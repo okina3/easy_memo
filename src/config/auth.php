@@ -13,8 +13,9 @@ return [
     |
     */
 
+    // デフォルトのガードの設定
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'users',
         'passwords' => 'users',
     ],
 
@@ -35,10 +36,21 @@ return [
     |
     */
 
+    // ガードの設定
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        // ユーザー用のガード
+        'users' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        // 管理者用のガード
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
         ],
     ],
 
@@ -59,10 +71,17 @@ return [
     |
     */
 
+    // プロバイダの設定
     'providers' => [
+        // ユーザー用のプロバイダ
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        // 管理者用のプロバイダ
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
@@ -90,10 +109,19 @@ return [
     |
     */
 
+    // パスワードリセットの設定
     'passwords' => [
+        // ユーザー用のパスワードリセット
         'users' => [
             'provider' => 'users',
             'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        // 管理者用のパスワードリセット
+        'admin' => [
+            'provider' => 'admin',
+            'table' => 'admin_password_resets_tokens',
             'expire' => 60,
             'throttle' => 60,
         ],
