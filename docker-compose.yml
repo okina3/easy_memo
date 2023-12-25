@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  database:
+    image: mysql:5.7
+    container_name: db_sample
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db_mysql_test
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./volumes/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./volumes/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - "3306:3306"
+
+  php-apache:
+    container_name: php_apache_sample
+    build:
+      context: ./php
+    ports:
+      - "8000:80" 
+      - "5173:5173"
+    volumes:
+      - ./src:/var/www/sample
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - database 
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - database 
+    environment:
+      - PMA_HOSTS=database 
+      - PMA_USER=admin 
+      - PMA_PASSWORD=password
+    ports:
+      - "3000:80" 
+    volumes:
+      - ./volumes/docker/phpmyadmin/sessions:/sessions
