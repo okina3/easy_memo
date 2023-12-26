@@ -35,9 +35,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
-            // デフォルト
-            // Route::middleware('web')
-            //     ->group(base_path('routes/web.php'));
             // 管理者用のルート
             Route::prefix('admin')
                 ->as('admin.')

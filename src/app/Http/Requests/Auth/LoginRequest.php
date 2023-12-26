@@ -33,9 +33,9 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * Attempt to authenticate the request's credentials.
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * リクエストの認証情報を、管理者と、ユーザーに分けて、認証するメソッド。
+     * @return void
+     * @throws ValidationException
      */
     public function authenticate(): void
     {
