@@ -55,4 +55,26 @@ class MemoService
         }
         return $memos;
     }
+
+    /**
+     * メモに紐づいた、既存のタグと画像を、中間テーブルに値を保存するメソッド
+     * @param $request
+     * @param $memo
+     * @return void
+     */
+    public static function attachRelationship($request, $memo): void
+    {
+        // 既存タグの選択があれば、メモに紐付けて中間テーブルに保存
+        if (!empty($request->tags)) {
+            foreach ($request->tags as $tag_number) {
+                Memo::findOrFail($memo->id)->tags()->attach($tag_number);
+            }
+        }
+        // 画像の選択があれば、メモに紐付けて中間テーブルに保存
+        if (!empty($request->images)) {
+            foreach ($request->images as $memo_image) {
+                Memo::findOrFail($memo->id)->images()->attach($memo_image);
+            }
+        }
+    }
 }
