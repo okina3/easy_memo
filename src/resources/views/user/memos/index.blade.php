@@ -21,10 +21,10 @@
        <section class="ml-2 w-4/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
            <div class="px-3 py-2 flex justify-between items-center border-b border-gray-400 bg-gray-200">
                <h1 class="text-xl font-semibold">メモ一覧</h1>
-               {{-- <button onclick="location.href='{{ route('create') }}'"
+               <button onclick="location.href='{{ route('user.create') }}'"
                        class="py-1 px-3 text-white rounded bg-blue-800 hover:bg-blue-700">
                    メモ新規作成
-               </button> --}}
+               </button>
            </div>
            <div class="p-2 h-[90vh] overflow-y-scroll overscroll-none">
                @foreach ($all_memos as $memo)
@@ -54,15 +54,15 @@
                                編集
                            </button> --}}
                            {{-- 削除ボタン --}}
-                           <form onsubmit="return deleteCheck()" action="{{ route('destroy') }}" method="post">
+                           {{-- <form onsubmit="return deleteCheck()" action="{{ route('destroy') }}" method="post">
                                @csrf
                                @method('delete')
-                               {{-- 選択されているメモのidを取得 --}}
+                               選択されているメモのidを取得
                                <input type="hidden" name="memoId" value="{{ $memo->id }}">
                                <button type="submit" class="py-1 px-3 rounded bg-red-600 hover:bg-red-500">
                                    削除
                                </button>
-                           </form>
+                           </form> --}}
                        </div>
                    </div>
                @endforeach

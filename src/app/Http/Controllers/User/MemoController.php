@@ -8,6 +8,7 @@ use App\Services\MemoService;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Image;
 
 class MemoController extends Controller
 {
@@ -32,5 +33,19 @@ class MemoController extends Controller
         $all_tags = Tag::availableTagAll()->get();
 
         return view('user.memos.index', compact('all_memos', 'all_tags'));
+    }
+
+    /**
+     * メモの新規作成画面を表示するメソッド。
+     * @return View
+     */
+    public function create(): View
+    {
+        //全タグを取得する
+        $all_tags = Tag::availableTagAll()->get();
+        //全画像を取得する
+        $all_images = Image::availableImageAll()->get();
+
+        return view('user.memos.create', compact('all_tags', 'all_images'));
     }
 }
