@@ -26,6 +26,11 @@
                         画像{{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('user.trashed-memo.index')" :active="request()->routeIs('user.trashed-memo.index')">
+                        削除済みメモ
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

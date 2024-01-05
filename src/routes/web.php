@@ -5,6 +5,7 @@ use App\Http\Controllers\User\ImageController;
 use App\Http\Controllers\User\MemoController;
 use App\Http\Controllers\User\TagController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\TrashedMemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,13 @@ Route::controller(ImageController::class)->prefix('image')->group(function () {
     Route::get('/show/{image}', 'show')->name('image.show');
     Route::delete('/destroy', 'destroy')->name('image.destroy');
 });
+
+    //ソフトデリートしたメモ画面
+    Route::controller(TrashedMemoController::class)->prefix('trashed-memo')->group(function () {
+        Route::get('/', 'index')->name('trashed-memo.index');
+        Route::patch('/undo', 'undo')->name('trashed-memo.undo');
+        Route::delete('/destroy', 'destroy')->name('trashed-memo.destroy');
+    });
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
