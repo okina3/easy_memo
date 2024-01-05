@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Throwable;
+use Intervention\Image\ImageManager;
 
 class ImageController extends Controller
 {
@@ -50,20 +51,21 @@ class ImageController extends Controller
     /**
      * 画像を保存するメソッド。
      * @param UploadImageRequest $request
+     * @param ImageManager $manager
      * @return RedirectResponse
      * @throws Throwable
      */
-    public function store(UploadImageRequest $request): RedirectResponse
+    public function store(UploadImageRequest $request, ImageManager $manager): RedirectResponse
     {
         try {
-            DB::transaction(function () use ($request) {
+            DB::transaction(function () use ($request, $manager) {
                 // 選択された画像を取得
                 $image_files = $request->file();
                 // もし画像が選択されている場合はリサイズ
                 if (!is_null($image_files)) {
                     foreach ($image_files as $image_file) {
                         // 画像をリサイズして、Laravelのフォルダ内に保存
-                        $only_one_file_name = ImageService::afterResizingImage($image_file);
+                        $only_one_file_name = ImageService::afterResizingImage($image_file, $manager);
                         // リサイズした画像をDBに保存
                         Image::create([
                             'user_id' => Auth::id(),
@@ -76,6 +78,6 @@ class ImageController extends Controller
             Log::error($e);
             throw $e;
         }
-        return to_route('image.index')->with(['message' => '画像を登録しました。', 'status' => 'info']);
+        return to_route('user.image.index')->with(['message' => '画像を登録しました。', 'status' => 'info']);
     }
 }

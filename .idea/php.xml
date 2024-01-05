@@ -129,6 +129,8 @@
       <path value="$PROJECT_DIR$/src/vendor/spatie/flare-client-php" />
       <path value="$PROJECT_DIR$/src/vendor/spatie/ignition" />
       <path value="$PROJECT_DIR$/src/vendor/spatie/laravel-ignition" />
+      <path value="$PROJECT_DIR$/src/vendor/intervention/gif" />
+      <path value="$PROJECT_DIR$/src/vendor/intervention/image" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

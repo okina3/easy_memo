@@ -159,7 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        App\Providers\InterventionImageServiceProvider::class,
         /*
          * Application Service Providers...
          */

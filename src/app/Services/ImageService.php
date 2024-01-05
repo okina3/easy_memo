@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use InterventionImage;
 
 class ImageService
 {
@@ -60,9 +59,10 @@ class ImageService
     /**
      * 画像をリサイズして、Laravelのフォルダ内に保存するメソッド。
      * @param $image_file
+     * @param $manager
      * @return string
      */
-    public static function afterResizingImage($image_file): string
+    public static function afterResizingImage($image_file, $manager): string
     {
         // ランダムなファイル名の生成
         $rnd_file_name = uniqid(rand() . '_');
@@ -71,9 +71,9 @@ class ImageService
         // ランダムなファイル名と拡張子を結合
         $only_one_file_name = $rnd_file_name . '.' . $get_extension;
         // 実際のリサイズ
-        $resize_image = InterventionImage::make($image_file)
+        $resize_image = $manager->read($image_file)
             ->resize(720, 480)
-            ->encode();
+            ->toJpeg(90);
         // 保存場所とファイル名を指定して、Laravel内に保存
         Storage::put('public/' . $only_one_file_name, $resize_image);
         return $only_one_file_name;
