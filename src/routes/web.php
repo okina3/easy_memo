@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\ImageController;
 use App\Http\Controllers\User\MemoController;
 use App\Http\Controllers\User\TagController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,15 @@ Route::controller(TagController::class)->prefix('tag')->group(function () {
     Route::get('/', 'index')->name('tag.index');
     Route::post('/store', 'store')->name('tag.store');
     Route::delete('/destroy', 'destroy')->name('tag.destroy');
+});
+
+//画像管理画面
+Route::controller(ImageController::class)->prefix('image')->group(function () {
+    Route::get('/', 'index')->name('image.index');
+    Route::get('/create', 'create')->name('image.create');
+    Route::post('/store', 'store')->name('image.store');
+    Route::get('/show/{image}', 'show')->name('image.show');
+    Route::delete('/destroy', 'destroy')->name('image.destroy');
 });
 
 // Route::middleware('auth')->group(function () {
