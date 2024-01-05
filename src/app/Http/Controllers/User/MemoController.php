@@ -107,4 +107,32 @@ class MemoController extends Controller
 
         return view('user.memos.show', compact('choice_memo', 'memo_in_tags', 'memo_in_images', 'shared_users'));
     }
+
+    /**
+     * メモの編集画面を表示するメソッド。
+     * @param string $id
+     * @return View
+     */
+    public function edit(string $id): View
+    {
+        // タグの一覧表示
+        $all_tags = Tag::availableTagAll()->get();
+        // 全画像を取得する
+        $all_images = Image::availableImageAll()->get();
+        // 選択したメモを、一件取得。
+        $choice_memo = Memo::availableMemoInTag($id)->first();
+        // 選択したメモに紐づいたタグのidを取得
+        $memo_in_tags = TagService::memoRelationTags($choice_memo, 'id');
+        // 選択したメモに紐づいた画像を取得
+        $memo_in_images = ImageService::memoRelationImages($choice_memo);
+        // 選択したメモに紐づいた画像のidを取得
+        $memo_in_images_id = ImageService::memoRelationImagesId($choice_memo);
+        // 共有されているメモに目印を付ける
+        MemoService::sharedCheck($choice_memo);
+
+        return view(
+            'user.memos.edit',
+            compact('all_tags', 'all_images', 'choice_memo', 'memo_in_tags', 'memo_in_images_id', 'memo_in_images')
+        );
+    }
 }

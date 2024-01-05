@@ -49,10 +49,10 @@
                                詳細
                            </button>
                            {{-- 編集ボタン --}}
-                           {{-- <button onclick="location.href='{{ route('edit', ['memo' => $memo->id]) }}'"
+                           <button onclick="location.href='{{ route('user.edit', ['memo' => $memo->id]) }}'"
                                    class="mr-3 py-1 px-3 rounded bg-blue-800 hover:bg-blue-700">
                                編集
-                           </button> --}}
+                           </button>
                            {{-- 削除ボタン --}}
                            {{-- <form onsubmit="return deleteCheck()" action="{{ route('destroy') }}" method="post">
                                @csrf

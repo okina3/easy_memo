@@ -40,4 +40,18 @@ class ImageService
         return $memo_in_images;
     }
 
+    /**
+     * 選択したメモに紐づいた画像のidを取得するメソッド
+     * @param $choice_memo
+     * @return array
+     */
+    public static function memoRelationImagesId($choice_memo): array
+    {
+        // メモにリレーションされた画像のidを、配列に追加
+        $memo_in_images_id = [];
+        foreach ($choice_memo->images as $memo_relation_image) {
+            $memo_in_images_id[] = $memo_relation_image->id;
+        }
+        return $memo_in_images_id;
+    }
 }
