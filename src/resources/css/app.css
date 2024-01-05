@@ -1,4 +1,5 @@
-@import 'micromodal';
+@import "accordion";
+@import "micromodal";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

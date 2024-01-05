@@ -77,4 +77,20 @@ class MemoService
             }
         }
     }
+
+    /**
+     * 共有されているメモに目印を付けるメソッド。
+     * @param $choice_memo
+     * @return mixed
+     */
+    public static function sharedCheck($choice_memo): mixed
+    {
+        // メモが共有されているかどうかを確認
+        $is_shared = $choice_memo->shareSettings->isNotEmpty();
+        // もしメモが共有されている場合、メモに共有中のステータスを追加
+        if ($is_shared) {
+            $choice_memo->status = "共有中";
+        }
+        return $choice_memo;
+    }
 }

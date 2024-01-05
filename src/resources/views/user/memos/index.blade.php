@@ -44,10 +44,10 @@
                        {{-- ボタンエリア --}}
                        <div class="flex justify-end text-white">
                            {{-- 詳細ボタン --}}
-                           {{-- <button onclick="location.href='{{ route('show', ['memo' => $memo->id]) }}'"
+                           <button onclick="location.href='{{ route('user.show', ['memo' => $memo->id]) }}'"
                                    class="mr-3 px-3 py-1 rounded bg-gray-800 hover:bg-gray-700">
                                詳細
-                           </button> --}}
+                           </button>
                            {{-- 編集ボタン --}}
                            {{-- <button onclick="location.href='{{ route('edit', ['memo' => $memo->id]) }}'"
                                    class="mr-3 py-1 px-3 rounded bg-blue-800 hover:bg-blue-700">

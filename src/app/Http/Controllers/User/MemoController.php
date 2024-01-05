@@ -7,7 +7,9 @@ use App\Http\Requests\UploadMemoRequest;
 use App\Models\Image;
 use App\Models\Memo;
 use App\Models\Tag;
+use App\Services\ImageService;
 use App\Services\MemoService;
+use App\Services\ShareSettingService;
 use App\Services\TagService;
 use Closure;
 use Illuminate\Http\RedirectResponse;
@@ -83,5 +85,26 @@ class MemoController extends Controller
             throw $e;
         }
         return to_route('index')->with(['message' => 'メモを登録しました。', 'status' => 'info']);
+    }
+
+    /**
+     *  メモの詳細を表示するメソッド。
+     * @param string $id
+     * @return View
+     */
+    public function show(string $id): View
+    {
+        // 選択したメモを、一件取得
+        $choice_memo = Memo::availableMemoInTag($id)->first();
+        // 選択したメモに紐づいたタグの名前を取得
+        $memo_in_tags = TagService::memoRelationTags($choice_memo, 'name');
+        // 選択したメモに紐づいた画像を取得
+        $memo_in_images = ImageService::memoRelationImages($choice_memo);
+        // 共有されているメモに目印を付ける
+        MemoService::sharedCheck($choice_memo);
+        // 自分が共有しているメモの、共有状態の情報を取得
+        $shared_users = ShareSettingService::shareMemoUserInformation($id);
+
+        return view('user.memos.show', compact('choice_memo', 'memo_in_tags', 'memo_in_images', 'shared_users'));
     }
 }

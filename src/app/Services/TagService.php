@@ -29,4 +29,26 @@ class TagService
             Tag::findOrFail($tag->id)->memos()->attach($memo->id);
         }
     }
+
+    /**
+     * 選択したメモに紐づいた、タグの情報を、配列で取得するメソッド。
+     * @param $choice_memo
+     * @param $tag_type
+     * @return array
+     */
+    public static function memoRelationTags($choice_memo, $tag_type): array
+    {
+        $memo_relation_tags = [];
+        foreach ($choice_memo->tags as $memo_relation_tag) {
+            // idがついていれば、メモにリレーションされたタグのidを、配列に追加
+            if ($tag_type === 'id') {
+                $memo_relation_tags[] = $memo_relation_tag->id;
+            }
+            // nameがついていれば、メモにリレーションされたタグの名前を、配列に追加
+            if ($tag_type === 'name') {
+                $memo_relation_tags[] = $memo_relation_tag->name;
+            }
+        }
+        return $memo_relation_tags;
+    }
 }

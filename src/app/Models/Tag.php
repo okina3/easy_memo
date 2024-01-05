@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
@@ -15,6 +16,15 @@ class Tag extends Model
         'name',
         'user_id',
     ];
+
+    /**
+     * Memoモデルとの多対多のリレーションを定義。
+     * @return BelongsToMany
+     */
+    public function memos(): BelongsToMany
+    {
+        return $this->belongsToMany(Memo::class, 'memo_tags');
+    }
 
     /**
      * 自分自身の、全てのタグを取得する為のスコープ。
