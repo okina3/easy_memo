@@ -38,4 +38,17 @@ class Tag extends Model
             ->whereNull('deleted_at')
             ->orderBy('updated_at', 'desc');
     }
+
+    /**
+     * タグが重複していないか調べる為のスコープ。
+     * @param Builder $query
+     * @param $request
+     * @return void
+     */
+    public function scopeAvailableTagExists(Builder $query, $request): void
+    {
+        $query
+            ->where('name', $request->new_tag)
+            ->where('user_id', Auth::id());
+    }
 }

@@ -6,8 +6,7 @@
         <div class="p-3">
             <x-common.flash-message status="session('status')"/>
             {{-- 新規タグ作成エリア --}}
-            {{-- <form action="{{ route('tag.store') }}" method="post"> --}}
-            <form action="" method="post">
+            <form action="{{ route('user.tag.store') }}" method="post">
                 @csrf
                 <div class="mb-10">
                     <h1 class="mb-1 text-lg font-semibold">新規タグ作成</h1>
@@ -24,8 +23,7 @@
             </form>
 
             {{-- タグ一覧 --}}
-            {{-- <form onsubmit="return deleteCheck()" action="{{ route('tag.destroy') }}" method="post"> --}}
-            <form action="" method="post">
+            <form onsubmit="return deleteCheck()" action="{{ route('user.tag.destroy') }}" method="post">
                 @csrf
                 @method('delete')
                 <div class="mb-5">
