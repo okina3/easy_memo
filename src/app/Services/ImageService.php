@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use InterventionImage;
 
 class ImageService
 {
@@ -53,5 +55,27 @@ class ImageService
             $memo_in_images_id[] = $memo_relation_image->id;
         }
         return $memo_in_images_id;
+    }
+
+    /**
+     * 画像をリサイズして、Laravelのフォルダ内に保存するメソッド。
+     * @param $image_file
+     * @return string
+     */
+    public static function afterResizingImage($image_file): string
+    {
+        // ランダムなファイル名の生成
+        $rnd_file_name = uniqid(rand() . '_');
+        // 選択画像の拡張子を取得
+        $get_extension = $image_file->extension();
+        // ランダムなファイル名と拡張子を結合
+        $only_one_file_name = $rnd_file_name . '.' . $get_extension;
+        // 実際のリサイズ
+        $resize_image = InterventionImage::make($image_file)
+            ->resize(720, 480)
+            ->encode();
+        // 保存場所とファイル名を指定して、Laravel内に保存
+        Storage::put('public/' . $only_one_file_name, $resize_image);
+        return $only_one_file_name;
     }
 }
