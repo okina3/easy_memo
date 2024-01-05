@@ -78,4 +78,18 @@ class ImageService
         Storage::put('public/' . $only_one_file_name, $resize_image);
         return $only_one_file_name;
     }
+
+    /**
+     * Storageフォルダ内の画像ファイルを削除するメソッド。
+     * @param $image
+     * @return void
+     */
+    public static function storageDelete($image): void
+    {
+        // Storageフォルダ内の画像ファイルを削除
+        $file_path = 'public/' . $image->filename;
+        if (Storage::exists($file_path)) {
+            Storage::delete($file_path);
+        }
+    }
 }

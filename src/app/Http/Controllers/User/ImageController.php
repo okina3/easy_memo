@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use Throwable;
 use Intervention\Image\ImageManager;
+use Throwable;
 
 class ImageController extends Controller
 {
@@ -79,5 +79,42 @@ class ImageController extends Controller
             throw $e;
         }
         return to_route('user.image.index')->with(['message' => '画像を登録しました。', 'status' => 'info']);
+    }
+
+    /**
+     * 画像の詳細を表示するメソッド。
+     * @param string $id
+     * @return View
+     */
+    public function show(string $id): View
+    {
+        // 選択した画像を編集エリアに表示
+        $show_image = Image::findOrFail($id);
+
+        return view('user.images.show', compact('show_image'));
+    }
+
+    /**
+     * 画像を削除するメソッド。
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        try {
+            DB::transaction(function () use ($request) {
+                // 削除したい画像を取得
+                $image = Image::findOrFail($request->memoId);
+                // 先にStorageフォルダ内の画像ファイルを削除
+                ImageService::storageDelete($image);
+                // 削除したい画像をDBから削除
+                Image::findOrFail($request->memoId)->delete();
+            }, 10);
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+        return to_route('user.image.index')->with(['message' => '画像を削除しました。', 'status' => 'alert']);
     }
 }
