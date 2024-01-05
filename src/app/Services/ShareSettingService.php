@@ -24,4 +24,17 @@ class ShareSettingService
         return $shared_users;
     }
 
+    /**
+     * 選択した全てのメモの共有設定を解除するメソッド。
+     * @param $request
+     * @return void
+     */
+    public static function shareSettingAllDelete($request): void
+    {
+        // 選択したメモの全ての共有設定を解除
+        $share_settings = ShareSetting::where('memo_id', $request->memoId)->get();
+        foreach ($share_settings as $share_setting) {
+            ShareSetting::findOrFail($share_setting->id)->delete();
+        }
+    }
 }

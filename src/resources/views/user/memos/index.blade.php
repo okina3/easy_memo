@@ -54,15 +54,15 @@
                                編集
                            </button>
                            {{-- 削除ボタン --}}
-                           {{-- <form onsubmit="return deleteCheck()" action="{{ route('destroy') }}" method="post">
+                           <form onsubmit="return deleteCheck()" action="{{ route('user.destroy') }}" method="post">
                                @csrf
                                @method('delete')
-                               選択されているメモのidを取得
+                               {{-- 選択されているメモのidを取得 --}}
                                <input type="hidden" name="memoId" value="{{ $memo->id }}">
                                <button type="submit" class="py-1 px-3 rounded bg-red-600 hover:bg-red-500">
                                    削除
                                </button>
-                           </form> --}}
+                           </form>
                        </div>
                    </div>
                @endforeach

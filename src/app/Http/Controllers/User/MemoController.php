@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadMemoRequest;
 use App\Models\Image;
 use App\Models\Memo;
+use App\Models\MemoImage;
+use App\Models\MemoTag;
 use App\Models\Tag;
 use App\Services\ImageService;
 use App\Services\MemoService;
@@ -84,7 +86,7 @@ class MemoController extends Controller
             Log::error($e);
             throw $e;
         }
-        return to_route('index')->with(['message' => 'メモを登録しました。', 'status' => 'info']);
+        return to_route('user.index')->with(['message' => 'メモを登録しました。', 'status' => 'info']);
     }
 
     /**
@@ -134,5 +136,58 @@ class MemoController extends Controller
             'user.memos.edit',
             compact('all_tags', 'all_images', 'choice_memo', 'memo_in_tags', 'memo_in_images_id', 'memo_in_images')
         );
+    }
+
+    /**
+     * メモの更新画面を表示するメソッド。
+     * @param UploadMemoRequest $request
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function update(UploadMemoRequest $request): RedirectResponse
+    {
+        try {
+            DB::transaction(function () use ($request) {
+                // メモを更新
+                $memo = Memo::findOrFail($request->memoId);
+                $memo->title = $request->title;
+                $memo->content = $request->content;
+                $memo->save();
+                // 一旦メモとタグを紐付けた中間デーブルのデータを削除
+                MemoTag::where('memo_id', $request->memoId)->delete();
+                // 一旦メモと画像を紐付けた中間デーブルのデータを削除
+                MemoImage::where('memo_id', $request->memoId)->delete();
+                // 新規タグの入力があれば、各データを保存。
+                TagService::tagCreate($request, $memo);
+                // 既存のタグと画像の選択があれば、メモに紐付けて中間テーブルに保存
+                MemoService::attachRelationship($request, $memo);
+            }, 10);
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+        return to_route('user.index')->with(['message' => 'メモを更新しました。', 'status' => 'info']);
+    }
+
+    /**
+     * メモを削除するメソッド。
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        try {
+            DB::transaction(function () use ($request) {
+                // 選択したメモを削除
+                Memo::findOrFail($request->memoId)->delete();
+                // 選択した全てのメモの共有設定を解除
+                ShareSettingService::shareSettingAllDelete($request);
+            }, 10);
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+        return to_route('user.index')->with(['message' => 'メモを削除しました。', 'status' => 'alert']);
     }
 }
