@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\MemoController;
-
+use App\Http\Controllers\User\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +35,13 @@ Route::middleware('auth:users')->group(function () {
         Route::patch('update', 'update')->name('update');
         Route::delete('destroy', 'destroy')->name('destroy');
     });
+});
+
+//タグ管理画面
+Route::controller(TagController::class)->prefix('tag')->group(function () {
+    Route::get('/', 'index')->name('tag.index');
+    Route::post('/store', 'store')->name('tag.store');
+    Route::delete('/destroy', 'destroy')->name('tag.destroy');
 });
 
 // Route::middleware('auth')->group(function () {
