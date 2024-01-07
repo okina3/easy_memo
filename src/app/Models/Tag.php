@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Auth;
 
 class Tag extends Model
 {
@@ -24,6 +25,15 @@ class Tag extends Model
     public function memos(): BelongsToMany
     {
         return $this->belongsToMany(Memo::class, 'memo_tags');
+    }
+
+    /**
+     * Userモデルへのリレーションを返す（一対多）。
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**

@@ -5,9 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShareEndRequest;
 use App\Http\Requests\ShareStartRequest;
+use App\Models\Memo;
 use App\Models\ShareSetting;
 use App\Models\User;
+use App\Services\ImageService;
 use App\Services\ShareSettingService;
+use App\Services\TagService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -59,6 +62,27 @@ class ShareSettingController extends Controller
             throw $e;
         }
         return to_route('user.index')->with(['message' => 'メモを共有しました。', 'status' => 'info']);
+    }
+
+    /**
+     *  共有メモの詳細を表示するメソッド。
+     * @param string $id
+     * @return View
+     */
+    public function show(string $id): View
+    {
+        // 共有されていないメモの詳細を見られなくする
+        ShareSettingService::shareShowCheck($id);
+        // 選択した共有メモを、一件取得
+        $choice_memo = Memo::with('tags.user')->where('id', $id)->first();
+        // 選択したメモに紐づいたタグの名前を取得
+        $memo_in_tags = TagService::memoRelationTags($choice_memo, 'name');
+        // 選択したメモに紐づいた画像を取得
+        $memo_in_images = ImageService::memoRelationImages($choice_memo);
+        // 選択した共有メモのユーザーを取得
+        $choice_user = $choice_memo->user;
+
+        return view('user.shareSettings.show', compact('choice_memo', 'memo_in_tags', 'memo_in_images', 'choice_user'));
     }
 
     /**

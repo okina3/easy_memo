@@ -49,7 +49,7 @@ class ShareSetting extends Model
             ->orderBy('updated_at', 'desc');
     }
 
-        /**
+    /**
      * 共有設定を、一件に、絞り込むスコープ。
      * @param Builder $query
      * @param $shared_user
@@ -61,6 +61,20 @@ class ShareSetting extends Model
         $query
             ->where('sharing_user_id', $shared_user->id)
             ->where('memo_id', $request->memoId);
+    }
+
+    /**
+     *  共有されていないメモを見られなくする為のスコープ。
+     * @param Builder $query
+     * @param $id
+     * @return void
+     */
+    public function scopeAvailableSettingCheck(Builder $query, $id): void
+    {
+        $query
+            ->with('memo')
+            ->where('sharing_user_id', Auth::id())
+            ->where('memo_id', $id);
     }
 
     /**

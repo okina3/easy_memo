@@ -77,6 +77,19 @@ class ShareSettingService
     }
 
     /**
+     * 共有されていないメモの詳細を見られなくするメソッド。
+     * @param $id
+     * @return void
+     */
+    public static function shareShowCheck($id): void
+    {
+        $share_setting_memo = ShareSetting::availableSettingCheck($id)->first();
+        if (!$share_setting_memo || !$share_setting_memo->memo) {
+            abort(404);
+        }
+    }
+
+    /**
      * 自分が共有しているメモの共有状態の情報を取得するメソッド。
      * @param $id
      * @return array
