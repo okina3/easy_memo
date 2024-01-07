@@ -61,6 +61,22 @@ class ShareSettingService
     }
 
     /**
+     * 共有設定が、重複していたら、共有設定を、一旦解除するメソッド。
+     * @param $request
+     * @param $shared_user
+     * @return void
+     */
+    public static function shareSettingCheck($request, $shared_user): void
+    {
+        // 共有設定が、重複していないか調べる
+        $share_setting_exists = ShareSetting::availableSelectSetting($shared_user, $request)->exists();
+        // 重複していたら、共有設定を解除
+        if ($share_setting_exists) {
+            ShareSetting::availableSelectSetting($shared_user, $request)->delete();
+        }
+    }
+
+    /**
      * 自分が共有しているメモの共有状態の情報を取得するメソッド。
      * @param $id
      * @return array

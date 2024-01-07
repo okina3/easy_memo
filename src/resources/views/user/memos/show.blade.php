@@ -22,8 +22,7 @@
                     <div class="accordion-body">
                         <div class="border-b-4 border-gray-700">
                             {{-- メモの共有の開始エリア --}}
-                            {{-- <form action="{{ route('share-setting.store') }}" method="post"> --}}
-                            <form action="" method="post">
+                            <form action="{{ route('user.share-setting.store') }}" method="post">
                                 @csrf
                                 {{-- 選択されているメモのidを取得 --}}
                                 <input type="hidden" name="memoId" value="{{ $choice_memo->id }}">
@@ -76,8 +75,7 @@
                                 @endforeach
                             </div>
                             {{-- メモの共有の停止エリア --}}
-                            {{-- <form action="{{ route('share-setting.destroy') }}" method="post"> --}}
-                            <form action="" method="post">
+                            <form action="{{ route('user.share-setting.destroy') }}" method="post">
                                 @csrf
                                 @method('delete')
                                 {{-- 選択されているメモのidを取得 --}}
