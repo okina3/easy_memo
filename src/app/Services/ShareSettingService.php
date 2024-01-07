@@ -90,6 +90,19 @@ class ShareSettingService
     }
 
     /**
+     * 共有、許可されていないメモの編集をできなくするメソッド。
+     * @param $id
+     * @return void
+     */
+    public static function shareEditCheck($id): void
+    {
+        $share_setting_memo = ShareSetting::availableSettingCheck($id)->first();
+        if (!$share_setting_memo || !($share_setting_memo->edit_access === 1)) {
+            abort(404);
+        }
+    }
+
+    /**
      * 自分が共有しているメモの共有状態の情報を取得するメソッド。
      * @param $id
      * @return array
