@@ -56,22 +56,22 @@ Route::controller(ImageController::class)->prefix('image')->group(function () {
     Route::delete('/destroy', 'destroy')->name('image.destroy');
 });
 
-    //共有メモ管理画面
-    Route::controller(ShareSettingController::class)->prefix('share-setting')->group(function () {
-        Route::get('/', 'index')->name('share-setting.index');
-        Route::post('/store', 'store')->name('share-setting.store');
-        Route::get('/show/{share}', 'show')->name('share-setting.show');
-        Route::get('/edit/{share}', 'edit')->name('share-setting.edit');
-        Route::patch('/update', 'update')->name('share-setting.update');
-        Route::delete('/destroy', 'destroy')->name('share-setting.destroy');
-    });
+//共有メモ管理画面
+Route::controller(ShareSettingController::class)->prefix('share-setting')->group(function () {
+    Route::get('/', 'index')->name('share-setting.index');
+    Route::post('/store', 'store')->name('share-setting.store');
+    Route::get('/show/{share}', 'show')->name('share-setting.show');
+    Route::get('/edit/{share}', 'edit')->name('share-setting.edit');
+    Route::patch('/update', 'update')->name('share-setting.update');
+    Route::delete('/destroy', 'destroy')->name('share-setting.destroy');
+});
 
-    //ソフトデリートしたメモ画面
-    Route::controller(TrashedMemoController::class)->prefix('trashed-memo')->group(function () {
-        Route::get('/', 'index')->name('trashed-memo.index');
-        Route::patch('/undo', 'undo')->name('trashed-memo.undo');
-        Route::delete('/destroy', 'destroy')->name('trashed-memo.destroy');
-    });
+//ソフトデリートしたメモ画面
+Route::controller(TrashedMemoController::class)->prefix('trashed-memo')->group(function () {
+    Route::get('/', 'index')->name('trashed-memo.index');
+    Route::patch('/undo', 'undo')->name('trashed-memo.undo');
+    Route::delete('/destroy', 'destroy')->name('trashed-memo.destroy');
+});
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
