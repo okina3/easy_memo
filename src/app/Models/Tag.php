@@ -50,6 +50,22 @@ class Tag extends Model
     }
 
     /**
+     * 自分自身の、選択したタグにリレーションされた、メモを取得する為のスコープ。
+     * @param Builder $query
+     * @param $get_url_tag
+     * @return void
+     */
+    public function scopeAvailableTagInMemo(Builder $query, $get_url_tag): void
+    {
+        $query
+            ->with('memos.shareSettings')
+            ->where('id', $get_url_tag)
+            ->where('user_id', Auth::id())
+            ->whereNull('deleted_at')
+            ->orderBy('updated_at', 'desc');
+    }
+
+    /**
      * タグが重複していないか調べる為のスコープ。
      * @param Builder $query
      * @param $request
