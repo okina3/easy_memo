@@ -25,8 +25,6 @@ class UploadMemoRequest extends FormRequest
             'title' => 'string | max:25',
             'content' => 'required | string | max:1000',
             'new_tag' => 'string | nullable | max:25 | unique:tags,name',
-            // 'image1' => 'nullable | exists:images,id',
-            // 'image2' => 'nullable | exists:images,id',
         ];
     }
 

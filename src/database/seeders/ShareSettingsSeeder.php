@@ -67,6 +67,11 @@ class ShareSettingsSeeder extends Seeder
                 'memo_id' => '14',
                 'edit_access' => '0',
             ],
+            [
+                'sharing_user_id' => '1',
+                'memo_id' => '14',
+                'edit_access' => '1',
+            ],
 
             //ユーザー３のダミーデータ
             [
@@ -88,6 +93,28 @@ class ShareSettingsSeeder extends Seeder
                 'sharing_user_id' => '2',
                 'memo_id' => '19',
                 'edit_access' => '0',
+            ],
+            [
+                'sharing_user_id' => '1',
+                'memo_id' => '19',
+                'edit_access' => '0',
+            ],
+            //ユーザー４のダミーデータ
+            [
+                'sharing_user_id' => '1',
+                'memo_id' => '21',
+                'edit_access' => '1',
+            ],
+            [
+                'sharing_user_id' => '2',
+                'memo_id' => '21',
+                'edit_access' => '1',
+            ],
+            //ユーザー５のダミーデータ
+            [
+                'sharing_user_id' => '4',
+                'memo_id' => '26',
+                'edit_access' => '1',
             ],
         ]);
     }
