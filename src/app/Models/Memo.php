@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Memo extends Model
 {
@@ -85,5 +85,18 @@ class Memo extends Model
             ->where('user_id', Auth::id())
             ->whereNull('deleted_at')
             ->orderBy('updated_at', 'desc');
+    }
+
+    /**
+     * 自分自身の、選択した削除済みのメモを取得する為のスコープ。
+     * @param Builder $query
+     * @param $request
+     * @return void
+     */
+    public function scopeAvailableTrashedMemo(Builder $query, $request): void
+    {
+        $query
+            ->where('id', $request->memoId)
+            ->where('user_id', Auth::id());
     }
 }
