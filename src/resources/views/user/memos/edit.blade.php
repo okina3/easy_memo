@@ -102,7 +102,6 @@
                 THUMBNAIL_IMAGE.src = IMAGE_PATH + '/' + IMAGE_FILE;
                 THUMBNAIL_IMAGE.classList.add('mr-2', 'mb-2', 'border', 'rounded-md', 'p-1', 'w-1/5');
                 THUMBNAIL_AREA.appendChild(THUMBNAIL_IMAGE);
-                // MemoService::sharedCheck($choice_memo);
             });
         });
 
@@ -117,16 +116,16 @@
             const CHECK_BOXES = document.getElementsByClassName(CHECK_BOX_CLASS_NAME);
             let checked_count = 0;
 
+            // 画像の枚数を、チェックする
             for (let i = 0; i < CHECK_BOXES.length; i++) {
                 if (CHECK_BOXES[i].checked) {
                     checked_count++;
                 }
             }
-
+            // 画像の上限枚数に、達したら選択をキャンセル
             if (checked_count > MAX_COUNT) {
                 alert("画像は " + MAX_COUNT + " 枚までにしてください。");
-                // チェックボックスを変更前の状態に戻すか、他の処理を追加できます
-                this.checked = false; // 選択をキャンセル
+                this.checked = false;
             }
         }
 
@@ -155,7 +154,6 @@
                 // 画像がすでに選択されているか確認
                 const IS_SELECTED = SELECTED_IMAGES.some(img => img.id === IMAGE_ID);
 
-                // if (!IS_SELECTED) {
                 if (!IS_SELECTED && SELECTED_IMAGES.length < MAX_COUNT) {
                     // 上限数に達していない場合、ユーザーが選択した画像を配列に追加
                     SELECTED_IMAGES.push({

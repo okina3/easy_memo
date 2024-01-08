@@ -77,16 +77,16 @@
             const CHECK_BOXES = document.getElementsByClassName(CHECK_BOX_CLASS_NAME);
             let checked_count = 0;
 
+            // 画像の枚数を、チェックする
             for (let i = 0; i < CHECK_BOXES.length; i++) {
                 if (CHECK_BOXES[i].checked) {
                     checked_count++;
                 }
             }
-
+            // 画像の上限枚数に、達したら選択をキャンセル
             if (checked_count > MAX_COUNT) {
                 alert("画像は " + MAX_COUNT + " 枚までにしてください。");
-                // チェックボックスを変更前の状態に戻すか、他の処理を追加できます
-                this.checked = false; // 選択をキャンセル
+                this.checked = false;
             }
         }
 

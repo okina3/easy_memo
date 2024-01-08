@@ -14,7 +14,6 @@ class UploadTagRequest extends FormRequest
         return true;
     }
 
-
     /**
      * リクエストに対するバリデーションルールを定義するメソッド。
      * @return string[]
@@ -25,7 +24,6 @@ class UploadTagRequest extends FormRequest
             'new_tag' => 'required | string | max:25 | unique:tags,name',
         ];
     }
-
 
     /**
      * バリデーションエラーメッセージを定義するメソッド。
