@@ -5,28 +5,33 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class UsersController extends Controller
 {
-
-    public function index()
+    /**
+     * ユーザー一覧を表示するメソッド。
+     * @return View
+     */
+    public function index(): View
     {
         // 全ユーザーを取得する
-        $users = User::all();
+        $users_all = User::all();
 
-        return view('admin.index', compact('users'));
+        return view('admin.users.index', compact('users_all'));
     }
 
-    public function undo(Request $request)
+    /**
+     * ユーザーのサービス利用を停止するメソッド。
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request): RedirectResponse
     {
+        // 選択したユーザーのサービス利用を停止
+        User::findOrFail($request->userId)->delete();
 
-        
+        return to_route('admin.index')->with(['message' => 'ユーザーのサービス利用を停止しました', 'status' => 'alert']);
     }
-
-    public function destroy(Request $request)
-    {
-
-    }
-
 }

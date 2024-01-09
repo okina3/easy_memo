@@ -36,7 +36,6 @@ Route::middleware('auth:admin')->group(function () {
 // ユーザーの管理画面
 Route::controller(UsersController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::patch('/undo', 'undo')->name('undo');
     Route::delete('/destroy', 'destroy')->name('destroy');
 });
 
