@@ -19,10 +19,10 @@
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100">
     {{-- @include('layouts.navigation') --}}
-
-    @if (auth('admin')->user())
+    {{-- 専用のナビを表示 --}}
+    @if (request()->is('admin*'))
         @include('layouts.admin-navigation')
-    @elseif(auth('users')->user())
+    @else
         @include('layouts.user-navigation')
     @endif
 
