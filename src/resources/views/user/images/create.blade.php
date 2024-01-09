@@ -12,7 +12,7 @@
                     <div class="p-2 w-1/2 mx-auto">
                         <div class="mt-2">
                             <label for="image" class="text-gray-600">画像</label>
-                            <input type="file" id="image" name="images" accept="image/ png,image/jpeg,image/jpg"
+                            <input type="file" id="image" name="images" accept="image/png,image/jpeg,image/jpg"
                                    class="py-1 px-3 w-full border border-gray-300 rounded bg-gray-100">
                         </div>
                     </div>

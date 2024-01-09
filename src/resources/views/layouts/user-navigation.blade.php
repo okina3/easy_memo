@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('user.dashboard') }}">
+                    <a href="{{ route('user.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800"/>
                     </a>
                 </div>
@@ -27,12 +27,14 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('user.share-setting.index')" :active="request()->routeIs('share-setting.index')">
+                    <x-nav-link :href="route('user.share-setting.index')"
+                                :active="request()->routeIs('share-setting.index')">
                         共有メモ{{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('user.trashed-memo.index')" :active="request()->routeIs('user.trashed-memo.index')">
+                    <x-nav-link :href="route('user.trashed-memo.index')"
+                                :active="request()->routeIs('user.trashed-memo.index')">
                         削除済みメモ
                     </x-nav-link>
                 </div>

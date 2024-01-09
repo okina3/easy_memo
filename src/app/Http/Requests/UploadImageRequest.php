@@ -14,7 +14,6 @@ class UploadImageRequest extends FormRequest
         return true;
     }
 
-
     /**
      * リクエストに対するバリデーションルールを定義するメソッド。
      * @return string[]
@@ -25,7 +24,6 @@ class UploadImageRequest extends FormRequest
             'images' => 'required | image | mimes:jpg,jpeg,png | max:2048',
         ];
     }
-
 
     /**
      * バリデーションエラーメッセージを定義するメソッド。
