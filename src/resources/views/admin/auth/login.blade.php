@@ -1,7 +1,9 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')"/>
-    管理者用
+    <div class="mb-2 text-lg">
+        管理者専用
+    </div>
     <form method="POST" action="{{ route('admin.login') }}">
         @csrf
 
