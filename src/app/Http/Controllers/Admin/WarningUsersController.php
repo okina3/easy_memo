@@ -31,8 +31,9 @@ class WarningUsersController extends Controller
      */
     public function undo(Request $request): RedirectResponse
     {
+        User::onlyTrashed()->where('id', $request->userId)->restore();
 
-        return to_route('user.trashed-memo.index')->with(['message' => 'ユーザーのサービス利用を再開しました', 'status' => 'info']);
+        return to_route('admin.warning.index')->with(['message' => 'ユーザーのサービス利用を再開しました', 'status' => 'info']);
     }
 
     /**
@@ -42,7 +43,8 @@ class WarningUsersController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        User::onlyTrashed()->where('id', $request->userId)->forceDelete();
 
-        return to_route('user.trashed-memo.index')->with(['message' => 'ユーザーの情報を完全に削除しました。', 'status' => 'alert']);
+        return to_route('admin.warning.index')->with(['message' => 'ユーザーの情報を完全に削除しました。', 'status' => 'alert']);
     }
 }

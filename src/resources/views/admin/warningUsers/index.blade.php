@@ -30,7 +30,7 @@
                             @csrf
                             @method('patch')
                             {{-- 選択されているメモのidを取得 --}}
-                            <input type="hidden" name="memoId" value="{{ $warning_user->id }}">
+                            <input type="hidden" name="userId" value="{{ $warning_user->id }}">
                             <button type="submit"
                                     class="py-1 px-2 w-24 text-white rounded bg-blue-800 hover:bg-blue-700">
                                 利用再開
