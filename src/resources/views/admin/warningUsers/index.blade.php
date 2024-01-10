@@ -1,22 +1,20 @@
 <x-app-layout>
     <x-common.flash-message status="session('status')"/>
-    {{-- メールアドレスの検索エリア --}}
-    <section class="mb-10 p-3 max-w-screen-lg mx-auto border border-gray-400 rounded-lg">
-        <div class="flex space-x-2 items-center">
-            <div class="text-gray-600 text-xl font-semibold">
-                メールアドレスから検索・・・
-            </div>
-            <div>
-                <input name="keyword" class="py-2 w-60 border border-gray-500 rounded-lg"
-                       placeholder="メールアドレスを入力">
-            </div>
-            <div>
-                <button class="py-1 px-3 rounded text-white bg-blue-800 hover:bg-blue-700">
-                    検索する
-                </button>
-            </div>
-        </div>
-    </section>
+        {{-- メールアドレスの検索エリア --}}
+        <section class="mb-10 p-3 max-w-screen-lg mx-auto border border-gray-400 rounded-lg">
+            <form action="{{ route('admin.warning.index') }}" method="get">
+                <div class="flex space-x-2 items-center">
+                    <div class="text-gray-600 text-xl font-semibold">
+                        メールアドレスから検索・・・
+                    </div>
+                    <input name="keyword" class="py-2 w-60 border border-gray-500 rounded-lg"
+                           placeholder="メールアドレスを入力">
+                    <button class="py-1 px-3 rounded text-white bg-blue-800 hover:bg-blue-700">
+                        検索する
+                    </button>
+                </div>
+            </form>
+        </section>
     {{-- ユーザー一覧表示エリア --}}
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         <div class="px-3 py-2 flex justify-between items-center border-b border-gray-400 bg-gray-200">
