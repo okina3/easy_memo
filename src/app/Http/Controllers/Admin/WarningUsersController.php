@@ -17,7 +17,7 @@ class WarningUsersController extends Controller
     public function index(): View
     {
         // 警告したユーザーを取得する
-        $warning_users_all = User::onlyTrashed()->availableUserOrder()->get();
+        $warning_users_all = User::onlyTrashed()->availableUserOrder()->paginate(5);
 
         return view('admin.warningUsers.index', compact('warning_users_all'));
     }
