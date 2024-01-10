@@ -17,7 +17,7 @@ class UsersController extends Controller
     public function index(): View
     {
         // 全ユーザーを取得する
-        $users_all = User::all();
+        $users_all = User::availableUserOrder()->get();
 
         return view('admin.users.index', compact('users_all'));
     }
