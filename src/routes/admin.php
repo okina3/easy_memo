@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\WarningUsersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,14 +34,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth:admin', 'verified'])->name('dashboard');
 
 Route::middleware('auth:admin')->group(function () {
-// ユーザーの管理画面
-Route::controller(UsersController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::patch('/undo', 'undo')->name('undo');
-    Route::delete('/destroy', 'destroy')->name('destroy');
-});
+    // ユーザーの管理画面
+    Route::controller(UsersController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::delete('/destroy', 'destroy')->name('destroy');
+    });
 
-// デフォルトのルーティング
+    // 警告されたユーザーの管理画面
+    Route::controller(WarningUsersController::class)->prefix('warning')->group(function () {
+        Route::get('/', 'index')->name('warning.index');
+        Route::patch('/undo', 'undo')->name('warning.undo');
+        Route::delete('/destroy', 'destroy')->name('warning.destroy');
+    });
+
+    // デフォルトのルーティング
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

@@ -9,7 +9,6 @@ class TagService
 {
     /**
      * 新規タグの保存・更新するメソッド。
-     *
      * @param $request
      * @param $memo
      * @return void
