@@ -33,7 +33,7 @@ class TagController extends Controller
     public function store(UploadTagRequest $request): RedirectResponse
     {
         // タグが重複していないか調べる
-        $tag_exists = Tag::availableTagExists($request)->exists();
+        $tag_exists = Tag::availableTagExists($request->new_tag)->exists();
         // タグが、重複していなれば、タグを保存
         if (!empty($request->new_tag) && !$tag_exists) {
             Tag::create([

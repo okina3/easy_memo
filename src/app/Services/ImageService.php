@@ -31,11 +31,11 @@ class ImageService
      * @param $choice_memo
      * @return array
      */
-    public static function memoRelationImages($choice_memo): array
+    public static function memoRelationImages($choice_memo_images): array
     {
         // メモにリレーションされた画像を、配列に追加
         $memo_in_images = [];
-        foreach ($choice_memo->images as $memo_relation_image) {
+        foreach ($choice_memo_images as $memo_relation_image) {
             $memo_in_images[] = $memo_relation_image;
         }
         return $memo_in_images;
@@ -46,11 +46,11 @@ class ImageService
      * @param $choice_memo
      * @return array
      */
-    public static function memoRelationImagesId($choice_memo): array
+    public static function memoRelationImagesId($choice_memo_images): array
     {
         // メモにリレーションされた画像のidを、配列に追加
         $memo_in_images_id = [];
-        foreach ($choice_memo->images as $memo_relation_image) {
+        foreach ($choice_memo_images as $memo_relation_image) {
             $memo_in_images_id[] = $memo_relation_image->id;
         }
         return $memo_in_images_id;
@@ -84,10 +84,10 @@ class ImageService
      * @param $image
      * @return void
      */
-    public static function storageDelete($image): void
+    public static function storageDelete($image_filename): void
     {
         // Storageフォルダ内の画像ファイルを削除
-        $file_path = 'public/' . $image->filename;
+        $file_path = 'public/' . $image_filename;
         if (Storage::exists($file_path)) {
             Storage::delete($file_path);
         }

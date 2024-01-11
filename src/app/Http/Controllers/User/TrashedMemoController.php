@@ -32,7 +32,7 @@ class TrashedMemoController extends Controller
      */
     public function undo(Request $request): RedirectResponse
     {
-        Memo::onlyTrashed()->availableTrashedMemo($request)->restore();
+        Memo::onlyTrashed()->availableTrashedMemo($request->memoId)->restore();
 
         return to_route('user.trashed-memo.index')->with(['message' => 'メモを元に戻しました。', 'status' => 'info']);
     }
@@ -44,7 +44,7 @@ class TrashedMemoController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Memo::onlyTrashed()->availableTrashedMemo($request)->forceDelete();
+        Memo::onlyTrashed()->availableTrashedMemo($request->memoId)->forceDelete();
 
         return to_route('user.trashed-memo.index')->with(['message' => 'メモを完全に削除しました。', 'status' => 'alert']);
     }

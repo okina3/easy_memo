@@ -62,18 +62,18 @@ class MemoService
      * @param $memo
      * @return void
      */
-    public static function attachRelationship($request, $memo): void
+    public static function attachRelationship($request, $memo_id): void
     {
         // 既存タグの選択があれば、メモに紐付けて中間テーブルに保存
         if (!empty($request->tags)) {
             foreach ($request->tags as $tag_number) {
-                Memo::findOrFail($memo->id)->tags()->attach($tag_number);
+                Memo::findOrFail($memo_id)->tags()->attach($tag_number);
             }
         }
         // 画像の選択があれば、メモに紐付けて中間テーブルに保存
         if (!empty($request->images)) {
             foreach ($request->images as $memo_image) {
-                Memo::findOrFail($memo->id)->images()->attach($memo_image);
+                Memo::findOrFail($memo_id)->images()->attach($memo_image);
             }
         }
     }

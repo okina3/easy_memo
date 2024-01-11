@@ -71,10 +71,10 @@ class Tag extends Model
      * @param $request
      * @return void
      */
-    public function scopeAvailableTagExists(Builder $query, $request): void
+    public function scopeAvailableTagExists(Builder $query, $request_new_tag): void
     {
         $query
-            ->where('name', $request->new_tag)
+            ->where('name', $request_new_tag)
             ->where('user_id', Auth::id());
     }
 }

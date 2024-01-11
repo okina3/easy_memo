@@ -78,9 +78,9 @@ class MemoController extends Controller
                     'user_id' => Auth::id(),
                 ]);
                 // 新規タグの入力があれば、各データを保存。
-                TagService::tagCreate($request, $memo);
+                TagService::tagCreate($request->new_tag, $memo->id);
                 // 既存のタグと画像の選択があれば、メモに紐付けて中間テーブルに保存
-                MemoService::attachRelationship($request, $memo);
+                MemoService::attachRelationship($request, $memo->id);
             }, 10);
         } catch (Throwable $e) {
             Log::error($e);
@@ -99,9 +99,9 @@ class MemoController extends Controller
         // 選択したメモを、一件取得
         $choice_memo = Memo::availableMemoInTag($id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $memo_in_tags = TagService::memoRelationTags($choice_memo, 'name');
+        $memo_in_tags = TagService::memoRelationTags($choice_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::memoRelationImages($choice_memo);
+        $memo_in_images = ImageService::memoRelationImages($choice_memo->images);
         // 共有されているメモに目印を付ける
         MemoService::sharedCheck($choice_memo);
         // 自分が共有しているメモの、共有状態の情報を取得
@@ -124,11 +124,11 @@ class MemoController extends Controller
         // 選択したメモを、一件取得。
         $choice_memo = Memo::availableMemoInTag($id)->first();
         // 選択したメモに紐づいたタグのidを取得
-        $memo_in_tags = TagService::memoRelationTags($choice_memo, 'id');
+        $memo_in_tags = TagService::memoRelationTags($choice_memo->tags, 'id');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::memoRelationImages($choice_memo);
+        $memo_in_images = ImageService::memoRelationImages($choice_memo->images);
         // 選択したメモに紐づいた画像のidを取得
-        $memo_in_images_id = ImageService::memoRelationImagesId($choice_memo);
+        $memo_in_images_id = ImageService::memoRelationImagesId($choice_memo->images);
         // 共有されているメモに目印を付ける
         MemoService::sharedCheck($choice_memo);
 
@@ -158,9 +158,9 @@ class MemoController extends Controller
                 // 一旦メモと画像を紐付けた中間デーブルのデータを削除
                 MemoImage::where('memo_id', $request->memoId)->delete();
                 // 新規タグの入力があれば、各データを保存。
-                TagService::tagCreate($request, $memo);
+                TagService::tagCreate($request->new_tag, $memo->id);
                 // 既存のタグと画像の選択があれば、メモに紐付けて中間テーブルに保存
-                MemoService::attachRelationship($request, $memo);
+                MemoService::attachRelationship($request, $memo->id);
             }, 10);
         } catch (Throwable $e) {
             Log::error($e);
@@ -182,7 +182,7 @@ class MemoController extends Controller
                 // 選択したメモを削除
                 Memo::findOrFail($request->memoId)->delete();
                 // 選択した全てのメモの共有設定を解除
-                ShareSettingService::shareSettingAllDelete($request);
+                ShareSettingService::shareSettingAllDelete($request->memoId);
             }, 10);
         } catch (Throwable $e) {
             Log::error($e);

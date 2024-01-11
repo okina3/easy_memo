@@ -66,13 +66,13 @@ class ShareSettingService
      * @param $shared_user
      * @return void
      */
-    public static function shareSettingCheck($request, $shared_user): void
+    public static function shareSettingCheck($request_memo_id, $shared_user_id): void
     {
         // 共有設定が、重複していないか調べる
-        $share_setting_exists = ShareSetting::availableSelectSetting($shared_user, $request)->exists();
+        $share_setting_exists = ShareSetting::availableSelectSetting($shared_user_id, $request_memo_id)->exists();
         // 重複していたら、共有設定を解除
         if ($share_setting_exists) {
-            ShareSetting::availableSelectSetting($shared_user, $request)->delete();
+            ShareSetting::availableSelectSetting($shared_user_id, $request_memo_id)->delete();
         }
     }
 
@@ -125,10 +125,10 @@ class ShareSettingService
      * @param $request
      * @return void
      */
-    public static function shareSettingAllDelete($request): void
+    public static function shareSettingAllDelete($request_memo_id): void
     {
         // 選択したメモの全ての共有設定を解除
-        $share_settings = ShareSetting::where('memo_id', $request->memoId)->get();
+        $share_settings = ShareSetting::where('memo_id', $request_memo_id)->get();
         foreach ($share_settings as $share_setting) {
             ShareSetting::findOrFail($share_setting->id)->delete();
         }

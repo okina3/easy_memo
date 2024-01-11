@@ -93,10 +93,10 @@ class Memo extends Model
      * @param $request
      * @return void
      */
-    public function scopeAvailableTrashedMemo(Builder $query, $request): void
+    public function scopeAvailableTrashedMemo(Builder $query, $request_memo_id): void
     {
         $query
-            ->where('id', $request->memoId)
+            ->where('id', $request_memo_id)
             ->where('user_id', Auth::id());
     }
 }

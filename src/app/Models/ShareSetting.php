@@ -56,11 +56,11 @@ class ShareSetting extends Model
      * @param $request
      * @return void
      */
-    public function scopeAvailableSelectSetting(Builder $query, $shared_user, $request): void
+    public function scopeAvailableSelectSetting(Builder $query, $shared_user_id, $request_memo_id): void
     {
         $query
-            ->where('sharing_user_id', $shared_user->id)
-            ->where('memo_id', $request->memoId);
+            ->where('sharing_user_id', $shared_user_id)
+            ->where('memo_id', $request_memo_id);
     }
 
     /**

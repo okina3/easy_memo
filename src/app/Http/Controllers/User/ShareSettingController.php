@@ -50,7 +50,7 @@ class ShareSettingController extends Controller
                 // メールアドレスから、ユーザーを特定
                 $shared_user = User::where('email', $request->share_user_start)->first();
                 // 共有設定が、重複していたら、共有設定を、一旦解除する。
-                ShareSettingService::shareSettingCheck($request, $shared_user);
+                ShareSettingService::shareSettingCheck($request->memoId, $shared_user->id);
                 // ユーザーを特定できたら、DBに保存する
                 ShareSetting::create([
                     'sharing_user_id' => $shared_user->id,
@@ -77,9 +77,9 @@ class ShareSettingController extends Controller
         // 選択した共有メモを、一件取得
         $choice_memo = Memo::with('tags.user')->where('id', $id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $memo_in_tags = TagService::memoRelationTags($choice_memo, 'name');
+        $memo_in_tags = TagService::memoRelationTags($choice_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::memoRelationImages($choice_memo);
+        $memo_in_images = ImageService::memoRelationImages($choice_memo->images);
         // 選択した共有メモのユーザーを取得
         $choice_user = $choice_memo->user;
 
@@ -98,9 +98,9 @@ class ShareSettingController extends Controller
         // 選択した共有メモを、一件取得
         $choice_memo = Memo::with('tags.user')->where('id', $id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $memo_in_tags = TagService::memoRelationTags($choice_memo, 'name');
+        $memo_in_tags = TagService::memoRelationTags($choice_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::memoRelationImages($choice_memo);
+        $memo_in_images = ImageService::memoRelationImages($choice_memo->images);
         // 選択した共有メモのユーザーを取得
         $choice_user = $choice_memo->user;
 
@@ -130,7 +130,7 @@ class ShareSettingController extends Controller
         // メールアドレスから、ユーザーを特定
         $shared_user = User::where('email', $request->share_user_end)->first();
         //ユーザーを特定できたら、共有を解除する
-        ShareSetting::availableSelectSetting($shared_user, $request)->delete();
+        ShareSetting::availableSelectSetting($shared_user->id, $request->memoId)->delete();
 
         return to_route('user.index')->with(['message' => '共有を解除しました。', 'status' => 'alert']);
     }

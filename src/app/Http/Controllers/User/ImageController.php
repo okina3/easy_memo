@@ -107,7 +107,7 @@ class ImageController extends Controller
                 // 削除したい画像を取得
                 $image = Image::findOrFail($request->memoId);
                 // 先にStorageフォルダ内の画像ファイルを削除
-                ImageService::storageDelete($image);
+                ImageService::storageDelete($image->filename);
                 // 削除したい画像をDBから削除
                 Image::findOrFail($request->memoId)->delete();
             }, 10);

@@ -72,10 +72,10 @@ class User extends Authenticatable
      * @param $request
      * @return void
      */
-    public function scopeAvailableSelectUser(Builder $query, $request): void
+    public function scopeAvailableSelectUser(Builder $query, $request_user_id): void
     {
         $query
-            ->where('id', $request->userId);
+            ->where('id', $request_user_id);
     }
 
     /**
