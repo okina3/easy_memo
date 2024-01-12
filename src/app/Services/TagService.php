@@ -9,11 +9,11 @@ class TagService
 {
     /**
      * 新規タグの保存・更新するメソッド。
-     * @param $request
-     * @param $memo
+     * @param $request_new_tag
+     * @param $memo_id
      * @return void
      */
-    public static function tagCreate($request_new_tag, $memo_id): void
+    public static function storeNewTag($request_new_tag, $memo_id): void
     {
         // 新規タグの入力があった場合、タグが重複していないか調べる
         $tag_exists = Tag::availableTagExists($request_new_tag)->exists();
@@ -31,11 +31,11 @@ class TagService
 
     /**
      * 選択したメモに紐づいた、タグの情報を、配列で取得するメソッド。
-     * @param $choice_memo
+     * @param $choice_memo_tags
      * @param $tag_type
      * @return array
      */
-    public static function memoRelationTags($choice_memo_tags, $tag_type): array
+    public static function getMemoTags($choice_memo_tags, $tag_type): array
     {
         $memo_relation_tags = [];
         foreach ($choice_memo_tags as $memo_relation_tag) {

@@ -13,7 +13,7 @@ class MemoService
      * @param $request
      * @return void
      */
-    public static function memoUserCheck($request): void
+    public static function checkUserMemo($request): void
     {
         // パラメーターを取得
         $id_memo = $request->route()->parameter('memo');
@@ -30,7 +30,7 @@ class MemoService
      * 全メモ、また、検索したメモを一覧表示するメソッド。
      * @return mixed
      */
-    public static function memoSearchAll(): mixed
+    public static function searchMemos(): mixed
     {
         // クエリパラメータを取得
         $get_url_tag = \Request::query('tag');
@@ -59,10 +59,10 @@ class MemoService
     /**
      * メモに紐づいた、既存のタグと画像を、中間テーブルに値を保存するメソッド
      * @param $request
-     * @param $memo
+     * @param $memo_id
      * @return void
      */
-    public static function attachRelationship($request, $memo_id): void
+    public static function attachTagsAndImages($request, $memo_id): void
     {
         // 既存タグの選択があれば、メモに紐付けて中間テーブルに保存
         if (!empty($request->tags)) {
@@ -83,7 +83,7 @@ class MemoService
      * @param $choice_memo
      * @return mixed
      */
-    public static function sharedCheck($choice_memo): mixed
+    public static function checkShared($choice_memo): mixed
     {
         // メモが共有されているかどうかを確認
         $is_shared = $choice_memo->shareSettings->isNotEmpty();

@@ -28,7 +28,7 @@ class MemoController extends Controller
     {
         // 別のユーザーのメモを見られなくする認証。
         $this->middleware(function (Request $request, Closure $next) {
-            MemoService::memoUserCheck($request);
+            MemoService::checkUserMemo($request);
             return $next($request);
         });
     }
@@ -40,7 +40,7 @@ class MemoController extends Controller
     public function index(): View
     {
         // 全メモ、または検索されたメモを表示する
-        $all_memos = MemoService::memoSearchAll();
+        $all_memos = MemoService::searchMemos();
         // 全タグを取得する
         $all_tags = Tag::availableTagAll()->get();
 
@@ -78,9 +78,9 @@ class MemoController extends Controller
                     'user_id' => Auth::id(),
                 ]);
                 // 新規タグの入力があれば、各データを保存。
-                TagService::tagCreate($request->new_tag, $memo->id);
+                TagService::storeNewTag($request->new_tag, $memo->id);
                 // 既存のタグと画像の選択があれば、メモに紐付けて中間テーブルに保存
-                MemoService::attachRelationship($request, $memo->id);
+                MemoService::attachTagsAndImages($request, $memo->id);
             }, 10);
         } catch (Throwable $e) {
             Log::error($e);
@@ -99,13 +99,13 @@ class MemoController extends Controller
         // 選択したメモを、一件取得
         $choice_memo = Memo::availableMemoInTag($id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $memo_in_tags = TagService::memoRelationTags($choice_memo->tags, 'name');
+        $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::memoRelationImages($choice_memo->images);
+        $memo_in_images = ImageService::getMemoImages($choice_memo->images);
         // 共有されているメモに目印を付ける
-        MemoService::sharedCheck($choice_memo);
+        MemoService::checkShared($choice_memo);
         // 自分が共有しているメモの、共有状態の情報を取得
-        $shared_users = ShareSettingService::shareMemoUserInformation($id);
+        $shared_users = ShareSettingService::checkSharedMemoStatus($id);
 
         return view('user.memos.show', compact('choice_memo', 'memo_in_tags', 'memo_in_images', 'shared_users'));
     }
@@ -124,13 +124,13 @@ class MemoController extends Controller
         // 選択したメモを、一件取得。
         $choice_memo = Memo::availableMemoInTag($id)->first();
         // 選択したメモに紐づいたタグのidを取得
-        $memo_in_tags = TagService::memoRelationTags($choice_memo->tags, 'id');
+        $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'id');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::memoRelationImages($choice_memo->images);
+        $memo_in_images = ImageService::getMemoImages($choice_memo->images);
         // 選択したメモに紐づいた画像のidを取得
-        $memo_in_images_id = ImageService::memoRelationImagesId($choice_memo->images);
+        $memo_in_images_id = ImageService::getMemoImagesId($choice_memo->images);
         // 共有されているメモに目印を付ける
-        MemoService::sharedCheck($choice_memo);
+        MemoService::checkShared($choice_memo);
 
         return view(
             'user.memos.edit',
@@ -158,9 +158,9 @@ class MemoController extends Controller
                 // 一旦メモと画像を紐付けた中間デーブルのデータを削除
                 MemoImage::where('memo_id', $request->memoId)->delete();
                 // 新規タグの入力があれば、各データを保存。
-                TagService::tagCreate($request->new_tag, $memo->id);
+                TagService::storeNewTag($request->new_tag, $memo->id);
                 // 既存のタグと画像の選択があれば、メモに紐付けて中間テーブルに保存
-                MemoService::attachRelationship($request, $memo->id);
+                MemoService::attachTagsAndImages($request, $memo->id);
             }, 10);
         } catch (Throwable $e) {
             Log::error($e);
@@ -181,8 +181,8 @@ class MemoController extends Controller
             DB::transaction(function () use ($request) {
                 // 選択したメモを削除
                 Memo::findOrFail($request->memoId)->delete();
-                // 選択した全てのメモの共有設定を解除
-                ShareSettingService::shareSettingAllDelete($request->memoId);
+                // 選択したメモの全ての共有設定を解除
+                ShareSettingService::deleteShareSettingAll($request->memoId);
             }, 10);
         } catch (Throwable $e) {
             Log::error($e);

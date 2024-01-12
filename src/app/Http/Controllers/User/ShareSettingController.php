@@ -30,9 +30,9 @@ class ShareSettingController extends Controller
         // 一旦全ての共有されたメモを取得
         $share_setting_memos = ShareSetting::availableSharesMemoAll()->get();
         // パラメーターから、全ての共有メモ、ユーザー別の共有メモを、切り分ける。
-        $shared_memos = ShareSettingService::sharedMemoSearchAll($share_setting_memos);
+        $shared_memos = ShareSettingService::searchSharedMemos($share_setting_memos);
         // メモを共有しているユーザー名を取得する。
-        $shared_users = ShareSettingService::sharedUserSearchAll($share_setting_memos);
+        $shared_users = ShareSettingService::searchSharedUserName($share_setting_memos);
 
         return view('user.shareSettings.index', compact('shared_memos', 'shared_users'));
     }
@@ -50,7 +50,7 @@ class ShareSettingController extends Controller
                 // メールアドレスから、ユーザーを特定
                 $shared_user = User::where('email', $request->share_user_start)->first();
                 // 共有設定が、重複していたら、共有設定を、一旦解除する。
-                ShareSettingService::shareSettingCheck($request->memoId, $shared_user->id);
+                ShareSettingService::resetDuplicateShareSettings($request->memoId, $shared_user->id);
                 // ユーザーを特定できたら、DBに保存する
                 ShareSetting::create([
                     'sharing_user_id' => $shared_user->id,
@@ -73,13 +73,13 @@ class ShareSettingController extends Controller
     public function show(string $id): View
     {
         // 共有されていないメモの詳細を見られなくする
-        ShareSettingService::shareShowCheck($id);
+        ShareSettingService::checkSharedMemoShow($id);
         // 選択した共有メモを、一件取得
         $choice_memo = Memo::with('tags.user')->where('id', $id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $memo_in_tags = TagService::memoRelationTags($choice_memo->tags, 'name');
+        $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::memoRelationImages($choice_memo->images);
+        $memo_in_images = ImageService::getMemoImages($choice_memo->images);
         // 選択した共有メモのユーザーを取得
         $choice_user = $choice_memo->user;
 
@@ -94,13 +94,13 @@ class ShareSettingController extends Controller
     public function edit(string $id): View
     {
         // 共有、許可されていない、メモの編集をできなくする
-        ShareSettingService::shareEditCheck($id);
+        ShareSettingService::checkSharedMemoEdit($id);
         // 選択した共有メモを、一件取得
         $choice_memo = Memo::with('tags.user')->where('id', $id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $memo_in_tags = TagService::memoRelationTags($choice_memo->tags, 'name');
+        $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::memoRelationImages($choice_memo->images);
+        $memo_in_images = ImageService::getMemoImages($choice_memo->images);
         // 選択した共有メモのユーザーを取得
         $choice_user = $choice_memo->user;
 

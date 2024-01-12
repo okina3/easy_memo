@@ -22,7 +22,7 @@ class ImageController extends Controller
     {
         //別のユーザーの画像を見られなくする認証。
         $this->middleware(function (Request $request, Closure $next) {
-            ImageService::imageUserCheck($request);
+            ImageService::checkUserImage($request);
             return $next($request);
         });
     }
@@ -107,7 +107,7 @@ class ImageController extends Controller
                 // 削除したい画像を取得
                 $image = Image::findOrFail($request->memoId);
                 // 先にStorageフォルダ内の画像ファイルを削除
-                ImageService::storageDelete($image->filename);
+                ImageService::deleteStorage($image->filename);
                 // 削除したい画像をDBから削除
                 Image::findOrFail($request->memoId)->delete();
             }, 10);

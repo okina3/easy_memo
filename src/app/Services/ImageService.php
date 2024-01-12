@@ -13,7 +13,7 @@ class ImageService
      * @param $request
      * @return void
      */
-    public static function imageUserCheck($request): void
+    public static function checkUserImage($request): void
     {
         // パラメーターを取得
         $id_image = $request->route()->parameter('image');
@@ -28,10 +28,10 @@ class ImageService
 
     /**
      * 選択したメモに紐づいた画像を取得するメソッド
-     * @param $choice_memo
+     * @param $choice_memo_images
      * @return array
      */
-    public static function memoRelationImages($choice_memo_images): array
+    public static function getMemoImages($choice_memo_images): array
     {
         // メモにリレーションされた画像を、配列に追加
         $memo_in_images = [];
@@ -43,10 +43,10 @@ class ImageService
 
     /**
      * 選択したメモに紐づいた画像のidを取得するメソッド
-     * @param $choice_memo
+     * @param $choice_memo_images
      * @return array
      */
-    public static function memoRelationImagesId($choice_memo_images): array
+    public static function getMemoImagesId($choice_memo_images): array
     {
         // メモにリレーションされた画像のidを、配列に追加
         $memo_in_images_id = [];
@@ -81,10 +81,10 @@ class ImageService
 
     /**
      * Storageフォルダ内の画像ファイルを削除するメソッド。
-     * @param $image
+     * @param $image_filename
      * @return void
      */
-    public static function storageDelete($image_filename): void
+    public static function deleteStorage($image_filename): void
     {
         // Storageフォルダ内の画像ファイルを削除
         $file_path = 'public/' . $image_filename;

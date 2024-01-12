@@ -40,9 +40,7 @@ class UsersController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // 自分の全てのメモの共有設定を解除する
-                UserService::myShareSettingStop($request->userId);
-                // 他のユーザーの、停止ユーザーに共有しているメモの共有を解除する
-                UserService::youShareSettingStop($request->userId);
+                UserService::deleteUserShareSettingAll($request->userId);
                 // 選択したユーザーのサービス利用を停止
                 User::findOrFail($request->userId)->delete();
             }, 10);

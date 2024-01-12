@@ -11,7 +11,7 @@ class ShareSettingService
      * @param $share_setting_memos
      * @return array
      */
-    public static function sharedMemoSearchAll($share_setting_memos): array
+    public static function searchSharedMemos($share_setting_memos): array
     {
         // クエリパラメータを取得。
         $get_url_user_id = \Request::query('user');
@@ -47,7 +47,7 @@ class ShareSettingService
      * @param $share_setting_memos
      * @return array
      */
-    public static function sharedUserSearchAll($share_setting_memos): array
+    public static function searchSharedUserName($share_setting_memos): array
     {
         // 共有情報から、全ユーザー名を、空の配列に追加
         $shared_users = [];
@@ -62,11 +62,11 @@ class ShareSettingService
 
     /**
      * 共有設定が、重複していたら、共有設定を、一旦解除するメソッド。
-     * @param $request
-     * @param $shared_user
+     * @param $request_memo_id
+     * @param $shared_user_id
      * @return void
      */
-    public static function shareSettingCheck($request_memo_id, $shared_user_id): void
+    public static function resetDuplicateShareSettings($request_memo_id, $shared_user_id): void
     {
         // 共有設定が、重複していないか調べる
         $share_setting_exists = ShareSetting::availableSelectSetting($shared_user_id, $request_memo_id)->exists();
@@ -81,7 +81,7 @@ class ShareSettingService
      * @param $id
      * @return void
      */
-    public static function shareShowCheck($id): void
+    public static function checkSharedMemoShow($id): void
     {
         $share_setting_memo = ShareSetting::availableSettingCheck($id)->first();
         if (!$share_setting_memo || !$share_setting_memo->memo) {
@@ -94,7 +94,7 @@ class ShareSettingService
      * @param $id
      * @return void
      */
-    public static function shareEditCheck($id): void
+    public static function checkSharedMemoEdit($id): void
     {
         $share_setting_memo = ShareSetting::availableSettingCheck($id)->first();
         if (!$share_setting_memo || !($share_setting_memo->edit_access === 1)) {
@@ -107,9 +107,9 @@ class ShareSettingService
      * @param $id
      * @return array
      */
-    public static function shareMemoUserInformation($id): array
+    public static function checkSharedMemoStatus($id): array
     {
-        // 自分が共有しているメモの情報を、空の配列に追加
+        // 自分が共有しているメモの共有情報を、空の配列に追加
         $shared_users = [];
         $share_settings_relation = ShareSetting::availableSettingInUser($id)->get();
         foreach ($share_settings_relation as $share_setting_relation) {
@@ -121,11 +121,11 @@ class ShareSettingService
     }
 
     /**
-     * 選択した全てのメモの共有設定を解除するメソッド。
-     * @param $request
+     * 選択したメモの全ての共有設定を解除するメソッド。
+     * @param $request_memo_id
      * @return void
      */
-    public static function shareSettingAllDelete($request_memo_id): void
+    public static function deleteShareSettingAll($request_memo_id): void
     {
         // 選択したメモの全ての共有設定を解除
         $share_settings = ShareSetting::where('memo_id', $request_memo_id)->get();
