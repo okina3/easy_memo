@@ -1,4 +1,7 @@
+{{--初期設定--}}
 @props(['status' => 'info'])
+
+{{--フラッシュメッセージの背景色を切り分ける--}}
 @php
     if (session('status') === 'info') {
         $bgColor = 'bg-blue-300';
