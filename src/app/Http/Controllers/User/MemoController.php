@@ -42,7 +42,7 @@ class MemoController extends Controller
         // 全メモ、または検索されたメモを表示する
         $all_memos = MemoService::searchMemos();
         // 全タグを取得する
-        $all_tags = Tag::availableTagAll()->get();
+        $all_tags = Tag::availableAllTags()->get();
 
         return view('user.memos.index', compact('all_memos', 'all_tags'));
     }
@@ -54,9 +54,9 @@ class MemoController extends Controller
     public function create(): View
     {
         //全タグを取得する
-        $all_tags = Tag::availableTagAll()->get();
+        $all_tags = Tag::availableAllTags()->get();
         //全画像を取得する
-        $all_images = Image::availableImageAll()->get();
+        $all_images = Image::availableAllImages()->get();
 
         return view('user.memos.create', compact('all_tags', 'all_images'));
     }
@@ -97,7 +97,7 @@ class MemoController extends Controller
     public function show(string $id): View
     {
         // 選択したメモを、一件取得
-        $choice_memo = Memo::availableMemoInTag($id)->first();
+        $choice_memo = Memo::availableSelectMemo($id)->first();
         // 選択したメモに紐づいたタグの名前を取得
         $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
@@ -118,11 +118,11 @@ class MemoController extends Controller
     public function edit(string $id): View
     {
         // タグの一覧表示
-        $all_tags = Tag::availableTagAll()->get();
+        $all_tags = Tag::availableAllTags()->get();
         // 全画像を取得する
-        $all_images = Image::availableImageAll()->get();
+        $all_images = Image::availableAllImages()->get();
         // 選択したメモを、一件取得。
-        $choice_memo = Memo::availableMemoInTag($id)->first();
+        $choice_memo = Memo::availableSelectMemo($id)->first();
         // 選択したメモに紐づいたタグのidを取得
         $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'id');
         // 選択したメモに紐づいた画像を取得

@@ -18,7 +18,7 @@ class WarningUsersController extends Controller
     public function index(Request $request): View
     {
         // 警告したユーザーを取得する
-        $warning_users_all = User::onlyTrashed()->availableUserOrder()
+        $warning_users_all = User::onlyTrashed()->availableAllUsers()
         ->searchKeyword($request->keyword)
         ->paginate(5);
 

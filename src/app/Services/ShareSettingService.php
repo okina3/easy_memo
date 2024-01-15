@@ -78,12 +78,12 @@ class ShareSettingService
 
     /**
      * 共有されていないメモの詳細を見られなくするメソッド。
-     * @param $id
+     * @param  $id
      * @return void
      */
     public static function checkSharedMemoShow($id): void
     {
-        $share_setting_memo = ShareSetting::availableSettingCheck($id)->first();
+        $share_setting_memo = ShareSetting::availableCheckSetting($id)->first();
         if (!$share_setting_memo || !$share_setting_memo->memo) {
             abort(404);
         }
@@ -96,7 +96,7 @@ class ShareSettingService
      */
     public static function checkSharedMemoEdit($id): void
     {
-        $share_setting_memo = ShareSetting::availableSettingCheck($id)->first();
+        $share_setting_memo = ShareSetting::availableCheckSetting($id)->first();
         if (!$share_setting_memo || !($share_setting_memo->edit_access === 1)) {
             abort(404);
         }
@@ -111,7 +111,7 @@ class ShareSettingService
     {
         // 自分が共有しているメモの共有情報を、空の配列に追加
         $shared_users = [];
-        $share_settings_relation = ShareSetting::availableSettingInUser($id)->get();
+        $share_settings_relation = ShareSetting::availableSharedMemoInfo($id)->get();
         foreach ($share_settings_relation as $share_setting_relation) {
             // ユーザー情報に、編集許可の判定を追加する
             $share_setting_relation->user->access = $share_setting_relation->edit_access;

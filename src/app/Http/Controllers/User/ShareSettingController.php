@@ -28,7 +28,7 @@ class ShareSettingController extends Controller
     public function index(): View
     {
         // 一旦全ての共有されたメモを取得
-        $share_setting_memos = ShareSetting::availableSharesMemoAll()->get();
+        $share_setting_memos = ShareSetting::availableAllSharedMemos()->get();
         // パラメーターから、全ての共有メモ、ユーザー別の共有メモを、切り分ける。
         $shared_memos = ShareSettingService::searchSharedMemos($share_setting_memos);
         // メモを共有しているユーザー名を取得する。
@@ -67,10 +67,10 @@ class ShareSettingController extends Controller
 
     /**
      *  共有メモの詳細を表示するメソッド。
-     * @param string $id
+     * @param int $id
      * @return View
      */
-    public function show(string $id): View
+    public function show(int $id): View
     {
         // 共有されていないメモの詳細を見られなくする
         ShareSettingService::checkSharedMemoShow($id);
@@ -88,10 +88,10 @@ class ShareSettingController extends Controller
 
     /**
      * 共有メモの編集画面を表示するメソッド。
-     * @param string $id
+     * @param int $id
      * @return View
      */
-    public function edit(string $id): View
+    public function edit(int $id): View
     {
         // 共有、許可されていない、メモの編集をできなくする
         ShareSettingService::checkSharedMemoEdit($id);

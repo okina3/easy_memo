@@ -16,7 +16,7 @@ class TagService
     public static function storeNewTag($request_new_tag, $memo_id): void
     {
         // 新規タグの入力があった場合、タグが重複していないか調べる
-        $tag_exists = Tag::availableTagExists($request_new_tag)->exists();
+        $tag_exists = Tag::availableCheckDuplicateTag($request_new_tag)->exists();
         // 新規タグがあり、重複していなければ、タグを保存し、中間テーブルに保存
         if (!empty($request_new_tag) && !$tag_exists) {
             // タグを保存

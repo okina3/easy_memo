@@ -34,7 +34,7 @@ class ImageController extends Controller
     public function index(): View
     {
         // 全画像を取得する
-        $images = Image::availableImageAll()->paginate(20);
+        $images = Image::availableAllImages()->paginate(20);
 
         return view('user.images.index', compact('images'));
     }
@@ -83,13 +83,13 @@ class ImageController extends Controller
 
     /**
      * 画像の詳細を表示するメソッド。
-     * @param string $id
+     * @param int $id
      * @return View
      */
-    public function show(string $id): View
+    public function show(int $id): View
     {
         // 選択した画像を編集エリアに表示
-        $show_image = Image::findOrFail($id);
+        $show_image = Image::availableSelectImage($id)->first();
 
         return view('user.images.show', compact('show_image'));
     }
@@ -105,11 +105,11 @@ class ImageController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // 削除したい画像を取得
-                $image = Image::findOrFail($request->memoId);
+                $image = Image::availableSelectImage($request->memoId)->first();
                 // 先にStorageフォルダ内の画像ファイルを削除
                 ImageService::deleteStorage($image->filename);
                 // 削除したい画像をDBから削除
-                Image::findOrFail($request->memoId)->delete();
+                Image::availableSelectImage($request->memoId)->delete();
             }, 10);
         } catch (Throwable $e) {
             Log::error($e);

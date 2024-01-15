@@ -37,12 +37,12 @@ class MemoService
         // もしクエリパラメータがあれば、タグから絞り込む
         if (!empty($get_url_tag)) {
             // 絞り込んだタグにリレーションされたメモを含む、タグを取得
-            $tag_relation = Tag::availableTagInMemo($get_url_tag)->first();
+            $tag_relation = Tag::availableSelectTag($get_url_tag)->first();
             // タグにリレーションされたメモを取得
             $memos = $tag_relation->memos;
         } else {
             // 全メモを取得
-            $memos = Memo::availableMemoAll()->get();
+            $memos = Memo::availableAllMemos()->get();
         }
         // 共有されているメモに目印を付ける
         foreach ($memos as $memo) {

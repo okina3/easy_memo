@@ -60,7 +60,7 @@ class User extends Authenticatable
      * @param Builder $query
      * @return void
      */
-    public function scopeAvailableUserOrder(Builder $query): void
+    public function scopeAvailableAllUsers(Builder $query): void
     {
         $query
             ->orderBy('updated_at', 'desc');

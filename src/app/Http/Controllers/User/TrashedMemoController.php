@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Memo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class TrashedMemoController extends Controller
@@ -17,10 +16,7 @@ class TrashedMemoController extends Controller
      */
     public function index(): View
     {
-        $trashed_memos = Memo::onlyTrashed()
-            ->where('user_id', Auth::id())
-            ->orderBy('deleted_at', 'desc')
-            ->get();
+        $trashed_memos = Memo::onlyTrashed()->availableAllTrashedMemos()->get();
 
         return view('user.trashedMemos.trashed-memo', compact('trashed_memos'));
     }
@@ -32,7 +28,7 @@ class TrashedMemoController extends Controller
      */
     public function undo(Request $request): RedirectResponse
     {
-        Memo::onlyTrashed()->availableTrashedMemo($request->memoId)->restore();
+        Memo::onlyTrashed()->availableSelectTrashedMemo($request->memoId)->restore();
 
         return to_route('user.trashed-memo.index')->with(['message' => 'メモを元に戻しました。', 'status' => 'info']);
     }
@@ -44,7 +40,7 @@ class TrashedMemoController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Memo::onlyTrashed()->availableTrashedMemo($request->memoId)->forceDelete();
+        Memo::onlyTrashed()->availableSelectTrashedMemo($request->memoId)->forceDelete();
 
         return to_route('user.trashed-memo.index')->with(['message' => 'メモを完全に削除しました。', 'status' => 'alert']);
     }

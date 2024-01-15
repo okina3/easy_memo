@@ -22,7 +22,7 @@ class UsersController extends Controller
     public function index(Request $request): View
     {
         // 全ユーザー、また、検索したユーザーを取得
-        $users_all = User::availableUserOrder()
+        $users_all = User::availableAllUsers()
             ->searchKeyword($request->keyword)
             ->paginate(5);
 

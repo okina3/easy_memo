@@ -41,7 +41,7 @@ class ShareSetting extends Model
      * @param Builder $query
      * @return void
      */
-    public function scopeAvailableSharesMemoAll(Builder $query): void
+    public function scopeAvailableAllSharedMemos(Builder $query): void
     {
         $query
             ->with('memo.user')
@@ -52,8 +52,8 @@ class ShareSetting extends Model
     /**
      * 共有設定を、一件に、絞り込むスコープ。
      * @param Builder $query
-     * @param $shared_user
-     * @param $request
+     * @param $shared_user_id
+     * @param $request_memo_id
      * @return void
      */
     public function scopeAvailableSelectSetting(Builder $query, $shared_user_id, $request_memo_id): void
@@ -69,7 +69,7 @@ class ShareSetting extends Model
      * @param $id
      * @return void
      */
-    public function scopeAvailableSettingCheck(Builder $query, $id): void
+    public function scopeAvailableCheckSetting(Builder $query, $id): void
     {
         $query
             ->with('memo')
@@ -83,7 +83,7 @@ class ShareSetting extends Model
      * @param $id
      * @return void
      */
-    public function scopeAvailableSettingInUser(Builder $query, $id): void
+    public function scopeAvailableSharedMemoInfo(Builder $query, $id): void
     {
         $query
             ->with('user')

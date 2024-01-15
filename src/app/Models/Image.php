@@ -37,14 +37,27 @@ class Image extends Model
     }
 
     /**
-     * 自分自身の画像のデータを取得する為のスコープ。
+     * 自分自身の、全ての画像のデータを取得する為のスコープ。
      * @param Builder $query
      * @return void
      */
-    public function scopeAvailableImageAll(Builder $query): void
+    public function scopeAvailableAllImages(Builder $query): void
     {
         $query
             ->where('user_id', Auth::id())
             ->orderBy('updated_at', 'desc');
+    }
+
+    /**
+     * 自分自身の、選択したの画像のデータを取得する為のスコープ。
+     * @param Builder $query
+     * @param $id
+     * @return void
+     */
+    public function scopeAvailableSelectImage(Builder $query, $id): void
+    {
+        $query
+            ->where('id', $id)
+            ->where('user_id', Auth::id());
     }
 }
