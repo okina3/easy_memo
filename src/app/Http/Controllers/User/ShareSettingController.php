@@ -108,7 +108,7 @@ class ShareSettingController extends Controller
     }
 
     /**
-     * 共有メモの更新画面を表示するメソッド。
+     * 共有メモの更新をするメソッド。
      * @param UploadMemoRequest $request
      * @return RedirectResponse
      */

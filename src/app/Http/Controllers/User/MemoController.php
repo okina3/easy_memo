@@ -139,7 +139,7 @@ class MemoController extends Controller
     }
 
     /**
-     * メモの更新画面を表示するメソッド。
+     * メモを更新するメソッド。
      * @param UploadMemoRequest $request
      * @return RedirectResponse
      * @throws Throwable
@@ -149,7 +149,7 @@ class MemoController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // メモを更新
-                $memo = Memo::findOrFail($request->memoId);
+                $memo = Memo::availableSelectMemo($request->memoId)->first();
                 $memo->title = $request->title;
                 $memo->content = $request->content;
                 $memo->save();
@@ -180,7 +180,7 @@ class MemoController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // 選択したメモを削除
-                Memo::findOrFail($request->memoId)->delete();
+                Memo::availableSelectMemo($request->memoId)->delete();
                 // 選択したメモの全ての共有設定を解除
                 ShareSettingService::deleteShareSettingAll($request->memoId);
             }, 10);

@@ -20,7 +20,7 @@ class TagController extends Controller
     public function index(Request $request): View
     {
         // タグを取得する
-        $all_tags = Tag::availableTagAll()->get();
+        $all_tags = Tag::availableAllTags()->get();
 
         return view('user.tags.index', compact('all_tags'));
     }
@@ -53,7 +53,7 @@ class TagController extends Controller
     {
         //タグを複数まとめて削除
         foreach ($request->tags as $tag) {
-            Tag::findOrFail($tag)->delete();
+            Tag::availableSelectTag($tag)->delete();
         }
         return to_route('user.tag.index')->with(['message' => 'タグを削除しました。', 'status' => 'alert']);
     }
