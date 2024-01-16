@@ -91,10 +91,10 @@ class MemoController extends Controller
 
     /**
      *  メモの詳細を表示するメソッド。
-     * @param string $id
+     * @param int $id
      * @return View
      */
-    public function show(string $id): View
+    public function show(int $id): View
     {
         // 選択したメモを、一件取得
         $choice_memo = Memo::availableSelectMemo($id)->first();
@@ -112,10 +112,10 @@ class MemoController extends Controller
 
     /**
      * メモの編集画面を表示するメソッド。
-     * @param string $id
+     * @param int $id
      * @return View
      */
-    public function edit(string $id): View
+    public function edit(int $id): View
     {
         // タグの一覧表示
         $all_tags = Tag::availableAllTags()->get();

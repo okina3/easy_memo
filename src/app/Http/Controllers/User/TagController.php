@@ -14,10 +14,9 @@ class TagController extends Controller
 {
     /**
      * タグの一覧を表示するメソッド。
-     * @param Request $request
      * @return View
      */
-    public function index(Request $request): View
+    public function index(): View
     {
         // タグを取得する
         $all_tags = Tag::availableAllTags()->get();

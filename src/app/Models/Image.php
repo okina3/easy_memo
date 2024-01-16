@@ -51,10 +51,10 @@ class Image extends Model
     /**
      * 自分自身の、選択したの画像のデータを取得する為のスコープ。
      * @param Builder $query
-     * @param $id
+     * @param int $id
      * @return void
      */
-    public function scopeAvailableSelectImage(Builder $query, $id): void
+    public function scopeAvailableSelectImage(Builder $query, int $id): void
     {
         $query
             ->where('id', $id)

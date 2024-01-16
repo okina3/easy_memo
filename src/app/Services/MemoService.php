@@ -59,10 +59,10 @@ class MemoService
     /**
      * メモに紐づいた、既存のタグと画像を、中間テーブルに値を保存するメソッド
      * @param $request
-     * @param $memo_id
+     * @param int $memo_id
      * @return void
      */
-    public static function attachTagsAndImages($request, $memo_id): void
+    public static function attachTagsAndImages($request, int $memo_id): void
     {
         // 既存タグの選択があれば、メモに紐付けて中間テーブルに保存
         if (!empty($request->tags)) {

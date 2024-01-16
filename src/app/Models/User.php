@@ -69,10 +69,10 @@ class User extends Authenticatable
     /**
      * 選択したユーザーを取得する為のスコープ。
      * @param Builder $query
-     * @param $request_user_id
+     * @param int $request_user_id
      * @return void
      */
-    public function scopeAvailableSelectUser(Builder $query, $request_user_id): void
+    public function scopeAvailableSelectUser(Builder $query, int $request_user_id): void
     {
         $query
             ->where('id', $request_user_id);

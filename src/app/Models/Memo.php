@@ -74,10 +74,10 @@ class Memo extends Model
     /**
      * 自分自身の、選択したメモを取得する為のスコープ。
      * @param Builder $query
-     * @param $id
+     * @param int $id
      * @return void
      */
-    public function scopeAvailableSelectMemo(Builder $query, $id): void
+    public function scopeAvailableSelectMemo(Builder $query, int $id): void
     {
         $query
             ->where('id', $id)
@@ -101,10 +101,10 @@ class Memo extends Model
     /**
      * 自分自身の、選択した削除済みのメモを取得する為のスコープ。
      * @param Builder $query
-     * @param $request_memo_id
+     * @param int $request_memo_id
      * @return void
      */
-    public function scopeAvailableSelectTrashedMemo(Builder $query, $request_memo_id): void
+    public function scopeAvailableSelectTrashedMemo(Builder $query, int $request_memo_id): void
     {
         $query
             ->where('id', $request_memo_id)

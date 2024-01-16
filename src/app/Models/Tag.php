@@ -52,10 +52,10 @@ class Tag extends Model
     /**
      * 自分自身の、選択したタグを取得する為のスコープ。
      * @param Builder $query
-     * @param $get_url_tag
+     * @param int $get_url_tag
      * @return void
      */
-    public function scopeAvailableSelectTag(Builder $query, $get_url_tag): void
+    public function scopeAvailableSelectTag(Builder $query, int $get_url_tag): void
     {
         $query
             ->with('memos.shareSettings')

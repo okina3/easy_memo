@@ -62,11 +62,11 @@ class ShareSettingService
 
     /**
      * 共有設定が、重複していたら、共有設定を、一旦解除するメソッド。
-     * @param $request_memo_id
-     * @param $shared_user_id
+     * @param int $request_memo_id
+     * @param int $shared_user_id
      * @return void
      */
-    public static function resetDuplicateShareSettings($request_memo_id, $shared_user_id): void
+    public static function resetDuplicateShareSettings(int $request_memo_id, int $shared_user_id): void
     {
         // 共有設定が、重複していないか調べる
         $share_setting_exists = ShareSetting::availableSelectSetting($shared_user_id, $request_memo_id)->exists();
@@ -78,10 +78,10 @@ class ShareSettingService
 
     /**
      * 共有されていないメモの詳細を見られなくするメソッド。
-     * @param  $id
+     * @param int $id
      * @return void
      */
-    public static function checkSharedMemoShow($id): void
+    public static function checkSharedMemoShow(int $id): void
     {
         $share_setting_memo = ShareSetting::availableCheckSetting($id)->first();
         if (!$share_setting_memo || !$share_setting_memo->memo) {
@@ -91,10 +91,10 @@ class ShareSettingService
 
     /**
      * 共有、許可されていないメモの編集をできなくするメソッド。
-     * @param $id
+     * @param int $id
      * @return void
      */
-    public static function checkSharedMemoEdit($id): void
+    public static function checkSharedMemoEdit(int $id): void
     {
         $share_setting_memo = ShareSetting::availableCheckSetting($id)->first();
         if (!$share_setting_memo || !($share_setting_memo->edit_access === 1)) {
@@ -104,10 +104,10 @@ class ShareSettingService
 
     /**
      * 自分が共有しているメモの共有状態の情報を取得するメソッド。
-     * @param $id
+     * @param int $id
      * @return array
      */
-    public static function checkSharedMemoStatus($id): array
+    public static function checkSharedMemoStatus(int $id): array
     {
         // 自分が共有しているメモの共有情報を、空の配列に追加
         $shared_users = [];
@@ -122,10 +122,10 @@ class ShareSettingService
 
     /**
      * 選択したメモの全ての共有設定を解除するメソッド。
-     * @param $request_memo_id
+     * @param int $request_memo_id
      * @return void
      */
-    public static function deleteShareSettingAll($request_memo_id): void
+    public static function deleteShareSettingAll(int $request_memo_id): void
     {
         // 選択したメモの全ての共有設定を解除
         $share_settings = ShareSetting::where('memo_id', $request_memo_id)->get();

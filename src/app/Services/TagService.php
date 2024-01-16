@@ -10,10 +10,10 @@ class TagService
     /**
      * 新規タグの保存・更新するメソッド。
      * @param $request_new_tag
-     * @param $memo_id
+     * @param int $memo_id
      * @return void
      */
-    public static function storeNewTag($request_new_tag, $memo_id): void
+    public static function storeNewTag($request_new_tag, int $memo_id): void
     {
         // 新規タグの入力があった場合、タグが重複していないか調べる
         $tag_exists = Tag::availableCheckDuplicateTag($request_new_tag)->exists();
