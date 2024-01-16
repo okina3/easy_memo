@@ -24,7 +24,7 @@ class UsersController extends Controller
         // 全ユーザー、また、検索したユーザーを取得
         $users_all = User::availableAllUsers()
             ->searchKeyword($request->keyword)
-            ->paginate(5);
+            ->get();
 
         return view('admin.users.index', compact('users_all'));
     }

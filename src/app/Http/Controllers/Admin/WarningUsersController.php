@@ -20,7 +20,7 @@ class WarningUsersController extends Controller
         // 警告したユーザーを取得する
         $warning_users_all = User::onlyTrashed()->availableAllUsers()
         ->searchKeyword($request->keyword)
-        ->paginate(5);
+        ->get();
 
         return view('admin.warningUsers.index', compact('warning_users_all'));
     }

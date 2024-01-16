@@ -26,6 +26,9 @@
                     </div>
                 @endforeach
             </div>
+            <div class="m-2">
+                {{ $images->links() }}
+            </div>
         </div>
     </section>
 </x-app-layout>

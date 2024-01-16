@@ -34,7 +34,7 @@ class ImageController extends Controller
     public function index(): View
     {
         // 全画像を取得する
-        $images = Image::availableAllImages()->paginate(20);
+        $images = Image::availableAllImages()->paginate(16);
 
         return view('user.images.index', compact('images'));
     }

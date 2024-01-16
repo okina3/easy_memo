@@ -20,7 +20,7 @@
         <div class="px-3 py-2 flex justify-between items-center border-b border-gray-400 bg-gray-200">
             <h1 class="text-xl font-semibold">警告したユーザー一覧</h1>
         </div>
-        <div class="p-2">
+        <div class="p-2 h-[70vh] overflow-y-scroll overscroll-none">
             @foreach ($warning_users_all as $warning_user)
                 <div class="mb-5 p-2 flex justify-between items-center border border-slate-400 rounded-lg">
                     <div class="truncate">
@@ -65,9 +65,6 @@
                     </div>
                 </div>
             @endforeach
-        </div>
-        <div class="m-2">
-            {{ $warning_users_all->links() }}
         </div>
     </section>
     <script>
