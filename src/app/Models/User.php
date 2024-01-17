@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Controllers\User\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -47,6 +48,17 @@ class User extends Authenticatable
     ];
 
     /**
+     * ユーザー用のパスワードリセットの為のメソッド。
+     * @param $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $url = url("reset-password/${token}");
+        $this->notify(new ResetPasswordNotification($url));
+    }
+
+    /**
      * Memoモデルとのリレーション（一対多）
      * @return HasMany
      */
@@ -79,7 +91,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 検索したメールアドレスを表示するの記述
+     * 検索したメールアドレスを表示するの為のスコープ。
      * @param $query
      * @param $keyword
      * @return void
