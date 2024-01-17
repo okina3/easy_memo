@@ -3,15 +3,16 @@
 namespace App\Services;
 
 use App\Models\ShareSetting;
+use Illuminate\Database\Eloquent\Collection;
 
 class ShareSettingService
 {
     /**
      * パラメーターから、全ての共有メモ、ユーザー別の共有メモを、切り分けるメソッド。
-     * @param $share_setting_memos
+     * @param Collection $share_setting_memos
      * @return array
      */
-    public static function searchSharedMemos($share_setting_memos): array
+    public static function searchSharedMemos(Collection $share_setting_memos): array
     {
         // クエリパラメータを取得。
         $get_url_user_id = \Request::query('user');
@@ -44,11 +45,12 @@ class ShareSettingService
 
     /**
      * メモを共有しているユーザー名を取得するメソッド。
-     * @param $share_setting_memos
+     * @param Collection $share_setting_memos
      * @return array
      */
-    public static function searchSharedUserName($share_setting_memos): array
+    public static function searchSharedUserName(Collection $share_setting_memos): array
     {
+//        dd($share_setting_memos);
         // 共有情報から、全ユーザー名を、空の配列に追加
         $shared_users = [];
         foreach ($share_setting_memos as $share_setting_user) {

@@ -3,8 +3,11 @@
 namespace App\Services;
 
 use App\Models\Image;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 
 class ImageService
 {
@@ -28,10 +31,10 @@ class ImageService
 
     /**
      * 選択したメモに紐づいた画像を取得するメソッド
-     * @param $choice_memo_images
+     * @param Collection $choice_memo_images
      * @return array
      */
-    public static function getMemoImages($choice_memo_images): array
+    public static function getMemoImages(Collection $choice_memo_images): array
     {
         // メモにリレーションされた画像を、配列に追加
         $memo_in_images = [];
@@ -43,10 +46,10 @@ class ImageService
 
     /**
      * 選択したメモに紐づいた画像のidを取得するメソッド
-     * @param $choice_memo_images
+     * @param Collection $choice_memo_images
      * @return array
      */
-    public static function getMemoImagesId($choice_memo_images): array
+    public static function getMemoImagesId(Collection $choice_memo_images): array
     {
         // メモにリレーションされた画像のidを、配列に追加
         $memo_in_images_id = [];
@@ -58,11 +61,11 @@ class ImageService
 
     /**
      * 画像をリサイズして、Laravelのフォルダ内に保存するメソッド。
-     * @param $image_file
-     * @param $manager
+     * @param UploadedFile $image_file
+     * @param ImageManager $manager
      * @return string
      */
-    public static function afterResizingImage($image_file, $manager): string
+    public static function afterResizingImage(UploadedFile $image_file, ImageManager $manager): string
     {
         // ランダムなファイル名の生成
         $rnd_file_name = uniqid(rand() . '_');
@@ -81,10 +84,10 @@ class ImageService
 
     /**
      * Storageフォルダ内の画像ファイルを削除するメソッド。
-     * @param $image_filename
+     * @param string $image_filename
      * @return void
      */
-    public static function deleteStorage($image_filename): void
+    public static function deleteStorage(string $image_filename): void
     {
         // Storageフォルダ内の画像ファイルを削除
         $file_path = 'public/' . $image_filename;
