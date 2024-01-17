@@ -76,7 +76,7 @@ class ImageService
         // 実際のリサイズ
         $resize_image = $manager->read($image_file)
             ->resize(720, 480)
-            ->toJpeg(90);
+            ->toJpeg();
         // 保存場所とファイル名を指定して、Laravel内に保存
         Storage::put('public/' . $only_one_file_name, $resize_image);
         return $only_one_file_name;

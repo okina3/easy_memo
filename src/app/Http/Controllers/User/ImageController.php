@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UploadImageRequest;
 use App\Models\Image;
 use App\Services\ImageService;
 use Closure;
@@ -50,12 +49,12 @@ class ImageController extends Controller
 
     /**
      * 画像を保存するメソッド。
-     * @param UploadImageRequest $request
+     * @param Request $request
      * @param ImageManager $manager
      * @return RedirectResponse
      * @throws Throwable
      */
-    public function store(UploadImageRequest $request, ImageManager $manager): RedirectResponse
+    public function store(Request $request, ImageManager $manager): RedirectResponse
     {
         try {
             DB::transaction(function () use ($request, $manager) {
