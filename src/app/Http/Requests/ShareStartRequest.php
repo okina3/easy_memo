@@ -31,7 +31,8 @@ class ShareStartRequest extends FormRequest
                 Rule::exists('users', 'email')->where(function (Builder $query) {
                     return $query
                         // emailが自分自身のものかどうかの判定
-                        ->where('id', '!=', Auth::id());
+                        ->where('id', '!=', Auth::id())
+                        ->whereNull('deleted_at');
                 }),
             ],
             'edit_access' => 'required',
