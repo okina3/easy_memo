@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Notifications;
+namespace App\Notifications\User;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -38,7 +38,7 @@ class ResetPasswordNotification extends Notification
     {
         return (new MailMessage)
             // ->subject(config('app.name') . ' パスワードリセットURLの送付')
-            ->subject('管理者様' . ' パスワードリセットURLの送付')
+            ->subject('ユーザー様' . ' パスワードリセットURLの送付')
             ->greeting('いつもご利用頂きありがとうございます')
             ->action('パスワードリセット', $this->url)
             ->line('こちらからパスワードリセットを行ってください');

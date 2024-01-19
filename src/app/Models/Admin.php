@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\Admin\Notifications\ResetPasswordNotification;
+use App\Notifications\Admin\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
