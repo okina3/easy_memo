@@ -48,15 +48,11 @@ class ShareSettingController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // メールアドレスから、ユーザーを特定
-                $shared_user = User::where('email', $request->share_user_start)->first();
+                $shared_user = User::availableSelectMailUser($request->share_user_start)->first();
                 // 共有設定が、重複していたら、共有設定を、一旦解除する。
                 ShareSettingService::resetDuplicateShareSettings($request->memoId, $shared_user->id);
                 // ユーザーを特定できたら、DBに保存する
-                ShareSetting::create([
-                    'sharing_user_id' => $shared_user->id,
-                    'memo_id' => $request->memoId,
-                    'edit_access' => $request->edit_access,
-                ]);
+                ShareSetting::availableCreateSetting($request, $shared_user->id);
             }, 10);
         } catch (Throwable $e) {
             Log::error($e);
@@ -128,7 +124,7 @@ class ShareSettingController extends Controller
     public function destroy(ShareEndRequest $request): RedirectResponse
     {
         // メールアドレスから、ユーザーを特定
-        $shared_user = User::where('email', $request->share_user_end)->first();
+        $shared_user = User::availableSelectMailUser($request->share_user_end)->first();
         //ユーザーを特定できたら、共有を解除する
         ShareSetting::availableSelectSetting($shared_user->id, $request->memoId)->delete();
 

@@ -50,7 +50,6 @@ class ShareSettingService
      */
     public static function searchSharedUserName(Collection $share_setting_memos): array
     {
-//        dd($share_setting_memos);
         // 共有情報から、全ユーザー名を、空の配列に追加
         $shared_users = [];
         foreach ($share_setting_memos as $share_setting_user) {

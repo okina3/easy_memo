@@ -64,6 +64,23 @@ class ShareSetting extends Model
     }
 
     /**
+     * 共有設定を、DBに保存するスコープ。
+     * @param Builder $query
+     * @param $request
+     * @param int $shared_user_id
+     * @return void
+     */
+    public function scopeAvailableCreateSetting(Builder $query, $request, int $shared_user_id): void
+    {
+        $query
+            ->create([
+                'sharing_user_id' => $shared_user_id,
+                'memo_id' => $request->memoId,
+                'edit_access' => $request->edit_access,
+            ]);
+    }
+
+    /**
      *  共有されていないメモを見られなくする為のスコープ。
      * @param Builder $query
      * @param int $id

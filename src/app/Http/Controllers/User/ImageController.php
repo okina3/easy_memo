@@ -8,7 +8,6 @@ use App\Services\ImageService;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
@@ -66,10 +65,7 @@ class ImageController extends Controller
                         // 画像をリサイズして、Laravelのフォルダ内に保存
                         $only_one_file_name = ImageService::afterResizingImage($image_file, $manager);
                         // リサイズした画像をDBに保存
-                        Image::create([
-                            'user_id' => Auth::id(),
-                            'filename' => $only_one_file_name
-                        ]);
+                        Image::availableCreateImage($only_one_file_name);
                     }
                 }
             }, 10);

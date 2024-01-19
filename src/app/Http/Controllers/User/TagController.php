@@ -7,7 +7,6 @@ use App\Http\Requests\UploadTagRequest;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class TagController extends Controller
@@ -35,10 +34,7 @@ class TagController extends Controller
         $tag_exists = Tag::availableCheckDuplicateTag($request->new_tag)->exists();
         // タグが、重複していなれば、タグを保存
         if (!empty($request->new_tag) && !$tag_exists) {
-            Tag::create([
-                'name' => $request->new_tag,
-                'user_id' => Auth::id()
-            ]);
+            Tag::availableCreateTag($request->new_tag);
         }
         return to_route('user.tag.index')->with(['message' => 'タグを登録しました。', 'status' => 'info']);
     }

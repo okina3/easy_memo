@@ -91,6 +91,18 @@ class User extends Authenticatable
     }
 
     /**
+     * メールアドレスから、ユーザーを特定する為のスコープ。
+     * @param Builder $query
+     * @param string $request_share_user
+     * @return void
+     */
+    public function scopeAvailableSelectMailUser(Builder $query, string $request_share_user): void
+    {
+        $query
+            ->where('email', $request_share_user);
+    }
+
+    /**
      * 検索したメールアドレスを表示するの為のスコープ。
      * @param $query
      * @param $keyword

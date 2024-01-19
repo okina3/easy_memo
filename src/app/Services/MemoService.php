@@ -79,6 +79,21 @@ class MemoService
     }
 
     /**
+     * メモを更新するメソッド。
+     * @param $request
+     * @return mixed
+     */
+    public static function updateMemo($request): mixed
+    {
+        $memo = Memo::availableSelectMemo($request->memoId)->first();
+        $memo->title = $request->title;
+        $memo->content = $request->content;
+        $memo->save();
+
+        return $memo;
+    }
+
+    /**
      * 共有されているメモに目印を付けるメソッド。
      * @param $choice_memo
      * @return mixed

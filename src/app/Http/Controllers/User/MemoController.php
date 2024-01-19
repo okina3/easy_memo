@@ -149,10 +149,7 @@ class MemoController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // メモを更新
-                $memo = Memo::availableSelectMemo($request->memoId)->first();
-                $memo->title = $request->title;
-                $memo->content = $request->content;
-                $memo->save();
+                $memo = MemoService::updateMemo($request);
                 // 一旦メモとタグを紐付けた中間デーブルのデータを削除
                 MemoTag::where('memo_id', $request->memoId)->delete();
                 // 一旦メモと画像を紐付けた中間デーブルのデータを削除

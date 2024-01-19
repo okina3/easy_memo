@@ -66,6 +66,21 @@ class Tag extends Model
     }
 
     /**
+     * タグをDBに保存する為のスコープ。
+     * @param Builder $query
+     * @param string $request_new_tag
+     * @return void
+     */
+    public function scopeAvailableCreateTag(Builder $query, string $request_new_tag): void
+    {
+        $query
+            ->create([
+                'name' => $request_new_tag,
+                'user_id' => Auth::id()
+            ]);
+    }
+
+    /**
      * タグが重複していないか調べる為のスコープ。
      * @param Builder $query
      * @param $request_new_tag
