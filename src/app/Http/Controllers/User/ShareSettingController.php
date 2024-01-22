@@ -10,6 +10,7 @@ use App\Models\Memo;
 use App\Models\ShareSetting;
 use App\Models\User;
 use App\Services\ImageService;
+use App\Services\SessionService;
 use App\Services\ShareSettingService;
 use App\Services\TagService;
 use Illuminate\Http\RedirectResponse;
@@ -27,6 +28,8 @@ class ShareSettingController extends Controller
      */
     public function index(): View
     {
+        // ブラウザバック対策（値を削除する）
+        SessionService::resetBrowserBackSession();
         // 一旦全ての共有されたメモを取得
         $share_setting_memos = ShareSetting::availableAllSharedMemos()->get();
         // パラメーターから、全ての共有メモ、ユーザー別の共有メモを、切り分ける。

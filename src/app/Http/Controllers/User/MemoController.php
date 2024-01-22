@@ -11,6 +11,7 @@ use App\Models\MemoTag;
 use App\Models\Tag;
 use App\Services\ImageService;
 use App\Services\MemoService;
+use App\Services\SessionService;
 use App\Services\ShareSettingService;
 use App\Services\TagService;
 use Closure;
@@ -39,6 +40,8 @@ class MemoController extends Controller
      */
     public function index(): View
     {
+        // ブラウザバック対策（値を削除する）
+        SessionService::resetBrowserBackSession();
         // 全メモ、または検索されたメモを表示する
         $all_memos = MemoService::searchMemos();
         // 全タグを取得する
@@ -53,10 +56,12 @@ class MemoController extends Controller
      */
     public function create(): View
     {
-        //全タグを取得する
+        // 全タグを取得する
         $all_tags = Tag::availableAllTags()->get();
-        //全画像を取得する
+        // 全画像を取得する
         $all_images = Image::availableAllImages()->get();
+        // ブラウザバック対策（値を持たせる）
+        SessionService::setBrowserBackSession();
 
         return view('user.memos.create', compact('all_tags', 'all_images'));
     }
@@ -69,6 +74,8 @@ class MemoController extends Controller
      */
     public function store(UploadMemoRequest $request): RedirectResponse
     {
+        // ブラウザバック対策（値を確認）
+        SessionService::clickBrowserBackSession();
         try {
             DB::transaction(function () use ($request) {
                 //メモを保存
@@ -117,7 +124,7 @@ class MemoController extends Controller
      */
     public function edit(int $id): View
     {
-        // タグの一覧表示
+        // 全タグの一覧表示
         $all_tags = Tag::availableAllTags()->get();
         // 全画像を取得する
         $all_images = Image::availableAllImages()->get();
@@ -131,6 +138,8 @@ class MemoController extends Controller
         $memo_in_images_id = ImageService::getMemoImagesId($choice_memo->images);
         // 共有されているメモに目印を付ける
         MemoService::checkShared($choice_memo);
+        // ブラウザバック対策（値を持たせる）
+        SessionService::setBrowserBackSession();
 
         return view(
             'user.memos.edit',
@@ -146,6 +155,8 @@ class MemoController extends Controller
      */
     public function update(UploadMemoRequest $request): RedirectResponse
     {
+        // ブラウザバック対策（値を確認）
+        SessionService::clickBrowserBackSession();
         try {
             DB::transaction(function () use ($request) {
                 // メモを更新

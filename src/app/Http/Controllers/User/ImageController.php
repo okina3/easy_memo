@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Services\ImageService;
+use App\Services\SessionService;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -31,6 +32,8 @@ class ImageController extends Controller
      */
     public function index(): View
     {
+        // ブラウザバック対策（値を削除する）
+        SessionService::resetBrowserBackSession();
         // 全画像を取得する
         $images = Image::availableAllImages()->paginate(16);
 
@@ -43,6 +46,9 @@ class ImageController extends Controller
      */
     public function create(): View
     {
+        // ブラウザバック対策（値を持たせる）
+        SessionService::setBrowserBackSession();
+
         return view('user.images.create');
     }
 
@@ -55,6 +61,8 @@ class ImageController extends Controller
      */
     public function store(Request $request, ImageManager $manager): RedirectResponse
     {
+        // ブラウザバック対策（値を確認）
+        SessionService::clickBrowserBackSession();
         try {
             DB::transaction(function () use ($request, $manager) {
                 // 選択された画像を取得

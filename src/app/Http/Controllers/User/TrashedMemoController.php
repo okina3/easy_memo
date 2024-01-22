@@ -4,8 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Memo;
+use App\Services\SessionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class TrashedMemoController extends Controller
@@ -16,6 +18,8 @@ class TrashedMemoController extends Controller
      */
     public function index(): View
     {
+        // ブラウザバック対策（値を削除する）
+        SessionService::resetBrowserBackSession();
         $trashed_memos = Memo::onlyTrashed()->availableAllTrashedMemos()->get();
 
         return view('user.trashedMemos.trashed-memo', compact('trashed_memos'));
