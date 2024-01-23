@@ -6,7 +6,7 @@
             <div class="px-3 py-2.5 border-b border-gray-400 bg-gray-200">
                 <h1 class="text-xl font-semibold">ユーザーから検索</h1>
             </div>
-            <div class="p-3 h-[90vh] overflow-y-scroll overscroll-none">
+            <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
                 <div class="mb-2 hover:font-semibold">
                     <a href="share-setting/">全てのメモを表示</a>
                 </div>
@@ -24,7 +24,7 @@
             <div class="px-3 py-2.5 flex justify-between items-center border-b border-gray-400 bg-gray-200">
                 <h1 class="text-xl font-semibold">共有されているメモ</h1>
             </div>
-            <div class="p-2 h-[90vh] overflow-y-scroll overscroll-none">
+            <div class="p-2 h-[85vh] overflow-y-scroll overscroll-none">
                 @foreach ($shared_memos as $shared_memo)
                     <div class="mb-5 p-2 border border-gray-400 rounded-lg">
                         {{-- 共有メモのユーザーの名前 --}}

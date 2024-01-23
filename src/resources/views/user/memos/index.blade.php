@@ -6,7 +6,7 @@
             <div class="px-3 py-2.5 border-b border-gray-400 bg-gray-200">
                 <h1 class="text-xl font-semibold">タグから検索</h1>
             </div>
-            <div class="p-3 h-[90vh] overflow-y-scroll overscroll-none">
+            <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
                 <div class="mb-2 hover:font-semibold">
                     <a href="/">全てのメモを表示</a>
                 </div>
@@ -26,7 +26,7 @@
                     メモ新規作成
                 </button>
             </div>
-            <div class="p-2 h-[90vh] overflow-y-scroll overscroll-none">
+            <div class="p-2 h-[85vh] overflow-y-scroll overscroll-none">
                 @foreach ($all_memos as $memo)
                     <div class="mb-5 p-2 border border-gray-400 rounded-lg">
                         {{-- 共有中のメモの目印 --}}

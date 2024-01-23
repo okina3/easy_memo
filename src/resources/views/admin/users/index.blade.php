@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-common.flash-message status="session('status')"/>
     {{-- メールアドレスの検索エリア --}}
-    <section class="mb-10 p-3 max-w-screen-lg mx-auto border border-gray-400 rounded-lg">
+    <section class="mb-5 p-3 max-w-screen-lg mx-auto border border-gray-400 rounded-lg bg-gray-200">
         <form action="{{ route('admin.index') }}" method="get">
             <div class="flex space-x-2 items-center">
                 <div class="text-gray-600 text-xl font-semibold">
@@ -20,7 +20,7 @@
         <div class="px-3 py-2 flex justify-between items-center border-b border-gray-400 bg-gray-200">
             <h1 class="text-xl font-semibold">ユーザー一覧</h1>
         </div>
-        <div class="p-2 h-[70vh] overflow-y-scroll overscroll-none">
+        <div class="p-2 h-[75vh] overflow-y-scroll overscroll-none">
             @foreach ($users_all as $user)
                 <div class="mb-5 p-2 flex justify-between items-center border border-gray-400 rounded-lg">
                     <div class="truncate">

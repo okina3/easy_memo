@@ -3,7 +3,7 @@
         <div class="px-3 py-2 flex justify-between items-center border-b border-gray-400 bg-gray-200">
             <h1 class="py-1 text-xl font-semibold">削除済みメモ一覧</h1>
         </div>
-        <div class="p-3 ">
+        <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
             <x-common.flash-message status="session('status')"/>
             @foreach ($trashed_memos as $trashed_memo)
                 <div class="py-3 flex justify-between items-center border-b border-slate-300">

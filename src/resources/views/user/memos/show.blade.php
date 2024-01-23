@@ -59,20 +59,24 @@
                                 <h1 class="mb-1 text-lg font-semibold">
                                     共有中のユーザー
                                 </h1>
-                                @foreach ($shared_users as $shared_user)
-                                    <div class="mb-1">
-                                        {{-- 共有中のユーザーの名前 --}}
-                                        {{ $shared_user->name }}・・・
-                                        ({{ $shared_user->email }})
-                                        {{-- 共有中のメモの編集許可の判定 --}}
-                                        @if ($shared_user->access === 1)
-                                            (詳細、編集も許可)
-                                        @endif
-                                        @if ($shared_user->access === 0)
-                                            (詳細のみ許可)
-                                        @endif
-                                    </div>
-                                @endforeach
+                                <ul
+                                    class="p-2 max-h-[20vh] border border-gray-400 rounded bg-white overflow-y-scroll overscroll-none">
+                                    @foreach ($shared_users as $shared_user)
+                                        <li class="pb-1 mb-1 border-b border-gray-400">
+                                            {{-- 共有中のユーザーの名前 --}}
+                                            {{ $shared_user->name }}・・・
+                                            {{-- 共有中のユーザーのメールアドレス --}}
+                                            （{{ $shared_user->email }}）
+                                            {{-- 共有中のメモの編集許可の判定 --}}
+                                            @if ($shared_user->access === 1)
+                                                （詳細、<span class="font-semibold text-blue-800">編集</span>も許可）
+                                            @endif
+                                            @if ($shared_user->access === 0)
+                                                （詳細のみ許可）
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                             {{-- メモの共有の停止エリア --}}
                             <form action="{{ route('user.share-setting.destroy') }}" method="post">
