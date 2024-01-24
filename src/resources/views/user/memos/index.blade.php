@@ -1,15 +1,18 @@
 <x-app-layout>
     <x-common.flash-message status="session('status')"/>
     <div class="mb-2 flex justify-between">
-        {{-- タグ検索エリア --}}
+        {{-- タグ検索の表示エリア --}}
         <section class="w-1/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+            {{-- タイトル --}}
             <div class="px-3 py-2.5 border-b border-gray-400 bg-gray-200">
                 <h1 class="text-xl font-semibold">タグから検索</h1>
             </div>
+            {{-- タグの検索 --}}
             <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
                 <div class="mb-2 hover:font-semibold">
                     <a href="/">全てのメモを表示</a>
                 </div>
+                {{-- タグ一覧 --}}
                 @foreach ($all_tags as $tag)
                     <a href="/?tag={{ $tag->id }}" class="mb-1 block truncate hover:font-semibold">
                         {{ $tag->name }}
@@ -17,8 +20,9 @@
                 @endforeach
             </div>
         </section>
-        {{-- メモ一覧表示エリア --}}
+        {{-- メモ一覧の表示エリア --}}
         <section class="ml-2 w-4/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+            {{-- タイトル --}}
             <div class="px-3 py-2 flex justify-between items-center border-b border-gray-400 bg-gray-200">
                 <h1 class="text-xl font-semibold">メモ一覧</h1>
                 <button onclick="location.href='{{ route('user.create') }}'"
@@ -26,6 +30,7 @@
                     メモ新規作成
                 </button>
             </div>
+            {{-- メモ一覧 --}}
             <div class="p-2 h-[85vh] overflow-y-scroll overscroll-none">
                 @foreach ($all_memos as $memo)
                     <div class="mb-5 p-2 border border-gray-400 rounded-lg">
@@ -37,9 +42,9 @@
                                 </div>
                             </div>
                         @endif
-                        {{-- タイトル --}}
+                        {{-- メモのタイトル --}}
                         <div class="mb-1 text-lg font-semibold">{{ $memo->title }}</div>
-                        {{-- 内容 --}}
+                        {{-- メモの内容 --}}
                         <div class="mb-2 truncate">{{ $memo->content }}</div>
                         {{-- ボタンエリア --}}
                         <div class="flex justify-end text-white">

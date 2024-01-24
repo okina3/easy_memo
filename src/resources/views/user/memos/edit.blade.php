@@ -1,8 +1,10 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+        {{-- メモの編集ページのタイトル --}}
         <div class="px-3 py-2 border-b border-gray-400 bg-gray-200">
             <h1 class="py-1 text-xl font-semibold">メモ編集</h1>
         </div>
+        {{-- 選択したメモを編集するエリア --}}
         <div class="p-3">
             <form action="{{ route('user.update') }}" method="post">
                 @csrf
@@ -17,24 +19,23 @@
                         </div>
                     </div>
                 @endif
-                {{-- タイトル --}}
+                {{-- 選択したメモのタイトルを表示 --}}
                 <div class="mb-5">
                     <h1 class="mb-1 text-lg font-semibold">タイトル</h1>
                     <input type="text" class="w-60 rounded" name="title" value="{{ $choice_memo->title }}"
                            placeholder="ここにタイトルを入力"/>
-                    {{-- 新規タグのエラーメッセージ --}}
+                    {{-- エラーメッセージ（メモのタイトル）--}}
                     <x-input-error :messages="$errors->get('title')" class="mt-2"/>
                 </div>
-                {{-- 選択したメモの内容表示エリア --}}
+                {{-- 選択したメモの内容の表示 --}}
                 <div class="mb-5">
                     <h1 class="mb-1 text-lg font-semibold">内容</h1>
                     <textarea class="w-full rounded" name="content" rows="7"
                               placeholder="ここにメモを入力">{{ $choice_memo->content }}</textarea>
-                    {{-- メモの内容エラーメッセージ --}}
+                    {{-- エラーメッセージ（メモの内容）--}}
                     <x-input-error :messages="$errors->get('content')" class="mt-2"/>
                 </div>
-
-                {{-- 既存タグの選択エリア --}}
+                {{-- 選択したメモに紐づいた既存タグを表示 --}}
                 <div class="mb-10">
                     <h1 class="mb-1 text-lg font-semibold">既存タグの選択</h1>
                     @foreach ($all_tags as $tag)
@@ -45,28 +46,29 @@
                         </div>
                     @endforeach
                 </div>
-
-                {{-- 新規タグ入力エリア --}}
+                {{-- 新規タグ入力 --}}
                 <div class="mb-10">
                     <h1 class="mb-1 text-lg font-semibold">新規タグの追加</h1>
                     <div class="mr-5">
                         <input type="text" class="w-60 rounded" name="new_tag" placeholder="ここに新規タグを入力"/>
                     </div>
-                    {{-- 新規タグのエラーメッセージ --}}
+                    {{-- エラーメッセージ（新規タグ） --}}
                     <x-input-error :messages="$errors->get('new_tag')" class="mt-2"/>
                 </div>
-                {{-- 選択画像の表示 --}}
+                {{-- 選択したメモに紐づいた画像の表示 --}}
                 <div class="mb-10">
                     <h1 class="mb-1 text-lg font-semibold">画像の選択</h1>
                     {{-- モーダルウィンドウ --}}
                     <x-common.list-select-image :allImages='$all_images' :memoInImagesId="$memo_in_images_id"/>
                 </div>
+                {{-- メモの更新ボタン --}}
                 <div class="mb-5">
                     <button type="submit" class="py-1 px-4 text-white rounded bg-blue-800 hover:bg-blue-700">
                         更新する
                     </button>
                 </div>
             </form>
+            {{-- 戻るボタン --}}
             <div class="mb-2 flex justify-end">
                 <button onclick="location.href='{{ route('user.index') }}'"
                         class="py-1 px-3 text-white rounded bg-gray-800 hover:bg-gray-700">
@@ -77,7 +79,7 @@
     </section>
     <script>
         'use strict'
-        // 最初に一度だけ発生するイベント
+        // 最初に一度だけ発生するイベント（メモに紐づいた画像を表示する為）
         document.addEventListener('DOMContentLoaded', function () {
             // Laravelから送られてくるデータをBladeで設定、メモに紐づいた画像を取得
             @php
