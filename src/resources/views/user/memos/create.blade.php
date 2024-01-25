@@ -1,8 +1,8 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- メモの新規作成ページのタイトル --}}
-        <div class="px-3 py-2 flex justify-between items-center border-b border-gray-400 bg-gray-200">
-            <h1 class="py-1 text-xl font-semibold">新規メモ作成</h1>
+        <div class="px-3 py-2.5 flex justify-between items-center border-b border-gray-400 bg-gray-200">
+            <h1 class="text-xl font-semibold">新規メモ作成</h1>
         </div>
         {{-- メモを新規作成するエリア --}}
         <div class="p-3">

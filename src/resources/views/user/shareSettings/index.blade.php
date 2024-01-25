@@ -41,13 +41,9 @@
                             <div class="ml-1">さん のメモ</div>
                         </div>
                         {{-- メモのタイトル --}}
-                        <div class="mb-1 text-lg font-semibold">
-                            {{ $shared_memo->title }}
-                        </div>
+                        <div class="mb-1 text-lg font-semibold">{{ $shared_memo->title }}</div>
                         {{-- メモの内容 --}}
-                        <div class="mb-2 truncate">
-                            {{ $shared_memo->content }}
-                        </div>
+                        <div class="mb-2 truncate">{{ $shared_memo->content }}</div>
                         {{-- ボタンエリア --}}
                         <div class="flex justify-end text-white">
                             {{-- メモの詳細ボタン --}}

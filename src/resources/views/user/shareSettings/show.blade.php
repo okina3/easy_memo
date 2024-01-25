@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- 共有中のメモの詳細ページのタイトル --}}
-        <div class="px-3 py-2 border-b border-gray-400 bg-gray-200">
+        <div class="px-3 py-2.5 border-b border-gray-400 bg-gray-200">
             <h1 class="text-xl font-semibold">共有のメモ詳細</h1>
         </div>
         {{-- 選択した共有メモの詳細を表示するエリア --}}

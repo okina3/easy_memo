@@ -1,131 +1,13 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- メモの詳細ページのタイトル --}}
-        <div class="px-3 py-1 font-semibold border-b border-gray-400 bg-gray-200">
-            <h1 class="text-xl">メモ詳細</h1>
+        <div class="px-3 py-2.5 border-b border-gray-400 bg-gray-200">
+            <h1 class="text-xl font-semibold">メモ詳細</h1>
         </div>
         {{-- 選択したメモの詳細を表示するエリア --}}
         <div class="p-3">
-            {{-- メモの共有状態を表示するエリア（アコーディオン） --}}
-            <div class="mb-3">
-                <div id="shared-information">
-                    {{-- アコーディオンの開閉ボタン --}}
-                    <div id="shared-button">
-                        <button type="button" class="accordion-button">
-                            メモの共有設定
-                        </button>
-                    </div>
-                    {{-- エラーメッセージ（共有設定） --}}
-                    <div class="mt-2">
-                        <x-input-error :messages="$errors->get('share_user_start')"/>
-                        <x-input-error :messages="$errors->get('share_user_end')"/>
-                    </div>
-                    {{-- メモの共有の設定エリア --}}
-                    <div class="accordion-body">
-                        <div class="border-b-4 border-gray-700">
-                            {{-- メモの共有を開始するエリア --}}
-                            <form action="{{ route('user.share-setting.store') }}" method="post">
-                                @csrf
-                                {{-- 選択されているメモのidを取得 --}}
-                                <input type="hidden" name="memoId" value="{{ $choice_memo->id }}">
-                                <div class="mb-3 pb-5 border-b border-gray-400">
-                                    {{-- 共有設定のタイトル --}}
-                                    <h1 class="mb-1 text-lg font-semibold">このメモを共有する</h1>
-                                    {{-- ユーザーのメールアドレスを入力 --}}
-                                    <div class="mb-3">
-                                        <p class="text-sm">
-                                            共有したいユーザーのメールアドレスを入力してください。
-                                        </p>
-                                        <input type="text" class="w-60 rounded" name="share_user_start"
-                                               placeholder="メールアドレスを入力">
-                                    </div>
-                                    {{-- 編集権限のボタン --}}
-                                    <div class="mb-3">
-                                        <p class="text-sm">
-                                            共有したユーザーに、メモの編集を許可しますか？
-                                        </p>
-                                        <input type="radio" class="ml-2" name="edit_access" id="yes_access" value=1
-                                            {{ old('edit_access') == 1 ? 'checked' : '' }} />
-                                        <label for="yes_access">はい</label>
-                                        <input type="radio" class="ml-10" name="edit_access" id="no_access" value=0
-                                            {{ old('edit_access') == 0 ? 'checked' : '' }} />
-                                        <label for="no_access">いいえ</label>
-                                    </div>
-                                    {{-- メモを共有するボタン --}}
-                                    <button type="submit"
-                                            class="py-1 px-3 block text-white rounded bg-cyan-600 hover:bg-cyan-700">
-                                        共有する
-                                    </button>
-                                </div>
-                            </form>
-                            {{-- メモを共有中のユーザーの情報を表示するエリア --}}
-                            <div class="mb-3 pb-4 border-b border-gray-400">
-                                {{-- 共有設定のタイトル --}}
-                                <h1 class="mb-1 text-lg font-semibold">
-                                    共有中のユーザー
-                                </h1>
-                                {{-- 共有中のユーザーの情報を表示 --}}
-                                <ul
-                                    class="p-2 max-h-[25vh] border border-gray-400 rounded bg-white overflow-y-scroll overscroll-none">
-                                    @foreach ($shared_users as $shared_user)
-                                        <li class="mb-1 border-b border-gray-400">
-                                            {{-- 共有中のユーザーの名前 --}}
-                                            <div>
-                                                <span>ユーザー名・・・・・</span>
-                                                <span class="font-semibold">{{ $shared_user->name }}</span>
-                                            </div>
-                                            {{-- 共有中のユーザーのメールアドレス --}}
-                                            <div>
-                                                <span>メールアドレス・・・</span>
-                                                <span class="font-semibold">{{ $shared_user->email }}</span>
-                                            </div>
-                                            {{-- 共有中のメモのアクセス許可の判定 --}}
-                                            <div>
-                                                <span>アクセス許可・・・・</span>
-                                                @if ($shared_user->access === 1)
-                                                    <span class="font-semibold">
-                                                        詳細、<span class=" text-blue-800">編集</span>も可
-                                                    </span>
-                                                @endif
-                                                @if ($shared_user->access === 0)
-                                                    <span class="font-semibold">詳細のみ</span>
-                                                @endif
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            {{-- メモの共有を停止するエリア --}}
-                            <form action="{{ route('user.share-setting.destroy') }}" method="post">
-                                @csrf
-                                @method('delete')
-                                {{-- 選択されているメモのidを取得 --}}
-                                <input type="hidden" name="memoId" value="{{ $choice_memo->id }}">
-                                <div class="mb-3 pb-5">
-                                    {{-- 共有設定のタイトル --}}
-                                    <h1 class="mb-1 text-lg font-semibold">このメモの共有を停止する</h1>
-                                    {{-- ユーザーのメールアドレスを入力 --}}
-                                    <p class="text-sm">
-                                        共有したい停止したいユーザーのメールアドレスを入力してください。
-                                    </p>
-                                    <input type="text" class="mb-2 w-60 rounded" name="share_user_end"
-                                           placeholder="メールアドレスを入力">
-                                    {{-- メモの共有を停止するボタン --}}
-                                    <button type="submit"
-                                            class="py-1 px-3 block text-white rounded bg-cyan-600 hover:bg-cyan-700">
-                                        共有停止
-                                    </button>
-                                    {{-- コメント --}}
-                                    <p class="text-sm mt-2">
-                                        ※ このメモの全てのユーザーの共有を停止したい場合は、メモを削除してください。
-                                    </p>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {{-- メモの共有設定を表示するエリア --}}
+            <x-common.memo-share-status :choiceMemoId='$choice_memo->id' :sharedUsers='$shared_users'/>
             {{-- メモの詳細を表示エリア --}}
             <div class="mb-3">
                 {{-- 共有中のメモの目印 --}}

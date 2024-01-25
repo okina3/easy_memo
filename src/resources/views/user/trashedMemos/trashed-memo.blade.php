@@ -1,8 +1,8 @@
 <x-app-layout>
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- 削除済みメモの管理ページのタイトル --}}
-        <div class="px-3 py-2 flex justify-between items-center border-b border-gray-400 bg-gray-200">
-            <h1 class="py-1 text-xl font-semibold">削除済みメモ一覧</h1>
+        <div class="px-3 py-2.5 flex justify-between items-center border-b border-gray-400 bg-gray-200">
+            <h1 class="text-xl font-semibold">削除済みメモ一覧</h1>
         </div>
         {{-- 削除済みメモを管理するエリア --}}
         <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">

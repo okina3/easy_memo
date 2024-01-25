@@ -12,7 +12,6 @@
                 </div>
             </div>
         </div>
-        {{-- ブラウザの表示 --}}
         {{-- ブラウザのサムネイル画像 --}}
         <div class="w-1/5 p-1">
             <a data-micromodal-trigger="{{ $memo_image->id }}" href='javascript:'>

@@ -21,7 +21,7 @@
     {{-- 登録ユーザー一覧の表示エリア --}}
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- タイトル --}}
-        <div class="px-3 py-2 flex justify-between items-center border-b border-gray-400 bg-gray-200">
+        <div class="px-3 py-2.5 flex justify-between items-center border-b border-gray-400 bg-gray-200">
             <h1 class="text-xl font-semibold">ユーザー一覧</h1>
         </div>
         {{-- 登録ユーザー一覧 --}}
