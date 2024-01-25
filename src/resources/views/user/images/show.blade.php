@@ -6,7 +6,6 @@
         </div>
         {{-- 選択した画像の詳細を表示するエリア --}}
         <div class="p-3">
-            <x-common.flash-message status="session('status')"/>
             {{-- 選択した画像を表示 --}}
             <div class="p-2 w-2/3 mx-auto">
                 <div class="relative">

@@ -7,7 +7,6 @@ use App\Models\Memo;
 use App\Services\SessionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class TrashedMemoController extends Controller

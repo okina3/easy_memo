@@ -6,7 +6,8 @@
         </div>
         {{-- 画像を新規登録するエリア --}}
         <div class="p-3">
-            <x-input-error :messages="$errors->get('user.images')" class="mt-2"/>
+            {{-- エラーメッセージ（画像）--}}
+            <x-input-error :messages="$errors->get('images')" class="mt-2"/>
             <form action="{{ route('user.image.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- 登録する画像の選択 --}}

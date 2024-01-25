@@ -6,6 +6,7 @@
         </div>
         {{-- タグを管理するエリア --}}
         <div class="p-3">
+            {{-- フラッシュメッセージ --}}
             <x-common.flash-message status="session('status')"/>
             {{-- タグを新規作成するエリア --}}
             <form action="{{ route('user.tag.store') }}" method="post">
@@ -45,6 +46,8 @@
                             <label for="{{ $tag->id }}">{{ $tag->name }}</label>
                         </div>
                     @endforeach
+                    {{-- エラーメッセージ （タグの削除） --}}
+                    <x-input-error :messages="$errors->get('tags')" class="mt-5"/>
                 </div>
                 {{-- タグを削除するボタン --}}
                 <div class="flex justify-end">

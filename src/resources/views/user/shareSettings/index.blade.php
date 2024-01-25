@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- フラッシュメッセージ --}}
     <x-common.flash-message status="session('status')"/>
     <div class="mb-2 flex justify-between">
         {{-- ユーザー検索の表示エリア --}}

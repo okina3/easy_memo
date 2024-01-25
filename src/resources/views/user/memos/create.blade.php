@@ -6,7 +6,6 @@
         </div>
         {{-- メモを新規作成するエリア --}}
         <div class="p-3">
-            <x-common.flash-message status="session('status')"/>
             <form action="{{ route('user.store') }}" method="post">
                 @csrf
                 {{-- メモのタイトル入力 --}}

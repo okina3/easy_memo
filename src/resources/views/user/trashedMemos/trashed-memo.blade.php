@@ -6,6 +6,7 @@
         </div>
         {{-- 削除済みメモを管理するエリア --}}
         <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
+            {{-- フラッシュメッセージ --}}
             <x-common.flash-message status="session('status')"/>
             {{-- ソフトデリートされたメモ一覧 --}}
             @foreach ($trashed_memos as $trashed_memo)

@@ -12,6 +12,7 @@
         </div>
         {{-- 登録した画像の表示エリア --}}
         <div class="p-3">
+            {{-- フラッシュメッセージ --}}
             <x-common.flash-message status="session('status')"/>
             <div class="flex flex-wrap">
                 {{-- 登録画像の一覧  --}}

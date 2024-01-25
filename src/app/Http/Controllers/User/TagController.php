@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeleteTagRequest;
 use App\Http\Requests\UploadTagRequest;
 use App\Models\Tag;
 use App\Services\SessionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class TagController extends Controller
@@ -48,7 +48,7 @@ class TagController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(DeleteTagRequest $request): RedirectResponse
     {
         //タグを複数まとめて削除
         foreach ($request->tags as $tag) {

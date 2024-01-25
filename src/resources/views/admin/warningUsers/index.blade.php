@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- フラッシュメッセージ --}}
     <x-common.flash-message status="session('status')"/>
     {{-- ユーザーの検索の表示エリア --}}
     <section class="mb-5 p-3 max-w-screen-lg mx-auto border border-gray-400 rounded-lg bg-gray-200">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UploadImageRequest;
 use App\Models\Image;
 use App\Services\ImageService;
 use App\Services\SessionService;
@@ -59,7 +60,7 @@ class ImageController extends Controller
      * @return RedirectResponse
      * @throws Throwable
      */
-    public function store(Request $request, ImageManager $manager): RedirectResponse
+    public function store(UploadImageRequest $request, ImageManager $manager): RedirectResponse
     {
         // ブラウザバック対策（値を確認）
         SessionService::clickBrowserBackSession();
