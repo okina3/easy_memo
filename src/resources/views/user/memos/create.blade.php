@@ -1,35 +1,33 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- メモの新規作成ページのタイトル --}}
-        <div class="px-3 py-2.5 flex justify-between items-center border-b border-gray-400 bg-gray-200">
-            <h1 class="text-xl font-semibold">新規メモ作成</h1>
-        </div>
+        <div class="heading_bg"><h1 class="heading">新規メモ作成</h1></div>
         {{-- メモを新規作成するエリア --}}
         <div class="p-3">
             <form action="{{ route('user.store') }}" method="post">
                 @csrf
                 {{-- メモのタイトル入力 --}}
                 <div class="mb-5">
-                    <h1 class="mb-1 text-lg font-semibold">タイトル</h1>
-                    <input type="text" class="w-60 rounded" name="title" value="{{ old('title') }}"
+                    <h2 class="sub_heading mb-1">タイトル</h2>
+                    <input class="w-60 rounded" type="text" name="title" value="{{ old('title') }}"
                            placeholder="ここにタイトルを入力"/>
                     {{-- エラーメッセージ（メモのタイトル） --}}
-                    <x-input-error :messages="$errors->get('title')" class="mt-2"/>
+                    <x-input-error class="mt-2" :messages="$errors->get('title')"/>
                 </div>
                 {{-- メモの内容入力 --}}
                 <div class="mb-5">
-                    <h1 class="mb-1 text-lg font-semibold">内容</h1>
+                    <h2 class="sub_heading mb-1">内容</h2>
                     <textarea class="w-full rounded" name="content" rows="7"
                               placeholder="ここにメモを入力">{{ old('content') }}</textarea>
                     {{-- エラーメッセージ（メモの内容） --}}
-                    <x-input-error :messages="$errors->get('content')" class="mt-2"/>
+                    <x-input-error class="mt-2" :messages="$errors->get('content')"/>
                 </div>
                 {{-- 既存タグの選択 --}}
                 <div class="mb-10">
-                    <h1 class="mb-1 text-lg font-semibold">既存タグの選択</h1>
+                    <h2 class="sub_heading mb-1">既存タグの選択</h2>
                     @foreach ($all_tags as $tag)
                         <div class="inline mr-3 hover:font-semibold">
-                            <input type="checkbox" class="mb-1 rounded" name="tags[]" id="{{ $tag->id }}"
+                            <input class="mb-1 rounded" type="checkbox" name="tags[]" id="{{ $tag->id }}"
                                    value="{{ $tag->id }}" {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} />
                             <label for="{{ $tag->id }}">{{ $tag->name }}</label>
                         </div>
@@ -37,29 +35,26 @@
                 </div>
                 {{-- 新規タグ入力 --}}
                 <div class="mb-10">
-                    <h1 class="mb-1 text-lg font-semibold">新規タグの追加</h1>
-                    <input type="text" class="w-60 rounded" name="new_tag" value="{{ old('new_tag') }}"
+                    <h2 class="sub_heading mb-1">新規タグの追加</h2>
+                    <input class="w-60 rounded" type="text" name="new_tag" value="{{ old('new_tag') }}"
                            placeholder="ここに新規タグを入力"/>
                     {{-- エラーメッセージ（新規タグ） --}}
-                    <x-input-error :messages="$errors->get('new_tag')" class="mt-2"/>
+                    <x-input-error class="mt-2" :messages="$errors->get('new_tag')"/>
                 </div>
                 {{-- 画像の選択 --}}
                 <div class="mb-10">
-                    <h1 class="text-lg font-semibold">画像の選択</h1>
+                    <h2 class="sub_heading">画像の選択</h2>
                     {{-- モーダルウィンドウ --}}
                     <x-common.list-select-image :allImages='$all_images'/>
                 </div>
                 {{-- メモの保存ボタン --}}
                 <div class="mb-5">
-                    <button type="submit" class="py-1 px-4 text-white rounded bg-blue-800 hover:bg-blue-700">
-                        保存する
-                    </button>
+                    <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">保存する</button>
                 </div>
             </form>
             {{-- 戻るボタン --}}
             <div class="flex justify-end">
-                <button onclick="location.href='{{ route('user.index') }}'"
-                        class="py-1 px-3 text-white rounded bg-gray-800 hover:bg-gray-700">
+                <button class="btn bg-gray-800 hover:bg-gray-700" onclick="location.href='{{ route('user.index') }}'">
                     戻る
                 </button>
             </div>
