@@ -69,10 +69,8 @@ class ImageService
     {
         // ランダムなファイル名の生成
         $rnd_file_name = uniqid(rand() . '_');
-        // 選択画像の拡張子を取得
-        $get_extension = $image_file->extension();
         // ランダムなファイル名と拡張子を結合
-        $only_one_file_name = $rnd_file_name . '.' . $get_extension;
+        $only_one_file_name = $rnd_file_name . '.' . 'jpeg';
         // 実際のリサイズ
         $resize_image = $manager->read($image_file)
             ->resize(720, 480)
