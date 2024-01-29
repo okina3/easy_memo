@@ -13,29 +13,29 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                        メモ{{ __('Dashboard') }}
+                        メモ管理画面
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('user.tag.index')" :active="request()->routeIs('user.tag.index')">
-                        タグ{{ __('Dashboard') }}
+                        タグ管理画面
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('user.image.index')" :active="request()->routeIs('user.image.index')">
-                        画像{{ __('Dashboard') }}
+                        画像管理画面
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('user.share-setting.index')"
                                 :active="request()->routeIs('share-setting.index')">
-                        共有メモ{{ __('Dashboard') }}
+                        共有メモ管理画面
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('user.trashed-memo.index')"
                                 :active="request()->routeIs('user.trashed-memo.index')">
-                        削除済みメモ
+                        ゴミ箱
                     </x-nav-link>
                 </div>
             </div>
