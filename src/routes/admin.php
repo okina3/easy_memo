@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WarningUsersController;
 use App\Http\Controllers\ProfileController;
@@ -45,6 +46,13 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/', 'index')->name('warning.index');
         Route::patch('/undo', 'undo')->name('warning.undo');
         Route::delete('/destroy', 'destroy')->name('warning.destroy');
+    });
+
+    // 問い合わせ画面
+    Route::controller(ContactController::class)->prefix('contact')->group(function () {
+        Route::get('/', 'index')->name('contact.index');
+        Route::get('show/{contact}', 'show')->name('contact.show');
+        Route::delete('/destroy', 'destroy')->name('contact.destroy');
     });
 
     // デフォルトのルーティング

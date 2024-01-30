@@ -21,6 +21,11 @@
                         警告したユーザー管理画面
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.contact.index')" :active="request()->routeIs('admin.contact.index')">
+                        ユーザーからの問い合わせ
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
