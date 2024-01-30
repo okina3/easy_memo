@@ -41,7 +41,7 @@ class Tag extends Model
      * @param Builder $query
      * @return void
      */
-    public function scopeAvailableTagAll(Builder $query): void
+    public function scopeAvailableAllTags(Builder $query): void
     {
         $query
             ->where('user_id', Auth::id())
@@ -50,12 +50,12 @@ class Tag extends Model
     }
 
     /**
-     * 自分自身の、選択したタグにリレーションされた、メモを取得する為のスコープ。
+     * 自分自身の、選択したタグを取得する為のスコープ。
      * @param Builder $query
-     * @param $get_url_tag
+     * @param int $get_url_tag
      * @return void
      */
-    public function scopeAvailableTagInMemo(Builder $query, $get_url_tag): void
+    public function scopeAvailableSelectTag(Builder $query, int $get_url_tag): void
     {
         $query
             ->with('memos.shareSettings')
@@ -66,15 +66,30 @@ class Tag extends Model
     }
 
     /**
-     * タグが重複していないか調べる為のスコープ。
+     * タグをDBに保存する為のスコープ。
      * @param Builder $query
-     * @param $request
+     * @param string $request_new_tag
      * @return void
      */
-    public function scopeAvailableTagExists(Builder $query, $request): void
+    public function scopeAvailableCreateTag(Builder $query, string $request_new_tag): void
     {
         $query
-            ->where('name', $request->new_tag)
+            ->create([
+                'name' => $request_new_tag,
+                'user_id' => Auth::id()
+            ]);
+    }
+
+    /**
+     * タグが重複していないか調べる為のスコープ。
+     * @param Builder $query
+     * @param $request_new_tag
+     * @return void
+     */
+    public function scopeAvailableCheckDuplicateTag(Builder $query, $request_new_tag): void
+    {
+        $query
+            ->where('name', $request_new_tag)
             ->where('user_id', Auth::id());
     }
 }

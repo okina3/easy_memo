@@ -18,9 +18,9 @@ class WarningUsersController extends Controller
     public function index(Request $request): View
     {
         // 警告したユーザーを取得する
-        $warning_users_all = User::onlyTrashed()->availableUserOrder()
+        $warning_users_all = User::onlyTrashed()->availableAllUsers()
         ->searchKeyword($request->keyword)
-        ->paginate(5);
+        ->get();
 
         return view('admin.warningUsers.index', compact('warning_users_all'));
     }
@@ -32,7 +32,7 @@ class WarningUsersController extends Controller
      */
     public function undo(Request $request): RedirectResponse
     {
-        User::onlyTrashed()->availableSelectUser($request)->restore();
+        User::onlyTrashed()->availableSelectUser($request->userId)->restore();
 
         return to_route('admin.warning.index')->with(['message' => 'ユーザーのサービス利用を再開しました', 'status' => 'info']);
     }
@@ -44,7 +44,7 @@ class WarningUsersController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        User::onlyTrashed()->availableSelectUser($request)->forceDelete();
+        User::onlyTrashed()->availableSelectUser($request->userId)->forceDelete();
 
         return to_route('admin.warning.index')->with(['message' => 'ユーザーの情報を完全に削除しました。', 'status' => 'alert']);
     }

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
     return view('user.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth:users', 'verified'])->name('dashboard');
 
 Route::middleware('auth:users')->group(function () {
     //メモ管理画面

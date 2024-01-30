@@ -13,7 +13,7 @@ class MemoService
      * @param $request
      * @return void
      */
-    public static function memoUserCheck($request): void
+    public static function checkUserMemo($request): void
     {
         // パラメーターを取得
         $id_memo = $request->route()->parameter('memo');
@@ -30,19 +30,19 @@ class MemoService
      * 全メモ、また、検索したメモを一覧表示するメソッド。
      * @return mixed
      */
-    public static function memoSearchAll(): mixed
+    public static function searchMemos(): mixed
     {
         // クエリパラメータを取得
         $get_url_tag = \Request::query('tag');
         // もしクエリパラメータがあれば、タグから絞り込む
         if (!empty($get_url_tag)) {
             // 絞り込んだタグにリレーションされたメモを含む、タグを取得
-            $tag_relation = Tag::availableTagInMemo($get_url_tag)->first();
+            $tag_relation = Tag::availableSelectTag($get_url_tag)->first();
             // タグにリレーションされたメモを取得
             $memos = $tag_relation->memos;
         } else {
             // 全メモを取得
-            $memos = Memo::availableMemoAll()->get();
+            $memos = Memo::availableAllMemos()->get();
         }
         // 共有されているメモに目印を付ける
         foreach ($memos as $memo) {
@@ -59,23 +59,38 @@ class MemoService
     /**
      * メモに紐づいた、既存のタグと画像を、中間テーブルに値を保存するメソッド
      * @param $request
-     * @param $memo
+     * @param int $memo_id
      * @return void
      */
-    public static function attachRelationship($request, $memo): void
+    public static function attachTagsAndImages($request, int $memo_id): void
     {
         // 既存タグの選択があれば、メモに紐付けて中間テーブルに保存
         if (!empty($request->tags)) {
             foreach ($request->tags as $tag_number) {
-                Memo::findOrFail($memo->id)->tags()->attach($tag_number);
+                Memo::findOrFail($memo_id)->tags()->attach($tag_number);
             }
         }
         // 画像の選択があれば、メモに紐付けて中間テーブルに保存
         if (!empty($request->images)) {
             foreach ($request->images as $memo_image) {
-                Memo::findOrFail($memo->id)->images()->attach($memo_image);
+                Memo::findOrFail($memo_id)->images()->attach($memo_image);
             }
         }
+    }
+
+    /**
+     * メモを更新するメソッド。
+     * @param $request
+     * @return mixed
+     */
+    public static function updateMemo($request): mixed
+    {
+        $memo = Memo::availableSelectMemo($request->memoId)->first();
+        $memo->title = $request->title;
+        $memo->content = $request->content;
+        $memo->save();
+
+        return $memo;
     }
 
     /**
@@ -83,7 +98,7 @@ class MemoService
      * @param $choice_memo
      * @return mixed
      */
-    public static function sharedCheck($choice_memo): mixed
+    public static function checkShared($choice_memo): mixed
     {
         // メモが共有されているかどうかを確認
         $is_shared = $choice_memo->shareSettings->isNotEmpty();

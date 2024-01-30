@@ -41,7 +41,7 @@ class ShareSetting extends Model
      * @param Builder $query
      * @return void
      */
-    public function scopeAvailableSharesMemoAll(Builder $query): void
+    public function scopeAvailableAllSharedMemos(Builder $query): void
     {
         $query
             ->with('memo.user')
@@ -52,24 +52,41 @@ class ShareSetting extends Model
     /**
      * 共有設定を、一件に、絞り込むスコープ。
      * @param Builder $query
-     * @param $shared_user
-     * @param $request
+     * @param int $shared_user_id
+     * @param int $request_memo_id
      * @return void
      */
-    public function scopeAvailableSelectSetting(Builder $query, $shared_user, $request): void
+    public function scopeAvailableSelectSetting(Builder $query, int $shared_user_id, int $request_memo_id): void
     {
         $query
-            ->where('sharing_user_id', $shared_user->id)
-            ->where('memo_id', $request->memoId);
+            ->where('sharing_user_id', $shared_user_id)
+            ->where('memo_id', $request_memo_id);
+    }
+
+    /**
+     * 共有設定を、DBに保存するスコープ。
+     * @param Builder $query
+     * @param $request
+     * @param int $shared_user_id
+     * @return void
+     */
+    public function scopeAvailableCreateSetting(Builder $query, $request, int $shared_user_id): void
+    {
+        $query
+            ->create([
+                'sharing_user_id' => $shared_user_id,
+                'memo_id' => $request->memoId,
+                'edit_access' => $request->edit_access,
+            ]);
     }
 
     /**
      *  共有されていないメモを見られなくする為のスコープ。
      * @param Builder $query
-     * @param $id
+     * @param int $id
      * @return void
      */
-    public function scopeAvailableSettingCheck(Builder $query, $id): void
+    public function scopeAvailableCheckSetting(Builder $query, int $id): void
     {
         $query
             ->with('memo')
@@ -80,10 +97,10 @@ class ShareSetting extends Model
     /**
      *  自分が共有しているメモの、共有情報を取得する為のスコープ。
      * @param Builder $query
-     * @param $id
+     * @param int $id
      * @return void
      */
-    public function scopeAvailableSettingInUser(Builder $query, $id): void
+    public function scopeAvailableSharedMemoInfo(Builder $query, int $id): void
     {
         $query
             ->with('user')

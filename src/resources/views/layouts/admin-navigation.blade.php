@@ -13,12 +13,12 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                        ユーザー{{ __('Dashboard') }}
+                        ユーザー管理画面
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('admin.warning.index')" :active="request()->routeIs('admin.warning.index')">
-                        警告したユーザー{{ __('Dashboard') }}
+                        警告したユーザー管理画面
                     </x-nav-link>
                 </div>
             </div>

@@ -22,9 +22,9 @@ class UsersController extends Controller
     public function index(Request $request): View
     {
         // 全ユーザー、また、検索したユーザーを取得
-        $users_all = User::availableUserOrder()
+        $users_all = User::availableAllUsers()
             ->searchKeyword($request->keyword)
-            ->paginate(5);
+            ->get();
 
         return view('admin.users.index', compact('users_all'));
     }
@@ -40,9 +40,7 @@ class UsersController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // 自分の全てのメモの共有設定を解除する
-                UserService::myShareSettingStop($request);
-                // 他のユーザーの、停止ユーザーに共有しているメモの共有を解除する
-                UserService::youShareSettingStop($request);
+                UserService::deleteUserShareSettingAll($request->userId);
                 // 選択したユーザーのサービス利用を停止
                 User::findOrFail($request->userId)->delete();
             }, 10);

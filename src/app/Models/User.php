@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\User\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -47,6 +48,17 @@ class User extends Authenticatable
     ];
 
     /**
+     * ユーザー用のパスワードリセットの為のメソッド。
+     * @param $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $url = url("reset-password/${token}");
+        $this->notify(new ResetPasswordNotification($url));
+    }
+
+    /**
      * Memoモデルとのリレーション（一対多）
      * @return HasMany
      */
@@ -60,7 +72,7 @@ class User extends Authenticatable
      * @param Builder $query
      * @return void
      */
-    public function scopeAvailableUserOrder(Builder $query): void
+    public function scopeAvailableAllUsers(Builder $query): void
     {
         $query
             ->orderBy('updated_at', 'desc');
@@ -69,17 +81,29 @@ class User extends Authenticatable
     /**
      * 選択したユーザーを取得する為のスコープ。
      * @param Builder $query
-     * @param $request
+     * @param int $request_user_id
      * @return void
      */
-    public function scopeAvailableSelectUser(Builder $query, $request): void
+    public function scopeAvailableSelectUser(Builder $query, int $request_user_id): void
     {
         $query
-            ->where('id', $request->userId);
+            ->where('id', $request_user_id);
     }
 
     /**
-     * 検索したメールアドレスを表示するの記述
+     * メールアドレスから、ユーザーを特定する為のスコープ。
+     * @param Builder $query
+     * @param string $request_share_user
+     * @return void
+     */
+    public function scopeAvailableSelectMailUser(Builder $query, string $request_share_user): void
+    {
+        $query
+            ->where('email', $request_share_user);
+    }
+
+    /**
+     * 検索したメールアドレスを表示するの為のスコープ。
      * @param $query
      * @param $keyword
      * @return void

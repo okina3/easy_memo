@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadImageRequest;
 use App\Models\Image;
 use App\Services\ImageService;
+use App\Services\SessionService;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
@@ -22,7 +22,7 @@ class ImageController extends Controller
     {
         //別のユーザーの画像を見られなくする認証。
         $this->middleware(function (Request $request, Closure $next) {
-            ImageService::imageUserCheck($request);
+            ImageService::checkUserImage($request);
             return $next($request);
         });
     }
@@ -33,8 +33,10 @@ class ImageController extends Controller
      */
     public function index(): View
     {
+        // ブラウザバック対策（値を削除する）
+        SessionService::resetBrowserBackSession();
         // 全画像を取得する
-        $images = Image::availableImageAll()->paginate(20);
+        $images = Image::availableAllImages()->paginate(16);
 
         return view('user.images.index', compact('images'));
     }
@@ -45,18 +47,23 @@ class ImageController extends Controller
      */
     public function create(): View
     {
+        // ブラウザバック対策（値を持たせる）
+        SessionService::setBrowserBackSession();
+
         return view('user.images.create');
     }
 
     /**
      * 画像を保存するメソッド。
-     * @param UploadImageRequest $request
+     * @param Request $request
      * @param ImageManager $manager
      * @return RedirectResponse
      * @throws Throwable
      */
     public function store(UploadImageRequest $request, ImageManager $manager): RedirectResponse
     {
+        // ブラウザバック対策（値を確認）
+        SessionService::clickBrowserBackSession();
         try {
             DB::transaction(function () use ($request, $manager) {
                 // 選択された画像を取得
@@ -67,10 +74,7 @@ class ImageController extends Controller
                         // 画像をリサイズして、Laravelのフォルダ内に保存
                         $only_one_file_name = ImageService::afterResizingImage($image_file, $manager);
                         // リサイズした画像をDBに保存
-                        Image::create([
-                            'user_id' => Auth::id(),
-                            'filename' => $only_one_file_name
-                        ]);
+                        Image::availableCreateImage($only_one_file_name);
                     }
                 }
             }, 10);
@@ -83,13 +87,13 @@ class ImageController extends Controller
 
     /**
      * 画像の詳細を表示するメソッド。
-     * @param string $id
+     * @param int $id
      * @return View
      */
-    public function show(string $id): View
+    public function show(int $id): View
     {
         // 選択した画像を編集エリアに表示
-        $show_image = Image::findOrFail($id);
+        $show_image = Image::availableSelectImage($id)->first();
 
         return view('user.images.show', compact('show_image'));
     }
@@ -105,11 +109,11 @@ class ImageController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // 削除したい画像を取得
-                $image = Image::findOrFail($request->memoId);
+                $image = Image::availableSelectImage($request->memoId)->first();
                 // 先にStorageフォルダ内の画像ファイルを削除
-                ImageService::storageDelete($image);
+                ImageService::deleteStorage($image->filename);
                 // 削除したい画像をDBから削除
-                Image::findOrFail($request->memoId)->delete();
+                Image::availableSelectImage($request->memoId)->delete();
             }, 10);
         } catch (Throwable $e) {
             Log::error($e);
