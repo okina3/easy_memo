@@ -68,7 +68,6 @@ Route::middleware('auth:users')->group(function () {
 
     // 問い合わせ画面
     Route::controller(ContactController::class)->prefix('contact')->group(function () {
-        Route::get('/index', 'index')->name('contact.index');
         Route::get('/create', 'create')->name('contact.create');
         Route::post('/store', 'store')->name('contact.store');
     });

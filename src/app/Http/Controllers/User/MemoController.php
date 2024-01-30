@@ -78,7 +78,7 @@ class MemoController extends Controller
         SessionService::clickBrowserBackSession();
         try {
             DB::transaction(function () use ($request) {
-                //メモを保存
+                // メモを保存
                 $memo = Memo::create([
                     'title' => $request->title,
                     'content' => $request->content,

@@ -1,12 +1,12 @@
 <x-app-layout>
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- 問い合わせページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">管理人に問い合わせ</h1></div>
+        <div class="heading_bg"><h1 class="heading">管理人にお問い合わせ</h1></div>
         <div class="p-3">
             {{-- フラッシュメッセージ --}}
             <x-common.flash-message status="session('status')"/>
             {{-- 問い合わせするエリア --}}
-            <form action="{{ route('user.tag.store') }}" method="post">
+            <form action="{{ route('user.contact.store') }}" method="post">
                 @csrf
                 <div class="mb-10">
                     {{-- 件名の入力 --}}
@@ -17,9 +17,9 @@
                         {{-- エラーメッセージ （件名）--}}
                         <x-input-error class="mt-2" :messages="$errors->get('subject')"/>
                     </div>
-                    {{-- 問い合わせ内容の入力 --}}
+                    {{-- お問い合わせ内容の入力 --}}
                     <div class="mb-3">
-                        <h2 class="sub_heading mb-1">問い合わせ内容</h2>
+                        <h2 class="sub_heading mb-1">お問い合わせ内容</h2>
                                <textarea class="w-full rounded" name="message" rows="7"
                                placeholder="ここに問い合わせ内容を入力">{{ old('message') }}</textarea>
                         {{-- エラーメッセージ （問い合わせ内容）--}}
