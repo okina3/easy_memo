@@ -13,10 +13,8 @@
                     {{-- タイトル --}}
                     <h2 class="sub_heading mb-1">新規タグ作成</h2>
                     {{-- 新規タグの入力 --}}
-                    <div class="mr-5 mb-2">
-                        <input class="form-control rounded w-60" type="text" name="new_tag"
-                               placeholder="ここに新規タグを入力"/>
-                    </div>
+                    <input class="mb-2 block form-control rounded w-60" type="text" name="new_tag"
+                           placeholder="ここに新規タグを入力"/>
                     {{-- タグを保存するボタン --}}
                     <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">保存</button>
                     {{-- エラーメッセージ （新規タグ）--}}

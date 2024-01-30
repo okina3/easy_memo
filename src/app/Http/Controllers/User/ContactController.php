@@ -4,11 +4,16 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Services\SessionService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ContactController extends Controller
 {
-    public function index()
+    /**
+     * @return RedirectResponse
+     */
+    public function index(): RedirectResponse
     {
         // ブラウザバック対策（値を削除する）
         SessionService::resetBrowserBackSession();
@@ -16,15 +21,24 @@ class ContactController extends Controller
         return to_route('user.contact.create');
     }
 
-
-    public function create()
+    /**
+     * @return View
+     */
+    public function create(): View
     {
+        // ブラウザバック対策（値を持たせる）
+        SessionService::setBrowserBackSession();
+
         return view('user.contacts.create');
     }
 
-    public function store(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
     {
 
-        return ;
+        return to_route('user.index');
     }
 }
