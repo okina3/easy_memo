@@ -28,8 +28,14 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('user.share-setting.index')"
-                                :active="request()->routeIs('share-setting.index')">
+                                :active="request()->routeIs('user.share-setting.index')">
                         共有メモ画面
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('user.contact.index')"
+                                :active="request()->routeIs('user.contact.index')">
+                        問い合わせ
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

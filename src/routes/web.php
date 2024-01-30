@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\ContactController;
 use App\Http\Controllers\User\ImageController;
 use App\Http\Controllers\User\MemoController;
 use App\Http\Controllers\User\ShareSettingController;
@@ -55,7 +56,7 @@ Route::middleware('auth:users')->group(function () {
         Route::delete('/destroy', 'destroy')->name('image.destroy');
     });
 
-    //共有メモ管理画面
+    //共有メモ画面
     Route::controller(ShareSettingController::class)->prefix('share-setting')->group(function () {
         Route::get('/', 'index')->name('share-setting.index');
         Route::post('/store', 'store')->name('share-setting.store');
@@ -63,6 +64,13 @@ Route::middleware('auth:users')->group(function () {
         Route::get('/edit/{share}', 'edit')->name('share-setting.edit');
         Route::patch('/update', 'update')->name('share-setting.update');
         Route::delete('/destroy', 'destroy')->name('share-setting.destroy');
+    });
+
+    // 問い合わせ画面
+    Route::controller(ContactController::class)->prefix('contact')->group(function () {
+        Route::get('/index', 'index')->name('contact.index');
+        Route::get('/create', 'create')->name('contact.create');
+        Route::post('/store', 'store')->name('contact.store');
     });
 
     //ソフトデリートしたメモ画面
