@@ -21,7 +21,7 @@ class UploadTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'new_tag' => 'required | string | max:25 | unique:tags,name',
+            'new_tag' => 'required|string|max:25|unique:tags,name',
         ];
     }
 

@@ -14,7 +14,6 @@ class UploadMemoRequest extends FormRequest
         return true;
     }
 
-
     /**
      * リクエストに対するバリデーションルールを定義するメソッド。
      * @return string[]
@@ -22,9 +21,9 @@ class UploadMemoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string | max:25',
-            'content' => 'required | string | max:1000',
-            'new_tag' => 'string | nullable | max:25 | unique:tags,name',
+            'title' => 'string|max:25',
+            'content' => 'required|string|max:1000',
+            'new_tag' => 'string|nullable|max:25|unique:tags,name',
         ];
     }
 

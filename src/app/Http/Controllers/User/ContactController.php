@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use App\Services\SessionService;
 use Illuminate\Http\RedirectResponse;
@@ -31,11 +32,11 @@ class ContactController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param ContactRequest $request
      * @return RedirectResponse
      * @throws Throwable
      */
-    public function store(Request $request): RedirectResponse
+    public function store(ContactRequest $request): RedirectResponse
     {
         // ブラウザバック対策（値を確認）
         SessionService::clickBrowserBackSession();
