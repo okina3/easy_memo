@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- 画像の詳細ページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">画像の詳細</h1></div>
+        <h1 class="heading heading_bg">画像の詳細</h1>
         {{-- 選択した画像の詳細を表示するエリア --}}
         <div class="p-3">
             {{-- 選択した画像を表示 --}}

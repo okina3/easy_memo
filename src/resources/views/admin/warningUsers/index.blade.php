@@ -18,7 +18,7 @@
         {{-- 警告されたユーザー一覧の表示エリア --}}
         <section class="text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- タイトル --}}
-            <div class="heading_bg"><h1 class="heading">警告したユーザー一覧</h1></div>
+            <h1 class="heading heading_bg">警告したユーザー一覧</h1>
             {{-- 警告されたユーザー一覧 --}}
             <div class="p-2 h-[75vh] overflow-y-scroll overscroll-none">
                 @foreach ($warning_users_all as $warning_user)

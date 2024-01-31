@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- 問い合わせページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">管理人にお問い合わせ</h1></div>
+        <h1 class="heading heading_bg">管理人にお問い合わせ</h1>
         <div class="p-3">
             {{-- フラッシュメッセージ --}}
             <x-common.flash-message status="session('status')"/>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- タグの管理ページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">タグ一覧</h1></div>
+        <h1 class="heading heading_bg">タグ一覧</h1>
         {{-- タグを管理するエリア --}}
         <div class="p-3">
             {{-- フラッシュメッセージ --}}

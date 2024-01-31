@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- メモの詳細ページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">メモ詳細</h1></div>
+        <h1 class="heading heading_bg">メモ詳細</h1>
         {{-- 選択したメモの詳細を表示するエリア --}}
         <div class="p-3">
             {{-- メモの共有設定を表示するエリア --}}
@@ -10,26 +10,22 @@
             <div class="mb-3">
                 {{-- 共有中のメモの目印 --}}
                 @if ($choice_memo->status)
-                    <div class="mark_bg">
-                        <div class="mark">{{ $choice_memo->status }}</div>
-                    </div>
+                    <div class="mark_bg"><p class="mark">{{ $choice_memo->status }}</p></div>
                 @endif
                 {{-- 選択したメモのタイトルを表示 --}}
                 <div class="mb-5">
-                    <h1 class="sub_heading mb-1">タイトル</h1>
-                    <div class="p-2 border border-gray-500 rounded bg-white">
-                        {{ $choice_memo->title }}
-                    </div>
+                    <h2 class="sub_heading mb-1">タイトル</h2>
+                    <p class="p-2 border border-gray-500 rounded bg-white">{{ $choice_memo->title }}</p>
                 </div>
                 {{-- 選択したメモの内容を表示 --}}
                 <div class="mb-5">
-                    <h1 class="sub_heading mb-1">内容</h1>
+                    <h2 class="sub_heading mb-1">内容</h2>
                     <textarea class="w-full rounded" name="content" rows="7" placeholder="ここにメモを入力"
                               disabled>{{ $choice_memo->content }}</textarea>
                 </div>
                 {{-- 選択したメモのタグを表示 --}}
                 <div class="mb-10">
-                    <h1 class="sub_heading mb-1">タグ</h1>
+                    <h2 class="sub_heading mb-1">タグ</h2>
                     @foreach ($memo_in_tags as $tag)
                         <div class="inline mr-3">
                             <input class="mb-1 rounded" type="checkbox" checked disabled/>
@@ -39,7 +35,7 @@
                 </div>
                 {{-- 選択したメモの画像の表示 --}}
                 <div class="mb-10">
-                    <h1 class="sub_heading mb-1">登録画像</h1>
+                    <h2 class="sub_heading mb-1">登録画像</h2>
                     {{-- モーダルウィンドウ --}}
                     <x-common.big-select-image :memoInImages='$memo_in_images'/>
                 </div>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- メモの編集ページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">メモ編集</h1></div>
+        <h1 class="heading heading_bg">メモ編集</h1>
         {{-- 選択したメモを編集するエリア --}}
         <div class="p-3">
             <form action="{{ route('user.update') }}" method="post">
@@ -9,9 +9,7 @@
                 @method('patch')
                 {{-- 共有中のメモの目印 --}}
                 @if ($choice_memo->status)
-                    <div class="mark_bg">
-                        <div class="mark">{{ $choice_memo->status }}</div>
-                    </div>
+                    <div class="mark_bg"><p class="mark">{{ $choice_memo->status }}</p></div>
                 @endif
                 {{-- 選択したメモのタイトルを表示 --}}
                 <div class="mb-5">

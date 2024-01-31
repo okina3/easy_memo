@@ -5,7 +5,7 @@
         {{-- ユーザーからの問い合わせ一覧の表示エリア --}}
         <section class="text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- タイトル --}}
-            <div class="heading_bg"><h1 class="heading">ユーザーからの問い合わせ一覧</h1></div>
+            <h1 class="heading heading_bg">ユーザーからの問い合わせ一覧</h1>
             {{-- ユーザーからの問い合わせ一覧 --}}
             <div class="p-2 h-[75vh] overflow-y-scroll overscroll-none">
                 @foreach ($contact_all as $contact)
@@ -25,14 +25,11 @@
                             問い合わせ内容<span class="font-normal">・・・</span>{{ $contact->message }}
                         </p>
                     </div>
-                    {{-- 利用停止ボタン --}}
-                    <form onsubmit="return deleteCheck()" action="{{ route('admin.destroy') }}" method="post">
-                        @csrf
-                        @method('delete')
-                        {{-- 選択されている問い合わせ情報のidを取得 --}}
-                        <input type="hidden" name="contactId" value="{{ $contact->id }}">
-                        <button class="btn bg-red-600 hover:bg-red-500" type="submit">詳細</button>
-                    </form>
+                    {{-- 詳細ボタン --}}
+                    <button class="btn mr-3 bg-gray-800 hover:bg-gray-700"
+                        onclick="location.href='{{ route('admin.contact.show', ['contact' => $contact->id]) }}'">
+                                            詳細
+                    </button>
                 </div>
                 @endforeach
             </div>
