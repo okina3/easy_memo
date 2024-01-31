@@ -21,7 +21,7 @@ class UploadTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'new_tag' => 'required|string|max:25|unique:tags,name',
+            'new_tag' => 'string|max:25|unique:tags,name',
         ];
     }
 
@@ -32,7 +32,7 @@ class UploadTagRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'new_tag.required' => 'タグが、入力されていません。',
+            'new_tag.string' => 'タグが、入力されていません。また、文字列で指定してください。',
             'new_tag.max' => 'タグは、25文字以内で入力してください。',
             'new_tag.unique' => 'このタグは、すでに登録されています。',
         ];

@@ -22,8 +22,8 @@ class UploadMemoRequest extends FormRequest
     {
         return [
             'title' => 'string|max:25',
-            'content' => 'required|string|max:1000',
-            'new_tag' => 'string|nullable|max:25|unique:tags,name',
+            'content' => 'string|max:1000',
+            'new_tag' => 'nullable|max:25|unique:tags,name',
         ];
     }
 
@@ -36,7 +36,7 @@ class UploadMemoRequest extends FormRequest
         return [
             'title.string' => 'タイトルが空です。また、文字列で指定してください。',
             'title.max' => 'タイトルは、25文字以内で入力してください。',
-            'content.required' => 'メモの内容が、入力されていません。',
+            'content.string' => 'メモの内容が空です。また、文字列で指定してください。',
             'content.max' => '文字数は、1000文字以内にしてください。',
             'new_tag.max' => 'タグは、25文字以内で入力してください。',
             'new_tag.unique' => 'このタグは、すでに登録されています。',

@@ -19,7 +19,7 @@
             {{-- 選択した共有メモの内容の表示 --}}
             <div class="mb-5">
                 <h2 class="sub_heading mb-1">内容</h2>
-                <textarea class="w-full rounded" name="content" rows="7" placeholder="ここにメモを入力"
+                <textarea class="w-full rounded" name="content" rows="7"
                           disabled>{{ $choice_memo->content }}</textarea>
             </div>
             {{-- 選択した共有メモに紐づいたタグの表示 --}}

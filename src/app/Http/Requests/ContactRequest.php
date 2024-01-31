@@ -21,8 +21,8 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject' => 'required|string|max:25',
-            'message' => 'required|string|max:1000',
+            'subject' => 'string|max:25',
+            'message' => 'string|max:1000',
         ];
     }
 
@@ -33,11 +33,9 @@ class ContactRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'subject.required' => '件名が、入力されていません。',
-            'subject.string' => '文字列で指定してください。',
+            'subject.string' => '件名が、入力されていません。また、文字列で指定してください。',
             'subject.max' => '件名は、25文字以内で入力してください。',
-            'message.required' => 'お問い合わせ内容が、入力されていません。',
-            'message.string' => '文字列で指定してください。',
+            'message.string' => 'お問い合わせ内容が、入力されていません。また、文字列で指定してください。',
             'message.max' => 'お問い合わせ内容は、1000文字以内にしてください。',
         ];
     }
