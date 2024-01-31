@@ -23,23 +23,17 @@
             <div class="p-2 h-[75vh] overflow-y-scroll overscroll-none">
                 @foreach ($warning_users_all as $warning_user)
                     <div class="mb-5 p-2 flex justify-between items-center border border-slate-400 rounded-lg">
-                        <div class="truncate">
+                        <div class="truncate font-semibold">
                             {{-- ユーザー名前 --}}
-                            <div class="mb-1">
-                                <span class="font-semibold">ユーザー名</span>
-                                <span>・・・・・・</span>
-                                <span class="font-semibold border-b border-slate-400">
-                                {{ $warning_user->name }}
-                            </span>
-                            </div>
+                            <p class="mb-1">
+                                ユーザー名<span class="font-normal">・・・・・・</span>
+                                <span class="border-b border-slate-400">{{ $warning_user->name }}</span>
+                            </p>
                             {{-- ユーザーのメールアドレス --}}
-                            <div class="mb-1">
-                                <span class="font-semibold">メールアドレス</span>
-                                <span>・・・・</span>
-                                <span class="font-semibold border-b border-slate-400">
-                                {{ $warning_user->email }}
-                            </span>
-                            </div>
+                            <p class="mb-1">
+                                メールアドレス<span class="font-normal">・・・・</span>
+                                <span class="border-b border-slate-400">{{ $warning_user->email }}</span>
+                            </p>
                         </div>
                         {{-- ボタンエリア --}}
                         <div class="flex justify-between">

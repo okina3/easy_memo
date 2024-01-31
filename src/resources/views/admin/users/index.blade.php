@@ -23,23 +23,17 @@
             <div class="p-2 h-[75vh] overflow-y-scroll overscroll-none">
                 @foreach ($users_all as $user)
                     <div class="mb-5 p-2 flex justify-between items-center border border-gray-400 rounded-lg">
-                        <div class="truncate">
+                        <div class="font-semibold truncate">
                             {{-- ユーザーの名前 --}}
-                            <div class="mb-1">
-                                <span class="font-semibold">ユーザー名</span>
-                                <span>・・・・・・</span>
-                                <span class="font-semibold border-b border-slate-400">
-                                {{ $user->name }}
-                            </span>
-                            </div>
+                            <p class="mb-1">
+                                ユーザー名<span class="font-normal">・・・・・・</span>
+                                <span class="border-b border-slate-400">{{ $user->name }}</span>
+                            </p>
                             {{-- ユーザーのメールアドレス --}}
-                            <div class="mb-1">
-                                <span class="font-semibold">メールアドレス</span>
-                                <span>・・・・</span>
-                                <span class="font-semibold border-b border-slate-400">
-                                {{ $user->email }}
-                            </span>
-                            </div>
+                            <p class="mb-1">
+                                メールアドレス<span class="font-normal">・・・・</span>
+                                <span class="border-b border-slate-400">{{ $user->email }}</span>
+                            </p>
                         </div>
                         {{-- 利用停止ボタン --}}
                         <form onsubmit="return deleteCheck()" action="{{ route('admin.destroy') }}" method="post">

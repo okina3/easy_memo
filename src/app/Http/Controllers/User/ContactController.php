@@ -46,7 +46,7 @@ class ContactController extends Controller
                 Contact::create([
                     'subject' => $request->subject,
                     'message' => $request->message,
-                    'user_number' => Auth::id(),
+                    'user_id' => Auth::id(),
                 ]);
             }, 10);
         } catch (Throwable $e) {
