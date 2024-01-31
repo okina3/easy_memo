@@ -21,6 +21,15 @@ class ContactController extends Controller
 
     public function show(int $id)
     {
+        // // 選択した問い合わせ情報を取得する
+        // $choice_contact = Contact::with('user')
+        // ->where('id', $id)
+        // ->orderBy('updated_at', 'desc')
+        // ->first();
+
+        // dd($choice_contact);
+
+        // return view('admin.contacts.show', compact('choice_contact'));
         return view('admin.contacts.show');
     }
 
