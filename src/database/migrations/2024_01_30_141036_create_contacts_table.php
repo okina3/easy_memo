@@ -19,6 +19,8 @@ return new class extends Migration
             ->onDelete('cascade');
             $table->string('subject');
             $table->text('message');
+            //ソフトデリート
+            $table->softDeletes();
             $table->timestamps();
         });
     }

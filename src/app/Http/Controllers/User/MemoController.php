@@ -178,7 +178,7 @@ class MemoController extends Controller
     }
 
     /**
-     * メモを削除するメソッド。
+     * メモを削除（ソフトデリート）するメソッド。
      * @param Request $request
      * @return RedirectResponse
      * @throws Throwable
@@ -196,6 +196,6 @@ class MemoController extends Controller
             Log::error($e);
             throw $e;
         }
-        return to_route('user.index')->with(['message' => 'メモを削除しました。', 'status' => 'alert']);
+        return to_route('user.index')->with(['message' => 'メモをゴミ箱に移動しました。', 'status' => 'alert']);
     }
 }

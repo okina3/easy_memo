@@ -72,7 +72,7 @@ Route::middleware('auth:users')->group(function () {
         Route::post('/store', 'store')->name('contact.store');
     });
 
-    //ソフトデリートしたメモ画面
+    //ソフトデリートしたメモの画面
     Route::controller(TrashedMemoController::class)->prefix('trashed-memo')->group(function () {
         Route::get('/', 'index')->name('trashed-memo.index');
         Route::patch('/undo', 'undo')->name('trashed-memo.undo');

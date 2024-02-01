@@ -32,7 +32,7 @@
                     @csrf
                     @method('delete')
                     {{-- 選択されている問い合わせ情報のidを取得 --}}
-                    <input type="hidden" name="userId" value="{{ $choice_contact->id }}">
+                    <input type="hidden" name="contentId" value="{{ $choice_contact->id }}">
                     <button class="btn bg-red-600 hover:bg-red-500" type="submit">削除</button>
                 </form>
                 {{-- 戻るボタン --}}
