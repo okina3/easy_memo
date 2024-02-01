@@ -44,9 +44,7 @@
                     <x-input-error class="mt-5" :messages="$errors->get('tags')"/>
                 </div>
                 {{-- タグを削除するボタン --}}
-                <div class="flex justify-end">
-                    <button class="btn bg-red-600 hover:bg-red-500" type="submit">タグを削除</button>
-                </div>
+                <button class="btn bg-red-600 hover:bg-red-500" type="submit">タグを削除</button>
             </form>
             {{-- 戻るボタン --}}
             <div class="my-2 flex justify-end">
