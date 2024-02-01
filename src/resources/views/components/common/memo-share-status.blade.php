@@ -34,7 +34,7 @@
                     <label for="no_access">いいえ</label>
                 </div>
                 {{-- 選択されているメモのidを取得 --}}
-                <input type="hidden" name="memoId" value="{{ $choiceMemoId }}">
+                <input type="hidden" name="memoId" value="{{ $selectMemoId }}">
                 {{-- メモを共有するボタン --}}
                 <button class="btn bg-cyan-600 hover:bg-cyan-700" type="submit">共有する</button>
             </form>
@@ -74,7 +74,7 @@
                 <input class="mb-2 w-60 rounded" type="text" name="share_user_end"
                        placeholder="メールアドレスを入力">
                 {{-- 選択されているメモのidを取得 --}}
-                <input type="hidden" name="memoId" value="{{ $choiceMemoId }}">
+                <input type="hidden" name="memoId" value="{{ $selectMemoId }}">
                 {{-- メモの共有を停止するボタン --}}
                 <button class="btn block bg-cyan-600 hover:bg-cyan-700" type="submit">共有停止</button>
                 {{-- コメント --}}

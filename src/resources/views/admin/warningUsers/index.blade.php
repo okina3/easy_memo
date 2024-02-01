@@ -21,9 +21,9 @@
             <h1 class="heading heading_bg">警告したユーザー一覧</h1>
             {{-- 警告されたユーザー一覧 --}}
             <div class="p-2 h-[75vh] overflow-y-scroll overscroll-none">
-                @foreach ($warning_users_all as $warning_user)
+                @foreach ($all_warning_users as $warning_user)
                     <div class="mb-5 p-2 flex justify-between items-center border border-slate-400 rounded-lg">
-                        <div class="truncate font-semibold">
+                        <div class="mr-5 truncate font-semibold">
                             {{-- ユーザー名前 --}}
                             <p class="mb-1">
                                 ユーザー名<span class="font-normal">・・・・・・</span>

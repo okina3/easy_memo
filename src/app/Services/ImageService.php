@@ -31,14 +31,14 @@ class ImageService
 
     /**
      * 選択したメモに紐づいた画像を取得するメソッド
-     * @param Collection $choice_memo_images
+     * @param Collection $select_memo_images
      * @return array
      */
-    public static function getMemoImages(Collection $choice_memo_images): array
+    public static function getMemoImages(Collection $select_memo_images): array
     {
         // メモにリレーションされた画像を、配列に追加
         $memo_in_images = [];
-        foreach ($choice_memo_images as $memo_relation_image) {
+        foreach ($select_memo_images as $memo_relation_image) {
             $memo_in_images[] = $memo_relation_image;
         }
         return $memo_in_images;
@@ -46,14 +46,14 @@ class ImageService
 
     /**
      * 選択したメモに紐づいた画像のidを取得するメソッド
-     * @param Collection $choice_memo_images
+     * @param Collection $select_memo_images
      * @return array
      */
-    public static function getMemoImagesId(Collection $choice_memo_images): array
+    public static function getMemoImagesId(Collection $select_memo_images): array
     {
         // メモにリレーションされた画像のidを、配列に追加
         $memo_in_images_id = [];
-        foreach ($choice_memo_images as $memo_relation_image) {
+        foreach ($select_memo_images as $memo_relation_image) {
             $memo_in_images_id[] = $memo_relation_image->id;
         }
         return $memo_in_images_id;

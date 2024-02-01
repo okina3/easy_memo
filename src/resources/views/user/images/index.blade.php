@@ -15,7 +15,7 @@
             <x-common.flash-message status="session('status')"/>
             <div class="flex flex-wrap">
                 {{-- 登録画像の一覧  --}}
-                @foreach ($images as $image)
+                @foreach ($all_images as $image)
                     <div class="w-1/4 p-1 mb-5">
                         <div class="p-1 border border-gray-300 rounded-md">
                             <a href="{{ route('user.image.show', ['image' => $image->id]) }}">
@@ -26,7 +26,7 @@
                 @endforeach
             </div>
             <div class="m-2">
-                {{ $images->links() }}
+                {{ $all_images->links() }}
             </div>
         </div>
     </section>

@@ -5,28 +5,28 @@
         {{-- 選択したメモの詳細を表示するエリア --}}
         <div class="p-3">
             {{-- メモの共有設定を表示するエリア --}}
-            <x-common.memo-share-status :choiceMemoId='$choice_memo->id' :sharedUsers='$shared_users'/>
+            <x-common.memo-share-status :selectMemoId='$select_memo->id' :sharedUsers='$shared_users'/>
             {{-- メモの詳細を表示エリア --}}
             <div class="mb-3">
                 {{-- 共有中のメモの目印 --}}
-                @if ($choice_memo->status)
-                    <div class="mark_bg"><p class="mark">{{ $choice_memo->status }}</p></div>
+                @if ($select_memo->status)
+                    <div class="mark_bg"><p class="mark">{{ $select_memo->status }}</p></div>
                 @endif
                 {{-- 選択したメモのタイトルを表示 --}}
                 <div class="mb-5">
                     <h2 class="sub_heading mb-1">タイトル</h2>
-                    <p class="p-2 border border-gray-500 rounded bg-white">{{ $choice_memo->title }}</p>
+                    <p class="p-2 border border-gray-500 rounded bg-white">{{ $select_memo->title }}</p>
                 </div>
                 {{-- 選択したメモの内容を表示 --}}
                 <div class="mb-5">
                     <h2 class="sub_heading mb-1">内容</h2>
                     <textarea class="w-full rounded" name="content" rows="7"
-                              disabled>{{ $choice_memo->content }}</textarea>
+                              disabled>{{ $select_memo->content }}</textarea>
                 </div>
                 {{-- 選択したメモのタグを表示 --}}
                 <div class="mb-10">
                     <h2 class="sub_heading mb-1">タグ</h2>
-                    @foreach ($memo_in_tags as $tag)
+                    @foreach ($get_memo_tags as $tag)
                         <div class="inline mr-3">
                             <input class="mb-1 rounded" type="checkbox" checked disabled/>
                             {{ $tag }}
@@ -37,7 +37,7 @@
                 <div class="mb-10">
                     <h2 class="sub_heading mb-1">登録画像</h2>
                     {{-- モーダルウィンドウ --}}
-                    <x-common.big-select-image :memoInImages='$memo_in_images'/>
+                    <x-common.big-select-image :getMemoImages='$get_memo_images'/>
                 </div>
                 {{-- 戻るボタン --}}
                 <div class="mb-2 flex justify-end">

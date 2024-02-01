@@ -7,9 +7,9 @@
             {{-- フラッシュメッセージ --}}
             <x-common.flash-message status="session('status')"/>
             {{-- ソフトデリートされたメモ一覧 --}}
-            @foreach ($trashed_memos as $trashed_memo)
+            @foreach ($all_trashed_memos as $trashed_memo)
                 <div class="py-3 flex justify-between items-center border-b border-slate-300">
-                    <div class="mr-10 truncate">
+                    <div class="mr-5 truncate">
                         {{-- メモのタイトル --}}
                         <p class="sub_heading mb-1">{{ $trashed_memo->title }}</p>
                         {{-- メモの内容 --}}

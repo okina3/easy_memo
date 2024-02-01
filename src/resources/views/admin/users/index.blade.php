@@ -21,7 +21,7 @@
             <h1 class="heading heading_bg">ユーザー一覧</h1>
             {{-- 登録ユーザー一覧 --}}
             <div class="p-2 h-[75vh] overflow-y-scroll overscroll-none">
-                @foreach ($users_all as $user)
+                @foreach ($all_users as $user)
                     <div class="mb-5 p-2 flex justify-between items-center border border-gray-400 rounded-lg">
                         <div class="font-semibold truncate">
                             {{-- ユーザーの名前 --}}

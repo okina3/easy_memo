@@ -8,9 +8,9 @@
             <h1 class="heading heading_bg">ユーザーからの連絡一覧</h1>
             {{-- ユーザーからの問い合わせ一覧 --}}
             <div class="p-2 h-[75vh] overflow-y-scroll overscroll-none">
-                @foreach ($contact_all as $contact)
+                @foreach ($all_contact as $contact)
                     <div class="mb-5 p-2 flex justify-between items-center border border-gray-400 rounded-lg">
-                        <div class="font-semibold truncate">
+                        <div class="mr-5 font-semibold truncate">
                             {{-- ユーザー名 --}}
                             <p class="mb-1">
                                 ユーザー名<span class="font-normal">・・・・・</span>
@@ -26,7 +26,7 @@
                             </p>
                         </div>
                         {{-- 詳細ボタン --}}
-                        <button class="btn mr-3 bg-gray-800 hover:bg-gray-700"
+                        <button class="btn mr-3 w-16 bg-gray-800 hover:bg-gray-700"
                                 onclick="location.href='{{ route('admin.contact.show', ['contact' => $contact->id]) }}'">
                             詳細
                         </button>

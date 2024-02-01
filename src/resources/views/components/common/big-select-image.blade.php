@@ -1,6 +1,6 @@
 {{-- モーダルウィンドウ --}}
 <div class="flex flex-wrap">
-    @foreach ($memoInImages as $memo_image)
+    @foreach ($getMemoImages as $memo_image)
         {{-- 拡大画像、モーダルウィンドウ --}}
         <div class="modal micromodal-slide" id="{{ $memo_image->id }}" aria-hidden="true">
             <div class="modal__overlay" tabindex="-1" data-micromodal-close>

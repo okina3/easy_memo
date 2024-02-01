@@ -17,11 +17,11 @@ class ContactController extends Controller
     public function index(): View
     {
         // 全ての問い合わせ情報を取得する
-        $contact_all = Contact::with('user')
+        $all_contact = Contact::with('user')
             ->orderBy('updated_at', 'desc')
             ->get();
 
-        return view('admin.contacts.index', compact('contact_all'));
+        return view('admin.contacts.index', compact('all_contact'));
     }
 
     /**
@@ -32,12 +32,12 @@ class ContactController extends Controller
     public function show(int $id): View
     {
         // 選択した問い合わせ情報を取得する
-        $choice_contact = Contact::with('user')
+        $select_contact = Contact::with('user')
             ->where('id', $id)
             ->orderBy('updated_at', 'desc')
             ->first();
 
-        return view('admin.contacts.show', compact('choice_contact'));
+        return view('admin.contacts.show', compact('select_contact'));
     }
 
     /**

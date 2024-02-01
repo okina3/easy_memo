@@ -22,11 +22,11 @@ class UsersController extends Controller
     public function index(Request $request): View
     {
         // 全ユーザー、また、検索したユーザーを取得
-        $users_all = User::availableAllUsers()
+        $all_users = User::availableAllUsers()
             ->searchKeyword($request->keyword)
             ->get();
 
-        return view('admin.users.index', compact('users_all'));
+        return view('admin.users.index', compact('all_users'));
     }
 
     /**

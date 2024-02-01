@@ -6,7 +6,7 @@
         <div class="p-3">
             {{-- 選択した共有メモのユーザーの名前を表示 --}}
             <div class="mb-5 flex items-center font-semibold">
-                <p class="text-blue-700 border-b border-slate-500">{{ $choice_user->name }}</p>
+                <p class="text-blue-700 border-b border-slate-500">{{ $select_user->name }}</p>
                 <p class="ml-1">さん のメモ</p>
             </div>
             {{-- コメント --}}
@@ -18,20 +18,20 @@
                 {{-- 選択した共有メモのタイトルを表示 --}}
                 <div class="mb-5">
                     <h2 class="sub_heading mb-1">タイトル</h2>
-                    <p class="p-2 border border-gray-500 rounded bg-white">{{ $choice_memo->title }}</p>
+                    <p class="p-2 border border-gray-500 rounded bg-white">{{ $select_memo->title }}</p>
                 </div>
                 {{-- 選択した共有メモの内容を表示 --}}
                 <div class="mb-5">
                     <h2 class="sub_heading mb-1">内容</h2>
                     <textarea class="w-full rounded" name="content" rows="7"
-                              placeholder="ここにメモを入力">{{ $choice_memo->content }}</textarea>
+                              placeholder="ここにメモを入力">{{ $select_memo->content }}</textarea>
                     {{-- エラーメッセージ （メモの内容）--}}
                     <x-input-error class="mt-2" :messages="$errors->get('content')"/>
                 </div>
                 {{-- 選択した共有メモに紐づいたタグの表示 --}}
                 <div class="mb-10">
                     <h2 class="sub_heading mb-1">タグ</h2>
-                    @foreach ($memo_in_tags as $tag)
+                    @foreach ($get_memo_tags as $tag)
                         <div class="inline mr-3">
                             <input class="mb-1 rounded" type="checkbox" checked disabled/>
                             {{ $tag }}
@@ -42,10 +42,10 @@
                 <div class="mb-10">
                     <h2 class="sub_heading mb-1">画像</h2>
                     {{-- モーダルウィンドウ --}}
-                    <x-common.big-select-image :memoInImages='$memo_in_images'/>
+                    <x-common.big-select-image :getMemoImages='$get_memo_images'/>
                 </div>
                 {{-- 選択されている共有メモのidを取得 --}}
-                <input type="hidden" name="memoId" value="{{ $choice_memo->id }}">
+                <input type="hidden" name="memoId" value="{{ $select_memo->id }}">
                 {{-- 更新するボタン --}}
                 <div class="mb-5">
                     <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">更新する</button>
