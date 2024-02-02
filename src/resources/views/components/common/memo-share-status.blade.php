@@ -65,7 +65,7 @@
                 </div>
             </div>
             {{-- メモの共有を停止するエリア --}}
-            <form class="mb-3 pb-5" action="{{ route('user.share-setting.destroy') }}" method="post">
+            <form class="mb-3" action="{{ route('user.share-setting.destroy') }}" method="post">
                 @csrf
                 @method('delete')
                 <h2 class="sub_heading mb-1">このメモの共有を停止する</h2>
@@ -77,11 +77,9 @@
                 <input type="hidden" name="memoId" value="{{ $selectMemoId }}">
                 {{-- メモの共有を停止するボタン --}}
                 <button class="btn block bg-cyan-600 hover:bg-cyan-700" type="submit">共有停止</button>
-                {{-- コメント --}}
-                <p class="text-sm mt-2">
-                    ※ このメモの全てのユーザーの共有を停止したい場合は、メモを削除してください。
-                </p>
             </form>
+            {{-- コメント --}}
+            <p class="mb-5 text-sm">※ このメモの全てのユーザーの共有を停止したい場合は、メモを削除してください。</p>
         </div>
     </div>
 </div>

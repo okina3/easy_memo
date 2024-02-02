@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- 問い合わせ情報の詳細ページのタイトル --}}
-        <h1 class="heading heading_bg">ユーザーからの連絡の詳細</h1>
+        <h1 class="heading heading_bg">ユーザーからの問い合わせの詳細</h1>
         {{-- 選択した問い合わせ情報の詳細を表示するエリア --}}
         <div class="p-3">
             <div class="mb-3">

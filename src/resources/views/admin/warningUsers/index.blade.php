@@ -3,10 +3,10 @@
     <x-common.flash-message status="session('status')"/>
     <div class="max-w-screen-lg mx-auto">
         {{-- ユーザーの検索の表示エリア --}}
-        <section class="mb-5 p-3 border border-gray-400 rounded-lg bg-gray-200">
+        <section class="mb-5 px-3 py-2 text-gray-600 border border-gray-400 rounded-lg bg-gray-200">
             <form action="{{ route('admin.warning.index') }}" method="get">
                 <div class="flex space-x-2 items-center">
-                    <div class="heading text-gray-600">メールアドレスから検索・・・</div>
+                    <div class="heading">メールアドレスから検索・・・</div>
                     {{-- メールアドレスを入力 --}}
                     <input class="py-2 w-60 border border-gray-500 rounded-lg" name="keyword"
                            placeholder="メールアドレスを入力">

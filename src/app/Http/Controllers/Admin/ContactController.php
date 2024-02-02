@@ -12,12 +12,14 @@ class ContactController extends Controller
 {
     /**
      * ユーザーの問い合わせ一覧を表示するメソッド。
+     * @param Request $request
      * @return View
      */
-    public function index(): View
+    public function index(Request $request): View
     {
         // 全ての問い合わせ情報を取得する
         $all_contact = Contact::with('user')
+            ->searchKeyword($request->keyword)
             ->orderBy('updated_at', 'desc')
             ->get();
 
