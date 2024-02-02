@@ -23,26 +23,29 @@
             <div class="p-2 h-[75vh] overflow-y-scroll overscroll-none">
                 @foreach ($all_users as $user)
                     <div class="mb-5 p-2 flex justify-between items-center border border-gray-400 rounded-lg">
-                        <div class="font-semibold truncate">
+                        <div class="w-4/5 font-semibold">
                             {{-- ユーザーの名前 --}}
-                            <p class="mb-1">
+                            <p class="mb-1 truncate">
                                 ユーザー名<span class="font-normal">・・・・・・</span>
                                 <span class="border-b border-slate-400">{{ $user->name }}</span>
                             </p>
                             {{-- ユーザーのメールアドレス --}}
-                            <p class="mb-1">
+                            <p class="mb-1 truncate">
                                 メールアドレス<span class="font-normal">・・・・</span>
                                 <span class="border-b border-slate-400">{{ $user->email }}</span>
                             </p>
                         </div>
                         {{-- 利用停止ボタン --}}
-                        <form onsubmit="return deleteCheck()" action="{{ route('admin.destroy') }}" method="post">
-                            @csrf
-                            @method('delete')
-                            {{-- 選択されているユーザーのidを取得 --}}
-                            <input type="hidden" name="userId" value="{{ $user->id }}">
-                            <button class="btn bg-red-600 hover:bg-red-500" type="submit">利用停止</button>
-                        </form>
+                        <div class="w-1/5">
+                            <form class="flex justify-end" onsubmit="return deleteCheck()"
+                                  action="{{ route('admin.destroy') }}" method="post">
+                                @csrf
+                                @method('delete')
+                                {{-- 選択されているユーザーのidを取得 --}}
+                                <input type="hidden" name="userId" value="{{ $user->id }}">
+                                <button class="btn bg-red-600 hover:bg-red-500" type="submit">利用停止</button>
+                            </form>
+                        </div>
                     </div>
                 @endforeach
             </div>

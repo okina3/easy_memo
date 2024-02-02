@@ -17,11 +17,6 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.warning.index')" :active="request()->routeIs('admin.warning.index')">
-                        警告したユーザー管理画面
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('admin.contact.index')" :active="request()->routeIs('admin.contact.index')">
                         ユーザーからの連絡
                     </x-nav-link>
@@ -29,6 +24,11 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('admin.trashed-contact.index')" :active="request()->routeIs('admin.trashed-contact.index')">
                         ゴミ箱
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.warning.index')" :active="request()->routeIs('admin.warning.index')">
+                        警告したユーザー管理画面
                     </x-nav-link>
                 </div>
             </div>

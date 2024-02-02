@@ -9,7 +9,7 @@
                     <div class="heading">キーワードから検索・・・・・</div>
                     {{-- キーワードを入力 --}}
                     <input class="py-2 w-60 border border-gray-500 rounded-lg" name="keyword"
-                            placeholder="キーワードを入力">
+                           placeholder="キーワードを入力">
                     {{-- 検索するボタン --}}
                     <button class="btn bg-blue-800 hover:bg-blue-700">検索する</button>
                 </div>
@@ -25,18 +25,18 @@
             <div class="p-2 h-[72vh] overflow-y-scroll overscroll-none">
                 @foreach ($all_trashed_contacts as $contact)
                     <div class="mb-5 p-2 flex justify-between items-center border border-gray-400 rounded-lg">
-                        <div class="mr-5 font-semibold truncate">
+                        <div class="w-3/4 mr-5 font-semibold">
                             {{-- 件名 --}}
-                            <p class="mb-1">
+                            <p class="mb-1 truncate">
                                 件名<span class="font-normal">・・・・・・・・</span>{{ $contact->subject }}
                             </p>
                             {{-- 問い合わせ内容 --}}
-                            <p class="mb-1">
+                            <p class="mb-1 truncate">
                                 問い合わせ内容<span class="font-normal">・・・</span>{{ $contact->message }}
                             </p>
                         </div>
                         {{-- ボタンエリア --}}
-                        <div class="flex justify-between">
+                        <div class="w-1/4 flex justify-end">
                             {{-- 元に戻すボタン --}}
                             <form action="{{ route('admin.trashed-contact.undo') }}" method="post" class="mr-3">
                                 @csrf

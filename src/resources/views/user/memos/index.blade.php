@@ -36,11 +36,11 @@
                             <div class="mark_bg"><p class="mark">{{ $memo->status }}</p></div>
                         @endif
                         {{-- メモの情報エリア --}}
-                        <div class="mb-2 truncate">
+                        <div class="mb-2">
                             {{-- メモのタイトル --}}
-                            <p class="sub_heading mb-1">{{ $memo->title }}</p>
+                            <p class="sub_heading mb-1 truncate">{{ $memo->title }}</p>
                             {{-- メモの内容 --}}
-                            <p>{{ $memo->content }}</p>
+                            <p class="truncate">{{ $memo->content }}</p>
                         </div>
                         {{-- ボタンエリア --}}
                         <div class="flex justify-end text-white">

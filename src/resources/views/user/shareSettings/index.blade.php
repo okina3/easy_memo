@@ -28,16 +28,18 @@
                 @foreach ($shared_memos as $shared_memo)
                     <div class="mb-5 p-2 border border-gray-400 rounded-lg">
                         {{-- 共有メモの情報エリア --}}
-                        <div class="mb-2 truncate">
+                        <div class="mb-2">
                             {{-- 共有中のメモのユーザーの名前 --}}
-                            <div class="mb-2 flex items-center font-semibold">
-                                <p class="text-blue-700 border-b border-slate-500">{{ $shared_memo->user->name }}</p>
-                                <p class="ml-1">さん のメモ</p>
+                            <div class="mb-2 font-semibold truncate">
+                                <span class="text-blue-700 border-b border-slate-500">
+                                    {{ $shared_memo->user->name }}
+                                </span>
+                                <span class="ml-1">さん のメモ</span>
                             </div>
                             {{-- メモのタイトル --}}
-                            <p class="sub_heading mb-1">{{ $shared_memo->title }}</p>
+                            <p class="sub_heading mb-1 truncate">{{ $shared_memo->title }}</p>
                             {{-- メモの内容 --}}
-                            <p>{{ $shared_memo->content }}</p>
+                            <p class="truncate">{{ $shared_memo->content }}</p>
                         </div>
                         {{-- ボタンエリア --}}
                         <div class="flex justify-end text-white">

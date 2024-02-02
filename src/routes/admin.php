@@ -42,13 +42,6 @@ Route::middleware('auth:admin')->group(function () {
         Route::delete('/destroy', 'destroy')->name('destroy');
     });
 
-    // 警告されたユーザーの管理画面
-    Route::controller(WarningUsersController::class)->prefix('warning')->group(function () {
-        Route::get('/', 'index')->name('warning.index');
-        Route::patch('/undo', 'undo')->name('warning.undo');
-        Route::delete('/destroy', 'destroy')->name('warning.destroy');
-    });
-
     // 問い合わせ画面
     Route::controller(ContactController::class)->prefix('contact')->group(function () {
         Route::get('/', 'index')->name('contact.index');
@@ -61,6 +54,13 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/', 'index')->name('trashed-contact.index');
         Route::patch('/undo', 'undo')->name('trashed-contact.undo');
         Route::delete('/destroy', 'destroy')->name('trashed-contact.destroy');
+    });
+
+    // 警告されたユーザーの管理画面
+    Route::controller(WarningUsersController::class)->prefix('warning')->group(function () {
+        Route::get('/', 'index')->name('warning.index');
+        Route::patch('/undo', 'undo')->name('warning.undo');
+        Route::delete('/destroy', 'destroy')->name('warning.destroy');
     });
 
     // デフォルトのルーティング
