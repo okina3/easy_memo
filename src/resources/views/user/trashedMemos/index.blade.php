@@ -9,14 +9,14 @@
             {{-- ソフトデリートされたメモ一覧 --}}
             @foreach ($all_trashed_memos as $trashed_memo)
                 <div class="py-3 flex justify-between items-center border-b border-slate-300">
-                    <div class="mr-5 truncate">
+                    <div class="w-3/4 mr-5">
                         {{-- メモのタイトル --}}
-                        <p class="sub_heading mb-1">{{ $trashed_memo->title }}</p>
+                        <p class="sub_heading mb-1 truncate">{{ $trashed_memo->title }}</p>
                         {{-- メモの内容 --}}
-                        <p>{{ $trashed_memo->content }}</p>
+                        <p class="truncate">{{ $trashed_memo->content }}</p>
                     </div>
                     {{-- ボタンエリア --}}
-                    <div class="flex justify-between">
+                    <div class="w-1/4 flex justify-end">
                         {{-- 元に戻すボタン --}}
                         <form class="mr-3" action="{{ route('user.trashed-memo.undo') }}" method="post">
                             @csrf

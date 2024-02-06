@@ -38,7 +38,7 @@
                         {{-- ボタンエリア --}}
                         <div class="w-1/4 flex justify-end">
                             {{-- 元に戻すボタン --}}
-                            <form action="{{ route('admin.warning.undo') }}" method="post" class="mr-3">
+                            <form class="mr-3" action="{{ route('admin.warning.undo') }}" method="post">
                                 @csrf
                                 @method('patch')
                                 {{-- 選択されているメモのidを取得 --}}

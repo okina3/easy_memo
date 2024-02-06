@@ -41,7 +41,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('user.contact.create')"
                                 :active="request()->routeIs('user.contact.create')">
-                        管理人に問い合わせ
+                        管理人に連絡
                     </x-nav-link>
                 </div>
             </div>

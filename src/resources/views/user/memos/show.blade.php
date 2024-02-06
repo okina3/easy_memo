@@ -42,7 +42,7 @@
                 {{-- 戻るボタン --}}
                 <div class="mb-2 flex justify-end">
                     <button onclick="location.href='{{ route('user.index') }}'"
-                            class="btn mr-1 bg-gray-800 hover:bg-gray-700">
+                            class="btn bg-gray-800 hover:bg-gray-700">
                         戻る
                     </button>
                 </div>

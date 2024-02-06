@@ -50,7 +50,7 @@
                             </button>
                             {{-- メモの編集ボタン --}}
                             @if ($shared_memo->access)
-                                <button class="btn mr-3 bg-blue-800 hover:bg-blue-700"
+                                <button class="btn bg-blue-800 hover:bg-blue-700"
                                         onclick="location.href='{{ route('user.share-setting.edit', ['share' => $shared_memo->id]) }}'">
                                     編集
                                 </button>
