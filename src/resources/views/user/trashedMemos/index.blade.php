@@ -9,21 +9,21 @@
             {{-- ソフトデリートされたメモ一覧 --}}
             @foreach ($all_trashed_memos as $trashed_memo)
                 <div class="py-3 flex justify-between items-center border-b border-slate-300">
-                    <div class="w-3/4 mr-5">
+                    <div class="w-[71%] mr-5">
                         {{-- メモのタイトル --}}
                         <p class="sub_heading mb-1 truncate">{{ $trashed_memo->title }}</p>
                         {{-- メモの内容 --}}
                         <p class="truncate">{{ $trashed_memo->content }}</p>
                     </div>
                     {{-- ボタンエリア --}}
-                    <div class="w-1/4 flex justify-end">
+                    <div class="w-[29%] flex justify-end">
                         {{-- 元に戻すボタン --}}
                         <form class="mr-3" action="{{ route('user.trashed-memo.undo') }}" method="post">
                             @csrf
                             @method('patch')
                             {{-- 選択されているメモのidを取得 --}}
                             <input type="hidden" name="memoId" value="{{ $trashed_memo->id }}">
-                            <button class="btn w-24 bg-blue-800 hover:bg-blue-700" type="submit">元に戻す</button>
+                            <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">元に戻す</button>
                         </form>
                         {{-- 完全削除ボタン --}}
                         <form onsubmit="return deleteCheck()" action="{{ route('user.trashed-memo.destroy') }}"
@@ -32,7 +32,7 @@
                             @method('delete')
                             {{-- 選択されているメモのidを取得 --}}
                             <input type="hidden" name="memoId" value="{{ $trashed_memo->id }}">
-                            <button type="submit" class="btn w-24 bg-red-600 hover:bg-red-500">完全削除</button>
+                            <button type="submit" class="btn bg-red-600 hover:bg-red-500">完全削除</button>
                         </form>
                     </div>
                 </div>

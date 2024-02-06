@@ -1,7 +1,7 @@
 <x-app-layout>
+    <div class="max-w-screen-lg mx-auto">
     {{-- フラッシュメッセージ --}}
     <x-common.flash-message status="session('status')"/>
-    <div class="max-w-screen-lg mx-auto">
         {{-- 検索の表示エリア --}}
         <section class="mb-5 px-3 py-2 text-gray-600 border border-gray-400 rounded-lg bg-gray-200">
             <form action="{{ route('admin.contact.index') }}" method="get">
@@ -25,7 +25,7 @@
             <div class="p-2 h-[72vh] overflow-y-scroll overscroll-none">
                 @foreach ($all_trashed_contacts as $contact)
                     <div class="mb-5 p-2 flex justify-between items-center border border-gray-400 rounded-lg">
-                        <div class="w-3/4 mr-5 font-semibold">
+                        <div class="w-[70%] mr-5 font-semibold">
                             {{-- 件名 --}}
                             <p class="mb-1 truncate">
                                 件名<span class="font-normal">・・・・・・・・</span>{{ $contact->subject }}
@@ -36,14 +36,14 @@
                             </p>
                         </div>
                         {{-- ボタンエリア --}}
-                        <div class="w-1/4 flex justify-end">
+                        <div class="w-[30%]  flex justify-end">
                             {{-- 元に戻すボタン --}}
                             <form action="{{ route('admin.trashed-contact.undo') }}" method="post" class="mr-3">
                                 @csrf
                                 @method('patch')
                                 {{-- 選択されている問い合わせのidを取得 --}}
                                 <input type="hidden" name="contentId" value="{{ $contact->id }}">
-                                <button class="btn w-24 bg-blue-800 hover:bg-blue-700" type="submit">元に戻す</button>
+                                <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">元に戻す</button>
                             </form>
                             {{-- 完全削除ボタン --}}
                             <form onsubmit="return deleteCheck()" action="{{ route('admin.trashed-contact.destroy') }}"
@@ -52,7 +52,7 @@
                                 @method('delete')
                                 {{-- 選択されている問い合わせのidを取得 --}}
                                 <input type="hidden" name="contentId" value="{{ $contact->id }}">
-                                <button class="btn w-24 bg-red-600 hover:bg-red-500" type="submit">完全削除</button>
+                                <button class="btn bg-red-600 hover:bg-red-500" type="submit">完全削除</button>
                             </form>
                         </div>
                     </div>

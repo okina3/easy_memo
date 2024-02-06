@@ -1,7 +1,7 @@
 <x-app-layout>
+    <div class="max-w-screen-lg mx-auto">
     {{-- フラッシュメッセージ --}}
     <x-common.flash-message status="session('status')"/>
-    <div class="max-w-screen-lg mx-auto">
         {{-- ユーザーの検索の表示エリア --}}
         <section class="mb-5 px-3 py-2 text-gray-600 border border-gray-400 rounded-lg bg-gray-200">
             <form action="{{ route('admin.index') }}" method="get">

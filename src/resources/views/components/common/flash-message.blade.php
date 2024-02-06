@@ -12,7 +12,7 @@
 
 {{-- メッセージを表示する --}}
 @if (session('message'))
-    <div class="{{ $bgColor }} p-2 mb-3 w-2/5 text-white rounded">
+    <div class="{{ $bgColor }} p-2 mb-3 text-white rounded">
         {{ session('message') }}
     </div>
 @endif
