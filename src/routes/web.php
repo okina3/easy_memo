@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\ContactController;
 use App\Http\Controllers\User\ImageController;
 use App\Http\Controllers\User\MemoController;
 use App\Http\Controllers\User\ShareSettingController;
@@ -55,7 +56,7 @@ Route::middleware('auth:users')->group(function () {
         Route::delete('/destroy', 'destroy')->name('image.destroy');
     });
 
-    //共有メモ管理画面
+    //共有メモ画面
     Route::controller(ShareSettingController::class)->prefix('share-setting')->group(function () {
         Route::get('/', 'index')->name('share-setting.index');
         Route::post('/store', 'store')->name('share-setting.store');
@@ -65,7 +66,13 @@ Route::middleware('auth:users')->group(function () {
         Route::delete('/destroy', 'destroy')->name('share-setting.destroy');
     });
 
-    //ソフトデリートしたメモ画面
+    // 問い合わせ画面
+    Route::controller(ContactController::class)->prefix('contact')->group(function () {
+        Route::get('/create', 'create')->name('contact.create');
+        Route::post('/store', 'store')->name('contact.store');
+    });
+
+    //ソフトデリートしたメモの画面
     Route::controller(TrashedMemoController::class)->prefix('trashed-memo')->group(function () {
         Route::get('/', 'index')->name('trashed-memo.index');
         Route::patch('/undo', 'undo')->name('trashed-memo.undo');

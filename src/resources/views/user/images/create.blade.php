@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- 画像の登録ページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">画像の登録</h1></div>
+        <h1 class="heading heading_bg">画像の登録</h1>
         {{-- 画像を新規登録するエリア --}}
         <div class="p-3">
             {{-- エラーメッセージ（画像）--}}
@@ -12,7 +12,7 @@
                 <div class="m-2">
                     <div class="p-2 w-1/2 mx-auto">
                         <div class="mt-2">
-                            <label class="sub_heading text-gray-600" for="image">画像</label>
+                            <h2 class="sub_heading mb-1">画像</h2>
                             <input class="py-1 px-3 w-full border border-gray-300 rounded bg-gray-100" type="file"
                                    id="image" name="images" accept="image/png,image/jpeg,image/jpg">
                         </div>

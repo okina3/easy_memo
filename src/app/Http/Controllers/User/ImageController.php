@@ -36,9 +36,9 @@ class ImageController extends Controller
         // ブラウザバック対策（値を削除する）
         SessionService::resetBrowserBackSession();
         // 全画像を取得する
-        $images = Image::availableAllImages()->paginate(16);
+        $all_images = Image::availableAllImages()->paginate(16);
 
-        return view('user.images.index', compact('images'));
+        return view('user.images.index', compact('all_images'));
     }
 
     /**
@@ -55,7 +55,7 @@ class ImageController extends Controller
 
     /**
      * 画像を保存するメソッド。
-     * @param Request $request
+     * @param UploadImageRequest $request
      * @param ImageManager $manager
      * @return RedirectResponse
      * @throws Throwable
@@ -93,9 +93,9 @@ class ImageController extends Controller
     public function show(int $id): View
     {
         // 選択した画像を編集エリアに表示
-        $show_image = Image::availableSelectImage($id)->first();
+        $select_image = Image::availableSelectImage($id)->first();
 
-        return view('user.images.show', compact('show_image'));
+        return view('user.images.show', compact('select_image'));
     }
 
     /**
@@ -109,9 +109,9 @@ class ImageController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // 削除したい画像を取得
-                $image = Image::availableSelectImage($request->memoId)->first();
+                $select_image = Image::availableSelectImage($request->memoId)->first();
                 // 先にStorageフォルダ内の画像ファイルを削除
-                ImageService::deleteStorage($image->filename);
+                ImageService::deleteStorage($select_image->filename);
                 // 削除したい画像をDBから削除
                 Image::availableSelectImage($request->memoId)->delete();
             }, 10);

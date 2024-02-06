@@ -5,7 +5,7 @@
         {{-- タグ検索の表示エリア --}}
         <section class="w-1/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- タイトル --}}
-            <div class="heading_bg"><h1 class="heading">タグから検索</h1></div>
+            <h1 class="heading heading_bg">タグから検索</h1>
             {{-- タグの検索 --}}
             <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
                 <div class="mb-2 hover:font-semibold"><a href="/">全てのメモを表示</a></div>
@@ -33,14 +33,15 @@
                     <div class="mb-5 p-2 border border-gray-400 rounded-lg">
                         {{-- 共有中のメモの目印 --}}
                         @if ($memo->status)
-                            <div class="mark_bg">
-                                <div class="mark">{{ $memo->status }}</div>
-                            </div>
+                            <div class="mark_bg"><p class="mark">{{ $memo->status }}</p></div>
                         @endif
-                        {{-- メモのタイトル --}}
-                        <div class="sub_heading mb-1">{{ $memo->title }}</div>
-                        {{-- メモの内容 --}}
-                        <div class="mb-2 truncate">{{ $memo->content }}</div>
+                        {{-- メモの情報エリア --}}
+                        <div class="mb-2">
+                            {{-- メモのタイトル --}}
+                            <p class="sub_heading mb-1 truncate">{{ $memo->title }}</p>
+                            {{-- メモの内容 --}}
+                            <p class="truncate">{{ $memo->content }}</p>
+                        </div>
                         {{-- ボタンエリア --}}
                         <div class="flex justify-end text-white">
                             {{-- 詳細ボタン --}}

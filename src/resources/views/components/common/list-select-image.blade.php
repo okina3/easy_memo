@@ -1,6 +1,6 @@
 {{-- 属性による値の受け取り --}}
 @php
-    $memoInImagesId = $memoInImagesId ?? '';
+    $getMemoImagesId = $getMemoImagesId ?? '';
 @endphp
 
 {{-- モーダルウィンドウ --}}
@@ -25,7 +25,7 @@
                                 <label class="mx-2 mb-2 block cursor-pointer">
                                     <input class="my-2 imageCheckbox" type="checkbox" name="images[]"
                                            value="{{ $image->id }}"
-                                        {{ $memoInImagesId && in_array($image->id, $memoInImagesId) ? 'checked' : '' }} />
+                                        {{ $getMemoImagesId && in_array($image->id, $getMemoImagesId) ? 'checked' : '' }} />
                                     <img class="image" data-id="{{ $image->id }}" data-file="{{ $image->filename }}"
                                          data-path="{{ asset('storage/') }}"
                                          src="{{ asset('storage/' . $image->filename) }}">

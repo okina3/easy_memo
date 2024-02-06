@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- メモの新規作成ページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">新規メモ作成</h1></div>
+        <h1 class="heading heading_bg">新規メモ作成</h1>
         {{-- メモを新規作成するエリア --}}
         <div class="p-3">
             <form action="{{ route('user.store') }}" method="post">

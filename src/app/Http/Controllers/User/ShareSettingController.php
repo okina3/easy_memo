@@ -74,15 +74,16 @@ class ShareSettingController extends Controller
         // 共有されていないメモの詳細を見られなくする
         ShareSettingService::checkSharedMemoShow($id);
         // 選択した共有メモを、一件取得
-        $choice_memo = Memo::with('tags.user')->where('id', $id)->first();
+        $select_memo = Memo::with('tags.user')->where('id', $id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'name');
+        $get_memo_tags = TagService::getMemoTags($select_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::getMemoImages($choice_memo->images);
+        $get_memo_images = ImageService::getMemoImages($select_memo->images);
         // 選択した共有メモのユーザーを取得
-        $choice_user = $choice_memo->user;
+        $select_user = $select_memo->user;
 
-        return view('user.shareSettings.show', compact('choice_memo', 'memo_in_tags', 'memo_in_images', 'choice_user'));
+        return view('user.shareSettings.show',
+            compact('select_memo', 'get_memo_tags', 'get_memo_images', 'select_user'));
     }
 
     /**
@@ -95,15 +96,16 @@ class ShareSettingController extends Controller
         // 共有、許可されていない、メモの編集をできなくする
         ShareSettingService::checkSharedMemoEdit($id);
         // 選択した共有メモを、一件取得
-        $choice_memo = Memo::with('tags.user')->where('id', $id)->first();
+        $select_memo = Memo::with('tags.user')->where('id', $id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'name');
+        $get_memo_tags = TagService::getMemoTags($select_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::getMemoImages($choice_memo->images);
+        $get_memo_images = ImageService::getMemoImages($select_memo->images);
         // 選択した共有メモのユーザーを取得
-        $choice_user = $choice_memo->user;
+        $select_user = $select_memo->user;
 
-        return view('user.shareSettings.edit', compact('choice_memo', 'memo_in_tags', 'memo_in_images', 'choice_user'));
+        return view('user.shareSettings.edit',
+            compact('select_memo', 'get_memo_tags', 'get_memo_images', 'select_user'));
     }
 
     /**
@@ -117,7 +119,8 @@ class ShareSettingController extends Controller
         $memo->content = $request->content;
         $memo->save();
 
-        return to_route('user.share-setting.index')->with(['message' => '共有されたメモを更新しました。', 'status' => 'info']);
+        return to_route('user.share-setting.index')
+            ->with(['message' => '共有されたメモを更新しました。', 'status' => 'info']);
     }
 
     /**

@@ -1,22 +1,20 @@
 <x-app-layout>
     <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- メモの編集ページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">メモ編集</h1></div>
+        <h1 class="heading heading_bg">メモ編集</h1>
         {{-- 選択したメモを編集するエリア --}}
         <div class="p-3">
             <form action="{{ route('user.update') }}" method="post">
                 @csrf
                 @method('patch')
                 {{-- 共有中のメモの目印 --}}
-                @if ($choice_memo->status)
-                    <div class="mark_bg">
-                        <div class="mark">{{ $choice_memo->status }}</div>
-                    </div>
+                @if ($select_memo->status)
+                    <div class="mark_bg"><p class="mark">{{ $select_memo->status }}</p></div>
                 @endif
                 {{-- 選択したメモのタイトルを表示 --}}
                 <div class="mb-5">
                     <h2 class="sub_heading mb-1">タイトル</h2>
-                    <input class="w-60 rounded" type="text" name="title" value="{{ $choice_memo->title }}"
+                    <input class="w-60 rounded" type="text" name="title" value="{{ $select_memo->title }}"
                            placeholder="ここにタイトルを入力"/>
                     {{-- エラーメッセージ（メモのタイトル）--}}
                     <x-input-error class="mt-2" :messages="$errors->get('title')"/>
@@ -25,7 +23,7 @@
                 <div class="mb-5">
                     <h2 class="sub_heading mb-1">内容</h2>
                     <textarea class="w-full rounded" name="content" rows="7"
-                              placeholder="ここにメモを入力">{{ $choice_memo->content }}</textarea>
+                              placeholder="ここにメモを入力">{{ $select_memo->content }}</textarea>
                     {{-- エラーメッセージ（メモの内容）--}}
                     <x-input-error class="mt-2" :messages="$errors->get('content')"/>
                 </div>
@@ -35,7 +33,7 @@
                     @foreach ($all_tags as $tag)
                         <div class="inline mr-3 hover:font-semibold">
                             <input class="mb-1 rounded" type="checkbox" name="tags[]" id="{{ $tag->id }}"
-                                   value="{{ $tag->id }}" {{ in_array($tag->id, $memo_in_tags) ? 'checked' : '' }} />
+                                   value="{{ $tag->id }}" {{ in_array($tag->id, $get_memo_tags) ? 'checked' : '' }} />
                             <label for="{{ $tag->id }}">{{ $tag->name }}</label>
                         </div>
                     @endforeach
@@ -53,10 +51,10 @@
                 <div class="mb-10">
                     <h2 class="sub_heading mb-1">画像の選択</h2>
                     {{-- モーダルウィンドウ --}}
-                    <x-common.list-select-image :allImages='$all_images' :memoInImagesId="$memo_in_images_id"/>
+                    <x-common.list-select-image :allImages='$all_images' :getMemoImagesId="$get_memo_images_id"/>
                 </div>
                 {{-- 選択されているメモのidを取得 --}}
-                <input type="hidden" name="memoId" value="{{ $choice_memo->id }}">
+                <input type="hidden" name="memoId" value="{{ $select_memo->id }}">
                 {{-- メモの更新ボタン --}}
                 <div class="mb-5">
                     <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">更新する</button>
@@ -76,7 +74,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Laravelから送られてくるデータをBladeで設定、メモに紐づいた画像を取得
             @php
-                $selectedImages = json_encode($memo_in_images);
+                $selectedImages = json_encode($get_memo_images);
             @endphp
             // Laravelから送られてきたデータをJavaScriptに渡す
             const selectedImagesData = JSON.parse('{!! addslashes($selectedImages) !!}');

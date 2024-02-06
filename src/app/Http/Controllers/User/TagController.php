@@ -45,7 +45,7 @@ class TagController extends Controller
 
     /**
      * タグを削除するメソッド。
-     * @param Request $request
+     * @param DeleteTagRequest $request
      * @return RedirectResponse
      */
     public function destroy(DeleteTagRequest $request): RedirectResponse

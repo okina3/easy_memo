@@ -5,7 +5,7 @@
         {{-- ユーザー検索の表示エリア --}}
         <section class="w-1/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- タイトル --}}
-            <div class="heading_bg"><h1 class="heading">ユーザーから検索</h1></div>
+            <h1 class="heading heading_bg">ユーザーから検索</h1>
             {{-- ユーザーの検索 --}}
             <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
                 <div class="mb-2 hover:font-semibold"><a href="share-setting/">全てのメモを表示</a></div>
@@ -22,22 +22,25 @@
         {{-- 共有中のメモ一覧の表示エリア --}}
         <section class="ml-2 w-4/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- タイトル --}}
-            <div class="heading_bg"><h1 class="heading">共有されているメモ</h1></div>
+            <h1 class="heading heading_bg">共有されているメモ</h1>
             {{-- 共有中のメモ一覧 --}}
             <div class="p-2 h-[85vh] overflow-y-scroll overscroll-none">
                 @foreach ($shared_memos as $shared_memo)
                     <div class="mb-5 p-2 border border-gray-400 rounded-lg">
-                        {{-- 共有中のメモのユーザーの名前 --}}
-                        <div class="mb-2 flex items-center font-semibold">
-                            <div class="text-blue-700 border-b border-slate-500">
-                                {{ $shared_memo->user->name }}
+                        {{-- 共有メモの情報エリア --}}
+                        <div class="mb-2">
+                            {{-- 共有中のメモのユーザーの名前 --}}
+                            <div class="mb-2 font-semibold truncate">
+                                <span class="text-blue-700 border-b border-slate-500">
+                                    {{ $shared_memo->user->name }}
+                                </span>
+                                <span class="ml-1">さん のメモ</span>
                             </div>
-                            <div class="ml-1">さん のメモ</div>
+                            {{-- メモのタイトル --}}
+                            <p class="sub_heading mb-1 truncate">{{ $shared_memo->title }}</p>
+                            {{-- メモの内容 --}}
+                            <p class="truncate">{{ $shared_memo->content }}</p>
                         </div>
-                        {{-- メモのタイトル --}}
-                        <div class="sub_heading mb-1">{{ $shared_memo->title }}</div>
-                        {{-- メモの内容 --}}
-                        <div class="mb-2 truncate">{{ $shared_memo->content }}</div>
                         {{-- ボタンエリア --}}
                         <div class="flex justify-end text-white">
                             {{-- メモの詳細ボタン --}}
@@ -47,7 +50,7 @@
                             </button>
                             {{-- メモの編集ボタン --}}
                             @if ($shared_memo->access)
-                                <button class="btn mr-3 bg-blue-800 hover:bg-blue-700"
+                                <button class="btn bg-blue-800 hover:bg-blue-700"
                                         onclick="location.href='{{ route('user.share-setting.edit', ['share' => $shared_memo->id]) }}'">
                                     編集
                                 </button>

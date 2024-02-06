@@ -78,7 +78,7 @@ class MemoController extends Controller
         SessionService::clickBrowserBackSession();
         try {
             DB::transaction(function () use ($request) {
-                //メモを保存
+                // メモを保存
                 $memo = Memo::create([
                     'title' => $request->title,
                     'content' => $request->content,
@@ -104,17 +104,17 @@ class MemoController extends Controller
     public function show(int $id): View
     {
         // 選択したメモを、一件取得
-        $choice_memo = Memo::availableSelectMemo($id)->first();
+        $select_memo = Memo::availableSelectMemo($id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'name');
+        $get_memo_tags = TagService::getMemoTags($select_memo->tags, 'name');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::getMemoImages($choice_memo->images);
+        $get_memo_images = ImageService::getMemoImages($select_memo->images);
         // 共有されているメモに目印を付ける
-        MemoService::checkShared($choice_memo);
+        MemoService::checkShared($select_memo);
         // 自分が共有しているメモの、共有状態の情報を取得
         $shared_users = ShareSettingService::checkSharedMemoStatus($id);
 
-        return view('user.memos.show', compact('choice_memo', 'memo_in_tags', 'memo_in_images', 'shared_users'));
+        return view('user.memos.show', compact('select_memo', 'get_memo_tags', 'get_memo_images', 'shared_users'));
     }
 
     /**
@@ -129,21 +129,20 @@ class MemoController extends Controller
         // 全画像を取得する
         $all_images = Image::availableAllImages()->get();
         // 選択したメモを、一件取得。
-        $choice_memo = Memo::availableSelectMemo($id)->first();
+        $select_memo = Memo::availableSelectMemo($id)->first();
         // 選択したメモに紐づいたタグのidを取得
-        $memo_in_tags = TagService::getMemoTags($choice_memo->tags, 'id');
+        $get_memo_tags = TagService::getMemoTags($select_memo->tags, 'id');
         // 選択したメモに紐づいた画像を取得
-        $memo_in_images = ImageService::getMemoImages($choice_memo->images);
+        $get_memo_images = ImageService::getMemoImages($select_memo->images);
         // 選択したメモに紐づいた画像のidを取得
-        $memo_in_images_id = ImageService::getMemoImagesId($choice_memo->images);
+        $get_memo_images_id = ImageService::getMemoImagesId($select_memo->images);
         // 共有されているメモに目印を付ける
-        MemoService::checkShared($choice_memo);
+        MemoService::checkShared($select_memo);
         // ブラウザバック対策（値を持たせる）
         SessionService::setBrowserBackSession();
 
-        return view(
-            'user.memos.edit',
-            compact('all_tags', 'all_images', 'choice_memo', 'memo_in_tags', 'memo_in_images_id', 'memo_in_images')
+        return view('user.memos.edit',
+            compact('all_tags', 'all_images', 'select_memo', 'get_memo_tags', 'get_memo_images_id', 'get_memo_images')
         );
     }
 
@@ -178,7 +177,7 @@ class MemoController extends Controller
     }
 
     /**
-     * メモを削除するメソッド。
+     * メモを削除（ソフトデリート）するメソッド。
      * @param Request $request
      * @return RedirectResponse
      * @throws Throwable
@@ -196,6 +195,6 @@ class MemoController extends Controller
             Log::error($e);
             throw $e;
         }
-        return to_route('user.index')->with(['message' => 'メモを削除しました。', 'status' => 'alert']);
+        return to_route('user.index')->with(['message' => 'メモをゴミ箱に移動しました。', 'status' => 'alert']);
     }
 }

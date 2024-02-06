@@ -1,22 +1,22 @@
 <x-app-layout>
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- 削除済みメモの管理ページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">削除済みメモ一覧</h1></div>
+        <h1 class="heading heading_bg">削除済みメモ一覧</h1>
         {{-- 削除済みメモを管理するエリア --}}
         <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
             {{-- フラッシュメッセージ --}}
             <x-common.flash-message status="session('status')"/>
             {{-- ソフトデリートされたメモ一覧 --}}
-            @foreach ($trashed_memos as $trashed_memo)
+            @foreach ($all_trashed_memos as $trashed_memo)
                 <div class="py-3 flex justify-between items-center border-b border-slate-300">
-                    <div class="mr-10 truncate">
+                    <div class="w-3/4 mr-5">
                         {{-- メモのタイトル --}}
-                        <div class="sub_heading mb-1">{{ $trashed_memo->title }}</div>
+                        <p class="sub_heading mb-1 truncate">{{ $trashed_memo->title }}</p>
                         {{-- メモの内容 --}}
-                        <div class="">{{ $trashed_memo->content }}</div>
+                        <p class="truncate">{{ $trashed_memo->content }}</p>
                     </div>
                     {{-- ボタンエリア --}}
-                    <div class="flex justify-between">
+                    <div class="w-1/4 flex justify-end">
                         {{-- 元に戻すボタン --}}
                         <form class="mr-3" action="{{ route('user.trashed-memo.undo') }}" method="post">
                             @csrf

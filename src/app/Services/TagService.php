@@ -32,14 +32,14 @@ class TagService
 
     /**
      * 選択したメモに紐づいた、タグの情報を、配列で取得するメソッド。
-     * @param Collection $choice_memo_tags
+     * @param Collection $select_memo_tags
      * @param string $tag_type
      * @return array
      */
-    public static function getMemoTags(Collection $choice_memo_tags, string $tag_type): array
+    public static function getMemoTags(Collection $select_memo_tags, string $tag_type): array
     {
         $memo_relation_tags = [];
-        foreach ($choice_memo_tags as $memo_relation_tag) {
+        foreach ($select_memo_tags as $memo_relation_tag) {
             // idがついていれば、メモにリレーションされたタグのidを、配列に追加
             if ($tag_type === 'id') {
                 $memo_relation_tags[] = $memo_relation_tag->id;

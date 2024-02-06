@@ -1,7 +1,7 @@
 <x-app-layout>
     <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
         {{-- タグの管理ページのタイトル --}}
-        <div class="heading_bg"><h1 class="heading">タグ一覧</h1></div>
+        <h1 class="heading heading_bg">タグ一覧</h1>
         {{-- タグを管理するエリア --}}
         <div class="p-3">
             {{-- フラッシュメッセージ --}}
@@ -13,10 +13,8 @@
                     {{-- タイトル --}}
                     <h2 class="sub_heading mb-1">新規タグ作成</h2>
                     {{-- 新規タグの入力 --}}
-                    <div class="mr-5 mb-2">
-                        <input class="form-control rounded w-60" type="text" name="new_tag"
-                               placeholder="ここに新規タグを入力"/>
-                    </div>
+                    <input class="mb-2 block form-control rounded w-60" type="text" name="new_tag"
+                           placeholder="ここに新規タグを入力"/>
                     {{-- タグを保存するボタン --}}
                     <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">保存</button>
                     {{-- エラーメッセージ （新規タグ）--}}
@@ -46,9 +44,7 @@
                     <x-input-error class="mt-5" :messages="$errors->get('tags')"/>
                 </div>
                 {{-- タグを削除するボタン --}}
-                <div class="flex justify-end">
-                    <button class="btn bg-red-600 hover:bg-red-500" type="submit">タグを削除</button>
-                </div>
+                <button class="btn bg-red-600 hover:bg-red-500" type="submit">タグを削除</button>
             </form>
             {{-- 戻るボタン --}}
             <div class="my-2 flex justify-end">

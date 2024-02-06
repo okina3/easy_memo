@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\TrashedContactController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WarningUsersController;
 use App\Http\Controllers\ProfileController;
@@ -38,6 +40,20 @@ Route::middleware('auth:admin')->group(function () {
     Route::controller(UsersController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::delete('/destroy', 'destroy')->name('destroy');
+    });
+
+    // 問い合わせ画面
+    Route::controller(ContactController::class)->prefix('contact')->group(function () {
+        Route::get('/', 'index')->name('contact.index');
+        Route::get('show/{contact}', 'show')->name('contact.show');
+        Route::delete('/destroy', 'destroy')->name('contact.destroy');
+    });
+
+    //ソフトデリートした問い合わせの画面
+    Route::controller(TrashedContactController::class)->prefix('trashed-contact')->group(function () {
+        Route::get('/', 'index')->name('trashed-contact.index');
+        Route::patch('/undo', 'undo')->name('trashed-contact.undo');
+        Route::delete('/destroy', 'destroy')->name('trashed-contact.destroy');
     });
 
     // 警告されたユーザーの管理画面

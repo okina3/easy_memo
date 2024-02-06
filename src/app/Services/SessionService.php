@@ -4,7 +4,6 @@ namespace App\Services;
 
 class SessionService
 {
-
     /**
      * ブラウザバック用のセッションに値を設定するメソッド。
      * @return void

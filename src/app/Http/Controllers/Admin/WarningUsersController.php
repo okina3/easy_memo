@@ -18,11 +18,11 @@ class WarningUsersController extends Controller
     public function index(Request $request): View
     {
         // 警告したユーザーを取得する
-        $warning_users_all = User::onlyTrashed()->availableAllUsers()
-        ->searchKeyword($request->keyword)
-        ->get();
+        $all_warning_users = User::onlyTrashed()->availableAllUsers()
+            ->searchKeyword($request->keyword)
+            ->get();
 
-        return view('admin.warningUsers.index', compact('warning_users_all'));
+        return view('admin.warningUsers.index', compact('all_warning_users'));
     }
 
     /**
