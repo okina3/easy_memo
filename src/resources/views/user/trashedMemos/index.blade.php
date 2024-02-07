@@ -8,15 +8,15 @@
             <x-common.flash-message status="session('status')"/>
             {{-- ソフトデリートされたメモ一覧 --}}
             @foreach ($all_trashed_memos as $trashed_memo)
-                <div class="py-3 flex justify-between items-center border-b border-slate-300">
-                    <div class="w-[71%] mr-5">
+                <div class="py-3 md:flex justify-between items-center border-b border-slate-300">
+                    <div class="md:w-[71%] mr-5">
                         {{-- メモのタイトル --}}
                         <p class="sub_heading mb-1 truncate">{{ $trashed_memo->title }}</p>
                         {{-- メモの内容 --}}
                         <p class="truncate">{{ $trashed_memo->content }}</p>
                     </div>
                     {{-- ボタンエリア --}}
-                    <div class="w-[29%] flex justify-end">
+                    <div class="mt-2 md:w-[29%] flex md:justify-end">
                         {{-- 元に戻すボタン --}}
                         <form class="mr-3" action="{{ route('user.trashed-memo.undo') }}" method="post">
                             @csrf

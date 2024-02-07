@@ -92,7 +92,7 @@
                 // サムネイルエリアに選択した画像を表示
                 const thumbnailImage = document.createElement('img');
                 thumbnailImage.src = imagePath + '/' + imageFile;
-                thumbnailImage.classList.add('mr-2', 'mb-2', 'border', 'rounded-md', 'p-1', 'w-1/5');
+                thumbnailImage.classList.add('mr-2', 'mb-2', 'border', 'rounded-md', 'p-1', 'w-[22.7%]','sm:w-[23%]');
                 thumbnailArea.appendChild(thumbnailImage);
             });
         });
@@ -153,7 +153,7 @@
                     // サムネイルエリアに選択した画像を表示
                     const thumbnailImage = document.createElement('img');
                     thumbnailImage.src = imagePath + '/' + imageFile;
-                    thumbnailImage.classList.add('mr-2', 'mb-2', 'border', 'rounded-md', 'p-1', 'w-1/5');
+                    thumbnailImage.classList.add('mr-2', 'mb-2', 'border', 'rounded-md', 'p-1', 'w-[22.7%]','sm:w-[23%]');
                     thumbnailArea.appendChild(thumbnailImage);
                 } else if (isSelecte) {
                     // すでに選択されている場合、配列から削除

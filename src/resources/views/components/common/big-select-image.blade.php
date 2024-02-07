@@ -13,7 +13,7 @@
             </div>
         </div>
         {{-- ブラウザのサムネイル画像 --}}
-        <div class="w-1/5 p-1">
+        <div class="p-1 w-[25%]">
             <a data-micromodal-trigger="{{ $memo_image->id }}" href='javascript:'>
                 <img src="{{ asset('storage/' . $memo_image->filename) }}">
             </a>
