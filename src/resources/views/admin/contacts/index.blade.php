@@ -5,13 +5,14 @@
         {{-- 検索の表示エリア --}}
         <section class="mb-5 px-3 py-2 text-gray-600 border border-gray-400 rounded-lg bg-gray-200">
             <form action="{{ route('admin.contact.index') }}" method="get">
-                <div class="flex space-x-2 items-center">
-                    <div class="heading">キーワードから検索・・・・・</div>
+                <div class="sm:flex items-center">
+                    <div class="heading">キーワードから検索</div>
+                    <div class="hidden sm:block">・・・・・</div>
                     {{-- キーワードを入力 --}}
                     <input class="py-2 w-60 border border-gray-500 rounded-lg" name="keyword"
                            placeholder="キーワードを入力">
                     {{-- 検索するボタン --}}
-                    <button class="btn bg-blue-800 hover:bg-blue-700">検索する</button>
+                    <button class="ml-2 btn bg-blue-800 hover:bg-blue-700">検索する</button>
                 </div>
             </form>
             {{-- コメント --}}
@@ -22,10 +23,10 @@
             {{-- タイトル --}}
             <h1 class="heading heading_bg">ユーザーからの問い合わせ一覧</h1>
             {{-- ユーザーからの問い合わせ一覧 --}}
-            <div class="p-2 h-[72vh] overflow-y-scroll overscroll-none">
+            <div class="p-2 h-[69vh] overflow-y-scroll overscroll-none">
                 @foreach ($all_contact as $contact)
-                    <div class="mb-5 p-2 flex justify-between items-center border border-gray-400 rounded-lg">
-                        <div class="w-[88%] mr-5 font-semibold">
+                    <div class="mb-5 p-2 md:flex justify-between items-center border border-gray-400 rounded-lg">
+                        <div class="md:w-[88%] mr-5 font-semibold">
                             {{-- ユーザー名 --}}
                             <p class="mb-1 truncate">
                                 ユーザー名<span class="font-normal">・・・・・</span>
@@ -41,7 +42,7 @@
                             </p>
                         </div>
                         {{-- 詳細ボタン --}}
-                        <div class="w-[12%] flex justify-end">
+                        <div class="md:w-[12%] flex justify-end">
                             <button class="btn bg-gray-800 hover:bg-gray-700"
                                     onclick="location.href='{{ route('admin.contact.show', ['contact' => $contact->id]) }}'">
                                 詳細

@@ -18,7 +18,9 @@ class TrashedContactController extends Controller
     public function index(Request $request): View
     {
         // 警告したユーザーを取得する
-        $all_trashed_contacts = Contact::onlyTrashed()->get();
+        $all_trashed_contacts = Contact::onlyTrashed()
+        ->orderBy('updated_at', 'desc')
+        ->get();
 
         return view('admin.trashedContacts.index', compact('all_trashed_contacts'));
     }
