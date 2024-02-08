@@ -43,8 +43,7 @@ class Image extends Model
      */
     public function scopeAvailableAllImages(Builder $query): void
     {
-        $query
-            ->where('user_id', Auth::id())
+        $query->where('user_id', Auth::id())
             ->orderBy('updated_at', 'desc');
     }
 
@@ -56,8 +55,7 @@ class Image extends Model
      */
     public function scopeAvailableSelectImage(Builder $query, int $id): void
     {
-        $query
-            ->where('id', $id)
+        $query->where('id', $id)
             ->where('user_id', Auth::id());
     }
 
@@ -69,9 +67,8 @@ class Image extends Model
      */
     public function scopeAvailableCreateImage(Builder $query, string $only_one_file_name): void
     {
-        $query
-            ->create([
-                'user_id' => Auth::id(),
-                'filename' => $only_one_file_name]);
+        $query->create([
+            'user_id' => Auth::id(),
+            'filename' => $only_one_file_name]);
     }
 }

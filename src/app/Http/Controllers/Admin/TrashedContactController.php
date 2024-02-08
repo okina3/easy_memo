@@ -18,9 +18,7 @@ class TrashedContactController extends Controller
     public function index(Request $request): View
     {
         // 警告したユーザーを取得する
-        $all_trashed_contacts = Contact::onlyTrashed()
-        ->orderBy('updated_at', 'desc')
-        ->get();
+        $all_trashed_contacts = Contact::onlyTrashed()->availableAllContacts()->get();
 
         return view('admin.trashedContacts.index', compact('all_trashed_contacts'));
     }
@@ -32,7 +30,7 @@ class TrashedContactController extends Controller
      */
     public function undo(Request $request): RedirectResponse
     {
-        Contact::onlyTrashed()->where('id', $request->contentId)->restore();
+        Contact::onlyTrashed()->availableSelectContact($request->contentId)->restore();
 
         return to_route('admin.trashed-contact.index')
             ->with(['message' => 'ユーザーの問い合わせを、元に戻しました。', 'status' => 'info']);
@@ -45,7 +43,7 @@ class TrashedContactController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Contact::onlyTrashed()->where('id', $request->contentId)->forceDelete();
+        Contact::onlyTrashed()->availableSelectContact($request->contentId)->forceDelete();
 
         return to_route('admin.trashed-contact.index')
             ->with(['message' => 'ユーザーの問い合わせを、完全に削除しました。', 'status' => 'alert']);
