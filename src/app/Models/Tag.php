@@ -59,8 +59,7 @@ class Tag extends Model
         $query->with('memos.shareSettings')
             ->where('id', $get_url_tag)
             ->where('user_id', Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'desc');
+            ->whereNull('deleted_at');
     }
 
     /**

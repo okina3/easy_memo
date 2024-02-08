@@ -21,13 +21,9 @@ class ContactController extends Controller
      */
     public function create(): View
     {
-        // これいらないか？（後で確かめる）
-        // ブラウザバック対策（値を削除する）
-        SessionService::resetBrowserBackSession();
-
         // ブラウザバック対策（値を持たせる）
         SessionService::setBrowserBackSession();
-
+        
         return view('user.contacts.create');
     }
 

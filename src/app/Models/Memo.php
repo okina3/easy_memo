@@ -80,8 +80,7 @@ class Memo extends Model
     {
         $query->where('id', $id)
             ->where('user_id', Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'desc');
+            ->whereNull('deleted_at');
     }
 
     /**
