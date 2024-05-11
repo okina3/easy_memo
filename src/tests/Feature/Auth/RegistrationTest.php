@@ -10,6 +10,11 @@ class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * 登録画面が正常に表示されるかテスト。
+     * レスポンスとしてHTTPステータス200が返されることを確認。
+     * @return void
+     */
     public function test_registration_screen_can_be_rendered(): void
     {
         $response = $this->get('/register');
@@ -17,6 +22,11 @@ class RegistrationTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * 新規ユーザーが登録できることをテスト。
+     * 正しい登録情報を送信後、ユーザーが認証され、ホームページにリダイレクトされることを確認。
+     * @return void
+     */
     public function test_new_users_can_register(): void
     {
         $response = $this->post('/register', [
