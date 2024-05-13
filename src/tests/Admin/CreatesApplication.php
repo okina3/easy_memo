@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\User;
+namespace Tests\Admin;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
