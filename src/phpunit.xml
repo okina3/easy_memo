@@ -12,6 +12,13 @@
             <directory>tests/Feature</directory>
         </testsuite> -->
 
+        <!-- Admin用 -->
+        <!-- <testsuite name="AdminUnit">
+            <directory suffix="Test.php">tests/Admin/Unit</directory>
+        </testsuite>
+        <testsuite name="AdminFeature">
+            <directory suffix="Test.php">tests/Admin/Feature</directory>
+        </testsuite>   -->
         <!-- ユーザー用 -->
         <testsuite name="UserUnit">
             <directory suffix="Test.php">tests/User/Unit</directory>
