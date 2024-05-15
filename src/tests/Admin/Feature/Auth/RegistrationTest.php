@@ -8,6 +8,8 @@ use Tests\Admin\TestCase;
 
 class RegistrationTest extends TestCase
 {
+    // 管理者は、一人なので新規登録のルートはコメントにしてあるので、ここもコメントにする。
+
     // use RefreshDatabase;
 
     // /**
@@ -17,7 +19,7 @@ class RegistrationTest extends TestCase
     //  */
     // public function test_registration_screen_can_be_rendered(): void
     // {
-    //     $response = $this->get('/register');
+    //     $response = $this->get('admin/register');
 
     //     $response->assertStatus(200);
     // }
@@ -29,14 +31,14 @@ class RegistrationTest extends TestCase
     //  */
     // public function test_new_users_can_register(): void
     // {
-    //     $response = $this->post('/register', [
+    //     $response = $this->post('admin/register', [
     //         'name' => 'Test User',
     //         'email' => 'test@example.com',
     //         'password' => 'password',
     //         'password_confirmation' => 'password',
     //     ]);
 
-    //     $this->assertAuthenticated();
-    //     $response->assertRedirect(RouteServiceProvider::HOME);
+    //     $this->assertAuthenticated('admin');
+    //     $response->assertRedirect(RouteServiceProvider::ADMIN_HOME);
     // }
 }
