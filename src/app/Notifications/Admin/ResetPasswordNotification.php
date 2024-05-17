@@ -42,7 +42,6 @@ class ResetPasswordNotification extends Notification
     {
         // URLをここで生成
         $url = url("admin/reset-password/{$this->token}");
-        // $url = url("reset-password/{$this->token}");
 
         return (new MailMessage)
             // ->subject(config('app.name') . ' パスワードリセットURLの送付')
