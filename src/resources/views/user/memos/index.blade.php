@@ -1,13 +1,13 @@
 <x-app-layout>
     {{-- フラッシュメッセージ --}}
     <x-common.flash-message status="session('status')"/>
-    <div class="mb-2 flex justify-between">
+    <div class="mb-2 md:flex justify-between">
         {{-- タグ検索の表示エリア --}}
-        <section class="w-1/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+        <section class="mb-2 md:mb-0 md:w-1/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- タイトル --}}
             <h1 class="heading heading_bg">タグから検索</h1>
             {{-- タグの検索 --}}
-            <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
+            <div class="p-3 h-[15vh] md:h-[85vh] overflow-y-scroll overscroll-none">
                 <div class="mb-2 hover:font-semibold"><a href="/">全てのメモを表示</a></div>
                 {{-- タグ一覧 --}}
                 @foreach ($all_tags as $tag)
@@ -18,7 +18,7 @@
             </div>
         </section>
         {{-- メモ一覧の表示エリア --}}
-        <section class="ml-2 w-4/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+        <section class="md:ml-2 md:w-4/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- タイトル --}}
             <div class="heading_bg py-2 flex justify-between items-center">
                 <h1 class="heading">メモ一覧</h1>
@@ -28,7 +28,7 @@
                 </button>
             </div>
             {{-- メモ一覧 --}}
-            <div class="p-2 h-[85vh] overflow-y-scroll overscroll-none">
+            <div class="p-2 h-[60vh] md:h-[85vh] overflow-y-scroll overscroll-none">
                 @foreach ($all_memos as $memo)
                     <div class="mb-5 p-2 border border-gray-400 rounded-lg">
                         {{-- 共有中のメモの目印 --}}

@@ -64,8 +64,7 @@ class Memo extends Model
      */
     public function scopeAvailableAllMemos(Builder $query): void
     {
-        $query
-            ->with('shareSettings')
+        $query->with('shareSettings')
             ->where('user_id', Auth::id())
             ->whereNull('deleted_at')
             ->orderBy('updated_at', 'desc');
@@ -79,11 +78,9 @@ class Memo extends Model
      */
     public function scopeAvailableSelectMemo(Builder $query, int $id): void
     {
-        $query
-            ->where('id', $id)
+        $query->where('id', $id)
             ->where('user_id', Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'desc');
+            ->whereNull('deleted_at');
     }
 
     /**
@@ -93,8 +90,7 @@ class Memo extends Model
      */
     public function scopeAvailableAllTrashedMemos(Builder $query): void
     {
-        $query
-            ->where('user_id', Auth::id())
+        $query->where('user_id', Auth::id())
             ->orderBy('deleted_at', 'desc');
     }
 
@@ -106,8 +102,7 @@ class Memo extends Model
      */
     public function scopeAvailableSelectTrashedMemo(Builder $query, int $request_memo_id): void
     {
-        $query
-            ->where('id', $request_memo_id)
+        $query->where('id', $request_memo_id)
             ->where('user_id', Auth::id());
     }
 }

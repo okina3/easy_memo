@@ -11,13 +11,19 @@ class ResetPasswordNotification extends Notification
 {
     use Queueable;
 
+    // トークンプロパティを追加
+    public string $token;
+
     /**
      * Create a new notification instance.
+     *
+     * @param string $token
      */
-    public function __construct($url)
+    public function __construct(string $token)
     {
-        $this->url = $url;
+        $this->token = $token;
     }
+
 
     /**
      * Get the notification's delivery channels.
@@ -36,11 +42,14 @@ class ResetPasswordNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        // URLを生成
+        $url = url("reset-password/{$this->token}");
+
         return (new MailMessage)
             // ->subject(config('app.name') . ' パスワードリセットURLの送付')
             ->subject('ユーザー様' . ' パスワードリセットURLの送付')
             ->greeting('いつもご利用頂きありがとうございます')
-            ->action('パスワードリセット', $this->url)
+            ->action('パスワードリセット', $url)
             ->line('こちらからパスワードリセットを行ってください');
     }
 

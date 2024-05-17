@@ -54,8 +54,7 @@ class User extends Authenticatable
      */
     public function sendPasswordResetNotification($token): void
     {
-        $url = url("reset-password/${token}");
-        $this->notify(new ResetPasswordNotification($url));
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     /**
@@ -74,8 +73,7 @@ class User extends Authenticatable
      */
     public function scopeAvailableAllUsers(Builder $query): void
     {
-        $query
-            ->orderBy('updated_at', 'desc');
+        $query->orderBy('updated_at', 'desc');
     }
 
     /**
@@ -86,8 +84,7 @@ class User extends Authenticatable
      */
     public function scopeAvailableSelectUser(Builder $query, int $request_user_id): void
     {
-        $query
-            ->where('id', $request_user_id);
+        $query->where('id', $request_user_id);
     }
 
     /**
@@ -98,8 +95,7 @@ class User extends Authenticatable
      */
     public function scopeAvailableSelectMailUser(Builder $query, string $request_share_user): void
     {
-        $query
-            ->where('email', $request_share_user);
+        $query->where('email', $request_share_user);
     }
 
     /**

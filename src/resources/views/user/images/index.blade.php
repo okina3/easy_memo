@@ -10,13 +10,13 @@
             </button>
         </div>
         {{-- 登録した画像の表示エリア --}}
-        <div class="p-3">
+        <div class="mb:p-3">
             {{-- フラッシュメッセージ --}}
             <x-common.flash-message status="session('status')"/>
             <div class="flex flex-wrap">
                 {{-- 登録画像の一覧  --}}
                 @foreach ($all_images as $image)
-                    <div class="w-1/4 p-1 mb-5">
+                    <div class=" p-1 w-1/2 sm:w-1/3 md:w-1/4">
                         <div class="p-1 border border-gray-300 rounded-md">
                             <a href="{{ route('user.image.show', ['image' => $image->id]) }}">
                                 <img src="{{ asset('storage/' . $image->filename) }}" alt="登録した画像が表示されます">

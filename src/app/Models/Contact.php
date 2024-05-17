@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +25,27 @@ class Contact extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * 全てのユーザーの問い合わせを取得する為のスコープ。
+     * @param Builder $query
+     * @return void
+     */
+    public function scopeAvailableAllContacts(Builder $query): void
+    {
+        $query->orderBy('updated_at', 'desc');
+    }
+
+    /**
+     * 選択したユーザーの問い合わせを取得する為のスコープ。
+     * @param Builder $query
+     * @param int $id
+     * @return void
+     */
+    public function scopeAvailableSelectContact(Builder $query, int $id): void
+    {
+        $query->where('id', $id);
     }
 
     /**

@@ -43,8 +43,7 @@ class ShareSetting extends Model
      */
     public function scopeAvailableAllSharedMemos(Builder $query): void
     {
-        $query
-            ->with('memo.user')
+        $query->with('memo.user')
             ->where('sharing_user_id', Auth::id())
             ->orderBy('updated_at', 'desc');
     }
@@ -58,8 +57,7 @@ class ShareSetting extends Model
      */
     public function scopeAvailableSelectSetting(Builder $query, int $shared_user_id, int $request_memo_id): void
     {
-        $query
-            ->where('sharing_user_id', $shared_user_id)
+        $query->where('sharing_user_id', $shared_user_id)
             ->where('memo_id', $request_memo_id);
     }
 
@@ -72,12 +70,11 @@ class ShareSetting extends Model
      */
     public function scopeAvailableCreateSetting(Builder $query, $request, int $shared_user_id): void
     {
-        $query
-            ->create([
-                'sharing_user_id' => $shared_user_id,
-                'memo_id' => $request->memoId,
-                'edit_access' => $request->edit_access,
-            ]);
+        $query->create([
+            'sharing_user_id' => $shared_user_id,
+            'memo_id' => $request->memoId,
+            'edit_access' => $request->edit_access,
+        ]);
     }
 
     /**
@@ -88,8 +85,7 @@ class ShareSetting extends Model
      */
     public function scopeAvailableCheckSetting(Builder $query, int $id): void
     {
-        $query
-            ->with('memo')
+        $query->with('memo')
             ->where('sharing_user_id', Auth::id())
             ->where('memo_id', $id);
     }
@@ -102,8 +98,7 @@ class ShareSetting extends Model
      */
     public function scopeAvailableSharedMemoInfo(Builder $query, int $id): void
     {
-        $query
-            ->with('user')
+        $query->with('user')
             ->where('memo_id', $id)
             ->orderBy('updated_at', 'desc');
     }

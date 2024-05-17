@@ -5,10 +5,8 @@
         {{-- 選択した画像の詳細を表示するエリア --}}
         <div class="p-3">
             {{-- 選択した画像を表示 --}}
-            <div class="p-2 w-2/3 mx-auto">
-                <div class="relative">
-                    <img src="{{ asset('storage/' . $select_image->filename) }}" alt="編集したい画像が表示されます">
-                </div>
+            <div class="p-2 md:w-4/5 mx-auto">
+                <img class="mx-auto" src="{{ asset('storage/' . $select_image->filename) }}" alt="編集したい画像が表示されます">
             </div>
             {{-- 選択した画像を削除するボタン --}}
             <div class="mt-3 mr-2 flex justify-center">

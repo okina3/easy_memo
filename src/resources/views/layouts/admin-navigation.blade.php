@@ -17,18 +17,21 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.contact.index')" :active="request()->routeIs('admin.contact.index')">
+                    <x-nav-link :href="route('admin.warning.index')"
+                                :active="request()->routeIs('admin.warning.index')">
+                        警告したユーザー管理画面
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.contact.index')"
+                                :active="request()->routeIs('admin.contact.index')">
                         ユーザーからの連絡
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.trashed-contact.index')" :active="request()->routeIs('admin.trashed-contact.index')">
+                    <x-nav-link :href="route('admin.trashed-contact.index')"
+                                :active="request()->routeIs('admin.trashed-contact.index')">
                         ゴミ箱
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.warning.index')" :active="request()->routeIs('admin.warning.index')">
-                        警告したユーザー管理画面
                     </x-nav-link>
                 </div>
             </div>
@@ -90,8 +93,20 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                ユーザー管理画面
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.warning.index')"
+                                   :active="request()->routeIs('admin.warning.index')">
+                警告したユーザー管理画面
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.contact.index')"
+                                   :active="request()->routeIs('admin.contact.index')">
+                ユーザーからの連絡
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.trashed-contact.index')"
+                                   :active="request()->routeIs('admin.trashed-contact.index')">
+                ゴミ箱
             </x-responsive-nav-link>
         </div>
 

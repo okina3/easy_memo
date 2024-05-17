@@ -1,17 +1,18 @@
 <x-app-layout>
+    <div class="max-w-screen-lg mx-auto">
     {{-- フラッシュメッセージ --}}
     <x-common.flash-message status="session('status')"/>
-    <div class="max-w-screen-lg mx-auto">
         {{-- 検索の表示エリア --}}
         <section class="mb-5 px-3 py-2 text-gray-600 border border-gray-400 rounded-lg bg-gray-200">
             <form action="{{ route('admin.contact.index') }}" method="get">
-                <div class="flex space-x-2 items-center">
-                    <div class="heading">キーワードから検索・・・・・</div>
+                <div class="sm:flex items-center">
+                    <div class="heading">キーワードから検索</div>
+                    <div class="hidden sm:block">・・・・・</div>
                     {{-- キーワードを入力 --}}
                     <input class="py-2 w-60 border border-gray-500 rounded-lg" name="keyword"
                            placeholder="キーワードを入力">
                     {{-- 検索するボタン --}}
-                    <button class="btn bg-blue-800 hover:bg-blue-700">検索する</button>
+                    <button class="ml-2 btn bg-blue-800 hover:bg-blue-700">検索する</button>
                 </div>
             </form>
             {{-- コメント --}}
@@ -22,10 +23,10 @@
             {{-- タイトル --}}
             <h1 class="heading heading_bg">削除済みユーザーからの問い合わせ一覧</h1>
             {{-- ユーザーからの問い合わせ一覧 --}}
-            <div class="p-2 h-[72vh] overflow-y-scroll overscroll-none">
+            <div class="p-2 h-[69vh] overflow-y-scroll overscroll-none">
                 @foreach ($all_trashed_contacts as $contact)
-                    <div class="mb-5 p-2 flex justify-between items-center border border-gray-400 rounded-lg">
-                        <div class="w-3/4 mr-5 font-semibold">
+                    <div class="mb-5 p-2 md:flex justify-between items-center border border-gray-400 rounded-lg">
+                        <div class="md:w-[70%] mr-5 font-semibold">
                             {{-- 件名 --}}
                             <p class="mb-1 truncate">
                                 件名<span class="font-normal">・・・・・・・・</span>{{ $contact->subject }}
@@ -36,14 +37,14 @@
                             </p>
                         </div>
                         {{-- ボタンエリア --}}
-                        <div class="w-1/4 flex justify-end">
+                        <div class="mt-2 md:w-[30%] flex md:justify-end">
                             {{-- 元に戻すボタン --}}
                             <form action="{{ route('admin.trashed-contact.undo') }}" method="post" class="mr-3">
                                 @csrf
                                 @method('patch')
                                 {{-- 選択されている問い合わせのidを取得 --}}
                                 <input type="hidden" name="contentId" value="{{ $contact->id }}">
-                                <button class="btn w-24 bg-blue-800 hover:bg-blue-700" type="submit">元に戻す</button>
+                                <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">元に戻す</button>
                             </form>
                             {{-- 完全削除ボタン --}}
                             <form onsubmit="return deleteCheck()" action="{{ route('admin.trashed-contact.destroy') }}"
@@ -52,7 +53,7 @@
                                 @method('delete')
                                 {{-- 選択されている問い合わせのidを取得 --}}
                                 <input type="hidden" name="contentId" value="{{ $contact->id }}">
-                                <button class="btn w-24 bg-red-600 hover:bg-red-500" type="submit">完全削除</button>
+                                <button class="btn bg-red-600 hover:bg-red-500" type="submit">完全削除</button>
                             </form>
                         </div>
                     </div>

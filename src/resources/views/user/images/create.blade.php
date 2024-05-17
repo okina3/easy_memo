@@ -10,7 +10,7 @@
                 @csrf
                 {{-- 登録する画像の選択 --}}
                 <div class="m-2">
-                    <div class="p-2 w-1/2 mx-auto">
+                    <div class="p-2 sm:w-2/3 mx-auto">
                         <div class="mt-2">
                             <h2 class="sub_heading mb-1">画像</h2>
                             <input class="py-1 px-3 w-full border border-gray-300 rounded bg-gray-100" type="file"

@@ -1,13 +1,13 @@
 <x-app-layout>
     {{-- フラッシュメッセージ --}}
     <x-common.flash-message status="session('status')"/>
-    <div class="mb-2 flex justify-between">
+    <div class="mb-2 md:flex justify-between">
         {{-- ユーザー検索の表示エリア --}}
-        <section class="w-1/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+        <section class="mb-2 md:mb-0 md:w-1/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- タイトル --}}
             <h1 class="heading heading_bg">ユーザーから検索</h1>
             {{-- ユーザーの検索 --}}
-            <div class="p-3 h-[85vh] overflow-y-scroll overscroll-none">
+            <div class="p-3 h-[15vh] md:h-[85vh] overflow-y-scroll overscroll-none">
                 <div class="mb-2 hover:font-semibold"><a href="share-setting/">全てのメモを表示</a></div>
                 {{-- ユーザー一覧 --}}
                 @foreach ($shared_users as $shared_user)
@@ -20,11 +20,11 @@
             </div>
         </section>
         {{-- 共有中のメモ一覧の表示エリア --}}
-        <section class="ml-2 w-4/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+        <section class="md:ml-2 md:w-4/5 text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- タイトル --}}
             <h1 class="heading heading_bg">共有されているメモ</h1>
             {{-- 共有中のメモ一覧 --}}
-            <div class="p-2 h-[85vh] overflow-y-scroll overscroll-none">
+            <div class="p-2 h-[60vh] md:h-[85vh] overflow-y-scroll overscroll-none">
                 @foreach ($shared_memos as $shared_memo)
                     <div class="mb-5 p-2 border border-gray-400 rounded-lg">
                         {{-- 共有メモの情報エリア --}}

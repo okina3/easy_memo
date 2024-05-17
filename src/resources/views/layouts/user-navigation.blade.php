@@ -103,8 +103,26 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('user.dashboard')" :active="request()->routeIs('user.dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                メモ管理画面
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('user.tag.index')" :active="request()->routeIs('user.tag.index')">
+                タグ管理画面
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('user.image.index')" :active="request()->routeIs('user.image.index')">
+                画像管理画面
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('user.share-setting.index')"
+                                   :active="request()->routeIs('user.share-setting.index')">
+                共有メモ画面
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('user.trashed-memo.index')"
+                                   :active="request()->routeIs('user.trashed-memo.index')">
+                ゴミ箱
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('user.contact.create')"
+                                   :active="request()->routeIs('user.contact.create')">
+                管理人に連絡
             </x-responsive-nav-link>
         </div>
 

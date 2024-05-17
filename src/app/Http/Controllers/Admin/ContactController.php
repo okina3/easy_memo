@@ -18,10 +18,7 @@ class ContactController extends Controller
     public function index(Request $request): View
     {
         // 全ての問い合わせ情報を取得する
-        $all_contact = Contact::with('user')
-            ->searchKeyword($request->keyword)
-            ->orderBy('updated_at', 'desc')
-            ->get();
+        $all_contact = Contact::with('user')->searchKeyword($request->keyword)->availableAllContacts()->get();
 
         return view('admin.contacts.index', compact('all_contact'));
     }
@@ -34,10 +31,7 @@ class ContactController extends Controller
     public function show(int $id): View
     {
         // 選択した問い合わせ情報を取得する
-        $select_contact = Contact::with('user')
-            ->where('id', $id)
-            ->orderBy('updated_at', 'desc')
-            ->first();
+        $select_contact = Contact::with('user')->availableSelectContact($id)->first();
 
         return view('admin.contacts.show', compact('select_contact'));
     }
@@ -50,7 +44,7 @@ class ContactController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         // 選択した問い合わせ情報を削除する
-        Contact::where('id', $request->contentId)->delete();
+        Contact::availableSelectContact($request->contentId)->delete();
 
         return to_route('admin.contact.index')->with(['message' => 'ユーザーの問い合わせをゴミ箱に移動しました。', 'status' => 'alert']);
     }

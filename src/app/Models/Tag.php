@@ -43,8 +43,7 @@ class Tag extends Model
      */
     public function scopeAvailableAllTags(Builder $query): void
     {
-        $query
-            ->where('user_id', Auth::id())
+        $query->where('user_id', Auth::id())
             ->whereNull('deleted_at')
             ->orderBy('updated_at', 'desc');
     }
@@ -57,12 +56,10 @@ class Tag extends Model
      */
     public function scopeAvailableSelectTag(Builder $query, int $get_url_tag): void
     {
-        $query
-            ->with('memos.shareSettings')
+        $query->with('memos.shareSettings')
             ->where('id', $get_url_tag)
             ->where('user_id', Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'desc');
+            ->whereNull('deleted_at');
     }
 
     /**
@@ -73,11 +70,10 @@ class Tag extends Model
      */
     public function scopeAvailableCreateTag(Builder $query, string $request_new_tag): void
     {
-        $query
-            ->create([
-                'name' => $request_new_tag,
-                'user_id' => Auth::id()
-            ]);
+        $query->create([
+            'name' => $request_new_tag,
+            'user_id' => Auth::id()
+        ]);
     }
 
     /**
@@ -88,8 +84,7 @@ class Tag extends Model
      */
     public function scopeAvailableCheckDuplicateTag(Builder $query, $request_new_tag): void
     {
-        $query
-            ->where('name', $request_new_tag)
+        $query->where('name', $request_new_tag)
             ->where('user_id', Auth::id());
     }
 }

@@ -5,11 +5,26 @@
          colors="true"
 >
     <testsuites>
-        <testsuite name="Unit">
+        <!-- <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
         <testsuite name="Feature">
             <directory>tests/Feature</directory>
+        </testsuite> -->
+
+        <!-- Admin用 -->
+        <testsuite name="AdminUnit">
+            <directory suffix="Test.php">tests/Admin/Unit</directory>
+        </testsuite>
+        <testsuite name="AdminFeature">
+            <directory suffix="Test.php">tests/Admin/Feature</directory>
+        </testsuite>
+        <!-- ユーザー用 -->
+        <testsuite name="UserUnit">
+            <directory suffix="Test.php">tests/User/Unit</directory>
+        </testsuite>
+        <testsuite name="UserFeature">
+            <directory suffix="Test.php">tests/User/Feature</directory>
         </testsuite>
     </testsuites>
     <source>
