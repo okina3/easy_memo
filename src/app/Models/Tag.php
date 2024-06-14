@@ -45,7 +45,7 @@ class Tag extends Model
     {
         $query->where('user_id', Auth::id())
             ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'desc');
+            ->orderBy('created_at', 'desc');
     }
 
     /**
