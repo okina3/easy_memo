@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Contact extends Model
 {
@@ -34,7 +35,7 @@ class Contact extends Model
      */
     public function scopeAvailableAllContacts(Builder $query): void
     {
-        $query->orderBy('updated_at', 'desc');
+        $query->orderBy('created_at', 'desc');
     }
 
     /**
@@ -46,6 +47,21 @@ class Contact extends Model
     public function scopeAvailableSelectContact(Builder $query, int $id): void
     {
         $query->where('id', $id);
+    }
+
+    /**
+     * 問い合わせをDBに保存する為のスコープ。
+     * @param Builder $query
+     * @param $request
+     * @return void
+     */
+    public function scopeAvailableCreateContact(Builder $query, $request): void
+    {
+        $query->create([
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'user_id' => Auth::id(),
+        ]);
     }
 
     /**

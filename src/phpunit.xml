@@ -5,7 +5,7 @@
     <testsuites>
         <!-- Admin用 -->
         <testsuite name="AdminUnit">
-            <!-- <directory suffix="Test.php">tests/Admin/Unit/Models</directory> -->
+            <directory suffix="Test.php">tests/Admin/Unit/Models</directory>
             <!-- <directory suffix="Test.php">tests/Admin/Unit/Notifications</directory> -->
         </testsuite>
         <testsuite name="AdminFeature">
