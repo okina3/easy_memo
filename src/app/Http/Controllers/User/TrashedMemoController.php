@@ -20,7 +20,7 @@ class TrashedMemoController extends Controller
         // ブラウザバック対策（値を削除する）
         SessionService::resetBrowserBackSession();
 
-        $all_trashed_memos = Memo::onlyTrashed()->availableAllTrashedMemos()->get();
+        $all_trashed_memos = Memo::availableAllTrashedMemos()->get();
 
         return view('user.trashedMemos.index', compact('all_trashed_memos'));
     }
@@ -32,7 +32,7 @@ class TrashedMemoController extends Controller
      */
     public function undo(Request $request): RedirectResponse
     {
-        Memo::onlyTrashed()->availableSelectTrashedMemo($request->memoId)->restore();
+        Memo::availableSelectTrashedMemo($request->memoId)->restore();
 
         return to_route('user.trashed-memo.index')->with(['message' => 'メモを元に戻しました。', 'status' => 'info']);
     }
@@ -44,7 +44,7 @@ class TrashedMemoController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Memo::onlyTrashed()->availableSelectTrashedMemo($request->memoId)->forceDelete();
+        Memo::availableSelectTrashedMemo($request->memoId)->forceDelete();
 
         return to_route('user.trashed-memo.index')->with(['message' => 'メモを完全に削除しました。', 'status' => 'alert']);
     }

@@ -90,7 +90,8 @@ class Memo extends Model
      */
     public function scopeAvailableAllTrashedMemos(Builder $query): void
     {
-        $query->where('user_id', Auth::id())
+        $query->onlyTrashed()
+            ->where('user_id', Auth::id())
             ->orderBy('deleted_at', 'desc');
     }
 
@@ -102,7 +103,8 @@ class Memo extends Model
      */
     public function scopeAvailableSelectTrashedMemo(Builder $query, int $request_memo_id): void
     {
-        $query->where('id', $request_memo_id)
+        $query->onlyTrashed()
+            ->where('id', $request_memo_id)
             ->where('user_id', Auth::id());
     }
 }
