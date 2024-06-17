@@ -44,7 +44,7 @@ class Image extends Model
     public function scopeAvailableAllImages(Builder $query): void
     {
         $query->where('user_id', Auth::id())
-            ->orderBy('updated_at', 'desc');
+            ->orderBy('created_at', 'desc');
     }
 
     /**
