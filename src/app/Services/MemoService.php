@@ -34,21 +34,20 @@ class MemoService
     {
         // クエリパラメータを取得
         $get_url_tag = \Request::query('tag');
-        // もしクエリパラメータがあれば、タグから絞り込む
+        // クエリパラメータがあった場合の処理
         if (!empty($get_url_tag)) {
-            // 絞り込んだタグにリレーションされたメモを含む、タグを取得
-            $tag_relation = Tag::availableSelectTag($get_url_tag)->first();
-            // タグにリレーションされたメモを取得
-            $memos = $tag_relation->memos;
+            // クエリパラメータから絞り込んだタグを取得
+            $select_tag = Tag::availableSelectTag($get_url_tag)->first();
+            // クエリパラメータから絞り込んだタグに、リレーションされたメモを取得
+            $memos = $select_tag->memos;
         } else {
             // 全メモを取得
             $memos = Memo::availableAllMemos()->get();
         }
-        // 共有されているメモに目印を付ける
         foreach ($memos as $memo) {
             // メモが共有されているかどうかを確認
             $is_shared = $memo->shareSettings->isNotEmpty();
-            // もしメモが共有されている場合、メモに共有中のステータスを追加
+            // もしメモが共有されている場合、そのメモに目印を付ける
             if ($is_shared) {
                 $memo->status = "共有中";
             }
