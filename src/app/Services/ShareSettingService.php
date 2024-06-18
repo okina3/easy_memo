@@ -16,27 +16,29 @@ class ShareSettingService
     {
         // クエリパラメータを取得。
         $get_url_user_id = \Request::query('user');
-        // 結果の共有メモを格納する空の配列
+        // 全ての共有メモ、または、ユーザー別の共有メモを格納する空の配列
         $shared_memos = [];
-        // クエリパラメータがあった場合と、なかった場合の処理。
+
+        // クエリパラメータの有無の処理
         if (!empty($get_url_user_id)) {
-            // 暗号化を元に戻す
+            // クエリパラメータの暗号化を元に戻す
             $decrypted_user_id = decrypt($get_url_user_id);
-            // 絞り込んだユーザーの、共有されているメモを、空の配列に追加。
+            // クエリーパラメーターから絞り込んだユーザーの、自分に共有しているメモを、空の配列に追加。
             foreach ($share_setting_memos as $share_setting_memo) {
-                // 共有メモ情報に、編集許可の判定を追加する
+                // 絞り込んだユーザーが自分に共有しているメモに、詳細のみか、編集可能か、の判定の情報を追加
                 $share_setting_memo->memo->access = $share_setting_memo->edit_access;
-                // 絞り込んだユーザーの、自分自身に共有されているメモを空の配列に追加
+                // 絞り込んだユーザーの共有メモが、自分に共有されているかの確認
                 if ($share_setting_memo->memo->user_id === $decrypted_user_id) {
+                    // 空の配列に追加
                     $shared_memos[] = $share_setting_memo->memo;
                 }
             }
         } else {
-            //全ての共有されたメモを、空の配列に追加。
+            // 自分に共有されている全てのメモを、空の配列に追加。
             foreach ($share_setting_memos as $share_setting_memo) {
-                // 共有メモ情報に、編集許可の判定を追加する
+                // 自分に共有しているメモに、詳細のみか、編集可能か、の判定の情報を追加
                 $share_setting_memo->memo->access = $share_setting_memo->edit_access;
-                // そのまま、全ての共有されたメモを、空の配列に追加
+                // 空の配列に追加
                 $shared_memos[] = $share_setting_memo->memo;
             }
         }
@@ -44,16 +46,16 @@ class ShareSettingService
     }
 
     /**
-     * メモを共有しているユーザー名を取得するメソッド。
+     * メモを共有しているユーザーを取得するメソッド。
      * @param Collection $share_setting_memos
      * @return array
      */
-    public static function searchSharedUserName(Collection $share_setting_memos): array
+    public static function searchSharedUser(Collection $share_setting_memos): array
     {
-        // 共有情報から、全ユーザー名を、空の配列に追加
+        // メモを共有している全ユーザーを、空の配列に追加
         $shared_users = [];
         foreach ($share_setting_memos as $share_setting_user) {
-            // すでに同じ値が存在しない場合に追加
+            // 配列に、同じユーザーが存在しない場合に追加する
             if (!in_array($share_setting_user->memo->user, $shared_users)) {
                 $shared_users[] = $share_setting_user->memo->user;
             }
