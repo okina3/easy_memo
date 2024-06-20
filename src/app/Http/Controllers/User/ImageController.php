@@ -78,11 +78,12 @@ class ImageController extends Controller
                     }
                 }
             }, 10);
+
+            return to_route('user.image.index')->with(['message' => '画像を登録しました。', 'status' => 'info']);
         } catch (Throwable $e) {
             Log::error($e);
             throw $e;
         }
-        return to_route('user.image.index')->with(['message' => '画像を登録しました。', 'status' => 'info']);
     }
 
     /**
@@ -115,10 +116,11 @@ class ImageController extends Controller
                 // 削除したい画像をDBから削除
                 Image::availableSelectImage($request->memoId)->delete();
             }, 10);
+
+            return to_route('user.image.index')->with(['message' => '画像を削除しました。', 'status' => 'alert']);
         } catch (Throwable $e) {
             Log::error($e);
             throw $e;
         }
-        return to_route('user.image.index')->with(['message' => '画像を削除しました。', 'status' => 'alert']);
     }
 }

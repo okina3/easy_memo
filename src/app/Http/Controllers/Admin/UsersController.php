@@ -42,11 +42,11 @@ class UsersController extends Controller
                 // 選択したユーザーのサービス利用を停止
                 User::findOrFail($request->userId)->delete();
             }, 10);
+
+            return to_route('admin.index')->with(['message' => 'ユーザーのサービス利用を停止しました', 'status' => 'alert']);
         } catch (Throwable $e) {
             Log::error($e);
             throw $e;
         }
-
-        return to_route('admin.index')->with(['message' => 'ユーザーのサービス利用を停止しました', 'status' => 'alert']);
     }
 }

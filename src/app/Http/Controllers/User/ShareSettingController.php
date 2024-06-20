@@ -57,11 +57,12 @@ class ShareSettingController extends Controller
                 // ユーザーを特定できたら、DBに保存する
                 ShareSetting::availableCreateSetting($request, $shared_user->id);
             }, 10);
+
+            return to_route('user.index')->with(['message' => 'メモを共有しました。', 'status' => 'info']);
         } catch (Throwable $e) {
             Log::error($e);
             throw $e;
         }
-        return to_route('user.index')->with(['message' => 'メモを共有しました。', 'status' => 'info']);
     }
 
     /**

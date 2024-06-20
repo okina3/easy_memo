@@ -90,11 +90,12 @@ class MemoController extends Controller
                 // 既存のタグと画像の選択があれば、メモに紐付けて中間テーブルに保存
                 MemoService::attachTagsAndImages($request, $memo->id);
             }, 10);
+
+            return to_route('user.index')->with(['message' => 'メモを登録しました。', 'status' => 'info']);
         } catch (Throwable $e) {
             Log::error($e);
             throw $e;
         }
-        return to_route('user.index')->with(['message' => 'メモを登録しました。', 'status' => 'info']);
     }
 
     /**
@@ -170,11 +171,12 @@ class MemoController extends Controller
                 // 既存のタグと画像の選択があれば、メモに紐付けて中間テーブルに保存
                 MemoService::attachTagsAndImages($request, $memo->id);
             }, 10);
+
+            return to_route('user.index')->with(['message' => 'メモを更新しました。', 'status' => 'info']);
         } catch (Throwable $e) {
             Log::error($e);
             throw $e;
         }
-        return to_route('user.index')->with(['message' => 'メモを更新しました。', 'status' => 'info']);
     }
 
     /**
@@ -192,10 +194,11 @@ class MemoController extends Controller
                 // 選択したメモの全ての共有設定を解除
                 ShareSettingService::deleteShareSettingAll($request->memoId);
             }, 10);
+
+            return to_route('user.index')->with(['message' => 'メモをゴミ箱に移動しました。', 'status' => 'alert']);
         } catch (Throwable $e) {
             Log::error($e);
             throw $e;
         }
-        return to_route('user.index')->with(['message' => 'メモをゴミ箱に移動しました。', 'status' => 'alert']);
     }
 }
