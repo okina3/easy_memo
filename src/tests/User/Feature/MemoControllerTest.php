@@ -93,4 +93,88 @@ class MemoControllerTest extends TestCase
         $response->assertRedirect(route('user.index'));
         $response->assertSessionHas(['message' => 'メモを登録しました。', 'status' => 'info']);
     }
+
+    /**
+     * メモの詳細表示が正しく動作することをテスト
+     * @return void
+     */
+    public function testShowMemoController()
+    {
+        // ログインユーザーを作成して認証
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        // メモ、タグ、画像、共有設定を作成
+        $memo = Memo::factory()->create(['user_id' => $user->id]);
+        $tags = Tag::factory()->count(3)->create(['user_id' => $user->id]);
+        $images = Image::factory()->count(2)->create(['user_id' => $user->id]);
+        $memo->tags()->attach($tags);
+        $memo->images()->attach($images);
+
+        // メモ詳細表示メソッドを呼び出してレスポンスを確認
+        $response = $this->get(route('user.show', ['memo' => $memo->id]));
+
+        // レスポンスが 'user.memos.show' ビューを返すことを確認
+        $response->assertStatus(200);
+        $response->assertViewIs('user.memos.show');
+
+        // ビューに渡されるデータが正しいか確認
+        $response->assertViewHas('select_memo', function ($select_memo) use ($memo) {
+            return $select_memo->id === $memo->id;
+        });
+        $response->assertViewHas('get_memo_tags', function ($get_memo_tags) use ($tags) {
+            return count($get_memo_tags) === 3 && in_array($tags->first()->name, $get_memo_tags);
+        });
+        $response->assertViewHas('get_memo_images', function ($get_memo_images) use ($images) {
+            return count($get_memo_images) === 2 && $get_memo_images[0]->id === $images->first()->id;
+        });
+        $response->assertViewHas('shared_users');
+    }
+
+    /**
+     * メモの編集画面が、正しく表示されることをテスト
+     * @return void
+     */
+    public function testEditMemoController()
+    {
+        // ログインユーザーを作成して認証
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        // タグと画像、メモを作成
+        $tags = Tag::factory()->count(5)->create(['user_id' => $user->id]);
+        $images = Image::factory()->count(3)->create(['user_id' => $user->id]);
+        $memo = Memo::factory()->create(['user_id' => $user->id]);
+
+        // メモにタグと画像を関連付け
+        $memo->tags()->attach($tags->pluck('id')->toArray());
+        $memo->images()->attach($images->pluck('id')->toArray());
+
+        // editメソッドを呼び出して、レスポンスを確認
+        $response = $this->get(route('user.edit', ['memo' => $memo->id]));
+
+        // レスポンスが 'user.memos.edit' ビューを返すことを確認
+        $response->assertStatus(200);
+        $response->assertViewIs('user.memos.edit');
+
+        // ビューに渡されるデータが正しいか確認
+        $response->assertViewHas('all_tags', function ($viewTags) use ($tags) {
+            return $viewTags->pluck('id')->toArray() === $tags->pluck('id')->toArray();
+        });
+        $response->assertViewHas('all_images', function ($viewImages) use ($images) {
+            return $viewImages->pluck('id')->toArray() === $images->pluck('id')->toArray();
+        });
+        $response->assertViewHas('select_memo', function ($viewMemo) use ($memo) {
+            return $viewMemo->id === $memo->id;
+        });
+        $response->assertViewHas('get_memo_tags', function ($viewMemoTags) use ($tags) {
+            return $viewMemoTags === $tags->pluck('id')->toArray();
+        });
+        $response->assertViewHas('get_memo_images_id', function ($viewMemoImagesId) use ($images) {
+            return $viewMemoImagesId === $images->pluck('id')->toArray();
+        });
+        $response->assertViewHas('get_memo_images', function ($viewMemoImages) use ($images) {
+            return collect($viewMemoImages)->pluck('id')->toArray() === $images->pluck('id')->toArray();
+        });
+    }
 }
