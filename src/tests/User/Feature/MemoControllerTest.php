@@ -4,6 +4,7 @@ namespace Tests\User\Feature;
 
 use App\Models\Image;
 use App\Models\Memo;
+use App\Models\ShareSetting;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -176,5 +177,97 @@ class MemoControllerTest extends TestCase
         $response->assertViewHas('get_memo_images', function ($viewMemoImages) use ($images) {
             return collect($viewMemoImages)->pluck('id')->toArray() === $images->pluck('id')->toArray();
         });
+    }
+
+    /**
+     * メモが、正しく更新されることをテスト
+     * @return void
+     */
+    public function testUpdateMemoController()
+    {
+        // ログインユーザーを作成して認証
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        // 既存のメモ、タグ、画像を作成
+        $memo = Memo::factory()->create(['user_id' => $user->id]);
+        $existingTags = Tag::factory()->count(2)->create(['user_id' => $user->id]);
+        $images = Image::factory()->count(2)->create(['user_id' => $user->id]);
+
+        // リクエストデータを作成
+        $requestData = [
+            'memoId' => $memo->id,
+            'title' => '更新テスト、メモ',
+            'content' => '更新テスト、メモ内容',
+            'new_tag' => '更新テスト、新規タグ',
+            'tags' => $existingTags->pluck('id')->toArray(),
+            'images' => $images->pluck('id')->toArray(),
+        ];
+
+        // ブラウザバック対策用のセッション設定
+        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+
+        // メモ更新メソッドを呼び出してレスポンスを確認
+        $response = $this->patch(route('user.update'), $requestData);
+
+        // メモが更新されたことを確認
+        $this->assertDatabaseHas('memos', [
+            'id' => $memo->id, 'title' => '更新テスト、メモ', 'content' => '更新テスト、メモ内容', 'user_id' => $user->id,]);
+
+        // 新規タグが保存されたことを確認
+        $this->assertDatabaseHas('tags', ['name' => '更新テスト、新規タグ', 'user_id' => $user->id,]);
+
+        // 中間テーブルにタグと画像の紐付けが保存されたことを確認
+        foreach ($existingTags as $tag) {
+            $this->assertDatabaseHas('memo_tags', ['memo_id' => $memo->id, 'tag_id' => $tag->id,]);
+        }
+        foreach ($images as $image) {
+            $this->assertDatabaseHas('memo_images', ['memo_id' => $memo->id, 'image_id' => $image->id,]);
+        }
+
+        // レスポンスが正しいリダイレクト先を指していることを確認
+        $response->assertRedirect(route('user.index'));
+        $response->assertSessionHas(['message' => 'メモを更新しました。', 'status' => 'info']);
+    }
+
+    /**
+     * メモが、正しく削除（ソフトデリート）されることをテスト
+     * @return void
+     */
+    public function testDestroyMemoController()
+    {
+        // ログインユーザーを作成して認証
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        // メモ、タグ、画像を作成
+        $memo = Memo::factory()->create(['user_id' => $user->id]);
+        $tags = Tag::factory()->count(2)->create(['user_id' => $user->id]);
+        $images = Image::factory()->count(2)->create(['user_id' => $user->id]);
+
+        // メモにタグと画像を紐付け
+        $memo->tags()->attach($tags->pluck('id')->toArray());
+        $memo->images()->attach($images->pluck('id')->toArray());
+
+        // 共有設定を作成
+        ShareSetting::factory()->count(2)->create(['memo_id' => $memo->id]);
+
+        // リクエストデータを作成
+        $requestData = ['memoId' => $memo->id,];
+
+        // メモ削除メソッドを呼び出してレスポンスを確認
+        $response = $this->delete(route('user.destroy', $memo->id), $requestData);
+
+        // メモがソフトデリートされたことを確認
+        $this->assertSoftDeleted('memos', ['id' => $memo->id]);
+
+        // 共有設定が削除されたことを確認
+        foreach ($memo->shareSettings as $shareSetting) {
+            $this->assertDatabaseMissing('share_settings', ['id' => $shareSetting->id]);
+        }
+
+        // レスポンスが正しいリダイレクト先を指していることを確認
+        $response->assertRedirect(route('user.index'));
+        $response->assertSessionHas(['message' => 'メモをゴミ箱に移動しました。', 'status' => 'alert']);
     }
 }
