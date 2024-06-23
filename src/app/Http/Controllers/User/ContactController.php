@@ -23,7 +23,7 @@ class ContactController extends Controller
     {
         // ブラウザバック対策（値を持たせる）
         SessionService::setBrowserBackSession();
-        
+
         return view('user.contacts.create');
     }
 
@@ -45,11 +45,11 @@ class ContactController extends Controller
                     'user_id' => Auth::id(),
                 ]);
             }, 10);
+
+            return to_route('user.index')->with(['message' => '管理人にメッセージを送りました。', 'status' => 'info']);
         } catch (Throwable $e) {
             Log::error($e);
             throw $e;
         }
-
-        return to_route('user.index')->with(['message' => '管理人にメッセージを送りました。', 'status' => 'info']);
     }
 }
