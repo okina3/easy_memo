@@ -15,19 +15,42 @@ class MemoControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    private User $user;
+
+    /**
+     * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
+     * @return void
+     */
+    public function setUp(): void
+    {
+        // 親クラスのsetUpメソッドを呼び出し
+        parent::setUp();
+        // ログインユーザーを作成し、プロパティに格納
+        $this->user = $this->createUserWithAuthenticatedSession();
+    }
+
+    /**
+     * ログインユーザーを作成し認証済みセッションを開始するヘルパーメソッド
+     * @return User 認証済みのユーザーオブジェクト
+     */
+    public function createUserWithAuthenticatedSession(): User
+    {
+        // ユーザーを作成
+        $user = User::factory()->create();
+        // ユーザーを認証
+        $this->actingAs($user);
+        // 認証済みのユーザーを返す
+        return $user;
+    }
+
     /**
      * constructメソッドが正しく動作することをテスト
      * @return void
      */
     public function testConstructMemoController()
     {
-        // ログインユーザーと別のユーザーを作成
-        $user = User::factory()->create();
+        // 別のユーザーを作成
         $anotherUser = User::factory()->create();
-
-        // ログインユーザーとして認証
-        $this->actingAs($user);
-
         // 別のユーザーのメモを作成
         $anotherUserMemo = Memo::factory()->create(['user_id' => $anotherUser->id]);
 
@@ -42,13 +65,9 @@ class MemoControllerTest extends TestCase
      */
     public function testIndexMemoController()
     {
-        // ログインユーザーを作成して認証
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         // タグとメモを作成
-        $tags = Tag::factory()->count(3)->create(['user_id' => $user->id]);
-        $memos = Memo::factory()->count(5)->create(['user_id' => $user->id]);
+        $tags = Tag::factory()->count(3)->create(['user_id' => $this->user->id]);
+        $memos = Memo::factory()->count(5)->create(['user_id' => $this->user->id]);
 
         // indexメソッドを呼び出して、レスポンスを確認
         $response = $this->get(route('user.index'));
@@ -72,13 +91,9 @@ class MemoControllerTest extends TestCase
      */
     public function testCreateMemoController()
     {
-        // ログインユーザーを作成して認証
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         // タグと画像を作成
-        Tag::factory()->count(5)->create(['user_id' => $user->id]);
-        Image::factory()->count(3)->create(['user_id' => $user->id]);
+        Tag::factory()->count(5)->create(['user_id' => $this->user->id]);
+        Image::factory()->count(3)->create(['user_id' => $this->user->id]);
 
         // createメソッドを呼び出して、レスポンスを確認
         $response = $this->get(route('user.create'));
@@ -88,11 +103,11 @@ class MemoControllerTest extends TestCase
         $response->assertViewIs('user.memos.create');
 
         // ビューに渡されるデータが正しいか確認
-        $response->assertViewHas('all_tags', function ($tags) use ($user) {
-            return $tags->count() === 5 && $tags->first()->user_id === $user->id;
+        $response->assertViewHas('all_tags', function ($tags) {
+            return $tags->count() === 5 && $tags->first()->user_id === $this->user->id;
         });
-        $response->assertViewHas('all_images', function ($images) use ($user) {
-            return $images->count() === 3 && $images->first()->user_id === $user->id;
+        $response->assertViewHas('all_images', function ($images) {
+            return $images->count() === 3 && $images->first()->user_id === $this->user->id;
         });
     }
 
@@ -102,14 +117,10 @@ class MemoControllerTest extends TestCase
      */
     public function testStoreMemoController()
     {
-        // ログインユーザーを作成して認証
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         // 新規タグと既存タグ、画像を作成
         $newTag = 'テスト、新規タグ';
-        $existingTags = Tag::factory()->count(2)->create(['user_id' => $user->id]);
-        $images = Image::factory()->count(2)->create(['user_id' => $user->id]);
+        $existingTags = Tag::factory()->count(2)->create(['user_id' => $this->user->id]);
+        $images = Image::factory()->count(2)->create(['user_id' => $this->user->id]);
 
         // リクエストデータを作成
         $requestData = [
@@ -127,18 +138,22 @@ class MemoControllerTest extends TestCase
         $response = $this->post(route('user.store'), $requestData);
 
         // メモが保存されたことを確認
-        $this->assertDatabaseHas('memos', ['title' => 'テスト、メモ', 'content' => 'テスト、メモ内容', 'user_id' => $user->id,]);
+        $this->assertDatabaseHas('memos', [
+            'title' => 'テスト、メモ',
+            'content' => 'テスト、メモ内容',
+            'user_id' => $this->user->id,
+        ]);
 
         // 新規タグが保存されたことを確認
-        $this->assertDatabaseHas('tags', ['name' => 'テスト、新規タグ', 'user_id' => $user->id,]);
+        $this->assertDatabaseHas('tags', ['name' => 'テスト、新規タグ', 'user_id' => $this->user->id]);
 
         // 中間テーブルにタグと画像の紐付けが保存されたことを確認
         $memo = Memo::where('title', 'テスト、メモ')->first();
         foreach ($existingTags as $tag) {
-            $this->assertDatabaseHas('memo_tags', ['memo_id' => $memo->id, 'tag_id' => $tag->id,]);
+            $this->assertDatabaseHas('memo_tags', ['memo_id' => $memo->id, 'tag_id' => $tag->id]);
         }
         foreach ($images as $image) {
-            $this->assertDatabaseHas('memo_images', ['memo_id' => $memo->id, 'image_id' => $image->id,]);
+            $this->assertDatabaseHas('memo_images', ['memo_id' => $memo->id, 'image_id' => $image->id]);
         }
 
         // レスポンスが正しいリダイレクト先を指していることを確認
@@ -152,14 +167,10 @@ class MemoControllerTest extends TestCase
      */
     public function testShowMemoController()
     {
-        // ログインユーザーを作成して認証
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         // メモ、タグ、画像、共有設定を作成
-        $memo = Memo::factory()->create(['user_id' => $user->id]);
-        $tags = Tag::factory()->count(3)->create(['user_id' => $user->id]);
-        $images = Image::factory()->count(2)->create(['user_id' => $user->id]);
+        $memo = Memo::factory()->create(['user_id' => $this->user->id]);
+        $tags = Tag::factory()->count(3)->create(['user_id' => $this->user->id]);
+        $images = Image::factory()->count(2)->create(['user_id' => $this->user->id]);
         $memo->tags()->attach($tags);
         $memo->images()->attach($images);
 
@@ -189,15 +200,10 @@ class MemoControllerTest extends TestCase
      */
     public function testEditMemoController()
     {
-        // ログインユーザーを作成して認証
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         // タグと画像、メモを作成
-        $tags = Tag::factory()->count(5)->create(['user_id' => $user->id]);
-        $images = Image::factory()->count(3)->create(['user_id' => $user->id]);
-        $memo = Memo::factory()->create(['user_id' => $user->id]);
-
+        $tags = Tag::factory()->count(5)->create(['user_id' => $this->user->id]);
+        $images = Image::factory()->count(3)->create(['user_id' => $this->user->id]);
+        $memo = Memo::factory()->create(['user_id' => $this->user->id]);
         // メモにタグと画像を関連付け
         $memo->tags()->attach($tags->pluck('id')->toArray());
         $memo->images()->attach($images->pluck('id')->toArray());
@@ -237,13 +243,11 @@ class MemoControllerTest extends TestCase
     public function testUpdateMemoController()
     {
         // ログインユーザーを作成して認証
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $memo = Memo::factory()->create(['user_id' => $this->user->id]);
 
-        // 既存のメモ、タグ、画像を作成
-        $memo = Memo::factory()->create(['user_id' => $user->id]);
-        $existingTags = Tag::factory()->count(2)->create(['user_id' => $user->id]);
-        $images = Image::factory()->count(2)->create(['user_id' => $user->id]);
+        // 既存のタグ、画像を作成
+        $existingTags = Tag::factory()->count(2)->create(['user_id' => $this->user->id]);
+        $images = Image::factory()->count(2)->create(['user_id' => $this->user->id]);
 
         // リクエストデータを作成
         $requestData = [
@@ -263,17 +267,21 @@ class MemoControllerTest extends TestCase
 
         // メモが更新されたことを確認
         $this->assertDatabaseHas('memos', [
-            'id' => $memo->id, 'title' => '更新テスト、メモ', 'content' => '更新テスト、メモ内容', 'user_id' => $user->id,]);
+            'id' => $memo->id,
+            'title' => '更新テスト、メモ',
+            'content' => '更新テスト、メモ内容',
+            'user_id' => $this->user->id,
+        ]);
 
         // 新規タグが保存されたことを確認
-        $this->assertDatabaseHas('tags', ['name' => '更新テスト、新規タグ', 'user_id' => $user->id,]);
+        $this->assertDatabaseHas('tags', ['name' => '更新テスト、新規タグ', 'user_id' => $this->user->id]);
 
         // 中間テーブルにタグと画像の紐付けが保存されたことを確認
         foreach ($existingTags as $tag) {
-            $this->assertDatabaseHas('memo_tags', ['memo_id' => $memo->id, 'tag_id' => $tag->id,]);
+            $this->assertDatabaseHas('memo_tags', ['memo_id' => $memo->id, 'tag_id' => $tag->id]);
         }
         foreach ($images as $image) {
-            $this->assertDatabaseHas('memo_images', ['memo_id' => $memo->id, 'image_id' => $image->id,]);
+            $this->assertDatabaseHas('memo_images', ['memo_id' => $memo->id, 'image_id' => $image->id]);
         }
 
         // レスポンスが正しいリダイレクト先を指していることを確認
@@ -287,24 +295,18 @@ class MemoControllerTest extends TestCase
      */
     public function testDestroyMemoController()
     {
-        // ログインユーザーを作成して認証
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         // メモ、タグ、画像を作成
-        $memo = Memo::factory()->create(['user_id' => $user->id]);
-        $tags = Tag::factory()->count(2)->create(['user_id' => $user->id]);
-        $images = Image::factory()->count(2)->create(['user_id' => $user->id]);
-
+        $memo = Memo::factory()->create(['user_id' => $this->user->id]);
+        $tags = Tag::factory()->count(2)->create(['user_id' => $this->user->id]);
+        $images = Image::factory()->count(2)->create(['user_id' => $this->user->id]);
         // メモにタグと画像を紐付け
         $memo->tags()->attach($tags->pluck('id')->toArray());
         $memo->images()->attach($images->pluck('id')->toArray());
-
         // 共有設定を作成
         ShareSetting::factory()->count(2)->create(['memo_id' => $memo->id]);
 
         // リクエストデータを作成
-        $requestData = ['memoId' => $memo->id,];
+        $requestData = ['memoId' => $memo->id];
 
         // メモ削除メソッドを呼び出してレスポンスを確認
         $response = $this->delete(route('user.destroy', $memo->id), $requestData);
