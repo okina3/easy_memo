@@ -16,6 +16,57 @@ class MemoControllerTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * constructメソッドが正しく動作することをテスト
+     * @return void
+     */
+    public function testConstructMemoController()
+    {
+        // ログインユーザーと別のユーザーを作成
+        $user = User::factory()->create();
+        $anotherUser = User::factory()->create();
+
+        // ログインユーザーとして認証
+        $this->actingAs($user);
+
+        // 別のユーザーのメモを作成
+        $anotherUserMemo = Memo::factory()->create(['user_id' => $anotherUser->id]);
+
+        // constructメソッドが正しく動作して、別のユーザーのメモにアクセスできないことを確認
+        $response = $this->get(route('user.show', $anotherUserMemo->id));
+        $response->assertStatus(404);
+    }
+
+    /**
+     * メモとタグの一覧が正しく表示されることをテスト
+     * @return void
+     */
+    public function testIndexMemoController()
+    {
+        // ログインユーザーを作成して認証
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        // タグとメモを作成
+        $tags = Tag::factory()->count(3)->create(['user_id' => $user->id]);
+        $memos = Memo::factory()->count(5)->create(['user_id' => $user->id]);
+
+        // indexメソッドを呼び出して、レスポンスを確認
+        $response = $this->get(route('user.index'));
+
+        // レスポンスが 'user.memos.index' ビューを返すことを確認
+        $response->assertStatus(200);
+        $response->assertViewIs('user.memos.index');
+
+        // ビューに渡されるデータが正しいか確認
+        $response->assertViewHas('all_memos', function ($viewMemos) use ($memos) {
+            return $viewMemos->count() === 5 && $viewMemos->first()->user_id === $memos->first()->user_id;
+        });
+        $response->assertViewHas('all_tags', function ($viewTags) use ($tags) {
+            return $viewTags->count() === 3 && $viewTags->first()->user_id === $tags->first()->user_id;
+        });
+    }
+
+    /**
      * メモの新規作成画面が、正しく表示されることをテスト
      * @return void
      */

@@ -58,18 +58,31 @@ class MemoServiceTest extends TestCase
     }
 
     /**
-     * 他のユーザーのメモへのアクセスを試みた場合に404エラーが発生することを確認
+     * checkUserMemoメソッドのテスト。
      * @return void
      */
     public function testCheckUserMemoWithOthersMemo()
     {
         // 特定のメモIDを持つリクエストを作成
-        $request = Request::create('/memos/' . $this->otherUserMemo->id);
+        $request = Request::create('/memos/' . $this->memo->id);
         $request->setRouteResolver(function () use ($request) {
-            return (new Route('GET', '/memos/{memo}', []))->bind($request, ['memo' => $this->otherUserMemo->id]);
+            return (new Route('GET', '/memos/{memo}', []))->bind($request, ['memo' => $this->memo->id]);
         });
 
-        // 他のユーザーのメモへのアクセスで404エラーが発生することを期待
+        // 正常なユーザーの場合、例外は発生しない
+        MemoService::checkUserMemo($request);
+
+        // 異常なユーザーの場合、404エラーが発生することを確認
+        $anotherUser = User::factory()->create();
+        $anotherMemo = Memo::factory()->create(['user_id' => $anotherUser->id]);
+
+        // 特定のメモIDを持つリクエストを作成（異常なユーザーの場合）
+        $request = Request::create('/memos/' . $anotherMemo->id);
+        $request->setRouteResolver(function () use ($request, $anotherMemo) {
+            return (new Route('GET', '/memos/{memo}', []))->bind($request, ['memo' => $anotherMemo->id]);
+        });
+
+        // 異常なユーザーのメモアクセスは404エラーを発生させる
         $this->expectException(NotFoundHttpException::class);
         MemoService::checkUserMemo($request);
     }
