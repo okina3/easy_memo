@@ -8,7 +8,6 @@ use App\Models\Contact;
 use App\Services\SessionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
@@ -39,11 +38,7 @@ class ContactController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // 問い合わせ情報を保存
-                Contact::create([
-                    'subject' => $request->subject,
-                    'message' => $request->message,
-                    'user_id' => Auth::id(),
-                ]);
+                Contact::availableCreateContact($request);
             }, 10);
 
             return to_route('user.index')->with(['message' => '管理人にメッセージを送りました。', 'status' => 'info']);
