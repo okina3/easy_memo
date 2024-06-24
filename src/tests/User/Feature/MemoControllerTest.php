@@ -21,7 +21,7 @@ class MemoControllerTest extends TestCase
      * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
@@ -33,7 +33,7 @@ class MemoControllerTest extends TestCase
      * ログインユーザーを作成し認証済みセッションを開始するヘルパーメソッド
      * @return User 認証済みのユーザーオブジェクト
      */
-    public function createUserWithAuthenticatedSession(): User
+    private function createUserWithAuthenticatedSession(): User
     {
         // ユーザーを作成
         $user = User::factory()->create();

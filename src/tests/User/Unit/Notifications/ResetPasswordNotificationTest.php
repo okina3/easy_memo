@@ -9,7 +9,7 @@ use Tests\User\TestCase;
 class ResetPasswordNotificationTest extends TestCase
 {
     /**
-     * メールメッセージの内容をテストするメソッド。
+     * メールメッセージの内容をテスト。
      *
      * @return void
      */

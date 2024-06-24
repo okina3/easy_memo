@@ -18,7 +18,7 @@ class ContactRequestTest extends TestCase
      *
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // ContactRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化

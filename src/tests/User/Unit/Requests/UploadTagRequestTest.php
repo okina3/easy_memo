@@ -18,7 +18,7 @@ class UploadTagRequestTest extends TestCase
      *
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // UploadTagRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化

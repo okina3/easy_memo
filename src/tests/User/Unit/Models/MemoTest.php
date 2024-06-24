@@ -22,10 +22,10 @@ class MemoTest extends TestCase
     private ShareSetting $shareSetting;
 
     /**
-     * テスト前の初期設定
+     * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // テスト用ユーザー、メモ、タグ、画像、共有設定を作成

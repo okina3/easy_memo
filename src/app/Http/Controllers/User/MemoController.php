@@ -62,7 +62,6 @@ class MemoController extends Controller
         $all_images = Image::availableAllImages()->get();
         // ブラウザバック対策（値を持たせる）
         SessionService::setBrowserBackSession();
-        // session()->flash('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
 
         return view('user.memos.create', compact('all_tags', 'all_images'));
     }
