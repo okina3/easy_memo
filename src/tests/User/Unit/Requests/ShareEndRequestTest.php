@@ -20,7 +20,7 @@ class ShareEndRequestTest extends TestCase
      *
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // ShareEndRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化

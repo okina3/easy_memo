@@ -24,22 +24,22 @@ class UserServiceTest extends TestCase
     private ShareSetting $otherUserShareSetting;
 
     /**
-     * テスト前の初期設定
+     * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // ３人のテスト用のユーザーを生成
         $this->user = User::factory()->create();
         $this->anotherUser = User::factory()->create();
         $this->otherUser = User::factory()->create();
-        
+
         // ３人のテスト用のメモを生成
         $this->memo = Memo::factory()->create(['user_id' => $this->user->id]);
         $this->anotherMemo = Memo::factory()->create(['user_id' => $this->anotherUser->id]);
         $this->otherMemo = Memo::factory()->create(['user_id' => $this->otherUser->id]);
-        
+
         // ３人のテスト用の共有設定を生成
         // userは、anotherUserに、メモを共有
         $this->userShareSetting = ShareSetting::factory()->create([

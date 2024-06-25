@@ -21,11 +21,11 @@ class ImageServiceTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected User $user;
-    protected Image $image;
+    private User $user;
+    private Image $image;
 
     /**
-     * テスト前の初期設定
+     * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
      */
     protected function setUp(): void
     {

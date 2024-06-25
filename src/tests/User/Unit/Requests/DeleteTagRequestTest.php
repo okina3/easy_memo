@@ -18,7 +18,7 @@ class DeleteTagRequestTest extends TestCase
      *
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // DeleteTagRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化

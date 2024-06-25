@@ -18,7 +18,7 @@ class UploadMemoRequestTest extends TestCase
      *
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // UploadMemoRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化

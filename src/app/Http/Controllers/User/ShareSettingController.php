@@ -35,7 +35,7 @@ class ShareSettingController extends Controller
         // パラメーターから、全ての共有メモ、ユーザー別の共有メモを、切り分ける。
         $shared_memos = ShareSettingService::searchSharedMemos($share_setting_memos);
         // メモを共有しているユーザー名を取得する。
-        $shared_users = ShareSettingService::searchSharedUserName($share_setting_memos);
+        $shared_users = ShareSettingService::searchSharedUser($share_setting_memos);
 
         return view('user.shareSettings.index', compact('shared_memos', 'shared_users'));
     }

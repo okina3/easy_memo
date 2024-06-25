@@ -28,10 +28,10 @@ class MemoServiceTest extends TestCase
     private Memo $otherUserMemo;
 
     /**
-     * テスト前の初期設定
+     * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // ２人のテスト用のユーザーを生成
