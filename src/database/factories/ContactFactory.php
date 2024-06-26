@@ -20,7 +20,7 @@ class ContactFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'subject' => $this->faker->sentence,
+            'subject' => $this->faker->word,
             'message' => $this->faker->paragraph
         ];
     }
