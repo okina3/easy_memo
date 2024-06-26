@@ -28,7 +28,7 @@ class UsersController extends Controller
     }
 
     /**
-     * ユーザーのサービス利用を停止するメソッド。
+     * ユーザーのサービス利用を停止（ソフトデリート）するメソッド。
      * @param Request $request
      * @return RedirectResponse
      * @throws Throwable
