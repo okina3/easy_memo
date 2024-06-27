@@ -24,11 +24,11 @@ class TrashedContactControllerTest extends TestCase
         // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
         // 管理者ユーザーを作成
-        $this->admin = Admin::factory()->create();
+        $admin = Admin::factory()->create();
         // ユーザーを作成
         $this->user = User::factory()->create();
         // 管理者ユーザーを認証
-        $this->actingAs($this->admin, 'admin');
+        $this->actingAs($admin, 'admin');
     }
 
     /**
@@ -48,7 +48,7 @@ class TrashedContactControllerTest extends TestCase
      */
     public function testIndexTrashedContactController()
     {
-        // ソフトデリートされた問い合わせを作成
+        // 3件のソフトデリートされた問い合わせを作成
         $contacts = $this->createTrashedContacts(3);
 
         // indexメソッドを呼び出して、レスポンスを確認
@@ -60,6 +60,7 @@ class TrashedContactControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_trashed_contacts', function ($viewContacts) use ($contacts) {
+            // ビューの問い合わせ数が3であり、かつ、ビューの問い合わせと作成した問い合わせの、最初のIDが一致することを確認
             return $viewContacts->count() === 3 && $viewContacts->first()->id === $contacts->first()->id;
         });
     }
