@@ -13,7 +13,6 @@ class ContactControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    private Admin $admin;
     private User $user;
 
     /**
@@ -25,11 +24,11 @@ class ContactControllerTest extends TestCase
         // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
         // 管理者ユーザーを作成
-        $this->admin = Admin::factory()->create();
+        $admin = Admin::factory()->create();
         // ユーザーを作成
         $this->user = User::factory()->create();
         // 管理者ユーザーを認証
-        $this->actingAs($this->admin, 'admin');
+        $this->actingAs($admin, 'admin');
     }
 
     /**
@@ -44,34 +43,36 @@ class ContactControllerTest extends TestCase
     }
 
     /**
-     * 問い合わせが、キーワードに基づいて正しくフィルタリングされるか確認するヘルパーメソッド
-     * @param mixed $viewContacts ビューに渡された問い合わせのデータ
-     * @param Collection $contacts 作成された問い合わせのコレクション
-     * @param string $keyword 検索キーワード
-     * @return bool ビューの問い合わせがキーワードに基づいて正しくフィルタリングされているかどうか
+     * 全ての問い合わせの一覧表示が正しく行われることをテスト
+     * @return void
      */
-    private function assertContactsMatch(mixed $viewContacts, Collection $contacts, string $keyword): bool
+    public function testIndexContactAllController()
     {
-        // ビューから取得した問い合わせをコレクションに変換
-        $viewContacts = collect($viewContacts);
+        // 3件の問い合わせを作成
+        $contacts = $this->createContacts(3);
 
-        // キーワードで問い合わせをフィルタリング
-        $filteredContacts = $contacts->filter(function ($contact) use ($keyword) {
-            return stripos($contact->subject, $keyword) !== false || stripos($contact->message, $keyword) !== false;
+        // 全問い合わせを表示する為に、リクエストを送信
+        $response = $this->get(route('admin.contact.index'));
+
+        // レスポンスが正しいビューを返すことを確認
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.contacts.index');
+
+        // ビューに渡されるデータが正しいか確認
+        $response->assertViewHas('all_contact', function ($viewContacts) use ($contacts) {
+            // ビューの問い合わせ数が3であり、かつ、ビューの問い合わせと作成した問い合わせの、最初のIDが一致することを確認
+            return $viewContacts->count() === 3 && $viewContacts->first()->id === $contacts->first()->id;
         });
-        // フィルタリングされた問い合わせの数とIDが、ビューの問い合わせと一致するかを確認
-        return $viewContacts->count() === $filteredContacts->count() &&
-            $viewContacts->pluck('id')->sort()->values()->all() === $filteredContacts->pluck('id')->sort()->values()->all();
     }
 
     /**
-     * 問い合わせの一覧表示が正しく行われることをテスト
+     * 絞り込んだ問い合わせの一覧表示が正しく行われることをテスト
      * @return void
      */
-    public function testIndexContactController()
+    public function testIndexContactSearchController()
     {
-        // 5件の問い合わせを作成
-        $contacts = $this->createContacts(5);
+        // 3件の問い合わせを作成
+        $contacts = $this->createContacts(3);
 
         // 最初の問い合わせの件名をキーワードとして設定
         $keyword = $contacts->first()->subject;
@@ -84,7 +85,16 @@ class ContactControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_contact', function ($viewContacts) use ($contacts, $keyword) {
-            return $this->assertContactsMatch($viewContacts, $contacts, $keyword);
+            // ビューから取得した問い合わせをコレクションに変換
+            $viewContacts = collect($viewContacts);
+
+            // キーワードで、件名と内容から、問い合わせを絞り込み
+            $filteredContacts = $contacts->filter(function ($contacts) use ($keyword) {
+                return stripos($contacts->subject, $keyword) !== false || stripos($contacts->message, $keyword) !== false;
+            });
+            // 絞り込まれた問い合わせの数とIDが、ビューの問い合わせと一致するかを確認
+            return $viewContacts->count() === $filteredContacts->count() &&
+                $viewContacts->pluck('id')->sort()->values()->all() === $filteredContacts->pluck('id')->sort()->values()->all();
         });
     }
 
