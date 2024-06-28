@@ -24,9 +24,7 @@ class WarningUsersControllerTest extends TestCase
         parent::setUp();
         // 管理者ユーザーを作成
         $admin = Admin::factory()->create();
-        // ユーザーを作成
-        $this->user = User::factory()->create();
-        // 管理者ユーザーを認証
+        // 管理者を認証
         $this->actingAs($admin, 'admin');
     }
 
@@ -45,9 +43,9 @@ class WarningUsersControllerTest extends TestCase
      * 全てのソフトデリートしたユーザー一覧が正しく表示されることをテスト
      * @return void
      */
-    public function testIndexWarningUsersAllController()
+    public function testAllIndexWarningUsersController()
     {
-        // ソフトデリートされたユーザーを作成
+        // 3件のソフトデリートされたユーザーを作成
         $users = $this->createTrashedUsers(3);
 
         // 全ユーザーを表示する為に、リクエストを送信
@@ -59,7 +57,7 @@ class WarningUsersControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_warning_users', function ($viewUsers) use ($users) {
-            // ビューのユーザー数が3であること、かつ、ビューのユーザーの最初のIDが、作成したユーザーの最初のIDと一致することを確認
+            // ビューのユーザー数が3であり、かつ、ビューのユーザーと作成したユーザーの、最初のIDが一致することを確認
             return $viewUsers->count() === 3 && $viewUsers->first()->id === $users->first()->id;
         });
     }
@@ -68,9 +66,9 @@ class WarningUsersControllerTest extends TestCase
      * 絞り込んだソフトデリートしたユーザー一覧が正しく表示されることをテスト
      * @return void
      */
-    public function testIndexWarningUsersSearchController()
+    public function testSearchIndexWarningUsersController()
     {
-        // ソフトデリートされたユーザーを作成
+        // 3件のソフトデリートされたユーザーを作成
         $users = $this->createTrashedUsers(3);
 
         // 最初のユーザーのメールアドレスをキーワードとして設定
@@ -87,7 +85,6 @@ class WarningUsersControllerTest extends TestCase
         $response->assertViewHas('all_warning_users', function ($viewUsers) use ($users, $keyword) {
             // ビューから取得したユーザーをコレクションに変換
             $viewUsers = collect($viewUsers);
-
             // キーワード（メールアドレス）でユーザーを絞り込み
             $filteredUsers = $users->filter(function ($users) use ($keyword) {
                 return stripos($users->email, $keyword) !== false;
@@ -116,7 +113,7 @@ class WarningUsersControllerTest extends TestCase
             'deleted_at' => null,
         ]);
 
-        // レスポンスが正しいリダイレクト先を指していることを確認
+        // レスポンスが 'admin.warning.index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('admin.warning.index'));
         $response->assertSessionHas(['message' => 'ユーザーのサービス利用を再開しました', 'status' => 'info']);
     }
@@ -136,7 +133,7 @@ class WarningUsersControllerTest extends TestCase
         // ユーザーが完全に削除されたことを確認
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
 
-        // レスポンスが正しいリダイレクト先を指していることを確認
+        // レスポンスが 'admin.warning.index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('admin.warning.index'));
         $response->assertSessionHas(['message' => 'ユーザーの情報を完全に削除しました。', 'status' => 'alert']);
     }
