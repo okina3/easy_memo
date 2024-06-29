@@ -61,7 +61,7 @@ class UsersControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_users', function ($viewUsers) use ($users) {
-            // ビューのユーザー数が3であり、かつ、ビューのユーザーと作成したユーザーの、最初のIDが一致することを確認
+            // ビューで取得したユーザー数が3であり、かつ、ビューで取得したユーザーと作成したユーザーの、最初のIDが一致することを確認
             return $viewUsers->count() === 3 && $viewUsers->first()->id === $users->first()->id;
         });
     }
@@ -93,7 +93,7 @@ class UsersControllerTest extends TestCase
             $filteredUsers = $users->filter(function ($users) use ($keyword) {
                 return stripos($users->email, $keyword) !== false;
             });
-            // 絞り込まれたユーザーの数とIDが、ビューのユーザーと一致するかを確認
+            // 絞り込まれたユーザーの数とIDが、ビューで取得したユーザーと一致するかを確認
             return $viewUsers->count() === $filteredUsers->count() &&
                 $viewUsers->pluck('id')->sort()->values()->all() === $filteredUsers->pluck('id')->sort()->values()->all();
         });

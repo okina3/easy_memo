@@ -51,7 +51,7 @@ class TrashedContactControllerTest extends TestCase
         // 3件のソフトデリートされた問い合わせを作成
         $contacts = $this->createTrashedContacts(3);
 
-        // indexメソッドを呼び出して、レスポンスを確認
+        // 全てのソフトデリートされた問い合わせを表示する為に、リクエストを送信
         $response = $this->get(route('admin.trashed-contact.index'));
 
         // レスポンスが 'admin.trashedContacts.index' ビューを返すことを確認
@@ -60,7 +60,7 @@ class TrashedContactControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_trashed_contacts', function ($viewContacts) use ($contacts) {
-            // ビューの問い合わせ数が3であり、かつ、ビューの問い合わせと作成した問い合わせの、最初のIDが一致することを確認
+            // ビューで取得した問い合わせ数が3であり、かつ、ビューで取得した問い合わせと作成した問い合わせの、最初のIDが一致することを確認
             return $viewContacts->count() === 3 && $viewContacts->first()->id === $contacts->first()->id;
         });
     }
@@ -71,10 +71,10 @@ class TrashedContactControllerTest extends TestCase
      */
     public function testUndoTrashedContactController()
     {
-        // ソフトデリートされた問い合わせを作成
+        // 1件のソフトデリートされた問い合わせを作成
         $contact = $this->createTrashedContacts(1)->first();
 
-        // undoメソッドを呼び出してレスポンスを確認
+        // ソフトデリートした問い合わせを、元に戻すリクエストを送信
         $response = $this->patch(route('admin.trashed-contact.undo'), ['contentId' => $contact->id]);
 
         // 問い合わせが元に戻されたことを確認
@@ -83,7 +83,7 @@ class TrashedContactControllerTest extends TestCase
             'deleted_at' => null,
         ]);
 
-        // レスポンスが正しいリダイレクト先を指していることを確認
+        // レスポンスが 'admin.trashed-contact.index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('admin.trashed-contact.index'));
         $response->assertSessionHas(['message' => 'ユーザーの問い合わせを、元に戻しました。', 'status' => 'info']);
     }
@@ -94,16 +94,16 @@ class TrashedContactControllerTest extends TestCase
      */
     public function testDestroyTrashedContactController()
     {
-        // ソフトデリートされた問い合わせを作成
+        // 1件のソフトデリートされた問い合わせを作成
         $contact = $this->createTrashedContacts(1)->first();
 
-        // destroyメソッドを呼び出してレスポンスを確認
+        // ソフトデリートした問い合わせを、完全に削除するリクエストを送信
         $response = $this->delete(route('admin.trashed-contact.destroy'), ['contentId' => $contact->id]);
 
         // 問い合わせが完全に削除されたことを確認
         $this->assertDatabaseMissing('contacts', ['id' => $contact->id]);
 
-        // レスポンスが正しいリダイレクト先を指していることを確認
+        // レスポンスが 'admin.trashed-contact.index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('admin.trashed-contact.index'));
         $response->assertSessionHas(['message' => 'ユーザーの問い合わせを、完全に削除しました。', 'status' => 'alert']);
     }

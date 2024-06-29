@@ -46,7 +46,7 @@ class ContactControllerTest extends TestCase
      * 全ての問い合わせの一覧表示が正しく行われることをテスト
      * @return void
      */
-    public function testIndexContactAllController()
+    public function testAllIndexContactController()
     {
         // 3件の問い合わせを作成
         $contacts = $this->createContacts(3);
@@ -54,13 +54,13 @@ class ContactControllerTest extends TestCase
         // 全問い合わせを表示する為に、リクエストを送信
         $response = $this->get(route('admin.contact.index'));
 
-        // レスポンスが正しいビューを返すことを確認
+        // レスポンスが 'admin.contacts.index' ビューを返すことを確認
         $response->assertStatus(200);
         $response->assertViewIs('admin.contacts.index');
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_contact', function ($viewContacts) use ($contacts) {
-            // ビューの問い合わせ数が3であり、かつ、ビューの問い合わせと作成した問い合わせの、最初のIDが一致することを確認
+            // ビューで取得した問い合わせ数が3であり、かつ、ビューで取得した問い合わせと作成した問い合わせの、最初のIDが一致することを確認
             return $viewContacts->count() === 3 && $viewContacts->first()->id === $contacts->first()->id;
         });
     }
@@ -69,17 +69,18 @@ class ContactControllerTest extends TestCase
      * 絞り込んだ問い合わせの一覧表示が正しく行われることをテスト
      * @return void
      */
-    public function testIndexContactSearchController()
+    public function testSearchIndexContactController()
     {
         // 3件の問い合わせを作成
         $contacts = $this->createContacts(3);
 
         // 最初の問い合わせの件名をキーワードとして設定
         $keyword = $contacts->first()->subject;
+
         // 問い合わせ一覧表示のリクエストを送信
         $response = $this->get(route('admin.contact.index', ['keyword' => $keyword]));
 
-        // レスポンスが正しいビューを返すことを確認
+        // レスポンスが 'admin.contacts.index' ビューを返すことを確認
         $response->assertStatus(200);
         $response->assertViewIs('admin.contacts.index');
 
@@ -87,12 +88,11 @@ class ContactControllerTest extends TestCase
         $response->assertViewHas('all_contact', function ($viewContacts) use ($contacts, $keyword) {
             // ビューから取得した問い合わせをコレクションに変換
             $viewContacts = collect($viewContacts);
-
             // キーワードで、件名と内容から、問い合わせを絞り込み
             $filteredContacts = $contacts->filter(function ($contacts) use ($keyword) {
                 return stripos($contacts->subject, $keyword) !== false || stripos($contacts->message, $keyword) !== false;
             });
-            // 絞り込まれた問い合わせの数とIDが、ビューの問い合わせと一致するかを確認
+            // 絞り込まれた問い合わせの数とIDが、ビューで取得した問い合わせと一致するかを確認
             return $viewContacts->count() === $filteredContacts->count() &&
                 $viewContacts->pluck('id')->sort()->values()->all() === $filteredContacts->pluck('id')->sort()->values()->all();
         });
@@ -104,18 +104,19 @@ class ContactControllerTest extends TestCase
      */
     public function testShowContactController()
     {
-        // 問い合わせを1件作成
+        // 1件の問い合わせを作成
         $contact = $this->createContacts(1)->first();
 
         // 問い合わせ詳細表示のリクエストを送信
         $response = $this->get(route('admin.contact.show', $contact->id));
 
-        // レスポンスが正しいビューを返すことを確認
+        // レスポンスが 'admin.contacts.show' ビューを返すことを確認
         $response->assertStatus(200);
         $response->assertViewIs('admin.contacts.show');
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('select_contact', function ($viewContact) use ($contact) {
+            // ビューで取得した問い合わせデータのIDが、作成した問い合わせデータのIDと一致することを確認
             return $viewContact->id === $contact->id;
         });
     }
@@ -126,7 +127,7 @@ class ContactControllerTest extends TestCase
      */
     public function testDestroyContactController()
     {
-        // 問い合わせを1件作成
+        // 1件の問い合わせを作成
         $contact = $this->createContacts(1)->first();
 
         // 問い合わせ削除のリクエストを送信
@@ -135,7 +136,7 @@ class ContactControllerTest extends TestCase
         // 問い合わせがソフトデリートされたことを確認
         $this->assertSoftDeleted('contacts', ['id' => $contact->id]);
 
-        // レスポンスが正しいリダイレクト先を指していることを確認
+        // レスポンスが 'admin.contact.index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('admin.contact.index'));
         $response->assertSessionHas(['message' => 'ユーザーの問い合わせをゴミ箱に移動しました。', 'status' => 'alert']);
     }

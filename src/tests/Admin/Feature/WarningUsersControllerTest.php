@@ -57,7 +57,7 @@ class WarningUsersControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_warning_users', function ($viewUsers) use ($users) {
-            // ビューのユーザー数が3であり、かつ、ビューのユーザーと作成したユーザーの、最初のIDが一致することを確認
+            // ビューで取得したユーザー数が3であり、かつ、ビューで取得したユーザーと作成したユーザーの、最初のIDが一致することを確認
             return $viewUsers->count() === 3 && $viewUsers->first()->id === $users->first()->id;
         });
     }
@@ -89,7 +89,7 @@ class WarningUsersControllerTest extends TestCase
             $filteredUsers = $users->filter(function ($users) use ($keyword) {
                 return stripos($users->email, $keyword) !== false;
             });
-            // 絞り込まれたユーザーの数とIDが、ビューのユーザーと一致するかを確認
+            // 絞り込まれたユーザーの数とIDが、ビューで取得したユーザーと一致するかを確認
             return $viewUsers->count() === $filteredUsers->count() &&
                 $viewUsers->pluck('id')->sort()->values()->all() === $filteredUsers->pluck('id')->sort()->values()->all();
         });
@@ -101,10 +101,10 @@ class WarningUsersControllerTest extends TestCase
      */
     public function testUndoWarningUsersController()
     {
-        // ソフトデリートされたユーザーを作成
+        // 1件のソフトデリートされたユーザーを作成
         $user = $this->createTrashedUsers(1)->first();
 
-        // undoメソッドを呼び出してレスポンスを確認
+        // ソフトデリートしたユーザーを、元に戻すリクエストを送信
         $response = $this->patch(route('admin.warning.undo'), ['userId' => $user->id]);
 
         // ユーザーが元に戻されたことを確認
@@ -124,10 +124,10 @@ class WarningUsersControllerTest extends TestCase
      */
     public function testDestroyWarningUsersController()
     {
-        // ソフトデリートされたユーザーを作成
+        // 1件のソフトデリートされたユーザーを作成
         $user = $this->createTrashedUsers(1)->first();
 
-        // destroyメソッドを呼び出してレスポンスを確認
+        // ソフトデリートしたユーザーを、完全に削除するリクエストを送信
         $response = $this->delete(route('admin.warning.destroy'), ['userId' => $user->id]);
 
         // ユーザーが完全に削除されたことを確認
