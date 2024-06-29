@@ -44,7 +44,7 @@ class ShareSettingControllerTest extends TestCase
     }
 
     /**
-     * 共有メモを作成するヘルパーメソッド
+     * 自分に共有されているメモを作成するヘルパーメソッド
      * @param User $sharingUser 共有元のユーザー
      * @param int $memoCount 作成するメモの数
      * @return Collection 作成されたメモのコレクション
@@ -59,6 +59,8 @@ class ShareSettingControllerTest extends TestCase
             ShareSetting::factory()->create([
                 'sharing_user_id' => $this->user->id,
                 'memo_id' => $memo->id,
+                // 'edit_access' => false
+                'edit_access' => true
             ]);
         }
 
@@ -96,8 +98,8 @@ class ShareSettingControllerTest extends TestCase
         // 他のユーザーを作成
         $otherUsers = User::factory()->count(5)->create();
         // 自分に共有されている他人のメモを作成
-        $otherUserMemos = $otherUsers->flatMap(function ($user) {
-            return $this->createSharedMemo($user);
+        $otherUserMemos = $otherUsers->flatMap(function ($otherUsers) {
+            return $this->createSharedMemo($otherUsers);
         });
 
         // indexメソッドを呼び出してレスポンスを確認

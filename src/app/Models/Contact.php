@@ -83,7 +83,6 @@ class Contact extends Model
                 $query->where('contacts.subject', 'like', '%' . $word . '%')
                     ->orWhere('contacts.message', 'like', '%' . $word . '%');
             }
-
         }
     }
 }
