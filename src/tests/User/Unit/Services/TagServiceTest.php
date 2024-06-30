@@ -56,9 +56,12 @@ class TagServiceTest extends TestCase
     public function testGetMemoTags()
     {
         // メモに紐づいたタグのIDを取得
-        $memoTagsById = TagService::getMemoTags($this->memo->tags, 'id');
+//        $memoTagsById = TagService::getMemoTags($this->memo->tags, 'id');
+        $memoTagsById = TagService::getMemoTagsId($this->memo->tags);
+
         // メモに紐づいたタグの名前を取得
-        $memoTagsByName = TagService::getMemoTags($this->memo->tags, 'name');
+//        $memoTagsByName = TagService::getMemoTags($this->memo->tags, 'name');
+        $memoTagsByName = TagService::getMemoTagsName($this->memo->tags);
 
         // タグIDが正しく含まれていることを確認
         $this->assertContains($this->tag->id, $memoTagsById);

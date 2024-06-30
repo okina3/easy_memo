@@ -235,7 +235,7 @@ class MemoControllerTest extends TestCase
             // ビューに渡されるメモのIDが、作成したメモのIDと一致することを確認
             return $viewMemo->id === $memo->id;
         });
-        $response->assertViewHas('get_memo_tags', function ($viewTags) use ($tags) {
+        $response->assertViewHas('get_memo_tags_name', function ($viewTags) use ($tags) {
             // ビューに渡されるタグが3件であり、作成したタグが含まれていることを確認
             return count($viewTags) === 3 && in_array($tags->first()->name, $viewTags);
         });
@@ -281,7 +281,7 @@ class MemoControllerTest extends TestCase
             // ビューに渡されるメモのIDが、作成したメモのIDと一致することを確認
             return $viewMemo->id === $memo->id;
         });
-        $response->assertViewHas('get_memo_tags', function ($viewMemoTags) use ($tags) {
+        $response->assertViewHas('get_memo_tags_id', function ($viewMemoTags) use ($tags) {
             // ビューに渡されるメモに紐づいたタグが、作成したタグのID配列と一致することを確認
             return $viewMemoTags === $tags->pluck('id')->toArray();
         });

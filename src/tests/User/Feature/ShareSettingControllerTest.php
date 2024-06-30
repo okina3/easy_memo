@@ -186,7 +186,7 @@ class ShareSettingControllerTest extends TestCase
             return $viewMemo->id === $memo->id;
         });
 
-        $response->assertViewHas('get_memo_tags', function ($viewTags) use ($tags) {
+        $response->assertViewHas('get_memo_tags_name', function ($viewTags) use ($tags) {
             return collect($viewTags)->sort()->values()->all() === $tags->pluck('name')->sort()->values()->all();
         });
 
@@ -224,7 +224,7 @@ class ShareSettingControllerTest extends TestCase
             return $viewMemo->id === $memo->id;
         });
 
-        $response->assertViewHas('get_memo_tags', function ($viewTags) use ($tags) {
+        $response->assertViewHas('get_memo_tags_name', function ($viewTags) use ($tags) {
             return collect($viewTags)->sort()->values()->all() === $tags->pluck('name')->sort()->values()->all();
         });
 

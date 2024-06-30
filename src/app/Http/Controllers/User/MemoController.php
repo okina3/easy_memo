@@ -107,7 +107,7 @@ class MemoController extends Controller
         // 選択したメモを、一件取得
         $select_memo = Memo::availableSelectMemo($id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $get_memo_tags = TagService::getMemoTags($select_memo->tags, 'name');
+        $get_memo_tags_name = TagService::getMemoTagsName($select_memo->tags);
         // 選択したメモに紐づいた画像を取得
         $get_memo_images = ImageService::getMemoImages($select_memo->images);
         // 共有されているメモに目印を付ける
@@ -115,7 +115,7 @@ class MemoController extends Controller
         // 自分が共有しているメモの、共有状態の情報を取得
         $shared_users = ShareSettingService::checkSharedMemoStatus($id);
 
-        return view('user.memos.show', compact('select_memo', 'get_memo_tags', 'get_memo_images', 'shared_users'));
+        return view('user.memos.show', compact('select_memo', 'get_memo_tags_name', 'get_memo_images', 'shared_users'));
     }
 
     /**
@@ -132,7 +132,7 @@ class MemoController extends Controller
         // 選択したメモを、一件取得。
         $select_memo = Memo::availableSelectMemo($id)->first();
         // 選択したメモに紐づいたタグのidを取得
-        $get_memo_tags = TagService::getMemoTags($select_memo->tags, 'id');
+        $get_memo_tags_id = TagService::getMemoTagsId($select_memo->tags);
         // 選択したメモに紐づいた画像を取得
         $get_memo_images = ImageService::getMemoImages($select_memo->images);
         // 選択したメモに紐づいた画像のidを取得
@@ -143,7 +143,7 @@ class MemoController extends Controller
         SessionService::setBrowserBackSession();
 
         return view('user.memos.edit',
-            compact('all_tags', 'all_images', 'select_memo', 'get_memo_tags', 'get_memo_images_id', 'get_memo_images')
+            compact('all_tags', 'all_images', 'select_memo', 'get_memo_tags_id', 'get_memo_images_id', 'get_memo_images')
         );
     }
 

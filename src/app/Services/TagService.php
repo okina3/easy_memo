@@ -31,24 +31,32 @@ class TagService
     }
 
     /**
-     * 選択したメモに紐づいた、タグの情報を、配列で取得するメソッド。
+     * 選択したメモに紐づいた、タグのIDを、配列で取得するメソッド。
      * @param Collection $select_memo_tags
-     * @param string $tag_type
      * @return array
      */
-    public static function getMemoTags(Collection $select_memo_tags, string $tag_type): array
+    public static function getMemoTagsId(Collection $select_memo_tags): array
     {
-        $memo_relation_tags = [];
+        $memo_relation_tags_id = [];
         foreach ($select_memo_tags as $memo_relation_tag) {
-            // idがついていれば、メモにリレーションされたタグのidを、配列に追加
-            if ($tag_type === 'id') {
-                $memo_relation_tags[] = $memo_relation_tag->id;
-            }
-            // nameがついていれば、メモにリレーションされたタグの名前を、配列に追加
-            if ($tag_type === 'name') {
-                $memo_relation_tags[] = $memo_relation_tag->name;
-            }
+            // メモにリレーションされたタグのidを、配列に追加
+            $memo_relation_tags_id[] = $memo_relation_tag->id;
         }
-        return $memo_relation_tags;
+        return $memo_relation_tags_id;
+    }
+
+    /**
+     * 選択したメモに紐づいた、タグのNameを、配列で取得するメソッド。
+     * @param Collection $select_memo_tags
+     * @return array
+     */
+    public static function getMemoTagsName(Collection $select_memo_tags): array
+    {
+        $memo_relation_tags_name = [];
+        foreach ($select_memo_tags as $memo_relation_tag) {
+            // メモにリレーションされたタグのidを、配列に追加
+            $memo_relation_tags_name[] = $memo_relation_tag->name;
+        }
+        return $memo_relation_tags_name;
     }
 }
