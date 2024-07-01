@@ -16,6 +16,7 @@ use Throwable;
 class ContactController extends Controller
 {
     /**
+     * 管理人への問い合わせの新規作成画面を表示するメソッド。
      * @return View
      */
     public function create(): View
@@ -27,6 +28,7 @@ class ContactController extends Controller
     }
 
     /**
+     * 管理人への問い合わせを、保存するメソッド。
      * @param ContactRequest $request
      * @return RedirectResponse
      * @throws Throwable
