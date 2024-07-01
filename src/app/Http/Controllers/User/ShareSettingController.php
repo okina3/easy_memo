@@ -23,7 +23,7 @@ use Throwable;
 class ShareSettingController extends Controller
 {
     /**
-     * 共有メモの一覧を表示するメソッド。
+     * 共有されているメモの一覧を表示するメソッド。
      * @return View
      */
     public function index(): View
@@ -66,7 +66,7 @@ class ShareSettingController extends Controller
     }
 
     /**
-     *  共有メモの詳細を表示するメソッド。
+     *  共有されているメモの詳細を表示するメソッド。
      * @param int $id
      * @return View
      */
@@ -88,7 +88,7 @@ class ShareSettingController extends Controller
     }
 
     /**
-     * 共有メモの編集画面を表示するメソッド。
+     * 共有されているメモの編集画面を表示するメソッド。
      * @param int $id
      * @return View
      */
@@ -110,7 +110,7 @@ class ShareSettingController extends Controller
     }
 
     /**
-     * 共有メモの更新をするメソッド。
+     * 共有されているメモの更新をするメソッド。
      * @param UploadMemoRequest $request
      * @return RedirectResponse
      */
