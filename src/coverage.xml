@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1719638833">
-  <project timestamp="1719638833">
+<coverage generated="1719988962">
+  <project timestamp="1719988962">
     <file name="/var/www/sample/app/Console/Kernel.php">
       <class name="App\Console\Kernel" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
       </class>
       <line num="13" type="method" name="schedule" visibility="protected" complexity="1" crap="2" count="0"/>
       <line num="16" type="stmt" count="0"/>
-      <line num="21" type="method" name="commands" visibility="protected" complexity="1" crap="1" count="157"/>
-      <line num="23" type="stmt" count="157"/>
-      <line num="25" type="stmt" count="157"/>
+      <line num="21" type="method" name="commands" visibility="protected" complexity="1" crap="1" count="161"/>
+      <line num="23" type="stmt" count="161"/>
+      <line num="25" type="stmt" count="161"/>
       <metrics loc="28" ncloc="21" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
     </file>
     <file name="/var/www/sample/app/Exceptions/Handler.php">
       <class name="App\Exceptions\Handler" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </class>
-      <line num="24" type="method" name="register" visibility="public" complexity="1" crap="1" count="157"/>
-      <line num="26" type="stmt" count="157"/>
-      <line num="28" type="stmt" count="157"/>
+      <line num="24" type="method" name="register" visibility="public" complexity="1" crap="1" count="161"/>
+      <line num="26" type="stmt" count="161"/>
+      <line num="28" type="stmt" count="161"/>
       <metrics loc="31" ncloc="22" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
     </file>
     <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/AuthenticatedSessionController.php">
@@ -424,21 +424,21 @@
     </file>
     <file name="/var/www/sample/app/Http/Controllers/User/ContactController.php">
       <class name="App\Http\Controllers\User\ContactController" namespace="global">
-        <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="7" elements="12" coveredelements="8"/>
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
       </class>
-      <line num="21" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="24" type="stmt" count="1"/>
-      <line num="26" type="stmt" count="1"/>
-      <line num="34" type="method" name="store" visibility="public" complexity="2" crap="2.21" count="1"/>
-      <line num="37" type="stmt" count="1"/>
-      <line num="39" type="stmt" count="1"/>
-      <line num="41" type="stmt" count="1"/>
-      <line num="42" type="stmt" count="1"/>
-      <line num="44" type="stmt" count="1"/>
-      <line num="45" type="stmt" count="0"/>
-      <line num="46" type="stmt" count="0"/>
-      <line num="47" type="stmt" count="0"/>
-      <metrics loc="51" ncloc="40" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="7" elements="12" coveredelements="8"/>
+      <line num="22" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="27" type="stmt" count="1"/>
+      <line num="36" type="method" name="store" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="39" type="stmt" count="2"/>
+      <line num="41" type="stmt" count="2"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="2"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <metrics loc="53" ncloc="40" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
     </file>
     <file name="/var/www/sample/app/Http/Controllers/User/ImageController.php">
       <class name="App\Http\Controllers\User\ImageController" namespace="global">
@@ -486,13 +486,13 @@
     </file>
     <file name="/var/www/sample/app/Http/Controllers/User/MemoController.php">
       <class name="App\Http\Controllers\User\MemoController" namespace="global">
-        <metrics complexity="11" methods="8" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="63" coveredstatements="54" elements="71" coveredelements="59"/>
+        <metrics complexity="11" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="63" coveredstatements="63" elements="71" coveredelements="71"/>
       </class>
-      <line num="28" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="9"/>
-      <line num="31" type="stmt" count="9"/>
-      <line num="32" type="stmt" count="9"/>
-      <line num="33" type="stmt" count="8"/>
-      <line num="34" type="stmt" count="9"/>
+      <line num="28" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="31" type="stmt" count="12"/>
+      <line num="32" type="stmt" count="12"/>
+      <line num="33" type="stmt" count="11"/>
+      <line num="34" type="stmt" count="12"/>
       <line num="41" type="method" name="index" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="44" type="stmt" count="2"/>
       <line num="46" type="stmt" count="2"/>
@@ -503,9 +503,9 @@
       <line num="62" type="stmt" count="1"/>
       <line num="64" type="stmt" count="1"/>
       <line num="66" type="stmt" count="1"/>
-      <line num="75" type="method" name="store" visibility="public" complexity="2" crap="2.04" count="1"/>
-      <line num="78" type="stmt" count="1"/>
-      <line num="80" type="stmt" count="1"/>
+      <line num="75" type="method" name="store" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="78" type="stmt" count="2"/>
+      <line num="80" type="stmt" count="2"/>
       <line num="82" type="stmt" count="1"/>
       <line num="83" type="stmt" count="1"/>
       <line num="84" type="stmt" count="1"/>
@@ -513,11 +513,11 @@
       <line num="86" type="stmt" count="1"/>
       <line num="88" type="stmt" count="1"/>
       <line num="90" type="stmt" count="1"/>
-      <line num="91" type="stmt" count="1"/>
+      <line num="91" type="stmt" count="2"/>
       <line num="93" type="stmt" count="1"/>
-      <line num="94" type="stmt" count="0"/>
-      <line num="95" type="stmt" count="0"/>
-      <line num="96" type="stmt" count="0"/>
+      <line num="94" type="stmt" count="1"/>
+      <line num="95" type="stmt" count="1"/>
+      <line num="96" type="stmt" count="1"/>
       <line num="105" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="108" type="stmt" count="1"/>
       <line num="110" type="stmt" count="1"/>
@@ -537,29 +537,29 @@
       <line num="145" type="stmt" count="1"/>
       <line num="146" type="stmt" count="1"/>
       <line num="147" type="stmt" count="1"/>
-      <line num="156" type="method" name="update" visibility="public" complexity="2" crap="2.06" count="1"/>
-      <line num="159" type="stmt" count="1"/>
-      <line num="161" type="stmt" count="1"/>
+      <line num="156" type="method" name="update" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="159" type="stmt" count="2"/>
+      <line num="161" type="stmt" count="2"/>
       <line num="163" type="stmt" count="1"/>
       <line num="165" type="stmt" count="1"/>
       <line num="167" type="stmt" count="1"/>
       <line num="169" type="stmt" count="1"/>
       <line num="171" type="stmt" count="1"/>
-      <line num="172" type="stmt" count="1"/>
+      <line num="172" type="stmt" count="2"/>
       <line num="174" type="stmt" count="1"/>
-      <line num="175" type="stmt" count="0"/>
-      <line num="176" type="stmt" count="0"/>
-      <line num="177" type="stmt" count="0"/>
-      <line num="187" type="method" name="destroy" visibility="public" complexity="2" crap="2.21" count="1"/>
-      <line num="190" type="stmt" count="1"/>
+      <line num="175" type="stmt" count="1"/>
+      <line num="176" type="stmt" count="1"/>
+      <line num="177" type="stmt" count="1"/>
+      <line num="187" type="method" name="destroy" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="190" type="stmt" count="2"/>
       <line num="192" type="stmt" count="1"/>
       <line num="194" type="stmt" count="1"/>
-      <line num="195" type="stmt" count="1"/>
+      <line num="195" type="stmt" count="2"/>
       <line num="197" type="stmt" count="1"/>
-      <line num="198" type="stmt" count="0"/>
-      <line num="199" type="stmt" count="0"/>
-      <line num="200" type="stmt" count="0"/>
-      <metrics loc="204" ncloc="136" classes="1" methods="8" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="63" coveredstatements="54" elements="71" coveredelements="59"/>
+      <line num="198" type="stmt" count="1"/>
+      <line num="199" type="stmt" count="1"/>
+      <line num="200" type="stmt" count="1"/>
+      <metrics loc="204" ncloc="136" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="63" coveredstatements="63" elements="71" coveredelements="71"/>
     </file>
     <file name="/var/www/sample/app/Http/Controllers/User/ShareSettingController.php">
       <class name="App\Http\Controllers\User\ShareSettingController" namespace="global">
@@ -760,20 +760,20 @@
       <class name="App\Http\Requests\ContactRequest" namespace="global">
         <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
       </class>
-      <line num="12" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="14" type="stmt" count="2"/>
-      <line num="21" type="method" name="rules" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="23" type="stmt" count="2"/>
-      <line num="24" type="stmt" count="2"/>
-      <line num="25" type="stmt" count="2"/>
-      <line num="26" type="stmt" count="2"/>
-      <line num="33" type="method" name="messages" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="35" type="stmt" count="2"/>
-      <line num="36" type="stmt" count="2"/>
-      <line num="37" type="stmt" count="2"/>
-      <line num="38" type="stmt" count="2"/>
-      <line num="39" type="stmt" count="2"/>
-      <line num="40" type="stmt" count="2"/>
+      <line num="12" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="14" type="stmt" count="3"/>
+      <line num="21" type="method" name="rules" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="23" type="stmt" count="3"/>
+      <line num="24" type="stmt" count="3"/>
+      <line num="25" type="stmt" count="3"/>
+      <line num="26" type="stmt" count="3"/>
+      <line num="33" type="method" name="messages" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="35" type="stmt" count="3"/>
+      <line num="36" type="stmt" count="3"/>
+      <line num="37" type="stmt" count="3"/>
+      <line num="38" type="stmt" count="3"/>
+      <line num="39" type="stmt" count="3"/>
+      <line num="40" type="stmt" count="3"/>
       <metrics loc="43" ncloc="32" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
     </file>
     <file name="/var/www/sample/app/Http/Requests/DeleteTagRequest.php">
@@ -882,23 +882,23 @@
       <class name="App\Http\Requests\UploadMemoRequest" namespace="global">
         <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="17" coveredelements="17"/>
       </class>
-      <line num="12" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="14" type="stmt" count="4"/>
-      <line num="21" type="method" name="rules" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="23" type="stmt" count="4"/>
-      <line num="24" type="stmt" count="4"/>
-      <line num="25" type="stmt" count="4"/>
-      <line num="26" type="stmt" count="4"/>
-      <line num="27" type="stmt" count="4"/>
-      <line num="34" type="method" name="messages" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="36" type="stmt" count="4"/>
-      <line num="37" type="stmt" count="4"/>
-      <line num="38" type="stmt" count="4"/>
-      <line num="39" type="stmt" count="4"/>
-      <line num="40" type="stmt" count="4"/>
-      <line num="41" type="stmt" count="4"/>
-      <line num="42" type="stmt" count="4"/>
-      <line num="43" type="stmt" count="4"/>
+      <line num="12" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="14" type="stmt" count="6"/>
+      <line num="21" type="method" name="rules" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="23" type="stmt" count="6"/>
+      <line num="24" type="stmt" count="6"/>
+      <line num="25" type="stmt" count="6"/>
+      <line num="26" type="stmt" count="6"/>
+      <line num="27" type="stmt" count="6"/>
+      <line num="34" type="method" name="messages" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="36" type="stmt" count="6"/>
+      <line num="37" type="stmt" count="6"/>
+      <line num="38" type="stmt" count="6"/>
+      <line num="39" type="stmt" count="6"/>
+      <line num="40" type="stmt" count="6"/>
+      <line num="41" type="stmt" count="6"/>
+      <line num="42" type="stmt" count="6"/>
+      <line num="43" type="stmt" count="6"/>
       <metrics loc="46" ncloc="35" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="17" coveredelements="17"/>
     </file>
     <file name="/var/www/sample/app/Http/Requests/UploadTagRequest.php">
@@ -976,12 +976,12 @@
       <class name="App\Models\Memo" namespace="global">
         <metrics complexity="8" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="25" coveredelements="25"/>
       </class>
-      <line num="28" type="method" name="tags" visibility="public" complexity="1" crap="1" count="16"/>
-      <line num="30" type="stmt" count="16"/>
-      <line num="37" type="method" name="images" visibility="public" complexity="1" crap="1" count="13"/>
-      <line num="39" type="stmt" count="13"/>
-      <line num="46" type="method" name="shareSettings" visibility="public" complexity="1" crap="1" count="10"/>
-      <line num="48" type="stmt" count="10"/>
+      <line num="28" type="method" name="tags" visibility="public" complexity="1" crap="1" count="15"/>
+      <line num="30" type="stmt" count="15"/>
+      <line num="37" type="method" name="images" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="39" type="stmt" count="12"/>
+      <line num="46" type="method" name="shareSettings" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="48" type="stmt" count="9"/>
       <line num="55" type="method" name="user" visibility="public" complexity="1" crap="1" count="10"/>
       <line num="57" type="stmt" count="10"/>
       <line num="65" type="method" name="scopeAvailableAllMemos" visibility="public" complexity="1" crap="1" count="3"/>
@@ -1135,10 +1135,10 @@
       <class name="App\Providers\AppServiceProvider" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
       </class>
-      <line num="12" type="method" name="register" visibility="public" complexity="1" crap="1" count="157"/>
-      <line num="15" type="stmt" count="157"/>
-      <line num="20" type="method" name="boot" visibility="public" complexity="2" crap="2.50" count="157"/>
-      <line num="23" type="stmt" count="157"/>
+      <line num="12" type="method" name="register" visibility="public" complexity="1" crap="1" count="161"/>
+      <line num="15" type="stmt" count="161"/>
+      <line num="20" type="method" name="boot" visibility="public" complexity="2" crap="2.50" count="161"/>
+      <line num="23" type="stmt" count="161"/>
       <line num="24" type="stmt" count="0"/>
       <metrics loc="28" ncloc="20" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
     </file>
@@ -1146,8 +1146,8 @@
       <class name="App\Providers\AuthServiceProvider" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
-      <line num="22" type="method" name="boot" visibility="public" complexity="1" crap="1" count="157"/>
-      <line num="25" type="stmt" count="157"/>
+      <line num="22" type="method" name="boot" visibility="public" complexity="1" crap="1" count="161"/>
+      <line num="25" type="stmt" count="161"/>
       <metrics loc="27" ncloc="17" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="/var/www/sample/app/Providers/BroadcastServiceProvider.php">
@@ -1163,47 +1163,47 @@
       <class name="App\Providers\EventServiceProvider" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
       </class>
-      <line num="26" type="method" name="boot" visibility="public" complexity="1" crap="1" count="157"/>
-      <line num="29" type="stmt" count="157"/>
-      <line num="34" type="method" name="shouldDiscoverEvents" visibility="public" complexity="1" crap="1" count="157"/>
-      <line num="36" type="stmt" count="157"/>
+      <line num="26" type="method" name="boot" visibility="public" complexity="1" crap="1" count="161"/>
+      <line num="29" type="stmt" count="161"/>
+      <line num="34" type="method" name="shouldDiscoverEvents" visibility="public" complexity="1" crap="1" count="161"/>
+      <line num="36" type="stmt" count="161"/>
       <metrics loc="39" ncloc="27" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
     </file>
     <file name="/var/www/sample/app/Providers/InterventionImageServiceProvider.php">
       <class name="App\Providers\InterventionImageServiceProvider" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="6" coveredelements="4"/>
       </class>
-      <line num="14" type="method" name="register" visibility="public" complexity="1" crap="1.04" count="157"/>
-      <line num="16" type="stmt" count="157"/>
+      <line num="14" type="method" name="register" visibility="public" complexity="1" crap="1.04" count="161"/>
+      <line num="16" type="stmt" count="161"/>
       <line num="17" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="157"/>
-      <line num="24" type="method" name="boot" visibility="public" complexity="1" crap="1" count="157"/>
-      <line num="27" type="stmt" count="157"/>
+      <line num="18" type="stmt" count="161"/>
+      <line num="24" type="method" name="boot" visibility="public" complexity="1" crap="1" count="161"/>
+      <line num="27" type="stmt" count="161"/>
       <metrics loc="29" ncloc="22" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="6" coveredelements="4"/>
     </file>
     <file name="/var/www/sample/app/Providers/RouteServiceProvider.php">
       <class name="App\Providers\RouteServiceProvider" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="17" elements="19" coveredelements="17"/>
       </class>
-      <line num="28" type="method" name="boot" visibility="public" complexity="2" crap="2.00" count="157"/>
-      <line num="30" type="stmt" count="157"/>
+      <line num="28" type="method" name="boot" visibility="public" complexity="2" crap="2.00" count="161"/>
+      <line num="30" type="stmt" count="161"/>
       <line num="31" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="157"/>
-      <line num="34" type="stmt" count="157"/>
-      <line num="35" type="stmt" count="157"/>
-      <line num="36" type="stmt" count="157"/>
-      <line num="37" type="stmt" count="157"/>
-      <line num="39" type="stmt" count="157"/>
-      <line num="40" type="stmt" count="157"/>
-      <line num="41" type="stmt" count="157"/>
-      <line num="42" type="stmt" count="157"/>
-      <line num="43" type="stmt" count="157"/>
-      <line num="45" type="stmt" count="157"/>
-      <line num="46" type="stmt" count="157"/>
-      <line num="47" type="stmt" count="157"/>
-      <line num="48" type="stmt" count="157"/>
-      <line num="49" type="stmt" count="157"/>
-      <line num="50" type="stmt" count="157"/>
+      <line num="32" type="stmt" count="161"/>
+      <line num="34" type="stmt" count="161"/>
+      <line num="35" type="stmt" count="161"/>
+      <line num="36" type="stmt" count="161"/>
+      <line num="37" type="stmt" count="161"/>
+      <line num="39" type="stmt" count="161"/>
+      <line num="40" type="stmt" count="161"/>
+      <line num="41" type="stmt" count="161"/>
+      <line num="42" type="stmt" count="161"/>
+      <line num="43" type="stmt" count="161"/>
+      <line num="45" type="stmt" count="161"/>
+      <line num="46" type="stmt" count="161"/>
+      <line num="47" type="stmt" count="161"/>
+      <line num="48" type="stmt" count="161"/>
+      <line num="49" type="stmt" count="161"/>
+      <line num="50" type="stmt" count="161"/>
       <metrics loc="53" ncloc="39" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="17" elements="19" coveredelements="17"/>
     </file>
     <file name="/var/www/sample/app/Services/ImageService.php">
@@ -1244,9 +1244,9 @@
       <class name="App\Services\MemoService" namespace="global">
         <metrics complexity="15" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="35" coveredelements="35"/>
       </class>
-      <line num="16" type="method" name="checkUserMemo" visibility="public" complexity="3" crap="3" count="10"/>
-      <line num="19" type="stmt" count="10"/>
-      <line num="21" type="stmt" count="10"/>
+      <line num="16" type="method" name="checkUserMemo" visibility="public" complexity="3" crap="3" count="13"/>
+      <line num="19" type="stmt" count="13"/>
+      <line num="21" type="stmt" count="13"/>
       <line num="22" type="stmt" count="4"/>
       <line num="23" type="stmt" count="4"/>
       <line num="24" type="stmt" count="2"/>
@@ -1287,9 +1287,9 @@
       </class>
       <line num="11" type="method" name="setBrowserBackSession" visibility="public" complexity="1" crap="1" count="5"/>
       <line num="13" type="stmt" count="5"/>
-      <line num="20" type="method" name="clickBrowserBackSession" visibility="public" complexity="3" crap="3" count="4"/>
-      <line num="22" type="stmt" count="4"/>
-      <line num="23" type="stmt" count="4"/>
+      <line num="20" type="method" name="clickBrowserBackSession" visibility="public" complexity="3" crap="3" count="7"/>
+      <line num="22" type="stmt" count="7"/>
+      <line num="23" type="stmt" count="7"/>
       <line num="24" type="stmt" count="1"/>
       <line num="25" type="stmt" count="1"/>
       <line num="33" type="method" name="resetBrowserBackSession" visibility="public" complexity="1" crap="1" count="6"/>
@@ -1346,7 +1346,7 @@
     </file>
     <file name="/var/www/sample/app/Services/TagService.php">
       <class name="App\Services\TagService" namespace="global">
-        <metrics complexity="7" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="16" coveredelements="16"/>
+        <metrics complexity="7" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="18" coveredelements="18"/>
       </class>
       <line num="17" type="method" name="storeNewTag" visibility="public" complexity="3" crap="3" count="3"/>
       <line num="20" type="stmt" count="3"/>
@@ -1356,15 +1356,17 @@
       <line num="26" type="stmt" count="3"/>
       <line num="27" type="stmt" count="3"/>
       <line num="29" type="stmt" count="3"/>
-      <line num="39" type="method" name="getMemoTags" visibility="public" complexity="4" crap="4" count="5"/>
-      <line num="41" type="stmt" count="5"/>
-      <line num="42" type="stmt" count="5"/>
-      <line num="44" type="stmt" count="5"/>
+      <line num="38" type="method" name="getMemoTagsId" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="40" type="stmt" count="2"/>
+      <line num="41" type="stmt" count="2"/>
+      <line num="43" type="stmt" count="2"/>
       <line num="45" type="stmt" count="2"/>
-      <line num="48" type="stmt" count="5"/>
-      <line num="49" type="stmt" count="4"/>
-      <line num="52" type="stmt" count="5"/>
-      <metrics loc="55" ncloc="37" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="16" coveredelements="16"/>
+      <line num="53" type="method" name="getMemoTagsName" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="55" type="stmt" count="4"/>
+      <line num="56" type="stmt" count="4"/>
+      <line num="58" type="stmt" count="4"/>
+      <line num="60" type="stmt" count="4"/>
+      <metrics loc="63" ncloc="41" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="18" coveredelements="18"/>
     </file>
     <file name="/var/www/sample/app/Services/UserService.php">
       <class name="App\Services\UserService" namespace="global">
@@ -1396,6 +1398,6 @@
       <line num="15" type="stmt" count="11"/>
       <metrics loc="18" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
-    <metrics files="76" loc="3922" ncloc="2827" classes="66" methods="183" coveredmethods="155" conditionals="0" coveredconditionals="0" statements="756" coveredstatements="650" elements="939" coveredelements="805"/>
+    <metrics files="76" loc="3932" ncloc="2831" classes="66" methods="184" coveredmethods="160" conditionals="0" coveredconditionals="0" statements="757" coveredstatements="663" elements="941" coveredelements="823"/>
   </project>
 </coverage>

@@ -33,7 +33,7 @@
                     @foreach ($all_tags as $tag)
                         <div class="inline mr-3 hover:font-semibold">
                             <input class="mb-1 rounded" type="checkbox" name="tags[]" id="{{ $tag->id }}"
-                                   value="{{ $tag->id }}" {{ in_array($tag->id, $get_memo_tags) ? 'checked' : '' }} />
+                                   value="{{ $tag->id }}" {{ in_array($tag->id, $get_memo_tags_id) ? 'checked' : '' }} />
                             <label for="{{ $tag->id }}">{{ $tag->name }}</label>
                         </div>
                     @endforeach

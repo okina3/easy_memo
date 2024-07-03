@@ -4,8 +4,10 @@ namespace Tests\User\Feature;
 
 use App\Models\Image;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\User\TestCase;
+use Illuminate\Support\Facades\Log;
 
 class ImageControllerTest extends TestCase
 {
@@ -21,22 +23,21 @@ class ImageControllerTest extends TestCase
     {
         // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // ログインユーザーを作成し、プロパティに格納
-        $this->user = $this->createUserWithAuthenticatedSession();
+        // ユーザーを作成
+        $this->user = User::factory()->create();
+        // 認証済みのユーザーを返す
+        $this->actingAs($this->user);
     }
 
     /**
-     * ログインユーザーを作成し認証済みセッションを開始するヘルパーメソッド
-     * @return User 認証済みのユーザーオブジェクト
+     * 画像を作成するヘルパーメソッド
+     * @param int $count 画像の作成数
+     * @return Collection 作成された画像のコレクション
      */
-    private function createUserWithAuthenticatedSession(): User
+    private function createImages(int $count): Collection
     {
-        // ユーザーを作成
-        $user = User::factory()->create();
-        // ユーザーを認証
-        $this->actingAs($user);
-        // 認証済みのユーザーを返す
-        return $user;
+        // 指定された数の画像を、現在のユーザーに関連付けて作成する
+        return Image::factory()->count($count)->create(['user_id' => $this->user->id]);
     }
 
     /**
@@ -45,9 +46,9 @@ class ImageControllerTest extends TestCase
      */
     public function testConstructImageController()
     {
-        // 別のユーザーを作成
+        // 1件の別のユーザーを作成
         $anotherUser = User::factory()->create();
-        // 別のユーザーの画像を作成
+        // 1件の別のユーザーの画像を作成
         $anotherUserImage = Image::factory()->create(['user_id' => $anotherUser->id]);
 
         // constructメソッドが正しく動作して、別のユーザーの画像にアクセスできないことを確認
@@ -61,10 +62,10 @@ class ImageControllerTest extends TestCase
      */
     public function testIndexImageController()
     {
-        // 画像を作成
-        $images = Image::factory()->count(5)->create(['user_id' => $this->user->id]);
+        // 5件の画像を作成
+        $images = $this->createImages(2);
 
-        // indexメソッドを呼び出して、レスポンスを確認
+        // 画像の一覧を表示する為に、リクエストを送信
         $response = $this->get(route('user.image.index'));
 
         // レスポンスが 'user.images.index' ビューを返すことを確認
@@ -73,7 +74,13 @@ class ImageControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_images', function ($viewImages) use ($images) {
-            return $viewImages->count() === 5 && $viewImages->first()->user_id === $images->first()->user_id;
+            // ビューから取得したメモをコレクションに変換
+            $viewImages = collect($viewImages);
+            // dataキーの中の画像を、配列で取得し、コレクションに変換
+            $viewImagesData = collect($viewImages->get('data', []));
+            // ビューに渡される画像が、2件であり、かつ、作成した画像のID配列と一致することを確認
+            return $viewImagesData->count() === 2 &&
+                $viewImagesData->pluck('id')->toArray() === $images->pluck('id')->toArray();
         });
     }
 
@@ -83,7 +90,7 @@ class ImageControllerTest extends TestCase
      */
     public function testCreateImageController()
     {
-        // createメソッドを呼び出して、レスポンスを確認
+        // 画像の新規作成画面を表示する為に、リクエストを送信
         $response = $this->get(route('user.image.create'));
 
         // レスポンスが 'user.images.create' ビューを返すことを確認

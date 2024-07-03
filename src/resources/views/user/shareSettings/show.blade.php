@@ -25,10 +25,10 @@
             {{-- 選択した共有メモに紐づいたタグの表示 --}}
             <div class="mb-10">
                 <h2 class="sub_heading mb-1">タグ</h2>
-                @foreach ($get_memo_tags as $tag)
+                @foreach ($get_memo_tags_name as $tag_name)
                     <div class="inline mr-3">
                         <input class="mb-1 rounded" type="checkbox" checked disabled/>
-                        {{ $tag }}
+                        {{ $tag_name }}
                     </div>
                 @endforeach
             </div>

@@ -23,7 +23,7 @@ use Throwable;
 class ShareSettingController extends Controller
 {
     /**
-     * 共有メモの一覧を表示するメソッド。
+     * 共有されているメモの一覧を表示するメソッド。
      * @return View
      */
     public function index(): View
@@ -66,7 +66,7 @@ class ShareSettingController extends Controller
     }
 
     /**
-     *  共有メモの詳細を表示するメソッド。
+     *  共有されているメモの詳細を表示するメソッド。
      * @param int $id
      * @return View
      */
@@ -77,18 +77,18 @@ class ShareSettingController extends Controller
         // 選択した共有メモを、一件取得
         $select_memo = Memo::with('tags.user')->where('id', $id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $get_memo_tags = TagService::getMemoTags($select_memo->tags, 'name');
+        $get_memo_tags_name = TagService::getMemoTagsName($select_memo->tags);
         // 選択したメモに紐づいた画像を取得
         $get_memo_images = ImageService::getMemoImages($select_memo->images);
         // 選択した共有メモのユーザーを取得
         $select_user = $select_memo->user;
 
         return view('user.shareSettings.show',
-            compact('select_memo', 'get_memo_tags', 'get_memo_images', 'select_user'));
+            compact('select_memo', 'get_memo_tags_name', 'get_memo_images', 'select_user'));
     }
 
     /**
-     * 共有メモの編集画面を表示するメソッド。
+     * 共有されているメモの編集画面を表示するメソッド。
      * @param int $id
      * @return View
      */
@@ -99,18 +99,18 @@ class ShareSettingController extends Controller
         // 選択した共有メモを、一件取得
         $select_memo = Memo::with('tags.user')->where('id', $id)->first();
         // 選択したメモに紐づいたタグの名前を取得
-        $get_memo_tags = TagService::getMemoTags($select_memo->tags, 'name');
+        $get_memo_tags_name = TagService::getMemoTagsName($select_memo->tags);
         // 選択したメモに紐づいた画像を取得
         $get_memo_images = ImageService::getMemoImages($select_memo->images);
         // 選択した共有メモのユーザーを取得
         $select_user = $select_memo->user;
 
         return view('user.shareSettings.edit',
-            compact('select_memo', 'get_memo_tags', 'get_memo_images', 'select_user'));
+            compact('select_memo', 'get_memo_tags_name', 'get_memo_images', 'select_user'));
     }
 
     /**
-     * 共有メモの更新をするメソッド。
+     * 共有されているメモの更新をするメソッド。
      * @param UploadMemoRequest $request
      * @return RedirectResponse
      */

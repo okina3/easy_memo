@@ -5,6 +5,7 @@ namespace Tests\User\Feature;
 use App\Models\Memo;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use Tests\User\TestCase;
 
 class TrashedMemoControllerTest extends TestCase
@@ -21,37 +22,33 @@ class TrashedMemoControllerTest extends TestCase
     {
         // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // ログインユーザーを作成し、プロパティに格納
-        $this->user = $this->createUserWithAuthenticatedSession();
-    }
-
-    /**
-     * ログインユーザーを作成し認証済みセッションを開始するヘルパーメソッド
-     * @return User 認証済みのユーザーオブジェクト
-     */
-    private function createUserWithAuthenticatedSession(): User
-    {
         // ユーザーを作成
-        $user = User::factory()->create();
-        // ユーザーを認証
-        $this->actingAs($user);
+        $this->user = User::factory()->create();
         // 認証済みのユーザーを返す
-        return $user;
+        $this->actingAs($this->user);
     }
 
     /**
-     * ソフトデリートしたメモ一覧が正しく表示されることをテスト
+     * ソフトデリートされたメモを作成するヘルパーメソッド
+     * @param int $count メモの作成数
+     * @return Collection 作成されたメモのコレクション
+     */
+    private function createTrashedMemos(int $count): Collection
+    {
+        // 指定された数のソフトデリートされたメモを、現在のユーザーに関連付けて作成する
+        return Memo::factory()->count($count)->create(['user_id' => $this->user->id, 'deleted_at' => now()]);
+    }
+
+    /**
+     * ソフトデリートしたメモ一覧が、正しく表示されることをテスト
      * @return void
      */
     public function testIndexTrashedMemoController()
     {
-        // ソフトデリートされたメモを作成
-        $memos = Memo::factory()->count(3)->create([
-            'user_id' => $this->user->id,
-            'deleted_at' => now(),
-        ]);
+        // 5件のソフトデリートされたメモを作成
+        $memos = $this->createTrashedMemos(5);
 
-        // indexメソッドを呼び出して、レスポンスを確認
+        // ソフトデリートされたメモの一覧を表示する為に、リクエストを送信
         $response = $this->get(route('user.trashed-memo.index'));
 
         // レスポンスが 'user.trashedMemos.index' ビューを返すことを確認
@@ -59,24 +56,25 @@ class TrashedMemoControllerTest extends TestCase
         $response->assertViewIs('user.trashedMemos.index');
 
         // ビューに渡されるデータが正しいか確認
-        $response->assertViewHas('all_trashed_memos', function ($viewMemos) use ($memos) {
-            return $viewMemos->count() === 3 && $viewMemos->first()->user_id === $memos->first()->user_id;
+        $response->assertViewHas('all_trashed_memos', function ($viewTrashedMemos) use ($memos) {
+            // ビューから取得した、メモをコレクションに変換
+            $viewTrashedMemos = collect($viewTrashedMemos);
+            // ビューに渡される、メモが、5件であり、かつ、作成した、メモのID配列と一致することを確認
+            return $viewTrashedMemos->count() === 5 &&
+                $viewTrashedMemos->pluck('id')->toArray() === $memos->pluck('id')->toArray();
         });
     }
 
     /**
-     * ソフトデリートしたメモが正しく元に戻されることをテスト
+     * ソフトデリートしたメモが、正しく元に戻されることをテスト
      * @return void
      */
     public function testUndoTrashedMemoController()
     {
-        // ソフトデリートされたメモを作成
-        $memo = Memo::factory()->create([
-            'user_id' => $this->user->id,
-            'deleted_at' => now(),
-        ]);
+        // 1件のソフトデリートされたメモを作成
+        $memo = $this->createTrashedMemos(1)->first();
 
-        // undoメソッドを呼び出してレスポンスを確認
+        // ソフトデリートしたメモを、元に戻す為に、リクエストを送信
         $response = $this->patch(route('user.trashed-memo.undo'), ['memoId' => $memo->id]);
 
         // メモが元に戻されたことを確認
@@ -85,30 +83,27 @@ class TrashedMemoControllerTest extends TestCase
             'deleted_at' => null,
         ]);
 
-        // レスポンスが正しいリダイレクト先を指していることを確認
+        // レスポンスが 'trashed-memo.index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('user.trashed-memo.index'));
         $response->assertSessionHas(['message' => 'メモを元に戻しました。', 'status' => 'info']);
     }
 
     /**
-     * ソフトデリートしたメモが正しく完全削除されることをテスト
+     * ソフトデリートしたメモが、正しく完全削除されることをテスト
      * @return void
      */
     public function testDestroyTrashedMemoController()
     {
-        // ソフトデリートされたメモを作成
-        $memo = Memo::factory()->create([
-            'user_id' => $this->user->id,
-            'deleted_at' => now(),
-        ]);
+        // 1件のソフトデリートされたメモを作成
+        $memo = $this->createTrashedMemos(1)->first();
 
-        // destroyメソッドを呼び出してレスポンスを確認
+        // ソフトデリートしたメモを、完全削除する為に、リクエストを送信
         $response = $this->delete(route('user.trashed-memo.destroy'), ['memoId' => $memo->id]);
 
         // メモが完全に削除されたことを確認
         $this->assertDatabaseMissing('memos', ['id' => $memo->id]);
 
-        // レスポンスが正しいリダイレクト先を指していることを確認
+        // レスポンスが 'trashed-memo.index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('user.trashed-memo.index'));
         $response->assertSessionHas(['message' => 'メモを完全に削除しました。', 'status' => 'alert']);
     }
