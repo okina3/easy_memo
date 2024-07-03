@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\User\Feature;
+namespace Tests\User\Feature\Controllers;
 
 use App\Models\Image;
 use App\Models\User;
@@ -78,7 +78,7 @@ class ImageControllerTest extends TestCase
             $viewImages = collect($viewImages);
             // dataキーの中の画像を、配列で取得し、コレクションに変換
             $viewImagesData = collect($viewImages->get('data', []));
-            // ビューに渡される画像が、2件であり、かつ、作成した画像のID配列と一致することを確認
+            // ビューに渡される画像が、2件であり、かつ、画像のID配列も、一致することを確認
             return $viewImagesData->count() === 2 &&
                 $viewImagesData->pluck('id')->toArray() === $images->pluck('id')->toArray();
         });
