@@ -21,6 +21,7 @@ class MemoControllerTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+    private User $secondaryUser;
 
     /**
      * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
@@ -32,6 +33,9 @@ class MemoControllerTest extends TestCase
         parent::setUp();
         // ユーザーを作成
         $this->user = User::factory()->create();
+        // 2人目の別のユーザーを作成
+        $this->secondaryUser = User::factory()->create();
+
         // 認証済みのユーザーを返す
         $this->actingAs($this->user);
     }
@@ -91,7 +95,7 @@ class MemoControllerTest extends TestCase
     }
 
     /**
-     * メモを他人に共有する設定を作成するヘルパーメソッド
+     * 自分のメモを他人に共有する設定を作成するヘルパーメソッド
      * @param Memo $memo 関連付けるメモ
      * @param User $sharingUser 共有したいユーザー
      */
@@ -208,7 +212,7 @@ class MemoControllerTest extends TestCase
         // ブラウザバック対策用のセッション設定
         Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
 
-        // メモ保存のリクエストを送信
+        // メモを保存するの為に、リクエストを送信
         $response = $this->post(route('user.store'), $requestData);
 
         // メモが保存されたことを確認
@@ -263,7 +267,7 @@ class MemoControllerTest extends TestCase
     }
 
     /**
-     * メモの詳細表示が正しく動作することをテスト
+     * メモの詳細表示が、正しく動作することをテスト
      * @return void
      */
     public function testShowMemoController()
@@ -300,7 +304,7 @@ class MemoControllerTest extends TestCase
                 $viewAchedImages->pluck('id')->toArray() === $attachedImages->pluck('id')->toArray();
         });
 
-        // shared_usersキーがビューに存在することを確認
+        // shared_usersキーが、ビューに存在することを確認
         $response->assertViewHas('shared_users');
     }
 
@@ -460,10 +464,8 @@ class MemoControllerTest extends TestCase
     {
         // 1件のメモを作成
         $memo = $this->createMemos(1)->first();
-        // 1件の別のユーザーを作成
-        $anotherUser = User::factory()->create();
-        // メモを他のユーザーに共有する設定を作成
-        $ShareSettings = $this->createSharingMemo($memo, $anotherUser);
+        // 自分のメモを他のユーザーに共有する設定を作成
+        $ShareSettings = $this->createSharingMemo($memo, $this->secondaryUser);
 
         // メモを削除（ソフトデリート）する為に、リクエストを送信
         $response = $this->delete(route('user.destroy', ['memoId' => $memo->id]));
@@ -487,10 +489,8 @@ class MemoControllerTest extends TestCase
     {
         // 1件のメモを作成
         $memo = $this->createMemos(1)->first();
-        // 1件の別のユーザーを作成
-        $anotherUser = User::factory()->create();
-        // メモを他のユーザーに共有する設定を作成
-        $this->createSharingMemo($memo, $anotherUser);
+        // 自分のメモを他のユーザーに共有する設定を作成
+        $this->createSharingMemo($memo, $this->secondaryUser);
 
         // DB::transactionメソッドが呼び出されると、一度だけ例外をスローするように設定
         DB::shouldReceive('transaction')->once()->andThrow(new Exception('DBエラー'));

@@ -40,7 +40,7 @@ class TrashedMemoControllerTest extends TestCase
     }
 
     /**
-     * ソフトデリートしたメモ一覧が正しく表示されることをテスト
+     * ソフトデリートしたメモ一覧が、正しく表示されることをテスト
      * @return void
      */
     public function testIndexTrashedMemoController()
@@ -66,7 +66,7 @@ class TrashedMemoControllerTest extends TestCase
     }
 
     /**
-     * ソフトデリートしたメモが正しく元に戻されることをテスト
+     * ソフトデリートしたメモが、正しく元に戻されることをテスト
      * @return void
      */
     public function testUndoTrashedMemoController()
@@ -89,7 +89,7 @@ class TrashedMemoControllerTest extends TestCase
     }
 
     /**
-     * ソフトデリートしたメモが正しく完全削除されることをテスト
+     * ソフトデリートしたメモが、正しく完全削除されることをテスト
      * @return void
      */
     public function testDestroyTrashedMemoController()

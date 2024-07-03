@@ -41,7 +41,7 @@ class TagControllerTest extends TestCase
     }
 
     /**
-     * タグの一覧が正しく表示されることをテスト
+     * タグの一覧、タグの新規作成画面が、正しく表示されることをテスト
      * @return void
      */
     public function testIndexTagController()
@@ -66,7 +66,7 @@ class TagControllerTest extends TestCase
     }
 
     /**
-     * タグが正しく保存されることをテスト
+     * タグが、正しく保存されることをテスト
      * @return void
      */
     public function testStoreTagController()
@@ -80,7 +80,7 @@ class TagControllerTest extends TestCase
         // ブラウザバック対策用のセッション設定
         Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
 
-        // タグ保存のリクエストを送信
+        // タグを保存するの為に、リクエストを送信
         $response = $this->post(route('user.tag.store'), $requestData);
 
         // タグが保存されたことを確認
@@ -92,7 +92,7 @@ class TagControllerTest extends TestCase
     }
 
     /**
-     * タグが正しく削除（複数）されることをテスト
+     * タグが、正しく削除（複数）されることをテスト
      * @return void
      */
     public function testDestroyTagController()
@@ -106,7 +106,7 @@ class TagControllerTest extends TestCase
         // 削除するタグのID（複数）のデータを作成
         $requestData = ['tags' => $tagsId];
 
-        // タグ削除メソッドを呼び出してレスポンスを確認
+        // タグを削除（複数）するの為に、リクエストを送信
         $response = $this->delete(route('user.tag.destroy'), $requestData);
 
         // タグが削除されたことを確認
@@ -114,7 +114,7 @@ class TagControllerTest extends TestCase
             $this->assertDatabaseMissing('tags', ['id' => $tagId]);
         }
 
-        // レスポンスが正しいリダイレクト先を指していることを確認
+        // レスポンスが 'tag.index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('user.tag.index'));
         $response->assertSessionHas(['message' => 'タグを削除しました。', 'status' => 'alert']);
     }
