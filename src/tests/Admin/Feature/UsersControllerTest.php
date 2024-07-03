@@ -44,7 +44,7 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * 全てのユーザーの一覧表示が正しく行われることをテスト
+     * 全てのユーザーの一覧表示が、正しく行われることをテスト
      * @return void
      */
     public function testAllIndexUsersController()
@@ -61,13 +61,13 @@ class UsersControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_users', function ($viewUsers) use ($users) {
-            // ビューで取得したユーザー数が3であり、かつ、ビューで取得したユーザーと作成したユーザーの、最初のIDが一致することを確認
-            return $viewUsers->count() === 3 && $viewUsers->first()->id === $users->first()->id;
+            // ビューに渡されるユーザーが、3件であり、かつ、ユーザーのID配列も、一致することを確認
+            return $viewUsers->count() === 3 && $viewUsers->pluck('id')->toArray() === $users->pluck('id')->toArray();
         });
     }
 
     /**
-     * 検索したユーザーの一覧表示が正しく行われることをテスト
+     * 検索したユーザーの一覧表示が、正しく行われることをテスト
      * @return void
      */
     public function testSearchIndexUsersController()
@@ -78,7 +78,7 @@ class UsersControllerTest extends TestCase
         // 最初のユーザーのメールアドレスをキーワードとして設定
         $keyword = $users->first()->email;
 
-        // 検索したユーザーを表示するリクエストを送信
+        // 検索したユーザーを表示する為に、リクエストを送信
         $response = $this->get(route('admin.index', ['keyword' => $keyword]));
 
         // レスポンスが 'admin.users.index' ビューを返すことを確認
@@ -87,20 +87,18 @@ class UsersControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_users', function ($viewUsers) use ($users, $keyword) {
-            // ビューから取得したユーザーをコレクションに変換
-            $viewUsers = collect($viewUsers);
             // キーワード（メールアドレス）でユーザーを絞り込み
             $filteredUsers = $users->filter(function ($users) use ($keyword) {
                 return stripos($users->email, $keyword) !== false;
             });
-            // 絞り込まれたユーザーの数とIDが、ビューで取得したユーザーと一致するかを確認
+            // ビューに渡されるユーザーと、絞り込まれたユーザーの数が同じ、かつ、ID配列も一致することを確認
             return $viewUsers->count() === $filteredUsers->count() &&
-                $viewUsers->pluck('id')->sort()->values()->all() === $filteredUsers->pluck('id')->sort()->values()->all();
+                $viewUsers->pluck('id')->toArray() === $filteredUsers->pluck('id')->toArray();
         });
     }
 
     /**
-     * ユーザーが正しくサービス利用を停止されることをテスト
+     * ユーザーが、正しくサービス利用を停止されることをテスト
      * @return void
      */
     public function testDestroyUsersController()
@@ -108,7 +106,7 @@ class UsersControllerTest extends TestCase
         // 1件のユーザーを作成
         $user = $this->createUsers(1)->first();
 
-        // ユーザーのサービス利用を停止するリクエストを送信
+        // ユーザーのサービス利用を停止する為に、リクエストを送信
         $response = $this->delete(route('admin.destroy'), ['userId' => $user->id]);
 
         // ユーザーがソフトデリートされたことを確認
@@ -120,7 +118,7 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * ユーザーがサービス利用停止時のエラーハンドリングをテスト
+     * ユーザーが、サービス利用停止時のエラーハンドリングをテスト
      * @return void
      */
     public function testErrorDestroyUsersController()
