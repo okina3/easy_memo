@@ -40,7 +40,7 @@ class WarningUsersControllerTest extends TestCase
     }
 
     /**
-     * 全てのソフトデリートしたユーザー一覧が正しく表示されることをテスト
+     * 全てのソフトデリートしたユーザー一覧が、正しく表示されることをテスト
      * @return void
      */
     public function testAllIndexWarningUsersController()
@@ -57,13 +57,13 @@ class WarningUsersControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_warning_users', function ($viewUsers) use ($users) {
-            // ビューで取得したユーザー数が3であり、かつ、ビューで取得したユーザーと作成したユーザーの、最初のIDが一致することを確認
-            return $viewUsers->count() === 3 && $viewUsers->first()->id === $users->first()->id;
+            // ビューに渡されるユーザーが、3件であり、かつ、ユーザーのID配列も、一致することを確認
+            return $viewUsers->count() === 3 && $viewUsers->pluck('id')->toArray() === $users->pluck('id')->toArray();
         });
     }
 
     /**
-     * 絞り込んだソフトデリートしたユーザー一覧が正しく表示されることをテスト
+     * 絞り込んだソフトデリートしたユーザー一覧が、正しく表示されることをテスト
      * @return void
      */
     public function testSearchIndexWarningUsersController()
@@ -83,20 +83,18 @@ class WarningUsersControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_warning_users', function ($viewUsers) use ($users, $keyword) {
-            // ビューから取得したユーザーをコレクションに変換
-            $viewUsers = collect($viewUsers);
             // キーワード（メールアドレス）でユーザーを絞り込み
             $filteredUsers = $users->filter(function ($users) use ($keyword) {
                 return stripos($users->email, $keyword) !== false;
             });
-            // 絞り込まれたユーザーの数とIDが、ビューで取得したユーザーと一致するかを確認
+            // ビューに渡されるユーザーと、絞り込まれたユーザーの数が同じ、かつ、ID配列も一致することを確認
             return $viewUsers->count() === $filteredUsers->count() &&
-                $viewUsers->pluck('id')->sort()->values()->all() === $filteredUsers->pluck('id')->sort()->values()->all();
+                $viewUsers->pluck('id')->toArray() === $filteredUsers->pluck('id')->toArray();
         });
     }
 
     /**
-     * ソフトデリートしたユーザーが正しく元に戻されることをテスト
+     * ソフトデリートしたユーザーが、正しく元に戻されることをテスト
      * @return void
      */
     public function testUndoWarningUsersController()
@@ -104,14 +102,11 @@ class WarningUsersControllerTest extends TestCase
         // 1件のソフトデリートされたユーザーを作成
         $user = $this->createTrashedUsers(1)->first();
 
-        // ソフトデリートしたユーザーを、元に戻すリクエストを送信
+        // ソフトデリートしたユーザーを、元に戻す為に、リクエストを送信
         $response = $this->patch(route('admin.warning.undo'), ['userId' => $user->id]);
 
         // ユーザーが元に戻されたことを確認
-        $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            'deleted_at' => null,
-        ]);
+        $this->assertDatabaseHas('users', ['id' => $user->id, 'deleted_at' => null,]);
 
         // レスポンスが 'admin.warning.index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('admin.warning.index'));
@@ -119,7 +114,7 @@ class WarningUsersControllerTest extends TestCase
     }
 
     /**
-     * ソフトデリートしたユーザーが正しく完全削除されることをテスト
+     * ソフトデリートしたユーザーが、正しく完全削除されることをテスト
      * @return void
      */
     public function testDestroyWarningUsersController()
@@ -127,7 +122,7 @@ class WarningUsersControllerTest extends TestCase
         // 1件のソフトデリートされたユーザーを作成
         $user = $this->createTrashedUsers(1)->first();
 
-        // ソフトデリートしたユーザーを、完全に削除するリクエストを送信
+        // ソフトデリートしたユーザーを、完全に削除する為に、リクエストを送信
         $response = $this->delete(route('admin.warning.destroy'), ['userId' => $user->id]);
 
         // ユーザーが完全に削除されたことを確認
