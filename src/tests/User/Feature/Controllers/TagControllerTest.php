@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\User\Feature;
+namespace Tests\User\Feature\Controllers;
 
 use App\Models\Tag;
 use App\Models\User;
@@ -58,9 +58,7 @@ class TagControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_tags', function ($viewTags) use ($tags) {
-            // ビューから取得したタグをコレクションに変換
-            $viewTags = collect($viewTags);
-            // ビューに渡されるタグが、3件であり、かつ、作成したタグのID配列と一致することを確認
+            // ビューに渡されるタグが、3件であり、かつ、タグのID配列も、一致することを確認
             return $viewTags->count() === 3 && $viewTags->pluck('id')->toArray() === $tags->pluck('id')->toArray();
         });
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\User\Feature;
+namespace Tests\User\Feature\Controllers;
 
 use App\Models\Image;
 use App\Models\Memo;
@@ -141,15 +141,11 @@ class MemoControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_memos', function ($viewMemos) use ($memos) {
-            // ビューから取得したメモをコレクションに変換
-            $viewMemos = collect($viewMemos);
-            // ビューに渡されるメモが、5件であり、かつ、作成したメモのID配列と一致することを確認
+            // ビューに渡されるメモが、5件であり、かつ、メモのID配列も、一致することを確認
             return $viewMemos->count() === 5 && $viewMemos->pluck('id')->toArray() === $memos->pluck('id')->toArray();
         });
         $response->assertViewHas('all_tags', function ($viewTags) use ($tags) {
-            // ビューから取得したタグをコレクションに変換
-            $viewTags = collect($viewTags);
-            // ビューに渡されるタグが、3件であり、かつ、作成したタグのID配列と一致することを確認
+            // ビューに渡されるタグが、3件であり、かつ、タグのID配列も、一致することを確認
             return $viewTags->count() === 3 && $viewTags->pluck('id')->toArray() === $tags->pluck('id')->toArray();
         });
     }
@@ -174,15 +170,11 @@ class MemoControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_tags', function ($viewTags) use ($tags) {
-            // ビューから取得したタグをコレクションに変換
-            $viewTags = collect($viewTags);
-            // ビューに渡されるタグが、5件であり、かつ、作成したタグのID配列と一致することを確認
+            // ビューに渡されるタグが、5件であり、かつ、タグのID配列も、一致することを確認
             return $viewTags->count() === 5 && $viewTags->pluck('id')->toArray() === $tags->pluck('id')->toArray();
         });
         $response->assertViewHas('all_images', function ($viewImages) use ($images) {
-            // ビューから取得した画像をコレクションに変換
-            $viewImages = collect($viewImages);
-            // ビューに渡される画像が、3件であり、かつ、作成した画像のID配列と一致することを確認
+            // ビューに渡される画像が、3件であり、かつ、画像のID配列も、一致することを確認
             return $viewImages->count() === 3 && $viewImages->pluck('id')->toArray() === $images->pluck('id')->toArray();
         });
     }
@@ -292,14 +284,14 @@ class MemoControllerTest extends TestCase
         $response->assertViewHas('get_memo_tags_name', function ($viewAchedTags) use ($attachedTags) {
             // ビューから取得したタグをコレクションに変換
             $viewAchedTags = collect($viewAchedTags);
-            // ビューに渡されるタグが、3件であり、かつ、作成したタグのNameの配列と一致することを確認
+            // ビューに渡されるタグが、3件であり、かつ、タグのNameの配列も、一致することを確認
             return $viewAchedTags->count() === 3 &&
                 $viewAchedTags->toArray() === $attachedTags->pluck('name')->toArray();
         });
         $response->assertViewHas('get_memo_images', function ($viewAchedImages) use ($attachedImages) {
             // ビューから取得したタグをコレクションに変換
             $viewAchedImages = collect($viewAchedImages);
-            // ビューに渡される画像が、2件であり、かつ、作成した画像のIDの配列と一致することを確認
+            // ビューに渡される画像が、2件であり、かつ、画像のIDの配列も、一致することを確認
             return $viewAchedImages->count() === 2 &&
                 $viewAchedImages->pluck('id')->toArray() === $attachedImages->pluck('id')->toArray();
         });
@@ -333,38 +325,34 @@ class MemoControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_tags', function ($viewTags) use ($tags) {
-            // ビューから取得したタグをコレクションに変換
-            $viewTags = collect($viewTags);
-            // ビューに渡されるタグが、3件であり、かつ、作成したタグのID配列と一致することを確認
+            // ビューに渡されるタグが、3件であり、かつ、タグのID配列も、一致することを確認
             return $viewTags->count() === 3 && $viewTags->pluck('id')->toArray() === $tags->pluck('id')->toArray();
         });
         $response->assertViewHas('all_images', function ($viewImages) use ($images) {
-            // ビューから取得した画像をコレクションに変換
-            $viewImages = collect($viewImages);
-            // ビューに渡される画像が、2件であり、かつ、作成した画像のID配列と一致することを確認
+            // ビューに渡される画像が、2件であり、かつ、画像のID配列も、一致することを確認
             return $viewImages->count() === 2 && $viewImages->pluck('id')->toArray() === $images->pluck('id')->toArray();
         });
         $response->assertViewHas('select_memo', function ($viewMemo) use ($memo) {
-            // ビューに渡されるメモのIDが、作成したメモのIDと一致することを確認
+            // ビューに渡されるメモのIDが、メモのIDと一致することを確認
             return $viewMemo->id === $memo->id;
         });
         $response->assertViewHas('get_memo_tags_id', function ($viewAchedTags) use ($attachedTags) {
             // ビューから取得した紐づいたタグをコレクションに変換
             $viewAchedTags = collect($viewAchedTags);
-            // ビューに渡されるメモに紐づいたタグが、5件であり、かつ、作成した紐づいたタグのID配列と一致することを確認
+            // ビューに渡されるメモに紐づいたタグが、5件であり、かつ、紐づいたタグのID配列も、一致することを確認
             return $viewAchedTags->count() === 5 && $viewAchedTags->toArray() === $attachedTags->pluck('id')->toArray();
         });
         $response->assertViewHas('get_memo_images', function ($viewAchedImages) use ($attachedImages) {
             // ビューから取得した紐づいた画像をコレクションに変換
             $viewAchedImages = collect($viewAchedImages);
-            // ビューに渡される画像が、3件であり、かつ、作成した紐づいた画像のID配列と一致することを確認
+            // ビューに渡される画像が、3件であり、かつ、紐づいた画像のID配列も、一致することを確認
             return $viewAchedImages->count() === 3 &&
                 $viewAchedImages->pluck('id')->toArray() === $attachedImages->pluck('id')->toArray();
         });
         $response->assertViewHas('get_memo_images_id', function ($viewAchedImagesId) use ($attachedImages) {
             // ビューから取得した画像をコレクションに変換
             $viewAchedImagesId = collect($viewAchedImagesId);
-            // ビューに渡される画像が、3件であり、かつ、作成した画像のID配列と一致することを確認
+            // ビューに渡される画像が、3件であり、かつ、画像のID配列も、一致することを確認
             return $viewAchedImagesId->count() === 3 &&
                 $viewAchedImagesId->toArray() === $attachedImages->pluck('id')->toArray();
         });

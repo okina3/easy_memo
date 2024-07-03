@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\User\Feature;
+namespace Tests\User\Feature\Controllers;
 
 use App\Models\User;
 use Exception;

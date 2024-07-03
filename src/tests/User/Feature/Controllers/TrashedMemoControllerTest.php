@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\User\Feature;
+namespace Tests\User\Feature\Controllers;
 
 use App\Models\Memo;
 use App\Models\User;
@@ -57,9 +57,7 @@ class TrashedMemoControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('all_trashed_memos', function ($viewTrashedMemos) use ($memos) {
-            // ビューから取得した、メモをコレクションに変換
-            $viewTrashedMemos = collect($viewTrashedMemos);
-            // ビューに渡される、メモが、5件であり、かつ、作成した、メモのID配列と一致することを確認
+            // ビューに渡される、メモが、5件であり、かつ、メモのID配列も、一致することを確認
             return $viewTrashedMemos->count() === 5 &&
                 $viewTrashedMemos->pluck('id')->toArray() === $memos->pluck('id')->toArray();
         });

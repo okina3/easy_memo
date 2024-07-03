@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\User\Feature;
+namespace Tests\User\Feature\Controllers;
 
 use App\Models\Image;
 use App\Models\Memo;
@@ -212,14 +212,14 @@ class ShareSettingControllerTest extends TestCase
         $response->assertViewHas('get_memo_tags_name', function ($viewSharedTags) use ($attachedTags) {
             // ビューから取得したタグをコレクションに変換
             $viewSharedTags = collect($viewSharedTags);
-            // ビューに渡されるタグが、2件であり、かつ、作成したタグのNameの配列と一致することを確認
+            // ビューに渡されるタグが、2件であり、かつ、タグのNameの配列も、一致することを確認
             return $viewSharedTags->count() === 2 &&
                 $viewSharedTags->toArray() === $attachedTags->pluck('name')->toArray();
         });
         $response->assertViewHas('get_memo_images', function ($viewSharedImages) use ($attachedImages) {
             // ビューから取得したタグをコレクションに変換
             $viewSharedImages = collect($viewSharedImages);
-            // ビューに渡される画像が、2件であり、かつ、作成した画像のIDの配列と一致することを確認
+            // ビューに渡される画像が、2件であり、かつ、画像のIDの配列も、一致することを確認
             return $viewSharedImages->count() === 2 &&
                 $viewSharedImages->pluck('id')->toArray() === $attachedImages->pluck('id')->toArray();
         });
@@ -255,14 +255,14 @@ class ShareSettingControllerTest extends TestCase
         $response->assertViewHas('get_memo_tags_name', function ($viewSharedTags) use ($attachedTags) {
             // ビューから取得したタグをコレクションに変換
             $viewSharedTags = collect($viewSharedTags);
-            // ビューに渡されるタグが、2件であり、かつ、作成したタグのNameの配列と一致することを確認
+            // ビューに渡されるタグが、2件であり、かつ、タグのNameの配列も、一致することを確認
             return $viewSharedTags->count() === 2 &&
                 $viewSharedTags->toArray() === $attachedTags->pluck('name')->toArray();
         });
         $response->assertViewHas('get_memo_images', function ($viewSharedImages) use ($attachedImages) {
             // ビューから取得したタグをコレクションに変換
             $viewSharedImages = collect($viewSharedImages);
-            // ビューに渡される画像が、2件であり、かつ、作成した画像のIDの配列と一致することを確認
+            // ビューに渡される画像が、2件であり、かつ、画像のIDの配列も、一致することを確認
             return $viewSharedImages->count() === 2 &&
                 $viewSharedImages->pluck('id')->toArray() === $attachedImages->pluck('id')->toArray();
         });
