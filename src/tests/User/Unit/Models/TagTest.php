@@ -116,9 +116,9 @@ class TagTest extends TestCase
      */
     public function testAvailableCreateTagScope()
     {
-        // 新しいタグ名を設定
+        // 新しいタグ名を作成
         $tagName = '新しいテストタグ';
-        // 新しいタグを作成
+        // 新しいタグを保存
         Tag::availableCreateTag($tagName);
 
         // 作成されたタグがDBに存在するかを確認
