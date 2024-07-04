@@ -91,7 +91,7 @@ class TagTest extends TestCase
         // 全てのタグを取得
         $allTags = Tag::availableAllTags()->get();
 
-        // 取得したタグのIDが、作成したタグのIDと、同じであることを確認
+        // 作成したタグのIDの配列が、取得したタグのIDの配列と、一致するか確認
         $this->assertEquals($tags->pluck('id')->toArray(), $allTags->pluck('id')->toArray());
     }
 
@@ -106,7 +106,7 @@ class TagTest extends TestCase
         // 選択したタグを取得
         $selectedTag = Tag::availableSelectTag($tag->id)->first();
 
-        // 取得したタグのIDが、作成したタグのIDと一致するか確認
+        // 作成したタグのIDが、取得したタグのIDと、一致するか確認
         $this->assertEquals($tag->id, $selectedTag->id);
     }
 
@@ -136,9 +136,9 @@ class TagTest extends TestCase
         // 重複チェックのスコープでタグを取得
         $duplicateTag = Tag::availableCheckDuplicateTag($tag->name)->first();
 
-        // 取得した重複タグが存在するかを確認
+        // 取得した重複タグが、存在するかを確認
         $this->assertNotNull($duplicateTag);
-        // 取得した重複タグの名前が、テスト用のタグの名前と一致するかを確認
+        // 作成したタグの名前が、取得した重複タグの名前と、一致するかを確認
         $this->assertEquals($tag->name, $duplicateTag->name);
     }
 }

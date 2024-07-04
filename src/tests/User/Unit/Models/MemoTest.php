@@ -103,17 +103,17 @@ class MemoTest extends TestCase
 
         // メモに関連付けられた共有設定のリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(HasMany::class, $memo->shareSettings());
-        // 作成した共有設定のIDが、メモに関連付けられた共有設定のIDと一致しているかを確認
-        $this->assertEquals($shareSetting->id, $memo->shareSettings->first()->id);
+        // 作成した共有設定のIDの配列が、メモに関連付けられた共有設定のIDの配列と一致しているかを確認
+        $this->assertEquals($shareSetting->pluck('id')->toArray(), $memo->shareSettings->pluck('id')->toArray());
 
         // メモに関連付けられたユーザーのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsTo::class, $memo->user());
-        // メモに関連付けられたユーザーのIDが、作成したユーザーのIDと一致しているかを確認
+        // 作成したユーザーのIDが、メモに関連付けられたユーザーのIDと、一致しているかを確認
         $this->assertEquals($this->user->id, $memo->user->id);
     }
 
     /**
-     * 自分自身の全てのメモを取得するスコープのテスト
+     * 自分自身の全てのメモを、取得するスコープのテスト
      * @return void
      */
     public function testAvailableAllMemosScope()
@@ -123,12 +123,12 @@ class MemoTest extends TestCase
         // 全てのメモを取得
         $allMemos = Memo::availableAllMemos()->get();
 
-        // 取得したメモのIDが、作成したメモのIDと、同じであることを確認
+        // 作成したメモのIDの配列が、取得したメモのIDの配列と、一致するか確認
         $this->assertEquals($memos->pluck('id')->toArray(), $allMemos->pluck('id')->toArray());
     }
 
     /**
-     * 自分自身の選択したメモを取得するスコープのテスト
+     * 自分自身の選択したメモを、取得するスコープのテスト
      * @return void
      */
     public function testAvailableSelectMemoScope()
@@ -138,12 +138,12 @@ class MemoTest extends TestCase
         // 選択したメモを取得
         $selectedMemo = Memo::availableSelectMemo($memo->id)->first();
 
-        // 取得したメモのIDが、作成したメモのIDと一致するか確認
+        // 作成したメモのIDが、取得したメモのIDと、一致するか確認
         $this->assertEquals($memo->id, $selectedMemo->id);
     }
 
     /**
-     * 自分自身の全ての削除済みのメモを取得するスコープのテスト
+     * 自分自身の全ての削除済みのメモを、取得するスコープのテスト
      * @return void
      */
     public function testAvailableAllTrashedMemosScope()
@@ -153,12 +153,12 @@ class MemoTest extends TestCase
         // 全てのソフトデリートしたメモを取得
         $trashedMemos = Memo::availableAllTrashedMemos()->get();
 
-        // 取得した削除済みメモのIDが、作成した削除済みメモのIDと、同じであることを確認
+        // 作成した削除済みメモのIDの配列が、取得した削除済みメモのIDの配列と、一致するか確認
         $this->assertEquals($memos->pluck('id')->toArray(), $trashedMemos->pluck('id')->toArray());
     }
 
     /**
-     * 自分自身の選択した削除済みのメモを取得するスコープのテスト
+     * 自分自身の選択した削除済みのメモを、取得するスコープのテスト
      * @return void
      */
     public function testAvailableSelectTrashedMemoScope()
@@ -168,7 +168,7 @@ class MemoTest extends TestCase
         // 選択した削除済みのメモを取得
         $selectedTrashedMemo = Memo::availableSelectTrashedMemo($memo->id)->first();
 
-        // 取得した削除済みメモのIDが、作成したメモのIDと一致するか確認
+        // 作成した削除済みメモのIDが、取得した削除済みメモのIDと、一致するか確認
         $this->assertEquals($memo->id, $selectedTrashedMemo->id);
     }
 }
