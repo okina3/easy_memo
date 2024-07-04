@@ -5,8 +5,10 @@ namespace Tests\User\Unit\Models;
 use App\Models\Memo;
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Auth;
 use Tests\User\TestCase;
 
 class TagTest extends TestCase
@@ -14,8 +16,6 @@ class TagTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
-    private Memo $memo;
-    private Tag $tag;
 
     /**
      * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
@@ -23,68 +23,101 @@ class TagTest extends TestCase
      */
     protected function setUp(): void
     {
+        // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // テスト用ユーザー、メモ、タグを作成
+        // ユーザーを作成
         $this->user = User::factory()->create();
-        $this->memo = Memo::factory()->create(['user_id' => $this->user->id]);
-        $this->tag = Tag::factory()->create(['user_id' => $this->user->id]);
-
-        // 認証ユーザーとして設定
-        Auth::shouldReceive('id')->andReturn($this->user->id);
-
-        // リレーションを設定
-        $this->tag->memos()->attach($this->memo);
+        // 認証済みのユーザーを返す
+        $this->actingAs($this->user);
     }
 
     /**
-     * Tagモデルの基本的なリレーションが正しく機能しているかのテスト
+     * タグを作成するヘルパーメソッド
+     * @param int $count タグの作成数
+     * @return Collection 作成されたタグのコレクション
+     */
+    private function createTags(int $count): Collection
+    {
+        // 指定された数のタグを、現在のユーザーに関連付けて作成する
+        return Tag::factory()->count($count)->create(['user_id' => $this->user->id]);
+    }
+
+    /**
+     * タグにメモを関連付けるヘルパーメソッド
+     * @param Tag $tag 関連付けるタグ
+     * @param int $memoCount 作成するメモの数
+     * @return Collection 作成されたメモのコレクション
+     */
+    private function attachMemos(Tag $tag, int $memoCount): Collection
+    {
+        // メモを作成し、タグに関連付け
+        $memos = Memo::factory()->count($memoCount)->create();
+        $tag->memos()->attach($memos);
+
+        // 作成されたメモのコレクションを返す
+        return $memos;
+    }
+
+    /**
+     * 基本的なリレーションが、正しく機能しているかのテスト
      * @return void
      */
     public function testTagAttributesAndRelations()
     {
-        // タグに関連付けられたメモが、正しいかを確認
-        $this->assertTrue($this->tag->memos->contains($this->memo));
-        // タグに関連付けられたメモのIDが、正しいかを確認
-        $this->assertEquals($this->memo->id, $this->tag->memos->first()->id);
+        // 1件のタグを作成
+        $tag = $this->createTags(1)->first();
+        // タグに2件のメモを関連付け
+        [$attachedMemos] = $this->attachMemos($tag, 2);
 
-        // タグに関連付けられたユーザーが、正しいかを確認
-        $this->assertInstanceOf(User::class, $this->tag->user);
-        // タグに関連付けられたユーザーのIDが、正しいかを確認
-        $this->assertEquals($this->user->id, $this->tag->user->id);
+        // タグに関連付けられたメモのリレーションが、正しいインスタンスであることを確認
+        $this->assertInstanceOf(BelongsToMany::class, $tag->memos());
+        // 作成した全てのメモのIDが、タグに関連付けられたメモのIDと一致しているかを確認
+        $this->assertEquals($attachedMemos->pluck('id')->toArray(), $tag->memos->pluck('id')->toArray());
+
+        // タグに関連付けられたユーザーのリレーションが、正しいインスタンスであることを確認
+        $this->assertInstanceOf(BelongsTo::class, $tag->user());
+        // タグに関連付けられたユーザーのIDが、作成したユーザーのIDと一致しているかを確認
+        $this->assertEquals($this->user->id, $tag->user->id);
     }
 
     /**
-     * 自分自身の全てのタグを取得するスコープのテスト
+     * 自分自身の全てのタグを、取得するスコープのテスト
      * @return void
      */
     public function testAvailableAllTagsScope()
     {
-        $tags = Tag::availableAllTags()->get();
+        // 3件のタグを作成
+        $tags = $this->createTags(3);
+        // 全てのタグを取得
+        $allTags = Tag::availableAllTags()->get();
 
-        // 取得したタグの中に、テスト用タグが含まれているかを確認
-        $this->assertTrue($tags->contains($this->tag));
+        // 取得したタグのIDが、作成したタグのIDと、同じであることを確認
+        $this->assertEquals($tags->pluck('id')->toArray(), $allTags->pluck('id')->toArray());
     }
 
     /**
-     * 自分自身の選択したタグを取得するスコープのテスト
+     * 自分自身の選択したタグを、取得するスコープのテスト
      * @return void
      */
     public function testAvailableSelectTagScope()
     {
-        $selectedTag = Tag::availableSelectTag($this->tag->id)->first();
+        // 1件のタグを作成
+        $tag = $this->createTags(1)->first();
+        // 選択したタグを取得
+        $selectedTag = Tag::availableSelectTag($tag->id)->first();
 
-        // 取得したタグのIDが、テスト用のタグIDと一致するか確認
-        $this->assertEquals($this->tag->id, $selectedTag->id);
+        // 取得したタグのIDが、作成したタグのIDと一致するか確認
+        $this->assertEquals($tag->id, $selectedTag->id);
     }
 
     /**
-     * タグをDBに保存するスコープのテスト
+     * タグをDBに、保存するスコープのテスト
      * @return void
      */
     public function testAvailableCreateTagScope()
     {
         // 新しいタグ名を設定
-        $tagName = '新しいタグ';
+        $tagName = '新しいテストタグ';
         // 新しいタグを作成
         Tag::availableCreateTag($tagName);
 
@@ -93,21 +126,19 @@ class TagTest extends TestCase
     }
 
     /**
-     * タグの重複をチェックするスコープのテスト
+     * タグの重複を、チェックするスコープのテスト
      * @return void
      */
     public function testAvailableCheckDuplicateTagScope()
     {
-        // 重複チェック用のタグ名を設定
-        $tagName = '非重複タグ';
-        // タグを作成
-        Tag::factory()->create(['name' => $tagName, 'user_id' => $this->user->id]);
+        // 1件のタグを作成
+        $tag = $this->createTags(1)->first();
         // 重複チェックのスコープでタグを取得
-        $duplicateTag = Tag::availableCheckDuplicateTag($tagName)->first();
+        $duplicateTag = Tag::availableCheckDuplicateTag($tag->name)->first();
 
         // 取得した重複タグが存在するかを確認
         $this->assertNotNull($duplicateTag);
         // 取得した重複タグの名前が、テスト用のタグの名前と一致するかを確認
-        $this->assertEquals($tagName, $duplicateTag->name);
+        $this->assertEquals($tag->name, $duplicateTag->name);
     }
 }
