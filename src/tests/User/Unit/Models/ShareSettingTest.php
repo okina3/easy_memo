@@ -73,14 +73,14 @@ class ShareSettingTest extends TestCase
         // 1件の共有設定を作成
         $shareSetting = $this->createShareSetting($this->secondaryUserMemo);
 
-        // 共有設定に関連付けられたメモのリレーションが、正しいインスタンスであることを確認
+        // 共有設定とメモのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsTo::class, $shareSetting->memo());
-        // 作成した共有設定のメモのIDが、共有設定に関連付けられたメモのIDと、一致しているかを確認
+        // 作成した共有設定のmemo_idが、共有設定に関連付けられたメモのIDと、一致しているかを確認
         $this->assertEquals($shareSetting->memo_id, $shareSetting->memo->id);
 
-        // 共有設定に関連付けられたユーザーのリレーションが、正しいインスタンスであることを確認
+        // 共有設定とユーザーのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsTo::class, $shareSetting->user());
-        // 作成した共有設定のsharing_user_idが、共有設定に関連付けられたユーザーのIDと、一致しているかを確認
+        // 作成した共有設定のsharing_user_idが、作成した共有設定に紐づいたユーザーのIDと、一致しているかを確認
         $this->assertEquals($shareSetting->sharing_user_id, $shareSetting->user->id);
     }
 

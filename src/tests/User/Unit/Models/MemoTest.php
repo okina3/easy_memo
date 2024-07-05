@@ -88,27 +88,27 @@ class MemoTest extends TestCase
         // メモに2件のタグと2件の画像を関連付け
         [$attachedTags, $attachedImages] = $this->attachTagsAndImages($memo, 2, 2);
 
-        // メモに関連付けられたタグのリレーションが、正しいインスタンスであることを確認
+        // メモとタグのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsToMany::class, $memo->tags());
-        // 作成した全てのタグのIDが、メモに関連付けられたタグのIDと一致しているかを確認
+        // 作成した関連付けられたタグのID配列が、作成したメモに紐づいたタグのID配列と、一致しているかを確認
         $this->assertEquals($attachedTags->pluck('id')->toArray(), $memo->tags->pluck('id')->toArray());
 
-        // メモに関連付けられた画像のリレーションが、正しいインスタンスであることを確認
+        // メモと画像のリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsToMany::class, $memo->images());
-        // 作成した全ての画像のIDが、メモに関連付けられた画像のIDと一致しているかを確認
+        // 作成した関連付けられた画像のID配列が、作成したメモに紐づいた画像のID配列と、一致しているかを確認
         $this->assertEquals($attachedImages->pluck('id')->toArray(), $memo->images->pluck('id')->toArray());
 
         // 共有設定を作成し、メモに関連付け
         $shareSetting = ShareSetting::factory()->create(['memo_id' => $memo->id]);
 
-        // メモに関連付けられた共有設定のリレーションが、正しいインスタンスであることを確認
+        // メモと共有設定のリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(HasMany::class, $memo->shareSettings());
-        // 作成した共有設定のIDの配列が、メモに関連付けられた共有設定のIDの配列と一致しているかを確認
+        // 作成した共有設定のIDの配列が、メモに紐づいた共有設定のIDの配列と、一致しているかを確認
         $this->assertEquals($shareSetting->pluck('id')->toArray(), $memo->shareSettings->pluck('id')->toArray());
 
-        // メモに関連付けられたユーザーのリレーションが、正しいインスタンスであることを確認
+        // メモとユーザーのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsTo::class, $memo->user());
-        // 作成したユーザーのIDが、メモに関連付けられたユーザーのIDと、一致しているかを確認
+        // 自分のユーザーのIDが、作成したメモに紐づいたユーザーのIDと、一致しているかを確認
         $this->assertEquals($this->user->id, $memo->user->id);
     }
 

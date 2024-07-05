@@ -71,7 +71,7 @@ class ImageTest extends TestCase
 
         // 画像とメモのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsToMany::class, $image->memos());
-        // 関連付けたメモのID配列が、作成した画像に紐づいたメモのID配列と一致しているかを確認
+        // 作成した関連付けられたメモのID配列が、作成した画像に紐づいたメモのID配列と、一致しているかを確認
         $this->assertEquals($attachedMemos->pluck('id')->toArray(), $image->memos->pluck('id')->toArray());
 
         // 画像とユーザーのリレーションが、正しいインスタンスであることを確認

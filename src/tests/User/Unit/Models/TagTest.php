@@ -69,14 +69,14 @@ class TagTest extends TestCase
         // タグに2件のメモを関連付け
         $attachedMemos = $this->attachMemos($tag, 2);
 
-        // タグに関連付けられたメモのリレーションが、正しいインスタンスであることを確認
+        // タグとメモのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsToMany::class, $tag->memos());
-        // 作成した全てのメモのIDが、タグに関連付けられたメモのIDと一致しているかを確認
+        // 作成した関連付けられたメモのID配列が、作成したタグに紐づいたメモのID配列と、一致しているかを確認
         $this->assertEquals($attachedMemos->pluck('id')->toArray(), $tag->memos->pluck('id')->toArray());
 
-        // タグに関連付けられたユーザーのリレーションが、正しいインスタンスであることを確認
+        // タグとユーザーのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsTo::class, $tag->user());
-        // タグに関連付けられたユーザーのIDが、作成したユーザーのIDと一致しているかを確認
+        // 自分のユーザーのIDが、作成したタグに紐づいたユーザーのIDと、一致しているかを確認
         $this->assertEquals($this->user->id, $tag->user->id);
     }
 

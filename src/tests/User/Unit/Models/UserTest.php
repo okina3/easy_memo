@@ -61,7 +61,6 @@ class UserTest extends TestCase
     {
         // 通知を偽装する
         Notification::fake();
-
         // ダミートークンを設定
         $token = 'dummy-token123';
         // パスワードリセット通知をユーザーに送信
@@ -81,9 +80,9 @@ class UserTest extends TestCase
         // 2件のメモを作成
         $attachedMemos = $this->createMemos(2);
 
-        // ユーザーに関連付けられたメモのリレーションが、正しいインスタンスであることを確認
+        // ユーザーとメモのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(HasMany::class, $this->user->memos());
-        // 作成した全てのメモのIDが、ユーザーに関連付けられたメモのIDと一致しているかを確認
+        // 作成したメモのIDが、自分のユーザーに紐づいたメモのIDと、一致しているかを確認
         $this->assertEquals($attachedMemos->pluck('id')->toArray(), $this->user->memos->pluck('id')->toArray());
     }
 

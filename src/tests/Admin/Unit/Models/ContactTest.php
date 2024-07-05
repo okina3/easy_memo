@@ -92,7 +92,6 @@ class ContactTest extends TestCase
         $requestData = new Request([
             'subject' => 'テスト件名',
             'message' => 'テストメッセージ',
-            'user_id' => $this->user->id,
         ]);
 
         // 問い合わせを保存
@@ -115,7 +114,6 @@ class ContactTest extends TestCase
         Contact::factory()->create([
             'subject' => '緊急: テスト問題',
             'message' => 'できるだけ早くこの問題を解決してください。',
-            'user_id' => $this->user->id,
         ]);
 
         // キーワード「緊急」で、問い合わせを検索
