@@ -67,7 +67,7 @@ class TagTest extends TestCase
         // 1件のタグを作成
         $tag = $this->createTags(1)->first();
         // タグに2件のメモを関連付け
-        [$attachedMemos] = $this->attachMemos($tag, 2);
+        $attachedMemos = $this->attachMemos($tag, 2);
 
         // タグに関連付けられたメモのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsToMany::class, $tag->memos());
