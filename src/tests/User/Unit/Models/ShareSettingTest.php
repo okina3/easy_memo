@@ -143,7 +143,7 @@ class ShareSettingTest extends TestCase
     }
 
     /**
-     * 共有されていないメモに対する設定の、チェックをするスコープのテスト
+     * 共有されていないメモに対する設定の、チェックをするスコープのテスト（成功）
      * @return void
      */
     public function testAvailableCheckSettingScope()
@@ -158,7 +158,7 @@ class ShareSettingTest extends TestCase
     }
 
     /**
-     * 共有されていないメモに対する設定の、チェックをするスコープのテスト（エラー）
+     * 共有されていないメモに対する設定の、チェックをするスコープのテスト（失敗）
      * @return void
      */
     public function testErrorAvailableCheckSettingScope()
