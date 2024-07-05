@@ -4,6 +4,8 @@ namespace Tests\User\Unit\Notifications;
 
 use App\Notifications\User\ResetPasswordNotification;
 use Illuminate\Notifications\Messages\MailMessage;
+use ReflectionClass;
+use stdClass;
 use Tests\User\TestCase;
 
 class ResetPasswordNotificationTest extends TestCase
@@ -21,7 +23,7 @@ class ResetPasswordNotificationTest extends TestCase
         $notification = new ResetPasswordNotification($token);
 
         // メールメッセージを生成。通知対象のオブジェクトを作成
-        $notifiable = new \stdClass();
+        $notifiable = new stdClass();
         // メールメッセージを生成するメソッドを呼び出し
         $mailMessage = $notification->toMail($notifiable);
 
@@ -31,7 +33,7 @@ class ResetPasswordNotificationTest extends TestCase
         $this->assertInstanceOf(MailMessage::class, $mailMessage);
 
         // メールメッセージの内容を反射クラスを使用して検証
-        $reflectionClass = new \ReflectionClass($mailMessage);
+        $reflectionClass = new ReflectionClass($mailMessage);
         // メールの件名を取得するためのプロパティを取得
         $subject = $reflectionClass->getProperty('subject');
         // メールの挨拶文を取得するためのプロパティを取得
