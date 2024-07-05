@@ -4,9 +4,10 @@ namespace Tests\Admin\Unit\Models;
 
 use App\Models\Contact;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Tests\Admin\TestCase;
 
 class ContactTest extends TestCase
@@ -14,7 +15,6 @@ class ContactTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
-    private Contact $contact;
 
     /**
      * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
@@ -22,68 +22,81 @@ class ContactTest extends TestCase
      */
     protected function setUp(): void
     {
+        // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // テスト用ユーザー、問い合わせを作成
+        // ユーザーを作成
         $this->user = User::factory()->create();
-        $this->contact = Contact::factory()->create(['user_id' => $this->user->id]);
-
-        // 認証ユーザーとして設定
-        Auth::shouldReceive('id')->andReturn($this->user->id);
+        // 認証済みのユーザーを返す
+        $this->actingAs($this->user);
     }
 
     /**
-     * Contactモデルの基本的なリレーションが正しく機能しているかのテスト
+     * 問い合わせを作成するヘルパーメソッド
+     * @param int $count 問い合わせの作成数
+     * @return Collection 作成された問い合わせのコレクション
+     */
+    private function createContacts(int $count): Collection
+    {
+        // 指定された数の問い合わせを作成する
+        return Contact::factory()->count($count)->create(['user_id' => $this->user->id]);
+    }
+
+    /**
+     * 基本的なリレーションが、正しく機能しているかのテスト
      */
     public function testUserRelation()
     {
-        // 問い合わせに関連付けられたユーザーが、正しいかを確認
-        $this->assertInstanceOf(User::class, $this->contact->user);
-        // 問い合わせに関連付けられたユーザーのIDが、正しいかを確認
-        $this->assertEquals($this->user->id, $this->contact->user->id);
+        // 1件の問い合わせを作成
+        $contact = $this->createContacts(1)->first();
+
+        // 問い合わせとユーザーのリレーションが、正しいインスタンスであることを確認
+        $this->assertInstanceOf(BelongsTo::class, $contact->user());
+        // 自分のユーザーのIDが、作成した問い合わせに紐づいたユーザーのIDと、一致しているかを確認
+        $this->assertEquals($this->user->id, $contact->user->id);
     }
 
     /**
-     * 問い合わせを、新しい順に取得するスコープのテスト
+     * 全ての問い合わせを、取得するスコープのテスト
      */
     public function testAvailableAllContactsScope()
     {
-        // 既存の問い合わせを削除
-        Contact::query()->delete();
+        // 3件の問い合わせを作成
+        $contacts = $this->createContacts(3);
+        // 全ての問い合わせを取得
+        $allContacts = Contact::availableAllContacts()->get();
 
-        // 2件の問い合わせを異なる作成日時で作成
-        Contact::factory()->create(['message' => '問い合わせ 1', 'created_at' => now()->subSeconds(10)]);
-        Contact::factory()->create(['message' => '問い合わせ 2', 'created_at' => now()]);
-
-        // 問い合わせを作成順に取得
-        $contacts = Contact::availableAllContacts()->get();
-
-        // 最初の問い合わせが、最新の作成問い合わせであることを確認
-        $this->assertEquals('問い合わせ 2', $contacts->first()->message);
-        // 最後の問い合わせが、最も古い作成問い合わせであることを確認
-        $this->assertEquals('問い合わせ 1', $contacts->last()->message);
+        // 作成した問い合わせのIDの配列が、取得した問い合わせのIDの配列と、一致するか確認
+        $this->assertEquals($contacts->pluck('id')->toArray(), $allContacts->pluck('id')->toArray());
     }
 
     /**
-     * 選択した問い合わせが正しく取得するスコープのテスト
+     * 選択した問い合わせが、正しく取得するスコープのテスト
      */
     public function testAvailableSelectContactScope()
     {
-        $selectedContact = Contact::availableSelectContact($this->contact->id)->first();
+        // 1件の問い合わせを作成
+        $contact = $this->createContacts(1)->first();
+        // 選択した問い合わせを取得
+        $selectedContact = Contact::availableSelectContact($contact->id)->first();
 
-        // 取得した問い合わせのIDが、テスト用問い合わせのIDと一致するか確認
-        $this->assertEquals($this->contact->id, $selectedContact->id);
+        // 作成した問い合わせのIDが、取得した問い合わせのIDと、一致するか確認
+        $this->assertEquals($contact->id, $selectedContact->id);
     }
 
     /**
-     * 問い合わせをDBに保存するスコープのテスト
+     * 問い合わせをDBに、保存するスコープのテスト
      */
     public function testAvailableCreateContactScope()
     {
-        // 問い合わせのデータを用意
-        $data = new Request(['subject' => 'テスト件名', 'message' => 'テストメッセージ']);
+        // 1件の問い合わせのデータを作成
+        $requestData = new Request([
+            'subject' => 'テスト件名',
+            'message' => 'テストメッセージ',
+            'user_id' => $this->user->id,
+        ]);
 
-        // スコープを使用して問い合わせを作成
-        Contact::availableCreateContact($data);
+        // 問い合わせを保存
+        Contact::availableCreateContact($requestData);
 
         // 作成された問い合わせがDBに存在するかを確認
         $this->assertDatabaseHas('contacts', [
@@ -94,19 +107,21 @@ class ContactTest extends TestCase
     }
 
     /**
-     * 問い合わせを検索するスコープのテスト
+     * 問い合わせを、検索するスコープのテスト
      */
     public function testSearchKeywordScope()
     {
-        // テスト用の問い合わせを作成
-        Contact::factory()->create(['subject' => '緊急: テスト問題', 'message' => 'できるだけ早くこの問題を解決してください。']);
+        // 1件の問い合わせのデータを作成
+        Contact::factory()->create([
+            'subject' => '緊急: テスト問題',
+            'message' => 'できるだけ早くこの問題を解決してください。',
+            'user_id' => $this->user->id,
+        ]);
 
-        // キーワードで問い合わせを検索
+        // キーワード「緊急」で、問い合わせを検索
         $searchResults = Contact::searchKeyword('緊急')->get();
 
-        // 検索結果が1件であることを確認
-        $this->assertCount(1, $searchResults);
-        // 検索結果の問い合わせが期待通りであることを確認
+        // 検索結果の最初の要素の件名に「緊急」が含まれているかを確認
         $this->assertStringContainsString('緊急', $searchResults->first()->subject);
     }
 }

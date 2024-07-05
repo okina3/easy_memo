@@ -69,14 +69,14 @@ class ImageTest extends TestCase
         // 画像に2件のメモを関連付け
         $attachedMemos = $this->attachMemos($image, 2);
 
-        // 画像に関連付けられたメモのリレーションが、正しいインスタンスであることを確認
+        // 画像とメモのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsToMany::class, $image->memos());
-        // 作成した全てのメモのIDが、画像に関連付けられたメモのIDと一致しているかを確認
+        // 関連付けたメモのID配列が、作成した画像に紐づいたメモのID配列と一致しているかを確認
         $this->assertEquals($attachedMemos->pluck('id')->toArray(), $image->memos->pluck('id')->toArray());
 
-        // 画像に関連付けられたユーザーのリレーションが、正しいインスタンスであることを確認
+        // 画像とユーザーのリレーションが、正しいインスタンスであることを確認
         $this->assertInstanceOf(BelongsTo::class, $image->user());
-        // 画像に関連付けられたユーザーのIDが、作成したユーザーのIDと一致しているかを確認
+        // 自分のユーザーのIDが、作成した画像に紐づいたユーザーのIDと、一致しているかを確認
         $this->assertEquals($this->user->id, $image->user->id);
     }
 
