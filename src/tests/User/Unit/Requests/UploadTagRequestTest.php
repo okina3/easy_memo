@@ -3,6 +3,7 @@
 namespace Tests\User\Unit\Requests;
 
 use App\Http\Requests\UploadTagRequest;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
 use Tests\User\TestCase;
@@ -11,8 +12,6 @@ class UploadTagRequestTest extends TestCase
 {
     use RefreshDatabase;
 
-    private UploadTagRequest $request;
-
     /**
      * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
      *
@@ -20,73 +19,94 @@ class UploadTagRequestTest extends TestCase
      */
     protected function setUp(): void
     {
+        // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // UploadTagRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化
-        $this->request = new UploadTagRequest();
+        // ユーザーを作成
+        $user = User::factory()->create();
+        // 認証済みのユーザーを返す
+        $this->actingAs($user);
     }
 
     /**
-     * 指定されたデータを用いてUploadTagRequestのインスタンスを作成。
-     * テスト用に、リクエストにデータをマージするメソッド
-     *
-     * @param array $data
+     * UploadTagRequestのインスタンスを作成
      * @return UploadTagRequest
      */
-    private function createUploadTagRequest(array $data): UploadTagRequest
+    private function createUploadTagRequest(): UploadTagRequest
     {
-        // 受け取ったデータをリクエストオブジェクトに統合
-        $this->request->merge($data);
-        return $this->request;
+        // UploadTagRequestのインスタンスを返す
+        return new UploadTagRequest();
     }
 
     /**
-     * リクエストが承認されるかどうかを確認するテスト
-     *
+     * authorizeメソッドが、常にtrueを返すことを検証するテスト
      * @return void
      */
     public function testAuthorizeReturnsTrue()
     {
-        // リクエストが常に承認されることを検証、trueを返すことを確認
-        $this->assertTrue($this->request->authorize());
+        // UploadTagRequestのインスタンスを初期化
+        $request = $this->createUploadTagRequest();
+
+        // authorize() メソッドが常に true を返すことを確認
+        $this->assertTrue($request->authorize());
     }
 
     /**
-     * リクエストデータが正しくバリデートされるかを確認するテスト
-     *
+     * バリデーションが、正しく機能することを確認するテスト
      * @return void
      */
     public function testRulesValidation()
     {
-        // テスト用データ
-        $data = ['new_tag' => 'テストタグ'];
-
-        // リクエストを作成
-        $request = $this->createUploadTagRequest($data);
-        // バリデータを作成
-        $validator = Validator::make($request->all(), $request->rules());
+        // バリデーション用のデータを設定
+        $data = [
+            'new_tag' => 'テストタグ'
+        ];
+        // UploadTagRequestのインスタンスを初期化
+        $request = $this->createUploadTagRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
 
         // バリデーションが成功することを確認
         $this->assertTrue($validator->passes());
     }
 
     /**
-     * バリデーションエラーメッセージが正しく設定されているかを確認するテスト
-     *
+     * バリデーションが、失敗することを確認するテスト
+     * @return void
+     */
+    public function testErrorRulesValidation()
+    {
+        // バリデーション用のデータを設定（タグ名が、25文字以上）
+        $data = [
+            'new_tag' => 'テストタグ、テストタグ、テストタグ、テストタグ、テストタグ'
+        ];
+        // UploadTagRequestのインスタンスを初期化
+        $request = $this->createUploadTagRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
+
+        // バリデーションが失敗することを確認
+        $this->assertFalse($validator->passes());
+    }
+
+    /**
+     * バリデーションエラーメッセージが、正しく設定されていることを確認するテスト
      * @return void
      */
     public function testMessagesMethod()
     {
-        // リクエストからバリデーションメッセージを取得
-        $messages = $this->request->messages();
+        // UploadTagRequestのインスタンスを初期化
+        $request = $this->createUploadTagRequest();
 
+        // リクエストから、バリデーションメッセージを取得
+        $messages = $request->messages();
         // 期待されるバリデーションメッセージを定義
         $expectedMessages = [
             'new_tag.string' => 'タグが、入力されていません。また、文字列で指定してください。',
             'new_tag.max' => 'タグは、25文字以内で入力してください。',
-            'new_tag.unique' => 'このタグは、すでに登録されています。',
+            'new_tag.unique' => 'このタグは、すでに登録されています。'
         ];
 
-        // 取得したメッセージが期待されるものと一致することを確認
+        // 取得したメッセージが、期待されるバリデーションメッセージと一致することを確認
         $this->assertEquals($expectedMessages, $messages);
     }
 }

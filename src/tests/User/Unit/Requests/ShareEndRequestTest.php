@@ -6,7 +6,6 @@ use App\Http\Requests\ShareEndRequest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 use Tests\User\TestCase;
 
 class ShareEndRequestTest extends TestCase
@@ -22,80 +21,99 @@ class ShareEndRequestTest extends TestCase
      */
     protected function setUp(): void
     {
+        // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // ShareEndRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化
-        $this->request = new ShareEndRequest();
+        // ユーザーを作成
+        $user = User::factory()->create();
+        // 認証済みのユーザーを返す
+        $this->actingAs($user);
     }
 
     /**
-     * 指定されたデータを用いてShareEndRequestのインスタンスを作成。
-     * テスト用に、リクエストにデータをマージするメソッド
-     *
-     * @param array $data
+     * ShareEndRequestのインスタンスを作成
      * @return ShareEndRequest
      */
-    private function createShareEndRequest(array $data): ShareEndRequest
+    private function createShareEndRequest(): ShareEndRequest
     {
-        // 受け取ったデータをリクエストオブジェクトに統合
-        $this->request->merge($data);
-        return $this->request;
+        // ShareEndRequestのインスタンスを返す
+        return new ShareEndRequest();
     }
 
     /**
-     * リクエストが承認されるかどうかを確認するテスト
-     *
+     * authorizeメソッドが、常にtrueを返すことを検証するテスト
      * @return void
      */
     public function testAuthorizeReturnsTrue()
     {
-        // リクエストが常に承認されることを検証、trueを返すことを確認
-        $this->assertTrue($this->request->authorize());
+        // ShareEndRequestのインスタンスを初期化
+        $request = $this->createShareEndRequest();
+
+        // authorize() メソッドが常に true を返すことを確認
+        $this->assertTrue($request->authorize());
     }
 
     /**
-     * リクエストデータが正しくバリデートされるかを確認するテスト
-     *
+     * バリデーションが、正しく機能することを確認するテスト
      * @return void
      */
     public function testRulesValidation()
     {
-        // テスト用データ
+        // バリデーション用のユーザーを作成
         User::factory()->create(['email' => 'test@example.com']);
+        // バリデーション用のデータを設定
         $data = [
             'share_user_end' => 'test@example.com'
         ];
-
-        // テストユーザーを認証
-        $authUser = User::factory()->create();
-        Auth::login($authUser);
-
-        // リクエストを作成
-        $request = $this->createShareEndRequest($data);
-        // バリデータを作成
-        $validator = Validator::make($request->all(), $request->rules());
+        // ShareEndRequestのインスタンスを初期化
+        $request = $this->createShareEndRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
 
         // バリデーションが成功することを確認
         $this->assertTrue($validator->passes());
     }
 
     /**
-     * バリデーションエラーメッセージが正しく設定されているかを確認するテスト
-     *
+     * バリデーションが、失敗することを確認するテスト
+     * @return void
+     */
+    public function testErrorRulesValidation()
+    {
+        // バリデーション用のユーザーを作成（メールアドレスが、文字列）
+        User::factory()->create(['email' => 'あいうえお']);
+        // バリデーション用のデータを設定
+        $data = [
+            'share_user_end' => 'あいうえお'
+        ];
+        // ShareEndRequestのインスタンスを初期化
+        $request = $this->createShareEndRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
+
+        // バリデーションが失敗することを確認
+        $this->assertFalse($validator->passes());
+    }
+
+    /**
+     * バリデーションエラーメッセージが、正しく設定されていることを確認するテスト
      * @return void
      */
     public function testMessagesMethod()
     {
-        // リクエストからバリデーションメッセージを取得
-        $messages = $this->request->messages();
+        // ShareEndRequestのインスタンスを初期化
+        $request = $this->createShareEndRequest();
+
+        // リクエストから、バリデーションメッセージを取得
+        $messages = $request->messages();
 
         // 期待されるバリデーションメッセージを定義
         $expectedMessages = [
             'share_user_end.required' => 'メールアドレスが、入力されていません。共有停止できません。',
             'share_user_end.email' => 'メールアドレスを、入力してください。共有停止できません。',
-            'share_user_end.exists' => '指定されたメールアドレスのユーザーが見つかりません。また自分のものです。共有停止できません。',
+            'share_user_end.exists' => '指定されたメールアドレスのユーザーが見つかりません。また自分のものです。共有停止できません。'
         ];
 
-        // 取得したメッセージが期待されるものと一致することを確認
+        // 取得したメッセージが、期待されるバリデーションメッセージと一致することを確認
         $this->assertEquals($expectedMessages, $messages);
     }
 }

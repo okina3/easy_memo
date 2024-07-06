@@ -3,6 +3,7 @@
 namespace Tests\User\Unit\Requests;
 
 use App\Http\Requests\ContactRequest;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
 use Tests\User\TestCase;
@@ -11,83 +12,103 @@ class ContactRequestTest extends TestCase
 {
     use RefreshDatabase;
 
-    private ContactRequest $request;
-
     /**
      * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
-     *
      * @return void
      */
     protected function setUp(): void
     {
+        // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // ContactRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化
-        $this->request = new ContactRequest();
+        // ユーザーを作成
+        $user = User::factory()->create();
+        // 認証済みのユーザーを返す
+        $this->actingAs($user);
     }
 
     /**
-     * 指定されたデータを用いてContactRequestのインスタンスを作成。
-     * テスト用に、リクエストにデータをマージするメソッド
-     *
-     * @param array $data
+     * ContactRequestのインスタンスを作成
      * @return ContactRequest
      */
-    private function createContactRequest(array $data): ContactRequest
+    private function createContactRequest(): ContactRequest
     {
-        // 受け取ったデータをリクエストオブジェクトに統合
-        $this->request->merge($data);
-        return $this->request;
+        // ContactRequestのインスタンスを返す
+        return new ContactRequest();
     }
 
     /**
-     * リクエストが承認されるかどうかを確認するテスト
-     *
+     * authorizeメソッドが、常にtrueを返すことを検証するテスト
      * @return void
      */
     public function testAuthorizeReturnsTrue()
     {
-        // リクエストが常に承認されることを検証、trueを返すことを確認
-        $this->assertTrue($this->request->authorize());
+        // ContactRequestのインスタンスを初期化
+        $request = $this->createContactRequest();
+
+        // authorize() メソッドが常に true を返すことを確認
+        $this->assertTrue($request->authorize());
     }
 
     /**
-     * リクエストデータが正しくバリデートされるかを確認するテスト
-     *
+     * バリデーションが、正しく機能することを確認するテスト
      * @return void
      */
     public function testRulesValidation()
     {
-        // テスト用データ
-        $data = ['subject' => 'テスト件名', 'message' => 'テストメッセージ'];
-
-        // リクエストを作成
-        $request = $this->createContactRequest($data);
-        // バリデータを作成
-        $validator = Validator::make($request->all(), $request->rules());
+        // バリデーション用のデータを設定
+        $data = [
+            'subject' => 'テスト件名',
+            'message' => 'テストメッセージ'
+        ];
+        // ContactRequestのインスタンスを初期化
+        $request = $this->createContactRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
 
         // バリデーションが成功することを確認
         $this->assertTrue($validator->passes());
     }
 
     /**
-     * バリデーションエラーメッセージが正しく設定されているかを確認するテスト
-     *
+     * バリデーションが、失敗することを確認するテスト
+     * @return void
+     */
+    public function testErrorRulesValidation()
+    {
+        // バリデーションの用データを設定（件名が、25文字以上）
+        $data = [
+            'subject' => 'テスト件名、テスト件名、テスト件名、テスト件名、テスト件名、テスト件名',
+            'message' => 'テストメッセージ'
+        ];
+        // ContactRequestのインスタンスを初期化
+        $request = $this->createContactRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
+
+        // バリデーションが失敗することを確認
+        $this->assertFalse($validator->passes());
+    }
+
+    /**
+     * バリデーションエラーメッセージが、正しく設定されていることを確認するテスト
      * @return void
      */
     public function testMessagesMethod()
     {
-        // リクエストからバリデーションメッセージを取得
-        $messages = $this->request->messages();
+        // ContactRequestのインスタンスを初期化
+        $request = $this->createContactRequest();
 
+        // リクエストから、バリデーションメッセージを取得
+        $messages = $request->messages();
         // 期待されるバリデーションメッセージを定義
         $expectedMessages = [
             'subject.string' => '件名が、入力されていません。また、文字列で指定してください。',
             'subject.max' => '件名は、25文字以内で入力してください。',
             'message.string' => 'お問い合わせ内容が、入力されていません。また、文字列で指定してください。',
-            'message.max' => 'お問い合わせ内容は、1000文字以内にしてください。',
+            'message.max' => 'お問い合わせ内容は、1000文字以内にしてください。'
         ];
 
-        // 取得したメッセージが期待されるものと一致することを確認
+        // 取得したメッセージが、期待されるバリデーションメッセージと一致することを確認
         $this->assertEquals($expectedMessages, $messages);
     }
 }

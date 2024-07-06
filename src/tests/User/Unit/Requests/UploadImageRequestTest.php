@@ -3,16 +3,15 @@
 namespace Tests\User\Unit\Requests;
 
 use App\Http\Requests\UploadImageRequest;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 use Tests\User\TestCase;
-use Illuminate\Http\UploadedFile;
 
 class UploadImageRequestTest extends TestCase
 {
     use RefreshDatabase;
-
-    private UploadImageRequest $request;
 
     /**
      * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
@@ -21,74 +20,95 @@ class UploadImageRequestTest extends TestCase
      */
     protected function setUp(): void
     {
+        // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // UploadImageRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化
-        $this->request = new UploadImageRequest();
+        // ユーザーを作成
+        $user = User::factory()->create();
+        // 認証済みのユーザーを返す
+        $this->actingAs($user);
     }
 
     /**
-     * 指定されたデータを用いてUploadImageRequestのインスタンスを作成。
-     * テスト用に、リクエストにデータをマージするメソッド
-     *
-     * @param array $data
+     * UploadImageRequestのインスタンスを作成
      * @return UploadImageRequest
      */
-    private function createUploadImageRequest(array $data): UploadImageRequest
+    private function createUploadImageRequest(): UploadImageRequest
     {
-        // 受け取ったデータをリクエストオブジェクトに統合
-        $this->request->merge($data);
-        return $this->request;
+        // UploadImageRequestのインスタンスを返す
+        return new UploadImageRequest();
     }
 
     /**
-     * リクエストが承認されるかどうかを確認するテスト
-     *
+     * authorizeメソッドが、常にtrueを返すことを検証するテスト
      * @return void
      */
     public function testAuthorizeReturnsTrue()
     {
-        // リクエストが常に承認されることを検証、trueを返すことを確認
-        $this->assertTrue($this->request->authorize());
+        // UploadImageRequestのインスタンスを初期化
+        $request = $this->createUploadImageRequest();
+
+        // authorize() メソッドが常に true を返すことを確認
+        $this->assertTrue($request->authorize());
     }
 
     /**
-     * リクエストデータが正しくバリデートされるかを確認するテスト
-     *
+     * バリデーションが、正しく機能することを確認するテスト
      * @return void
      */
     public function testRulesValidation()
     {
-        // テスト用データとして、ファイルを作成
-        $data = ['images' => UploadedFile::fake()->image('test_image.jpg')->size(1024)];
-
-        // リクエストを作成
-        $request = $this->createUploadImageRequest($data);
-        // バリデータを作成
-        $validator = Validator::make($request->all(), $request->rules());
+        // バリデーション用のデータを設定
+        $data = [
+            'images' => UploadedFile::fake()->image('test_image.jpg')->size(1024)
+        ];
+        // UploadImageRequestのインスタンスを初期化
+        $request = $this->createUploadImageRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
 
         // バリデーションが成功することを確認
         $this->assertTrue($validator->passes());
     }
 
     /**
-     * バリデーションエラーメッセージが正しく設定されているかを確認するテスト
-     *
+     * バリデーションが、失敗することを確認するテスト
+     * @return void
+     */
+    public function testErrorRulesValidation()
+    {
+        // バリデーション用のデータを設定（拡張子が、txt）
+        $data = [
+            'images' => UploadedFile::fake()->image('test_image.txt')->size(1024)
+        ];
+        // UploadImageRequestのインスタンスを初期化
+        $request = $this->createUploadImageRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
+
+        // バリデーションが失敗することを確認
+        $this->assertFalse($validator->passes());
+    }
+
+    /**
+     * バリデーションエラーメッセージが、正しく設定されていることを確認するテスト
      * @return void
      */
     public function testMessagesMethod()
     {
-        // リクエストからバリデーションメッセージを取得
-        $messages = $this->request->messages();
+        // UploadImageRequestのインスタンスを初期化
+        $request = $this->createUploadImageRequest();
 
+        // リクエストから、バリデーションメッセージを取得
+        $messages = $request->messages();
         // 期待されるバリデーションメッセージを定義
         $expectedMessages = [
             'images.required' => '画像が指定されていません。',
             'images.image' => '指定されたファイルが画像ではありません。',
             'images.mimes' => '指定された拡張子(jpg/jpeg/png)ではありません。',
-            'images.max' => 'ファイルサイズは2MB以内にしてください。',
+            'images.max' => 'ファイルサイズは2MB以内にしてください。'
         ];
 
-        // 取得したメッセージが期待されるものと一致することを確認
+        // 取得したメッセージが、期待されるバリデーションメッセージと一致することを確認
         $this->assertEquals($expectedMessages, $messages);
     }
 }
