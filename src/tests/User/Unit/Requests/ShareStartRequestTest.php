@@ -6,7 +6,6 @@ use App\Http\Requests\ShareStartRequest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 use Tests\User\TestCase;
 
 class ShareStartRequestTest extends TestCase
@@ -22,61 +21,79 @@ class ShareStartRequestTest extends TestCase
      */
     protected function setUp(): void
     {
+        // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // ShareStartRequestのインスタンスを作成、テスト用のリクエストオブジェクトを初期化
-        $this->request = new ShareStartRequest();
+        // ユーザーを作成
+        $user = User::factory()->create();
+        // 認証済みのユーザーを返す
+        $this->actingAs($user);
     }
 
     /**
-     * 指定されたデータを用いてShareStartRequestのインスタンスを作成。
-     * テスト用に、リクエストにデータをマージするメソッド
-     *
-     * @param array $data
+     * ShareStartRequestのインスタンスを作成
      * @return ShareStartRequest
      */
-    private function createShareStartRequest(array $data): ShareStartRequest
+    private function createShareStartRequest(): ShareStartRequest
     {
-        // 受け取ったデータをリクエストオブジェクトに統合
-        $this->request->merge($data);
-        return $this->request;
+        // ShareStartRequestのインスタンスを返す
+        return new ShareStartRequest();
     }
 
     /**
-     * リクエストが承認されるかどうかを確認するテスト
-     *
+     * authorizeメソッドが、常にtrueを返すことを検証するテスト
      * @return void
      */
     public function testAuthorizeReturnsTrue()
     {
-        // リクエストが常に承認されることを検証、trueを返すことを確認
-        $this->assertTrue($this->request->authorize());
+        // ShareStartRequestのインスタンスを初期化
+        $request = $this->createShareStartRequest();
+
+        // authorize() メソッドが常に true を返すことを確認
+        $this->assertTrue($request->authorize());
     }
 
     /**
-     * リクエストデータが正しくバリデートされるかを確認するテスト
-     *
+     * バリデーションが、正しく機能することを確認するテスト
      * @return void
      */
     public function testRulesValidation()
     {
-        // テスト用データ
+        // バリデーション用のユーザーを作成
         User::factory()->create(['email' => 'test@example.com']);
+        // バリデーション用のデータを設定
         $data = [
             'share_user_start' => 'test@example.com',
             'edit_access' => 'true'
         ];
-
-        // テストユーザーを認証
-        $authUser = User::factory()->create();
-        Auth::login($authUser);
-
-        // リクエストを作成
-        $request = $this->createShareStartRequest($data);
-        // バリデータを作成
-        $validator = Validator::make($request->all(), $request->rules());
+        // ShareStartRequestのインスタンスを初期化
+        $request = $this->createShareStartRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
 
         // バリデーションが成功することを確認
         $this->assertTrue($validator->passes());
+    }
+
+    /**
+     * バリデーションが、失敗することを確認するテスト
+     * @return void
+     */
+    public function testErrorRulesValidation()
+    {
+        // バリデーション用のユーザーを作成（メールアドレスが、文字列）
+        User::factory()->create(['email' => 'かきくけこ']);
+        // バリデーション用のデータを設定
+        $data = [
+            'share_user_start' => 'かきくけこ',
+            'edit_access' => 'true'
+        ];
+        // ShareStartRequestのインスタンスを初期化
+        $request = $this->createShareStartRequest();
+        // データをマージしてバリデータを作成
+        $validator = Validator::make($request->merge($data)->all(), $request->rules());
+
+        // バリデーションが失敗することを確認
+        $this->assertFalse($validator->passes());
     }
 
     /**
@@ -86,18 +103,20 @@ class ShareStartRequestTest extends TestCase
      */
     public function testMessagesMethod()
     {
-        // リクエストからバリデーションメッセージを取得
-        $messages = $this->request->messages();
+        // ShareStartRequestのインスタンスを初期化
+        $request = $this->createShareStartRequest();
 
+        // リクエストから、バリデーションメッセージを取得
+        $messages = $request->messages();
         // 期待されるバリデーションメッセージを定義
         $expectedMessages = [
             'share_user_start.required' => 'メールアドレスが、入力されていません。共有できません。',
             'share_user_start.email' => 'メールアドレスを、入力してください。共有できません。',
             'share_user_start.exists' => '指定されたメールアドレスのユーザーが見つかりません。また自分のものです。共有できません。',
-            'edit_access.required' => '編集の許可が、選択されていません。',
+            'edit_access.required' => '編集の許可が、選択されていません。'
         ];
 
-        // 取得したメッセージが期待されるものと一致することを確認
+        // 取得したメッセージが、期待されるバリデーションメッセージと一致することを確認
         $this->assertEquals($expectedMessages, $messages);
     }
 }

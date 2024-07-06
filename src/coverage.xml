@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1720266678">
-  <project timestamp="1720266678">
+<coverage generated="1720268185">
+  <project timestamp="1720268185">
     <file name="/var/www/sample/app/Console/Kernel.php">
       <class name="App\Console\Kernel" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
@@ -805,34 +805,7 @@
     </file>
     <file name="/var/www/sample/app/Http/Requests/ShareEndRequest.php">
       <class name="App\Http\Requests\ShareEndRequest" namespace="global">
-        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="21" coveredelements="21"/>
-      </class>
-      <line num="15" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="17" type="stmt" count="1"/>
-      <line num="24" type="method" name="rules" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="26" type="stmt" count="2"/>
-      <line num="27" type="stmt" count="2"/>
-      <line num="28" type="stmt" count="2"/>
-      <line num="29" type="stmt" count="2"/>
-      <line num="31" type="stmt" count="2"/>
-      <line num="32" type="stmt" count="1"/>
-      <line num="33" type="stmt" count="1"/>
-      <line num="34" type="stmt" count="1"/>
-      <line num="35" type="stmt" count="1"/>
-      <line num="36" type="stmt" count="2"/>
-      <line num="37" type="stmt" count="2"/>
-      <line num="38" type="stmt" count="2"/>
-      <line num="45" type="method" name="messages" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="47" type="stmt" count="1"/>
-      <line num="48" type="stmt" count="1"/>
-      <line num="49" type="stmt" count="1"/>
-      <line num="50" type="stmt" count="1"/>
-      <line num="51" type="stmt" count="1"/>
-      <metrics loc="54" ncloc="42" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="21" coveredelements="21"/>
-    </file>
-    <file name="/var/www/sample/app/Http/Requests/ShareStartRequest.php">
-      <class name="App\Http\Requests\ShareStartRequest" namespace="global">
-        <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="23" coveredelements="0"/>
+        <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="21" coveredelements="0"/>
       </class>
       <line num="15" type="method" name="authorize" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="17" type="stmt" count="0"/>
@@ -849,15 +822,42 @@
       <line num="36" type="stmt" count="0"/>
       <line num="37" type="stmt" count="0"/>
       <line num="38" type="stmt" count="0"/>
-      <line num="39" type="stmt" count="0"/>
-      <line num="46" type="method" name="messages" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="45" type="method" name="messages" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="47" type="stmt" count="0"/>
       <line num="48" type="stmt" count="0"/>
       <line num="49" type="stmt" count="0"/>
       <line num="50" type="stmt" count="0"/>
       <line num="51" type="stmt" count="0"/>
-      <line num="52" type="stmt" count="0"/>
-      <line num="53" type="stmt" count="0"/>
-      <metrics loc="56" ncloc="44" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="23" coveredelements="0"/>
+      <metrics loc="54" ncloc="42" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="21" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Requests/ShareStartRequest.php">
+      <class name="App\Http\Requests\ShareStartRequest" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="23" coveredelements="23"/>
+      </class>
+      <line num="15" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="17" type="stmt" count="1"/>
+      <line num="24" type="method" name="rules" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="26" type="stmt" count="2"/>
+      <line num="27" type="stmt" count="2"/>
+      <line num="28" type="stmt" count="2"/>
+      <line num="29" type="stmt" count="2"/>
+      <line num="31" type="stmt" count="2"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="2"/>
+      <line num="37" type="stmt" count="2"/>
+      <line num="38" type="stmt" count="2"/>
+      <line num="39" type="stmt" count="2"/>
+      <line num="46" type="method" name="messages" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="53" type="stmt" count="1"/>
+      <metrics loc="56" ncloc="44" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="23" coveredelements="23"/>
     </file>
     <file name="/var/www/sample/app/Http/Requests/UploadImageRequest.php">
       <class name="App\Http\Requests\UploadImageRequest" namespace="global">
@@ -1398,6 +1398,6 @@
       <line num="15" type="stmt" count="0"/>
       <metrics loc="18" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
     </file>
-    <metrics files="76" loc="3932" ncloc="2831" classes="66" methods="184" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="757" coveredstatements="47" elements="941" coveredelements="57"/>
+    <metrics files="76" loc="3932" ncloc="2831" classes="66" methods="184" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="757" coveredstatements="49" elements="941" coveredelements="59"/>
   </project>
 </coverage>
