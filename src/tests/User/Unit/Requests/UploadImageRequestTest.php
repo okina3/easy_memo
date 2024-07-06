@@ -44,7 +44,7 @@ class UploadImageRequestTest extends TestCase
      */
     public function testAuthorizeReturnsTrue()
     {
-        // UploadMemoRequestのインスタンスを初期化
+        // UploadImageRequestのインスタンスを初期化
         $request = $this->createUploadImageRequest();
 
         // authorize() メソッドが常に true を返すことを確認
@@ -61,7 +61,7 @@ class UploadImageRequestTest extends TestCase
         $data = [
             'images' => UploadedFile::fake()->image('test_image.jpg')->size(1024)
         ];
-        // UploadMemoRequestのインスタンスを初期化
+        // UploadImageRequestのインスタンスを初期化
         $request = $this->createUploadImageRequest();
         // データをマージしてバリデータを作成
         $validator = Validator::make($request->merge($data)->all(), $request->rules());
@@ -80,7 +80,7 @@ class UploadImageRequestTest extends TestCase
         $data = [
             'images' => UploadedFile::fake()->image('test_image.txt')->size(1024)
         ];
-        // UploadMemoRequestのインスタンスを初期化
+        // UploadImageRequestのインスタンスを初期化
         $request = $this->createUploadImageRequest();
         // データをマージしてバリデータを作成
         $validator = Validator::make($request->merge($data)->all(), $request->rules());
@@ -95,7 +95,7 @@ class UploadImageRequestTest extends TestCase
      */
     public function testMessagesMethod()
     {
-        // UploadMemoRequestのインスタンスを初期化
+        // UploadImageRequestのインスタンスを初期化
         $request = $this->createUploadImageRequest();
 
         // リクエストから、バリデーションメッセージを取得
@@ -105,7 +105,7 @@ class UploadImageRequestTest extends TestCase
             'images.required' => '画像が指定されていません。',
             'images.image' => '指定されたファイルが画像ではありません。',
             'images.mimes' => '指定された拡張子(jpg/jpeg/png)ではありません。',
-            'images.max' => 'ファイルサイズは2MB以内にしてください。',
+            'images.max' => 'ファイルサイズは2MB以内にしてください。'
         ];
 
         // 取得したメッセージが、期待されるバリデーションメッセージと一致することを確認

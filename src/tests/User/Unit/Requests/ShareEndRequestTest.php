@@ -45,7 +45,7 @@ class ShareEndRequestTest extends TestCase
      */
     public function testAuthorizeReturnsTrue()
     {
-        // UploadMemoRequestのインスタンスを初期化
+        // ShareEndRequestのインスタンスを初期化
         $request = $this->createShareEndRequest();
 
         // authorize() メソッドが常に true を返すことを確認
@@ -64,7 +64,7 @@ class ShareEndRequestTest extends TestCase
         $data = [
             'share_user_end' => 'test@example.com'
         ];
-        // UploadMemoRequestのインスタンスを初期化
+        // ShareEndRequestのインスタンスを初期化
         $request = $this->createShareEndRequest();
         // データをマージしてバリデータを作成
         $validator = Validator::make($request->merge($data)->all(), $request->rules());
@@ -85,7 +85,7 @@ class ShareEndRequestTest extends TestCase
         $data = [
             'share_user_end' => 'あいうえお'
         ];
-        // UploadMemoRequestのインスタンスを初期化
+        // ShareEndRequestのインスタンスを初期化
         $request = $this->createShareEndRequest();
         // データをマージしてバリデータを作成
         $validator = Validator::make($request->merge($data)->all(), $request->rules());
@@ -100,7 +100,7 @@ class ShareEndRequestTest extends TestCase
      */
     public function testMessagesMethod()
     {
-        // UploadMemoRequestのインスタンスを初期化
+        // ShareEndRequestのインスタンスを初期化
         $request = $this->createShareEndRequest();
 
         // リクエストから、バリデーションメッセージを取得
@@ -110,7 +110,7 @@ class ShareEndRequestTest extends TestCase
         $expectedMessages = [
             'share_user_end.required' => 'メールアドレスが、入力されていません。共有停止できません。',
             'share_user_end.email' => 'メールアドレスを、入力してください。共有停止できません。',
-            'share_user_end.exists' => '指定されたメールアドレスのユーザーが見つかりません。また自分のものです。共有停止できません。',
+            'share_user_end.exists' => '指定されたメールアドレスのユーザーが見つかりません。また自分のものです。共有停止できません。'
         ];
 
         // 取得したメッセージが、期待されるバリデーションメッセージと一致することを確認
