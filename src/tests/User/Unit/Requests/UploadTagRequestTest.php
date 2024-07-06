@@ -75,7 +75,7 @@ class UploadTagRequestTest extends TestCase
      */
     public function testErrorRulesValidation()
     {
-        // バリデーション用のデータを設定（件名が、25文字以上）
+        // バリデーション用のデータを設定（タグ名が、25文字以上）
         $data = [
             'new_tag' => 'テストタグ、テストタグ、テストタグ、テストタグ、テストタグ'
         ];

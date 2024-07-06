@@ -12,8 +12,6 @@ class ContactRequestTest extends TestCase
 {
     use RefreshDatabase;
 
-    private ContactRequest $request;
-
     /**
      * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
      * @return void
@@ -23,9 +21,9 @@ class ContactRequestTest extends TestCase
         // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
         // ユーザーを作成
-        $this->user = User::factory()->create();
+        $user = User::factory()->create();
         // 認証済みのユーザーを返す
-        $this->actingAs($this->user);
+        $this->actingAs($user);
     }
 
     /**
@@ -107,7 +105,7 @@ class ContactRequestTest extends TestCase
             'subject.string' => '件名が、入力されていません。また、文字列で指定してください。',
             'subject.max' => '件名は、25文字以内で入力してください。',
             'message.string' => 'お問い合わせ内容が、入力されていません。また、文字列で指定してください。',
-            'message.max' => 'お問い合わせ内容は、1000文字以内にしてください。',
+            'message.max' => 'お問い合わせ内容は、1000文字以内にしてください。'
         ];
 
         // 取得したメッセージが、期待されるバリデーションメッセージと一致することを確認

@@ -77,7 +77,7 @@ class UploadMemoRequestTest extends TestCase
      */
     public function testErrorRulesValidation()
     {
-        // バリデーション用のデータを設定（件名が、25文字以上）
+        // バリデーション用のデータを設定（タイトルが、25文字以上）
         $data = [
             'title' => 'テストタイトル、テストタイトル、テストタイトル、テストタイトル',
             'content' => 'テストメモの内容',
@@ -110,7 +110,7 @@ class UploadMemoRequestTest extends TestCase
             'content.string' => 'メモの内容が空です。また、文字列で指定してください。',
             'content.max' => '文字数は、1000文字以内にしてください。',
             'new_tag.max' => 'タグは、25文字以内で入力してください。',
-            'new_tag.unique' => 'このタグは、すでに登録されています。',
+            'new_tag.unique' => 'このタグは、すでに登録されています。'
         ];
 
         // 取得したメッセージが、期待されるバリデーションメッセージと一致することを確認
