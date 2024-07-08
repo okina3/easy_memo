@@ -14,7 +14,7 @@ class SessionServiceTest extends TestCase
      */
     public function testSetBrowserBackSession()
     {
-        // セッションにブラウザバック用の値を設定
+        // セッションにブラウザバック用の値を設定するサービスメソッドを実行
         SessionService::setBrowserBackSession();
 
         // セッションが設定されたことを確認
@@ -32,8 +32,9 @@ class SessionServiceTest extends TestCase
     {
         // セッションに正しい値を設定 (環境変数 'BROWSER_BACK_KEY' を暗号化)
         Session::flash('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
-        // セッション値を検証するメソッドを呼び出し
+        // セッション値を検証するサービスメソッドを実行
         SessionService::clickBrowserBackSession();
+
         // 例外が投げられないことを確認
         $this->assertTrue(true);
 
@@ -41,7 +42,23 @@ class SessionServiceTest extends TestCase
         Session::flash('back_button_clicked', encrypt('wrong_key'));
         // 期待される例外のクラスを指定
         $this->expectException(HttpResponseException::class);
-        // セッション値を検証するメソッドを呼び出し、不正な値のため例外が投げられることを確認
+        // セッション値を検証するサービスメソッドを実行し、不正な値のため例外が投げられることを確認
         SessionService::clickBrowserBackSession();
+    }
+
+    /**
+     * ブラウザバック用のセッションの値を削除するテスト。
+     */
+    public function testResetBrowserBackSession()
+    {
+        // セッションに値を設定
+        Session::flash('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        // セッションに値があることを確認
+        $this->assertTrue(Session::has('back_button_clicked'));
+        // セッションの値を削除するサービスメソッドを実行
+        SessionService::resetBrowserBackSession();
+
+        // セッションの値が削除されたことを確認
+        $this->assertFalse(Session::has('back_button_clicked'));
     }
 }
