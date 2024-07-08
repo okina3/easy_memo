@@ -157,34 +157,34 @@ class MemoServiceTest extends TestCase
     public function testAttachTagsAndImages()
     {
         // タグが空の場合
-        // 自分のメモを作成
-        $tag = $this->createMemo($this->user);
-        // 自分の画像を作成
+        // 1件の自分のメモを作成
+        $memo = $this->createMemo($this->user);
+        // 1件の自分の画像を作成
         $image = $this->createImage($this->user);
         // タグが空、画像が指定されたリクエストを作成
         $requestWithNoTags = new Request(['tags' => [], 'images' => [$image->id]]);
         // メモにタグと画像を関連付けるサービスメソッドを実行
-        MemoService::attachTagsAndImages($requestWithNoTags, $tag->id);
+        MemoService::attachTagsAndImages($requestWithNoTags, $memo->id);
 
-        // タグが関連付けられていないことを確認
-        $this->assertDatabaseMissing('memo_tags', ['memo_id' => $tag->id]);
-        // 画像が関連付けられていることを確認
-        $this->assertDatabaseHas('memo_images', ['image_id' => $image->id, 'memo_id' => $tag->id]);
+        // タグが、関連付けられていないことを確認
+        $this->assertDatabaseMissing('memo_tags', ['memo_id' => $memo->id]);
+        // 画像が、関連付けられていることを確認
+        $this->assertDatabaseHas('memo_images', ['image_id' => $image->id, 'memo_id' => $memo->id]);
 
         // 画像が空の場合
-        // 自分のメモを作成
-        $image = $this->createMemo($this->user);
-        // 自分のタグを作成
+        // 1件の自分のメモを作成
+        $memo = $this->createMemo($this->user);
+        // 1件の自分のタグを作成
         $tag = $this->createTag($this->user);
-        // タグが指定され、画像が空のリクエストを作成
+        // 画像が空、タグが指定されたリクエストを作成
         $requestWithNoImages = new Request(['tags' => [$tag->id], 'images' => []]);
         // メモにタグと画像を関連付けるサービスメソッドを実行
-        MemoService::attachTagsAndImages($requestWithNoImages, $image->id);
+        MemoService::attachTagsAndImages($requestWithNoImages, $memo->id);
 
-        // タグが関連付けられていることを確認
-        $this->assertDatabaseHas('memo_tags', ['tag_id' => $tag->id, 'memo_id' => $image->id]);
-        // 画像が関連付けられていないことを確認
-        $this->assertDatabaseMissing('memo_images', ['memo_id' => $image->id]);
+        // 画像が、関連付けられていないことを確認
+        $this->assertDatabaseMissing('memo_images', ['memo_id' => $memo->id]);
+        // タグが、関連付けられていることを確認
+        $this->assertDatabaseHas('memo_tags', ['tag_id' => $tag->id, 'memo_id' => $memo->id]);
     }
 
     /**
