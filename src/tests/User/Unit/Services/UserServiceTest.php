@@ -14,14 +14,9 @@ class UserServiceTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
-    private Memo $memo;
-    private ShareSetting $userShareSetting;
-    private User $anotherUser;
-    private Memo $anotherMemo;
-    private ShareSetting $anotherUserShareSetting;
-    private User $otherUser;
-    private Memo $otherMemo;
-    private ShareSetting $otherUserShareSetting;
+    private User $secondaryUser;
+    private User $tertiaryUser;
+    private User $quaternaryUser;
 
     /**
      * テスト前の初期設定（各テストメソッドの実行前に毎回呼び出される）
@@ -29,34 +24,47 @@ class UserServiceTest extends TestCase
      */
     protected function setUp(): void
     {
+        // 親クラスのsetUpメソッドを呼び出し
         parent::setUp();
-        // ３人のテスト用のユーザーを生成
+        // ユーザーを作成
         $this->user = User::factory()->create();
-        $this->anotherUser = User::factory()->create();
-        $this->otherUser = User::factory()->create();
+        // 2人目の別のユーザーを作成
+        $this->secondaryUser = User::factory()->create();
+        // 3人目のユーザーを作成
+        $this->tertiaryUser = User::factory()->create();
+        // 4人目のユーザーを作成
+        $this->quaternaryUser = User::factory()->create();
 
-        // ３人のテスト用のメモを生成
-        $this->memo = Memo::factory()->create(['user_id' => $this->user->id]);
-        $this->anotherMemo = Memo::factory()->create(['user_id' => $this->anotherUser->id]);
-        $this->otherMemo = Memo::factory()->create(['user_id' => $this->otherUser->id]);
+        // 認証済みのユーザーを返す
+        $this->actingAs($this->user);
+    }
 
-        // ３人のテスト用の共有設定を生成
-        // userは、anotherUserに、メモを共有
-        $this->userShareSetting = ShareSetting::factory()->create([
-            'memo_id' => $this->memo->id,
-            'sharing_user_id' => $this->anotherUser->id
-        ]);
+    /**
+     * メモを作成するヘルパーメソッド
+     * @param User $user 作成するメモに関連付けるユーザー
+     * @return Memo 作成されたメモのインスタンス
+     */
+    private function createMemo(User $user): Memo
+    {
+        // メモを、現在のユーザーに関連付けて作成する
+        return Memo::factory()->create(['user_id' => $user->id]);
+    }
 
-        // anotherUserは、userに、メモを共有
-        $this->anotherUserShareSetting = ShareSetting::factory()->create([
-            'memo_id' => $this->anotherMemo->id,
-            'sharing_user_id' => $this->user->id
-        ]);
-
-        // otherUserは、anotherUserに、メモを共有
-        $this->otherUserShareSetting = ShareSetting::factory()->create([
-            'memo_id' => $this->otherMemo->id,
-            'sharing_user_id' => $this->anotherUser->id
+    /**
+     * メモを共有させる設定を作成するヘルパーメソッド
+     * @param User $sharingUser 共有設定させたいユーザー
+     * @param Memo $memo 共有するメモ
+     * @return ShareSetting 作成された共有設定のインスタンス
+     */
+    private function createShareSetting(User $sharingUser, Memo $memo): ShareSetting
+    {
+        return ShareSetting::factory()->create([
+            // 共有させたいユーザー
+            'sharing_user_id' => $sharingUser->id,
+            // メモの選択
+            'memo_id' => $memo->id,
+            // 編集も可能
+            'edit_access' => true
         ]);
     }
 
@@ -65,14 +73,30 @@ class UserServiceTest extends TestCase
      */
     public function testDeleteUserShareSettingAll()
     {
-        // userの共有設定を削除するメソッドを実行
-        UserService::deleteUserShareSettingAll($this->user->id);
+        // 2人目のユーザーのメモを作成し、自分に共有する設定を作成
+        $secondaryUserMemo = $this->createMemo($this->secondaryUser);
+        $shareSetting = $this->createShareSetting($this->user, $secondaryUserMemo);
 
-        // userの共有設定が、削除されたことを確認
-        $this->assertDatabaseMissing('share_settings', ['id' => $this->userShareSetting->id]);
-        // userへの共有設定が、削除されたことを確認
-        $this->assertDatabaseMissing('share_settings', ['id' => $this->anotherUserShareSetting->id]);
+        // 自分のメモを作成し、2人目のユーザーに共有する設定を作成
+        $memo = $this->createMemo($this->user);
+        $secondaryUserSetting = $this->createShareSetting($this->secondaryUser, $memo);
+
+        // 3人目のユーザーのメモを作成し、4人目のユーザーに共有する設定を作成
+        $tertiaryUserMemo = $this->createMemo($this->tertiaryUser);
+        $tertiaryUseSetting = $this->createShareSetting($this->quaternaryUser, $tertiaryUserMemo);
+
+
+        // 共有設定を削除するサービスメソッドを実行（停止ユーザーが、共有しているメモの共有を解除）
+        UserService::deleteUserShareSettingAll($shareSetting->memo->user->id);
+        // 共有設定が、削除されたことを確認
+        $this->assertDatabaseMissing('share_settings', ['id' => $shareSetting->id]);
+
+        // 共有設定を削除するサービスメソッドを実行（停止ユーザーに、共有しているメモの共有を解除）
+        UserService::deleteUserShareSettingAll($secondaryUserSetting->memo->user->id);
+        // 共有設定が、削除されたことを確認
+        $this->assertDatabaseMissing('share_settings', ['id' => $secondaryUserSetting->id]);
+
         // 他のユーザーの共有設定が影響を受けていないことを確認する
-        $this->assertDatabaseHas('share_settings', ['id' => $this->otherUserShareSetting->id]);
+        $this->assertDatabaseHas('share_settings', ['id' => $tertiaryUseSetting->id]);
     }
 }
