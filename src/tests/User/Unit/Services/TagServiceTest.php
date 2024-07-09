@@ -45,18 +45,18 @@ class TagServiceTest extends TestCase
     }
 
     /**
-     * メモにタグと画像を関連付けるヘルパーメソッド
+     * メモにタグを関連付けるヘルパーメソッド
      * @param Memo $memo 関連付けるメモ
      * @param int $tagCount 作成するタグの数
      * @return Collection Collection 作成されたタグのコレクション
      */
-    private function attachTagsAndImages(Memo $memo, int $tagCount): Collection
+    private function attachTags(Memo $memo, int $tagCount): Collection
     {
         // タグを作成し、メモに関連付け
         $tags = Tag::factory()->count($tagCount)->create();
         $memo->tags()->attach($tags);
 
-        // タグと画像を返す
+        // タグを返す
         return $tags;
     }
 
@@ -84,7 +84,7 @@ class TagServiceTest extends TestCase
         // 1件の自分のメモを作成
         $memo = $this->createMemos(1)->first();
         // メモに2件のタグを関連付け
-        $attachedTags = $this->attachTagsAndImages($memo, 2);
+        $attachedTags = $this->attachTags($memo, 2);
         // メモに紐づいたタグのIDを取得するサービスメソッドを実行
         $memoTagsById = TagService::getMemoTagsId($attachedTags);
 
@@ -100,7 +100,7 @@ class TagServiceTest extends TestCase
         // 1件の自分のメモを作成
         $memo = $this->createMemos(1)->first();
         // メモに2件のタグを関連付け
-        $attachedTags = $this->attachTagsAndImages($memo, 2);
+        $attachedTags = $this->attachTags($memo, 2);
         // メモに紐づいたタグの名前を取得するサービスメソッドを実行
         $memoTagsByName = TagService::getMemoTagsName($attachedTags);
 
