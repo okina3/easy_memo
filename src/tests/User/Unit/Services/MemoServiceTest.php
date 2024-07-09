@@ -108,7 +108,7 @@ class MemoServiceTest extends TestCase
             return (new Route('GET', '/memos/{memo}', []))->bind($request);
         });
 
-        // 異常なユーザーのメモアクセスは、404エラーを発生させることを期待
+        // 異常なユーザーのメモアクセスは、例外の発生を期待（404エラー）
         $this->expectException(NotFoundHttpException::class);
         // メモの所有者を確認するサービスメソッドを実行
         MemoService::checkUserMemo($request);
@@ -120,11 +120,13 @@ class MemoServiceTest extends TestCase
      */
     public function testSearchMemos()
     {
-        // 自分のメモを作成
+        // 4件の自分のメモを作成
+        Memo::factory()->count(4)->create(['user_id' => $this->user->id]);
+        // 1件の自分のメモを作成
         $memo = $this->createMemo($this->user);
-        // 自分のタグを作成
+        // 1件の自分のタグを作成
         $tag = $this->createTag($this->user);
-        // 共有設定を作成（自分のメモを、2人目のユーザーに共有）
+        // 1件の共有設定を作成（自分のメモを、2人目のユーザーに共有）
         $this->createShareSetting($this->secondaryUser, $memo);
 
         // メモにタグを関連付ける
@@ -134,8 +136,8 @@ class MemoServiceTest extends TestCase
         // メモを検索するサービスメソッドを実行
         $response = MemoService::searchMemos();
 
-        // 取得されたメモの中に、関連付けたメモが含まれていることを確認
-        $this->assertTrue($response->contains($memo));
+        // 期待されるメモの数が、1であることを確認
+        $this->assertCount(1, $response);
 
         // 共有設定を確認
         $sharedMemo = $response->firstWhere('id', $memo->id);
@@ -145,9 +147,10 @@ class MemoServiceTest extends TestCase
         // タグのIDをパラメーターから削除
         request()->replace([]);
         // 再度メモを検索するサービスメソッドを実行（タグなし）
-        MemoService::searchMemos();
-        // 取得されたメモが空でないことを確認
-        $this->assertNotEmpty($response);
+        $response = MemoService::searchMemos();
+
+        // 期待されるメモの数が、5であることを確認
+        $this->assertCount(5, $response);
     }
 
     /**
@@ -193,7 +196,7 @@ class MemoServiceTest extends TestCase
      */
     public function testUpdateMemo()
     {
-        // 自分のメモを作成
+        // 1件の自分のメモを作成
         $memo = $this->createMemo($this->user);
 
         // メモ更新のためのリクエストを作成
@@ -216,7 +219,7 @@ class MemoServiceTest extends TestCase
      */
     public function testCheckShared()
     {
-        // 自分のメモを作成
+        // 1件の自分のメモを作成
         $memo = $this->createMemo($this->user);
         // 共有設定を作成（自分のメモを、2人目のユーザーに共有）
         $this->createShareSetting($this->secondaryUser, $memo);
