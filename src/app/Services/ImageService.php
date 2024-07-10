@@ -37,11 +37,11 @@ class ImageService
     public static function getMemoImages(Collection $select_memo_images): array
     {
         // メモにリレーションされた画像を、配列に追加
-        $memo_in_images = [];
+        $memo_relation_images = [];
         foreach ($select_memo_images as $memo_relation_image) {
-            $memo_in_images[] = $memo_relation_image;
+            $memo_relation_images[] = $memo_relation_image;
         }
-        return $memo_in_images;
+        return $memo_relation_images;
     }
 
     /**
@@ -52,11 +52,11 @@ class ImageService
     public static function getMemoImagesId(Collection $select_memo_images): array
     {
         // メモにリレーションされた画像のidを、配列に追加
-        $memo_in_images_id = [];
+        $memo_relation_images_id = [];
         foreach ($select_memo_images as $memo_relation_image) {
-            $memo_in_images_id[] = $memo_relation_image->id;
+            $memo_relation_images_id[] = $memo_relation_image->id;
         }
-        return $memo_in_images_id;
+        return $memo_relation_images_id;
     }
 
     /**
@@ -71,12 +71,16 @@ class ImageService
         $rnd_file_name = uniqid(rand() . '_');
         // ランダムなファイル名と拡張子を結合
         $only_one_file_name = $rnd_file_name . '.' . 'jpeg';
+        // 画像の読み込み
+        $image = $manager->read($image_file->getPathname());
         // 実際のリサイズ
-        $resize_image = $manager->read($image_file)
-            ->resize(720, 480)
-            ->toJpeg();
+        $resized_image = $image->resize(720, 480);
+        // 画像をJPEG形式でエンコード
+        $encoded_image = $resized_image->toJpeg();
+
         // 保存場所とファイル名を指定して、Laravel内に保存
-        Storage::put('public/' . $only_one_file_name, $resize_image);
+        Storage::disk('public')->put($only_one_file_name, $encoded_image);
+
         return $only_one_file_name;
     }
 
