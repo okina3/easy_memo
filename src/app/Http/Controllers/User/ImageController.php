@@ -110,11 +110,11 @@ class ImageController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 // 削除したい画像を取得
-                $select_image = Image::availableSelectImage($request->memoId)->first();
+                $select_image = Image::availableSelectImage($request->imageId)->first();
                 // 先にStorageフォルダ内の画像ファイルを削除
                 ImageService::deleteStorage($select_image->filename);
                 // 削除したい画像をDBから削除
-                Image::availableSelectImage($request->memoId)->delete();
+                Image::availableSelectImage($request->imageId)->delete();
             }, 10);
 
             return to_route('user.image.index')->with(['message' => '画像を削除しました。', 'status' => 'alert']);

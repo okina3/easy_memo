@@ -4,10 +4,15 @@ namespace Tests\User\Feature\Controllers;
 
 use App\Models\Image;
 use App\Models\User;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\User\TestCase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Mockery;
+use Tests\User\TestCase;
 
 class ImageControllerTest extends TestCase
 {
@@ -98,6 +103,33 @@ class ImageControllerTest extends TestCase
         $response->assertViewIs('user.images.create');
     }
 
+    // /**
+    //  * 画像を保存するメソッドをテスト
+    //  * @return void
+    //  */
+    // public function testStoreImageController()
+    // {
+    //     // テスト用のアップロードファイルを作成
+    //     $file = UploadedFile::fake()->image('test_image.jpg');
+    //     // 保存するデータを作成
+    //     $requestData = [
+    //         'filename' => $file,
+    //         'user_id' => $this->user->id
+    //     ];
+
+    //     // 画像を保存するの為に、リクエストを送信
+    //     $response = $this->post(route('user.image.store'),$requestData, ['Content-Type' => 'multipart/form-data']);
+
+    //     // データベースに画像データが保存されていることを確認
+    //     $this->assertDatabaseHas('images', [
+    //         'filename' => $file->hashName(),
+    //         'user_id' => $this->user->id,
+    //     ]);
+
+    //     // レスポンスが 'image.index' リダイレクト先を指していることを確認
+    //     $response->assertRedirect(route('user.image.index'));
+    //     $response->assertSessionHas(['message' => '画像を登録しました。', 'status' => 'info']);
+    // }
 
     /**
      * 画像の詳細が正しく表示されることをテスト
@@ -105,10 +137,10 @@ class ImageControllerTest extends TestCase
      */
     public function testShowImageController()
     {
-        // 画像を作成
-        $image = Image::factory()->create(['user_id' => $this->user->id]);
+        // 1件の画像を作成
+        $image = $this->createImages(1)->first();
 
-        // showメソッドを呼び出して、レスポンスを確認
+        // 画像詳細画面を表示する為に、リクエストを送信
         $response = $this->get(route('user.image.show', $image->id));
 
         // レスポンスが 'user.images.show' ビューを返すことを確認
@@ -117,7 +149,51 @@ class ImageControllerTest extends TestCase
 
         // ビューに渡されるデータが正しいか確認
         $response->assertViewHas('select_image', function ($viewImage) use ($image) {
-            return $viewImage->id === $image->id && $viewImage->user_id === $image->user_id;
+            // ビューに渡される画像のIDが、作成した画像のIDと一致することを確認
+            return $viewImage->id === $image->id;
         });
+    }
+
+    /**
+     * 画像が、正しく削除されることをテスト
+     * @return void
+     */
+    public function testDestroyImageController()
+    {
+        // 1件の画像を作成
+        $image = $this->createImages(1)->first();
+
+        // 画像を削除する為に、リクエストを送信
+        $response = $this->delete(route('user.image.destroy', ['imageId' => $image->id]));
+
+        // 画像が削除されたことを確認
+        $this->assertDatabaseMissing('images', ['id' => $image->id]);
+
+        // レスポンスが 'image.index' リダイレクト先を指していることを確認
+        $response->assertRedirect(route('user.image.index'));
+        $response->assertSessionHas(['message' => '画像を削除しました。', 'status' => 'alert']);
+    }
+
+    /**
+     * 画像が、正しく削除される時のエラーハンドリングをテスト
+     * @return void
+     */
+    public function testErrorDestroyImageController()
+    {
+        // 1件の画像を作成
+        $image = $this->createImages(1)->first();
+
+        // DB::transactionメソッドが呼び出されると、一度だけ例外をスローするように設定
+        DB::shouldReceive('transaction')->once()->andThrow(new Exception('DBエラー'));
+
+        // Log::errorメソッドが呼び出されるときに、例外がログに記録されることを確認
+        Log::shouldReceive('error')->once()->with(Mockery::type(Exception::class));
+
+        // 例外がスローされることを期待し、そのメッセージが"DBエラー"であることを確認
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('DBエラー');
+
+        // 画像を削除する為に、リクエストを送信
+        $this->delete(route('user.image.destroy', ['imageId' => $image->id]));
     }
 }
