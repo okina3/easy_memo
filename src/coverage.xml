@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1720771469">
-  <project timestamp="1720771469">
+<coverage generated="1720776562">
+  <project timestamp="1720776562">
     <file name="/var/www/sample/app/Console/Kernel.php">
       <class name="App\Console\Kernel" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
@@ -1161,15 +1161,15 @@
     </file>
     <file name="/var/www/sample/app/Providers/InterventionImageServiceProvider.php">
       <class name="App\Providers\InterventionImageServiceProvider" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="6" coveredelements="4"/>
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
       </class>
-      <line num="14" type="method" name="register" visibility="public" complexity="1" crap="1.04" count="170"/>
+      <line num="14" type="method" name="register" visibility="public" complexity="1" crap="1" count="170"/>
       <line num="16" type="stmt" count="170"/>
-      <line num="17" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="1"/>
       <line num="18" type="stmt" count="170"/>
       <line num="24" type="method" name="boot" visibility="public" complexity="1" crap="1" count="170"/>
       <line num="27" type="stmt" count="170"/>
-      <metrics loc="29" ncloc="22" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="6" coveredelements="4"/>
+      <metrics loc="29" ncloc="22" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
     </file>
     <file name="/var/www/sample/app/Providers/RouteServiceProvider.php">
       <class name="App\Providers\RouteServiceProvider" namespace="global">
@@ -1388,6 +1388,6 @@
       <line num="15" type="stmt" count="11"/>
       <metrics loc="18" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
-    <metrics files="76" loc="3914" ncloc="2813" classes="66" methods="184" coveredmethods="163" conditionals="0" coveredconditionals="0" statements="747" coveredstatements="666" elements="931" coveredelements="829"/>
+    <metrics files="76" loc="3914" ncloc="2813" classes="66" methods="184" coveredmethods="164" conditionals="0" coveredconditionals="0" statements="747" coveredstatements="667" elements="931" coveredelements="831"/>
   </project>
 </coverage>
