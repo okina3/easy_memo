@@ -25,7 +25,7 @@
         </testsuite>
         <!-- 共通用 -->
         <testsuite name="Common">
-            <directory suffix="Test.php">tests/Common/Providers</directory>
+            <directory suffix="Test.php">tests/Common</directory>
         </testsuite>
     </testsuites>
     <php>
