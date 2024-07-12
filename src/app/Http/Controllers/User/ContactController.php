@@ -8,10 +8,7 @@ use App\Models\Contact;
 use App\Services\SessionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use Throwable;
 
 class ContactController extends Controller
 {
@@ -31,22 +28,14 @@ class ContactController extends Controller
      * 管理人への問い合わせを、保存するメソッド。
      * @param ContactRequest $request
      * @return RedirectResponse
-     * @throws Throwable
      */
     public function store(ContactRequest $request): RedirectResponse
     {
         // ブラウザバック対策（値を確認）
         SessionService::clickBrowserBackSession();
-        try {
-            DB::transaction(function () use ($request) {
-                // 問い合わせ情報を保存
-                Contact::availableCreateContact($request);
-            }, 10);
+        // 問い合わせ情報を保存
+        Contact::availableCreateContact($request);
 
-            return to_route('user.index')->with(['message' => '管理人にメッセージを送りました。', 'status' => 'info']);
-        } catch (Throwable $e) {
-            Log::error($e);
-            throw $e;
-        }
+        return to_route('user.index')->with(['message' => '管理人にメッセージを送りました。', 'status' => 'info']);
     }
 }

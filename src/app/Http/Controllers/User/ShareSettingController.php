@@ -15,10 +15,7 @@ use App\Services\ShareSettingService;
 use App\Services\TagService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use Throwable;
 
 class ShareSettingController extends Controller
 {
@@ -44,25 +41,17 @@ class ShareSettingController extends Controller
      * メモを共有する為のメソッド。
      * @param ShareStartRequest $request
      * @return RedirectResponse
-     * @throws Throwable
      */
     public function store(ShareStartRequest $request): RedirectResponse
     {
-        try {
-            DB::transaction(function () use ($request) {
-                // メールアドレスから、ユーザーを特定
-                $shared_user = User::availableSelectMailUser($request->share_user_start)->first();
-                // 共有設定が、重複していたら、共有設定を、一旦解除する。
-                ShareSettingService::resetDuplicateShareSettings($request->memoId, $shared_user->id);
-                // ユーザーを特定できたら、DBに保存する
-                ShareSetting::availableCreateSetting($request, $shared_user->id);
-            }, 10);
+        // メールアドレスから、ユーザーを特定
+        $shared_user = User::availableSelectMailUser($request->share_user_start)->first();
+        // 共有設定が、重複していたら、共有設定を、一旦解除する。
+        ShareSettingService::resetDuplicateShareSettings($request->memoId, $shared_user->id);
+        // ユーザーを特定できたら、DBに保存する
+        ShareSetting::availableCreateSetting($request, $shared_user->id);
 
-            return to_route('user.index')->with(['message' => 'メモを共有しました。', 'status' => 'info']);
-        } catch (Throwable $e) {
-            Log::error($e);
-            throw $e;
-        }
+        return to_route('user.index')->with(['message' => 'メモを共有しました。', 'status' => 'info']);
     }
 
     /**

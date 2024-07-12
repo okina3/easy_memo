@@ -77,7 +77,7 @@ class ShareSettingServiceTest extends TestCase
     /**
      *  全ての共有メモ、ユーザー別の共有メモを、切り分けて表示するメソッドのテスト
      */
-    public function testAllSearchSharedMemos()
+    public function testSearchSharedMemos()
     {
         // 4件の他人のメモを、自分に共有する設定を作成
         $shareSettings = new Collection([

@@ -13,8 +13,8 @@
                 <form onsubmit="return deleteCheck()" action="{{ route('user.image.destroy') }}" method="post">
                     @csrf
                     @method('delete')
-                    {{-- 選択されているメモのidを取得 --}}
-                    <input type="hidden" name="memoId" value="{{ $select_image->id }}">
+                    {{-- 選択されている画像のidを取得 --}}
+                    <input type="hidden" name="imageId" value="{{ $select_image->id }}">
                     <button class="btn bg-red-600 hover:bg-red-500" type="submit">画像を削除</button>
                 </form>
             </div>

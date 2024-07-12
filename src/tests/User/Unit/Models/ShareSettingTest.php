@@ -36,13 +36,6 @@ class ShareSettingTest extends TestCase
 
         // 認証済みのユーザーを返す
         $this->actingAs($this->user);
-
-        // // ユーザーのメモ作成
-        // $this->memo = Memo::factory()->create(['user_id' => $this->user->id]);
-        // // 2人目の別のユーザーのメモ作成
-        // $this->secondaryUserMemo = Memo::factory()->create(['user_id' => $this->secondaryUser->id]);
-        // // 3人目のユーザーのメモ作成
-        // $this->tertiaryUserMemo = Memo::factory()->create(['user_id' => $this->tertiaryUser->id]);
     }
 
     /**

@@ -42,7 +42,7 @@
                             <form class="mr-3" action="{{ route('admin.warning.undo') }}" method="post">
                                 @csrf
                                 @method('patch')
-                                {{-- 選択されているメモのidを取得 --}}
+                                {{-- 選択されているユーザーのidを取得 --}}
                                 <input type="hidden" name="userId" value="{{ $warning_user->id }}">
                                 <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">利用再開</button>
                             </form>
@@ -51,7 +51,7 @@
                                   method="post">
                                 @csrf
                                 @method('delete')
-                                {{-- 選択されているメモのidを取得 --}}
+                                {{-- 選択されているユーザーのidを取得 --}}
                                 <input type="hidden" name="userId" value="{{ $warning_user->id }}">
                                 <button class="btn bg-red-600 hover:bg-red-500" type="submit">完全削除</button>
                             </form>
