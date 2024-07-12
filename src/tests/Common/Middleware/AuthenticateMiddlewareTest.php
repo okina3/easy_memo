@@ -59,7 +59,7 @@ class AuthenticateMiddlewareTest extends TestCase
      */
     public function testRedirectToAdminLogin()
     {
-        // 管理者用ダッシュボードへのGETリクエスト
+        // 管理者用ダッシュボードへのリクエスト
         $response = $this->get('/admin/dashboard');
 
         // 管理者ログインページにリダイレクトされることを確認
@@ -72,7 +72,7 @@ class AuthenticateMiddlewareTest extends TestCase
      */
     public function testRedirectToUserLogin()
     {
-        // ユーザーダッシュボードへのGETリクエスト
+        // ユーザーダッシュボードへのリクエスト
         $response = $this->get('/user/dashboard');
 
         // ユーザーログインページにリダイレクトされることを確認
