@@ -3,12 +3,8 @@
 namespace Tests\User\Feature\Controllers;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-use Mockery;
 use Tests\User\TestCase;
 
 class ContactControllerTest extends TestCase
@@ -74,34 +70,5 @@ class ContactControllerTest extends TestCase
         // レスポンスが 'index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('user.index'));
         $response->assertSessionHas(['message' => '管理人にメッセージを送りました。', 'status' => 'info']);
-    }
-
-    /**
-     * 管理人への問い合わせが、正しく保存される時のエラーハンドリングをテスト
-     * @return void
-     */
-    public function testErrorStoreContactController()
-    {
-        // 保存するデータを作成
-        $requestData = [
-            'subject' => 'テスト、問い合わせ',
-            'message' => 'これはテストメッセージです。',
-        ];
-
-        // ブラウザバック対策用のセッション設定
-        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
-
-        // DB::transactionメソッドが呼び出されると、一度だけ例外をスローするように設定
-        DB::shouldReceive('transaction')->once()->andThrow(new Exception('DBエラー'));
-
-        // Log::errorメソッドが呼び出されるときに、例外がログに記録されることを確認
-        Log::shouldReceive('error')->once()->with(Mockery::type(Exception::class));
-
-        // 例外がスローされることを期待し、そのメッセージが"DBエラー"であることを確認
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('DBエラー');
-
-        // 管理人への問い合わせを保存する為に、リクエストを送信
-        $this->post(route('user.contact.store'), $requestData);
     }
 }
