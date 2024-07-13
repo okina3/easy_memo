@@ -30,6 +30,23 @@ class EmailVerificationTest extends TestCase
     }
 
     /**
+     * メールが確認済みのユーザーが、リダイレクトされることをテスト。
+     * @return void
+     */
+    public function test_verified_user_is_redirected(): void
+    {
+        // メールアドレスが確認済みのユーザーを作成
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
+        // 確認済みのメールアドレスを持つユーザーで、リクエストを送信
+        $response = $this->actingAs($user)->get('/verify-email');
+
+        // ユーザーが、ユーザー用ホームページにリダイレクトされることを確認
+        $response->assertRedirect(RouteServiceProvider::HOME);
+    }
+
+    /**
      * ユーザーのメールが確認されるフローをテスト。
      * @return void
      */
@@ -51,6 +68,29 @@ class EmailVerificationTest extends TestCase
 
         Event::assertDispatched(Verified::class);
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
+        $response->assertRedirect(RouteServiceProvider::HOME . '?verified=1');
+    }
+
+    /**
+     * メールが確認済みのユーザーが、リダイレクトされることをテスト。
+     * @return void
+     */
+    public function test_already_verified_email_redirect(): void
+    {
+        // メールアドレスが確認済みのユーザーを作成
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
+        // 検証用のURLを作成
+        $verificationUrl = URL::temporarySignedRoute(
+            'user.verification.verify',
+            now()->addMinutes(60),
+            ['id' => $user->id, 'hash' => sha1($user->email)]
+        );
+        // 確認済みのメールアドレスを持つユーザーで、リクエストを送信
+        $response = $this->actingAs($user)->get($verificationUrl);
+
+        // ユーザーが、ユーザー用ホームページにリダイレクトされることを確認
         $response->assertRedirect(RouteServiceProvider::HOME . '?verified=1');
     }
 
