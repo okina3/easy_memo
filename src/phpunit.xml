@@ -25,7 +25,7 @@
         </testsuite>
         <!-- 共通用 -->
         <testsuite name="Common">
-            <directory suffix="Test.php">tests/Common/Providers</directory>
+            <directory suffix="Test.php">tests/Common</directory>
         </testsuite>
     </testsuites>
     <php>
@@ -50,5 +50,16 @@
         <include>
             <directory suffix=".php">./app</directory>
         </include>
+        <!-- テストを除外するファイル -->
+        <exclude>
+            <!-- 管理者は1人の為、新規登録はなし、未使用 -->
+            <file>./app/Http/Controllers/Admin/Auth/RegisteredUserController.php</file>
+            <!-- Profileは、未使用 -->
+            <file>./app/Http/Controllers/ProfileController.php</file>
+            <file>./app/Http/Requests/ProfileUpdateRequest.php</file>
+            <!-- カスタムパスワードリセットを使用の為、未使用 -->
+            <file>./app/Http/Controllers/Admin/Auth/EmailVerificationNotificationController.php</file>
+            <file>./app/Http/Controllers/User/Auth/EmailVerificationNotificationController.php</file>
+        </exclude>
     </source>
 </phpunit>

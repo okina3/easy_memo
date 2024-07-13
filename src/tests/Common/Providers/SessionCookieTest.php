@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Admin\Feature\Config;
+namespace Tests\Common\Providers;
 
 use App\Providers\AppServiceProvider;
 use Illuminate\Support\Facades\Request;
