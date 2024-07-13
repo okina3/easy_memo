@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1720856024">
-  <project timestamp="1720856024">
+<coverage generated="1720858419">
+  <project timestamp="1720858419">
     <file name="/var/www/sample/app/Console/Kernel.php">
       <class name="App\Console\Kernel" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
@@ -55,17 +55,6 @@
       <line num="37" type="stmt" count="1"/>
       <line num="39" type="stmt" count="1"/>
       <metrics loc="42" ncloc="36" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
-    </file>
-    <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/EmailVerificationNotificationController.php">
-      <class name="App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController" namespace="global">
-        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
-      </class>
-      <line num="15" type="method" name="store" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <metrics loc="26" ncloc="23" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
     </file>
     <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/EmailVerificationPromptController.php">
       <class name="App\Http\Controllers\Admin\Auth\EmailVerificationPromptController" namespace="global">
@@ -138,28 +127,6 @@
       <line num="41" type="stmt" count="3"/>
       <line num="42" type="stmt" count="3"/>
       <metrics loc="45" ncloc="34" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
-    </file>
-    <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/RegisteredUserController.php">
-      <class name="App\Http\Controllers\Admin\Auth\RegisteredUserController" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
-      </class>
-      <line num="21" type="method" name="create" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <line num="31" type="method" name="store" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="39" type="stmt" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="41" type="stmt" count="0"/>
-      <line num="42" type="stmt" count="0"/>
-      <line num="43" type="stmt" count="0"/>
-      <line num="45" type="stmt" count="0"/>
-      <line num="47" type="stmt" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <metrics loc="52" ncloc="44" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="16" coveredelements="0"/>
     </file>
     <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/VerifyEmailController.php">
       <class name="App\Http\Controllers\Admin\Auth\VerifyEmailController" namespace="global">
@@ -244,32 +211,6 @@
       </class>
       <metrics loc="13" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/var/www/sample/app/Http/Controllers/ProfileController.php">
-      <class name="App\Http\Controllers\ProfileController" namespace="global">
-        <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="20" coveredelements="0"/>
-      </class>
-      <line num="17" type="method" name="edit" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="20" type="stmt" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <line num="27" type="method" name="update" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="29" type="stmt" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="43" type="method" name="destroy" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="45" type="stmt" count="0"/>
-      <line num="46" type="stmt" count="0"/>
-      <line num="47" type="stmt" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <line num="51" type="stmt" count="0"/>
-      <line num="53" type="stmt" count="0"/>
-      <line num="55" type="stmt" count="0"/>
-      <line num="56" type="stmt" count="0"/>
-      <line num="58" type="stmt" count="0"/>
-      <metrics loc="61" ncloc="52" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="20" coveredelements="0"/>
-    </file>
     <file name="/var/www/sample/app/Http/Controllers/User/Auth/AuthenticatedSessionController.php">
       <class name="App\Http\Controllers\User\Auth\AuthenticatedSessionController" namespace="global">
         <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
@@ -304,17 +245,6 @@
       <line num="37" type="stmt" count="1"/>
       <line num="39" type="stmt" count="1"/>
       <metrics loc="42" ncloc="36" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
-    </file>
-    <file name="/var/www/sample/app/Http/Controllers/User/Auth/EmailVerificationNotificationController.php">
-      <class name="App\Http\Controllers\User\Auth\EmailVerificationNotificationController" namespace="global">
-        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
-      </class>
-      <line num="15" type="method" name="store" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <metrics loc="26" ncloc="23" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
     </file>
     <file name="/var/www/sample/app/Http/Controllers/User/Auth/EmailVerificationPromptController.php">
       <class name="App\Http\Controllers\User\Auth\EmailVerificationPromptController" namespace="global">
@@ -781,17 +711,6 @@
       <line num="35" type="stmt" count="2"/>
       <line num="36" type="stmt" count="2"/>
       <metrics loc="39" ncloc="28" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
-    </file>
-    <file name="/var/www/sample/app/Http/Requests/ProfileUpdateRequest.php">
-      <class name="App\Http\Requests\ProfileUpdateRequest" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
-      </class>
-      <line num="16" type="method" name="rules" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="20" type="stmt" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <metrics loc="24" ncloc="19" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
     </file>
     <file name="/var/www/sample/app/Http/Requests/ShareEndRequest.php">
       <class name="App\Http\Requests\ShareEndRequest" namespace="global">
@@ -1388,6 +1307,6 @@
       <line num="15" type="stmt" count="11"/>
       <metrics loc="18" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
-    <metrics files="76" loc="3914" ncloc="2813" classes="66" methods="184" coveredmethods="170" conditionals="0" coveredconditionals="0" statements="747" coveredstatements="677" elements="931" coveredelements="847"/>
+    <metrics files="71" loc="3725" ncloc="2652" classes="61" methods="176" coveredmethods="170" conditionals="0" coveredconditionals="0" statements="704" coveredstatements="677" elements="880" coveredelements="847"/>
   </project>
 </coverage>
