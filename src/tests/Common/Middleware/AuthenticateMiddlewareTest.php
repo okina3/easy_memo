@@ -5,7 +5,7 @@ namespace Tests\Common\Middleware;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
-use Tests\Admin\TestCase;
+use Tests\Common\TestCase;
 
 class AuthenticateMiddlewareTest extends TestCase
 {
