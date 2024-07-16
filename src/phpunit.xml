@@ -6,8 +6,6 @@
         <!-- Admin用 -->
         <testsuite name="AdminUnit">
             <directory suffix="Test.php">tests/Admin/Unit</directory>
-            <!-- <directory suffix="Test.php">tests/Admin/Unit/Models</directory> -->
-            <!-- <directory suffix="Test.php">tests/Admin/Unit/Notifications</directory> -->
         </testsuite>
         <testsuite name="AdminFeature">
             <directory suffix="Test.php">tests/Admin/Feature</directory>
@@ -15,10 +13,6 @@
         <!-- ユーザー用 -->
         <testsuite name="UserUnit">
             <directory suffix="Test.php">tests/User/Unit</directory>
-            <!-- <directory suffix="Test.php">tests/User/Unit/Models</directory> -->
-            <!-- <directory suffix="Test.php">tests/User/Unit/Notifications</directory> -->
-            <!-- <directory suffix="Test.php">tests/User/Unit/Services</directory> -->
-            <!-- <directory suffix="Test.php">tests/User/Unit/Requests</directory> -->
         </testsuite>
         <testsuite name="UserFeature">
             <directory suffix="Test.php">tests/User/Feature</directory>

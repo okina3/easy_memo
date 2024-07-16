@@ -4,7 +4,7 @@ namespace Tests\Common\Providers;
 
 use App\Providers\AppServiceProvider;
 use Illuminate\Support\Facades\Request;
-use Tests\Admin\TestCase;
+use Tests\Common\TestCase;
 
 class SessionCookieTest extends TestCase
 {

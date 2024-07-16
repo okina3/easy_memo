@@ -4,7 +4,7 @@ namespace Tests\Common\Providers;
 
 use Illuminate\Support\Facades\App;
 use Intervention\Image\ImageManager;
-use Tests\Admin\TestCase;
+use Tests\Common\TestCase;
 
 class InterventionImageServiceProviderTest extends TestCase
 {
