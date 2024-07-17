@@ -13,7 +13,6 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\TrashedContactController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\WarningUsersController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,11 +61,6 @@ Route::middleware('auth:admin')->group(function () {
         Route::patch('/undo', 'undo')->name('warning.undo');
         Route::delete('/destroy', 'destroy')->name('warning.destroy');
     });
-
-    // デフォルトのルーティング
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 //auth.phpの認証関連のルーティング

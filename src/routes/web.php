@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\ContactController;
 use App\Http\Controllers\User\ImageController;
 use App\Http\Controllers\User\MemoController;
@@ -79,12 +78,5 @@ Route::middleware('auth:users')->group(function () {
         Route::delete('/destroy', 'destroy')->name('trashed-memo.destroy');
     });
 });
-
-// デフォルトのルート
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 require __DIR__ . '/auth.php';
