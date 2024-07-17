@@ -7,7 +7,11 @@ use App\Models\Memo;
 use App\Models\ShareSetting;
 use App\Models\Tag;
 use App\Models\User;
+use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Mockery;
 use Tests\User\TestCase;
 
 class ShareSettingControllerTest extends TestCase
@@ -165,6 +169,46 @@ class ShareSettingControllerTest extends TestCase
         // レスポンスが 'index' リダイレクト先を指していることを確認
         $response->assertRedirect(route('user.index'));
         $response->assertSessionHas(['message' => 'メモを共有しました。', 'status' => 'info']);
+    }
+
+    /**
+     * 自分のメモの共有設定が、正しく保存される時のエラーハンドリングをテスト
+     * @return void
+     */
+    public function testErrorStoreShareSettingController()
+    {
+        // 1件の自分のメモを作成
+        $memo = $this->createMemo($this->user);
+        // 1件の共有設定のデータを作成（自分のメモを、2人目の別のユーザーに共有）
+        $requestData = [
+            'share_user_start' => $this->secondaryUser->email,
+            'memoId' => $memo->id,
+            'edit_access' => true,
+        ];
+
+        // DB::connectionメソッドをモック
+        DB::shouldReceive('connection')->andReturnSelf();
+        // DB::tableメソッドをモック
+        DB::shouldReceive('table')->andReturnSelf();
+        // DB::useWritePdoメソッドをモック
+        DB::shouldReceive('useWritePdo')->andReturnSelf();
+        // DB::whereメソッドをモック
+        DB::shouldReceive('where')->andReturnSelf();
+        // DB::countメソッドをモック
+        DB::shouldReceive('count')->andReturn(1);
+
+        // DB::transactionメソッドが呼び出されると、一度だけ例外をスローするように設定
+        DB::shouldReceive('transaction')->once()->andThrow(new Exception('DBエラー'));
+
+        // Log::errorメソッドが呼び出されるときに、例外がログに記録されることを確認
+        Log::shouldReceive('error')->once()->with(Mockery::type(Exception::class));
+
+        // 例外がスローされることを期待し、そのメッセージが"DBエラー"であることを確認
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('DBエラー');
+
+        // メモを共有する為に、リクエストを送信
+        $this->post(route('user.share-setting.store'), $requestData);
     }
 
     /**
