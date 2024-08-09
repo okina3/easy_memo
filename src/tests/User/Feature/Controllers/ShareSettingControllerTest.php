@@ -186,15 +186,11 @@ class ShareSettingControllerTest extends TestCase
             'edit_access' => true,
         ];
 
-        // DB::connectionメソッドをモック
+        // DB操作に対するモックを設定
         DB::shouldReceive('connection')->andReturnSelf();
-        // DB::tableメソッドをモック
         DB::shouldReceive('table')->andReturnSelf();
-        // DB::useWritePdoメソッドをモック
         DB::shouldReceive('useWritePdo')->andReturnSelf();
-        // DB::whereメソッドをモック
         DB::shouldReceive('where')->andReturnSelf();
-        // DB::countメソッドをモック
         DB::shouldReceive('count')->andReturn(1);
 
         // DB::transactionメソッドが呼び出されると、一度だけ例外をスローするように設定
