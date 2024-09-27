@@ -3,6 +3,7 @@
 namespace Tests\User\Unit\Services;
 
 use App\Services\SessionService;
+use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Session;
 use Tests\User\TestCase;
@@ -23,6 +24,22 @@ class SessionServiceTest extends TestCase
         // セッション値を復号し、期待される環境変数の値と比較
         $decryptedSessionValue = decrypt(Session::get('back_button_clicked'));
         $this->assertEquals(env('BROWSER_BACK_KEY'), $decryptedSessionValue);
+    }
+
+    /**
+     * ブラウザバック用のセッションに値を設定する例外のテスト（BROWSER_BACK_KEYが設定されていない場合）
+     */
+    public function testErrorSetBrowserBackSession()
+    {
+        // テスト環境でBROWSER_BACK_KEYをnullに設定
+        config(['app.test_browser_back_key' => null]);
+
+        // 例外が投げられることを期待
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('BROWSER_BACK_KEY is not set in the environment file.');
+
+        // メソッドを実行して例外を確認
+        SessionService::setBrowserBackSession();
     }
 
     /**
