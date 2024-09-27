@@ -2,15 +2,27 @@
 
 namespace App\Services;
 
+use Exception;
+
 class SessionService
 {
     /**
      * ブラウザバック用のセッションに値を設定するメソッド。
      * @return void
+     * @throws Exception
      */
     public static function setBrowserBackSession(): void
     {
-        session()->flash('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        // 環境変数 BROWSER_BACK_KEY の値を取得
+        $back_key = config('app.test_browser_back_key');
+
+        // BROWSER_BACK_KEY が null または空の場合は例外をスロー
+        if (empty($back_key)) {
+            throw new Exception('BROWSER_BACK_KEY is not set in the environment file.');
+        }
+
+        // 暗号化してセッションに保存
+        session()->flash('back_button_clicked', encrypt($back_key));
     }
 
     /**
