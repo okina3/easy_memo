@@ -1,4 +1,13 @@
 /**
+   ログイン画面のレイアウト
+*/
+.background-cover {
+    background-image: url('../../public/images/cover.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/**
    ボタンのレイアウト
 */
 .btn {
