@@ -1,5 +1,8 @@
-# 使用技術
+![トップページのスクリーンショット](../readme_images/top_image.png)
+![インデックスページのスクリーンショット](../readme_images/index_image.png)
+![詳細ページのスクリーンショット](../readme_images/show_image.png)
 
+# 使用技術
 - PHP 8.1
 - Laravel 10
 - Laravel/breeze 1.27
@@ -26,8 +29,14 @@
 - PHPUnit
 
 # AWS構成図
+![AWSのアーキテクチャ図](../readme_images/aws_architecture.png)
 
 # GitHub Actions CI/CD
+- Githubへのpush時に、RspecとRubocopが自動で実行されます。
+- masterブランチへのpushでは、RspecとRubocopが成功した場合、EC2への自動デプロイが実行されます
+
+
+[//]: # (- mainブランチに、mergeした場合)
 
 # 機能一覧
 - ユーザー登録、ログイン機能（Laravel/breeze）
