@@ -138,7 +138,7 @@ class ImageControllerTest extends TestCase
         $this->app->instance(ImageService::class, $imageServiceMock);
 
         // ブラウザバック対策用のセッション設定
-        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::put('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
 
         // 画像を保存するの為に、リクエストを送信
         $response = $this->post(route('user.image.store'), ['images' => $file]);
@@ -194,7 +194,7 @@ class ImageControllerTest extends TestCase
         $this->app->instance(ImageService::class, $imageServiceMock);
 
         // ブラウザバック対策用のセッション設定
-        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::put('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
 
         // DB::transactionメソッドが呼び出されると、一度だけ例外をスローするように設定
         DB::shouldReceive('transaction')->once()->andThrow(new Exception('DBエラー'));

@@ -7,11 +7,11 @@ name: laravel-memo-app-deploy
 #     branches:
 #       - deploy_lesson
 
-# ワークフローのトリガー（mainブランチへのmergeをトリガーとして実行）
+# ワークフローのトリガー（developブランチへのmergeをトリガーとして実行）
 on:
   pull_request:
     branches:
-      - main
+      - develop
 
 jobs:
   # testsジョブの定義

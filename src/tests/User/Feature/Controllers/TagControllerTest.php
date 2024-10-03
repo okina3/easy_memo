@@ -76,7 +76,7 @@ class TagControllerTest extends TestCase
         $requestData = ['new_tag' => $newTag,];
 
         // ブラウザバック対策用のセッション設定
-        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::put('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
 
         // タグを保存するの為に、リクエストを送信
         $response = $this->post(route('user.tag.store'), $requestData);
