@@ -1,12 +1,6 @@
 # ワークフローの名前
 name: laravel-memo-app-deploy
 
-# ワークフローのトリガー（deploy_lesson'ブランチへのpushをトリガーとして実行） 
-# on:
-#   push:
-#     branches:
-#       - deploy_lesson
-
 # ワークフローのトリガー（developブランチへのmergeをトリガーとして実行）
 on:
   pull_request:
