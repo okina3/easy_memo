@@ -23,7 +23,7 @@ class SessionServiceTest extends TestCase
 
         // セッション値を復号し、期待される環境変数の値と比較
         $decryptedSessionValue = decrypt(Session::get('back_button_clicked'));
-        $this->assertEquals(env('BROWSER_BACK_KEY'), $decryptedSessionValue);
+        $this->assertEquals(config('common_browser_back.browser_back_key'), $decryptedSessionValue);
     }
 
     /**
@@ -32,7 +32,7 @@ class SessionServiceTest extends TestCase
     public function testErrorSetBrowserBackSession()
     {
         // テスト環境でBROWSER_BACK_KEYをnullに設定
-        config(['app.test_browser_back_key' => null]);
+        config(['common_browser_back.browser_back_key' => null]);
 
         // 例外が投げられることを期待
         $this->expectException(Exception::class);
@@ -48,7 +48,7 @@ class SessionServiceTest extends TestCase
     public function testClickBrowserBackSession()
     {
         // セッションに正しい値を設定 (環境変数 'BROWSER_BACK_KEY' を暗号化)
-        Session::flash('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::flash('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
         // セッション値を検証するサービスメソッドを実行
         SessionService::clickBrowserBackSession();
 
@@ -69,7 +69,7 @@ class SessionServiceTest extends TestCase
     public function testResetBrowserBackSession()
     {
         // セッションに値を設定
-        Session::flash('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::flash('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
         // セッションに値があることを確認
         $this->assertTrue(Session::has('back_button_clicked'));
         // セッションの値を削除するサービスメソッドを実行

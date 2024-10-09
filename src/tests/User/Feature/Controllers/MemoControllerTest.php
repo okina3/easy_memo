@@ -202,7 +202,7 @@ class MemoControllerTest extends TestCase
         ];
 
         // ブラウザバック対策用のセッション設定
-        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::put('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
 
         // メモを保存するの為に、リクエストを送信
         $response = $this->post(route('user.store'), $requestData);
@@ -242,7 +242,7 @@ class MemoControllerTest extends TestCase
         $requestData = ['title' => 'テスト、メモ', 'content' => 'テスト、メモ内容',];
 
         // ブラウザバック対策用のセッション設定
-        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::put('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
 
         // DB::transactionメソッドが呼び出されると、一度だけ例外をスローするように設定
         DB::shouldReceive('transaction')->once()->andThrow(new Exception('DBエラー'));
@@ -383,7 +383,7 @@ class MemoControllerTest extends TestCase
         ];
 
         // ブラウザバック対策用のセッション設定
-        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::put('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
 
         // メモを更新する為に、リクエストを送信
         $response = $this->patch(route('user.update'), $requestData);
@@ -428,7 +428,7 @@ class MemoControllerTest extends TestCase
         ];
 
         // ブラウザバック対策用のセッション設定
-        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::put('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
 
         // DB::transactionメソッドが呼び出されると、一度だけ例外をスローするように設定
         DB::shouldReceive('transaction')->once()->andThrow(new Exception('DBエラー'));

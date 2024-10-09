@@ -57,7 +57,7 @@ class ContactControllerTest extends TestCase
         ];
 
         // ブラウザバック対策用のセッション設定
-        Session::put('back_button_clicked', encrypt(env('BROWSER_BACK_KEY')));
+        Session::put('back_button_clicked', encrypt(config('common_browser_back.browser_back_key')));
 
         // 管理人への問い合わせを保存する為に、リクエストを送信
         $response = $this->post(route('user.contact.store'), $requestData);
