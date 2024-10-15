@@ -96,6 +96,9 @@ jobs:
       # 成果物を保存する前に、.envファイルを削除
       - name: Remove .env File
         run: rm -f .env
+      # 成果物を保存する前に、readme_imagesフォルダごと削除
+      - name: Remove readme_images Folder
+        run: rm -rf ../readme_images/
       # 成果物の保存
       - name: Upload Deployment Artifacts
         uses: actions/upload-artifact@v4
@@ -103,6 +106,7 @@ jobs:
         with:
           name: dist
           path: "./*"
+          if-no-files-found: ignore
           retention-days: 5
           include-hidden-files: true
 
