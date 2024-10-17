@@ -14,8 +14,8 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="relative min-h-screen bg-cover bg-center background-cover">
+    <body class="font-sans text-gray-900 antialiased {{ request()->is('admin*') ? 'admin-bg' : 'user-bg' }}">
+        <div class="relative min-h-screen bg-cover bg-center">
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="w-full sm:max-w-md px-6 py-4 bg-white bg-opacity-95 shadow-md overflow-hidden sm:rounded-lg">
                     {{ $slot }}
