@@ -1,7 +1,16 @@
 /**
-   ログイン画面のレイアウト
+   管理者用ログイン画面のレイアウト
 */
-.background-cover {
+.admin-bg {
+    background-image: url('../../public/images/admin_cover.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/**
+   ユーザー用ログイン画面のレイアウト
+*/
+.user-bg {
     background-image: url('../../public/images/cover.jpg');
     background-size: cover;
     background-position: center;
