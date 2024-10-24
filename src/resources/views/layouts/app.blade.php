@@ -17,7 +17,7 @@
 </head>
 
 <body class="font-sans antialiased">
-<div class="min-h-screen bg-gray-100">
+<div class="min-h-screen bg-white">
     {{-- @include('layouts.navigation') --}}
     {{-- 専用のナビを表示 --}}
     @if (request()->is('admin*'))
@@ -37,9 +37,7 @@
 
     <!-- Page Content -->
     <main>
-        <div class="max-w-7xl mx-auto px-2 py-2">
-            {{ $slot }}
-        </div>
+        {{ $slot }}
     </main>
 </div>
 </body>

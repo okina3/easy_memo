@@ -1,65 +1,68 @@
 <x-app-layout>
-    <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
-        {{-- メモの新規作成ページのタイトル --}}
-        <h1 class="heading heading_bg">新規メモ作成</h1>
-        {{-- メモを新規作成するエリア --}}
-        <div class="p-3">
-            <form action="{{ route('user.store') }}" method="post">
-                @csrf
-                {{-- メモのタイトル入力 --}}
-                <div class="mb-5">
-                    <h2 class="sub_heading mb-1">タイトル</h2>
-                    <input class="w-60 rounded" type="text" name="title" value="{{ old('title') }}"
-                           placeholder="ここにタイトルを入力"/>
-                    {{-- エラーメッセージ（メモのタイトル） --}}
-                    <x-input-error class="mt-2" :messages="$errors->get('title')"/>
+    <div class="max-w-7xl mx-auto px-2 py-2 bg-slate-300 shadow">
+        <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg bg-white overflow-hidden">
+            {{-- メモの新規作成ページのタイトル --}}
+            <h1 class="heading heading_bg">新規メモ作成</h1>
+            {{-- メモを新規作成するエリア --}}
+            <div class="p-3">
+                <form action="{{ route('user.store') }}" method="post">
+                    @csrf
+                    {{-- メモのタイトル入力 --}}
+                    <div class="mb-5">
+                        <h2 class="sub_heading mb-1">タイトル</h2>
+                        <input class="w-60 rounded" type="text" name="title" value="{{ old('title') }}"
+                               placeholder="ここにタイトルを入力"/>
+                        {{-- エラーメッセージ（メモのタイトル） --}}
+                        <x-input-error class="mt-2" :messages="$errors->get('title')"/>
+                    </div>
+                    {{-- メモの内容入力 --}}
+                    <div class="mb-5">
+                        <h2 class="sub_heading mb-1">内容</h2>
+                        <textarea class="w-full rounded" name="content" rows="7"
+                                  placeholder="ここにメモを入力">{{ old('content') }}</textarea>
+                        {{-- エラーメッセージ（メモの内容） --}}
+                        <x-input-error class="mt-2" :messages="$errors->get('content')"/>
+                    </div>
+                    {{-- 既存タグの選択 --}}
+                    <div class="mb-10">
+                        <h2 class="sub_heading mb-1">既存タグの選択</h2>
+                        @foreach ($all_tags as $tag)
+                            <div class="inline mr-3 hover:font-semibold">
+                                <input class="mb-1 rounded" type="checkbox" name="tags[]" id="{{ $tag->id }}"
+                                       value="{{ $tag->id }}" {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} />
+                                <label for="{{ $tag->id }}">{{ $tag->name }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                    {{-- 新規タグ入力 --}}
+                    <div class="mb-10">
+                        <h2 class="sub_heading mb-1">新規タグの追加</h2>
+                        <input class="w-60 rounded" type="text" name="new_tag" value="{{ old('new_tag') }}"
+                               placeholder="ここに新規タグを入力"/>
+                        {{-- エラーメッセージ（新規タグ） --}}
+                        <x-input-error class="mt-2" :messages="$errors->get('new_tag')"/>
+                    </div>
+                    {{-- 画像の選択 --}}
+                    <div class="mb-10">
+                        <h2 class="sub_heading">画像の選択</h2>
+                        {{-- モーダルウィンドウ --}}
+                        <x-common.list-select-image :allImages='$all_images'/>
+                    </div>
+                    {{-- メモの保存ボタン --}}
+                    <div class="mb-5">
+                        <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">保存する</button>
+                    </div>
+                </form>
+                {{-- 戻るボタン --}}
+                <div class="flex justify-end">
+                    <button class="btn bg-gray-800 hover:bg-gray-700"
+                            onclick="location.href='{{ route('user.index') }}'">
+                        戻る
+                    </button>
                 </div>
-                {{-- メモの内容入力 --}}
-                <div class="mb-5">
-                    <h2 class="sub_heading mb-1">内容</h2>
-                    <textarea class="w-full rounded" name="content" rows="7"
-                              placeholder="ここにメモを入力">{{ old('content') }}</textarea>
-                    {{-- エラーメッセージ（メモの内容） --}}
-                    <x-input-error class="mt-2" :messages="$errors->get('content')"/>
-                </div>
-                {{-- 既存タグの選択 --}}
-                <div class="mb-10">
-                    <h2 class="sub_heading mb-1">既存タグの選択</h2>
-                    @foreach ($all_tags as $tag)
-                        <div class="inline mr-3 hover:font-semibold">
-                            <input class="mb-1 rounded" type="checkbox" name="tags[]" id="{{ $tag->id }}"
-                                   value="{{ $tag->id }}" {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} />
-                            <label for="{{ $tag->id }}">{{ $tag->name }}</label>
-                        </div>
-                    @endforeach
-                </div>
-                {{-- 新規タグ入力 --}}
-                <div class="mb-10">
-                    <h2 class="sub_heading mb-1">新規タグの追加</h2>
-                    <input class="w-60 rounded" type="text" name="new_tag" value="{{ old('new_tag') }}"
-                           placeholder="ここに新規タグを入力"/>
-                    {{-- エラーメッセージ（新規タグ） --}}
-                    <x-input-error class="mt-2" :messages="$errors->get('new_tag')"/>
-                </div>
-                {{-- 画像の選択 --}}
-                <div class="mb-10">
-                    <h2 class="sub_heading">画像の選択</h2>
-                    {{-- モーダルウィンドウ --}}
-                    <x-common.list-select-image :allImages='$all_images'/>
-                </div>
-                {{-- メモの保存ボタン --}}
-                <div class="mb-5">
-                    <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">保存する</button>
-                </div>
-            </form>
-            {{-- 戻るボタン --}}
-            <div class="flex justify-end">
-                <button class="btn bg-gray-800 hover:bg-gray-700" onclick="location.href='{{ route('user.index') }}'">
-                    戻る
-                </button>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
     <script>
         'use strict'
         // 画像の上限数の設定
@@ -118,7 +121,7 @@
                     // サムネイルエリアに選択した画像を表示
                     const thumbnailImage = document.createElement('img');
                     thumbnailImage.src = imagePath + '/' + imageFile;
-                    thumbnailImage.classList.add('mr-2', 'mb-2', 'border', 'rounded-md', 'p-1','w-[22.7%]','sm:w-[23%]');
+                    thumbnailImage.classList.add('mr-2', 'mb-2', 'border', 'rounded-md', 'p-1', 'w-[22.7%]', 'sm:w-[23%]');
                     thumbnailArea.appendChild(thumbnailImage);
                 } else if (isSelecte) {
                     // すでに選択されている場合、配列から削除
