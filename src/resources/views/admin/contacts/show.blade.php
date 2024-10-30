@@ -1,10 +1,10 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-2 py-2 bg-rose-100 shadow">
-        <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+    <div class="px-2 py-2 bg-rose-100">
+        <section class="text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- 問い合わせ情報の詳細ページのタイトル --}}
             <h1 class="heading heading_bg bg-rose-900">ユーザーからの問い合わせの詳細</h1>
             {{-- 選択した問い合わせ情報の詳細を表示するエリア --}}
-            <div class="p-3 bg-white">
+            <div class="p-3 h-[85vh] bg-white">
                 <div class="mb-3">
                     {{-- 選択した問い合わせ情報のユーザー名を表示 --}}
                     <div class="mb-5">

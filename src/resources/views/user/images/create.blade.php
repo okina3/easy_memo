@@ -1,11 +1,11 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-2 py-2 bg-slate-300 shadow">
+    <div class="px-2 py-2 bg-slate-200">
         <section
-            class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg bg-white overflow-hidden">
+            class="text-gray-600 border border-gray-400 rounded-lg bg-white overflow-hidden">
             {{-- 画像の登録ページのタイトル --}}
             <h1 class="heading heading_bg">画像の登録</h1>
             {{-- 画像を新規登録するエリア --}}
-            <div class="p-3">
+            <div class="p-3 h-[85vh]">
                 {{-- エラーメッセージ（画像）--}}
                 <x-input-error :messages="$errors->get('images')" class="mt-2"/>
                 <form action="{{ route('user.image.store') }}" method="post" enctype="multipart/form-data">

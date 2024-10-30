@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-2 py-2 bg-slate-300 shadow">
+    <div class="px-2 py-2 bg-slate-200">
         {{-- フラッシュメッセージ --}}
         <x-common.flash-message status="session('status')"/>
         <div class="mb-2 md:flex justify-between">

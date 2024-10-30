@@ -1,11 +1,11 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-2 py-2 bg-slate-300 shadow">
+    <div class="px-2 py-2 bg-slate-200">
         <section
-            class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg bg-white overflow-hidden">
+            class="text-gray-600 border border-gray-400 rounded-lg bg-white overflow-hidden">
             {{-- 画像の詳細ページのタイトル --}}
             <h1 class="heading heading_bg">画像の詳細</h1>
             {{-- 選択した画像の詳細を表示するエリア --}}
-            <div class="p-3">
+            <div class="p-3 h-[85vh]">
                 {{-- 選択した画像を表示 --}}
                 <div class="p-2 md:w-4/5 mx-auto">
                     <img class="mx-auto" src="{{ asset('storage/' . $select_image->filename) }}"

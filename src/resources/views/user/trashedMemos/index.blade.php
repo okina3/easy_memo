@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-2 py-2 bg-slate-300 shadow">
-        <section class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+    <div class="px-2 py-2 bg-slate-200">
+        <section class="text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
             {{-- 削除済みメモの管理ページのタイトル --}}
             <h1 class="heading heading_bg">削除済みメモ一覧</h1>
             {{-- 削除済みメモを管理するエリア --}}

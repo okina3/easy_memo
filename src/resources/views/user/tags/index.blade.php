@@ -1,11 +1,11 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-2 py-2 bg-slate-300 shadow">
+    <div class="px-2 py-2 bg-slate-200">
         <section
-            class="max-w-screen-lg mx-auto text-gray-600 border border-gray-400 rounded-lg bg-white overflow-hidden">
+            class="text-gray-600 border border-gray-400 rounded-lg bg-white overflow-hidden">
             {{-- タグの管理ページのタイトル --}}
             <h1 class="heading heading_bg">タグ一覧</h1>
             {{-- タグを管理するエリア --}}
-            <div class="p-3">
+            <div class="p-3 h-[85vh]">
                 {{-- フラッシュメッセージ --}}
                 <x-common.flash-message status="session('status')"/>
                 {{-- タグを新規作成するエリア --}}

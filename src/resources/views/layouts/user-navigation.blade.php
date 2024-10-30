@@ -1,15 +1,13 @@
 <nav x-data="{ open: false }">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 border-b-2 border-white bg-sky-900 shadow sm:px-6 lg:px-8">
+    <div class="px-4 border-b-2 border-white bg-sky-900 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="w-16">
-                    <div class="mt-1 shrink-0 flex items-center">
-                        <a href="{{ route('user.index') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800"/>
-                        </a>
-                    </div>
+                <div class="w-10 sm:w-12 shrink-0 flex items-center">
+                    <a href="{{ route('user.index') }}">
+                        <x-application-logo/>
+                    </a>
                 </div>
 
                 <!-- Navigation Links -->
@@ -53,8 +51,8 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            class="inline-flex items-center px-3 py-2 border border-yellow-500 text-sm leading-4 font-bold rounded-md text-white hover:text-gray-400 focus:outline-none transition ease-in-out duration-150">
+                            <div>{{ Auth::user()->name }}さん</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +73,6 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('user.logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('user.logout')"
                                              onclick="event.preventDefault();
                                                 this.closest('form').submit();">
@@ -143,7 +140,6 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('user.logout') }}">
                     @csrf
-
                     <x-responsive-nav-link :href="route('user.logout')"
                                            onclick="event.preventDefault();
                                         this.closest('form').submit();">

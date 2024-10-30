@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-2 py-2 bg-slate-300 shadow">
+    <div class="px-2 py-2 bg-slate-200">
         <section class="min-h-[45vh] text-gray-600 border border-gray-400 rounded-lg bg-white overflow-hidden">
             {{-- 共有中のメモの編集ページのタイトル --}}
             <h1 class="heading heading_bg">共有のメモ編集</h1>
