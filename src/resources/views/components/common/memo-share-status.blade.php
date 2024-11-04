@@ -36,7 +36,7 @@
                 {{-- 選択されているメモのidを取得 --}}
                 <input type="hidden" name="memoId" value="{{ $selectMemoId }}">
                 {{-- メモを共有するボタン --}}
-                <button class="btn bg-cyan-600 hover:bg-cyan-700" type="submit">共有する</button>
+                <button class="btn bg-blue-800 hover:bg-blue-700" type="submit">共有する</button>
             </form>
             {{-- メモの共有状態を詳しく表示するエリア --}}
             <div class="mb-3 pb-4 border-b border-gray-400">
@@ -76,7 +76,7 @@
                 {{-- 選択されているメモのidを取得 --}}
                 <input type="hidden" name="memoId" value="{{ $selectMemoId }}">
                 {{-- メモの共有を停止するボタン --}}
-                <button class="btn block bg-cyan-600 hover:bg-cyan-700" type="submit">共有停止</button>
+                <button class="btn block bg-red-600 hover:bg-red-500" type="submit">共有停止</button>
             </form>
             {{-- コメント --}}
             <p class="mb-5 text-sm">※ このメモの全てのユーザーの共有を停止したい場合は、メモを削除してください。</p>

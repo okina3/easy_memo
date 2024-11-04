@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="max-w-screen-lg mx-auto">
-    {{-- フラッシュメッセージ --}}
-    <x-common.flash-message status="session('status')"/>
+    <div class="px-2 py-2 bg-rose-100">
+        {{-- フラッシュメッセージ --}}
+        <x-common.flash-message status="session('status')"/>
         {{-- ユーザーの検索の表示エリア --}}
-        <section class="mb-5 px-3 py-2 text-gray-600 border border-gray-400 rounded-lg bg-gray-200">
+        <section class="mb-5 px-3 py-2 text-slate-100 border border-gray-500 rounded-lg bg-rose-900">
             <form action="{{ route('admin.warning.index') }}" method="get">
                 <div class="sm:flex items-center">
                     <div class="heading">メールアドレスから検索</div>
@@ -12,23 +12,25 @@
                     <input class="py-2 w-60 border border-gray-500 rounded-lg" name="keyword"
                            placeholder="メールアドレスを入力">
                     {{-- 検索するボタン --}}
-                    <button class="ml-2 btn bg-blue-800 hover:bg-blue-700">検索する</button>
+                    <button class="ml-2 btn btn-bk bg-yellow-500 hover:bg-yellow-400">検索する</button>
                 </div>
             </form>
         </section>
         {{-- 警告されたユーザー一覧の表示エリア --}}
-        <section class="text-gray-600 border border-gray-400 rounded-lg overflow-hidden">
+        <section class="text-gray-600 border border-gray-500 rounded-lg overflow-hidden bg-white">
             {{-- タイトル --}}
-            <h1 class="heading heading_bg text-red-600">警告したユーザー一覧</h1>
+            <h1 class="heading heading_bg bg-rose-900">警告したユーザー 一覧</h1>
             {{-- 警告されたユーザー一覧 --}}
-            <div class="p-2 h-[74vh] overflow-y-scroll overscroll-none">
+            <div class="p-2 h-[76vh] overflow-y-scroll overscroll-none">
                 @foreach ($all_warning_users as $warning_user)
-                    <div class="mb-5 p-2 md:flex justify-between items-center border border-slate-400 rounded-lg">
+                    <div
+                        class="mb-5 p-2 md:flex justify-between items-center border border-slate-400 rounded-lg bg-white">
                         <div class="md:w-[70%] mr-5 font-semibold">
                             {{-- ユーザー名前 --}}
                             <p class="mb-1 truncate">
                                 ユーザー名<span class="font-normal">・・・・・・</span>
-                                <span class="text-red-600 border-b border-slate-400">{{ $warning_user->name }}</span>
+                                <span
+                                    class="text-red-600 border-b border-slate-400">{{ $warning_user->name }}</span>
                             </p>
                             {{-- ユーザーのメールアドレス --}}
                             <p class="mb-1 truncate">

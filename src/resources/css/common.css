@@ -1,28 +1,20 @@
 /**
-   管理者用ログイン画面のレイアウト
-*/
-.admin-bg {
-    background-image: url('../../public/images/admin_cover.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-/**
-   ユーザー用ログイン画面のレイアウト
-*/
-.user-bg {
-    background-image: url('../../public/images/cover.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-/**
    ボタンのレイアウト
 */
 .btn {
     padding: 0.25rem 0.75rem;
     color: rgb(255 255 255);
+    border-width: 2px;
+    border-style: double;
     border-radius: 0.25rem;
+}
+
+/**
+   ボタンのレイアウト（文字黒）
+*/
+.btn-bk {
+    font-weight: 700;
+    color: rgb(30 41 59);
 }
 
 /**
@@ -39,9 +31,8 @@
 */
 .heading_bg {
     padding: 0.625rem 0.75rem;
-    border-bottom-width: 1px;
-    border-color: rgb(156 163 175);
-    background-color: rgb(229 231 235);
+    color: rgb(241 245 249);
+    background-color: rgb(12 74 110);
 }
 
 /**
@@ -70,6 +61,8 @@
 .mark_bg {
     margin-bottom: 0.25rem;
     display: inline-block;
+    border-width: 2px;
+    border-style: double;
     border-radius: 0.75rem;
     background-color: rgb(8 145 178);
 }
