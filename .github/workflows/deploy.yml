@@ -1,11 +1,11 @@
 # ワークフローの名前
 name: laravel-memo-app-deploy
 
-# ワークフローのトリガー（'feature_Dockerの修正'ブランチへのpushをトリガーとして実行）
+# ワークフローのトリガー（developブランチへのmergeをトリガーとして実行）
 on:
-  push:
+  pull_request:
     branches:
-      - feature_Dockerの修正
+      - develop
 
 jobs:
   # testsジョブの定義
