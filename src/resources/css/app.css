@@ -1,3 +1,6 @@
+@import "common";
+@import "accordion";
+@import "micromodal";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1727429069">
+  <project timestamp="1727429069">
+    <file name="/var/www/sample/app/Console/Kernel.php">
+      <class name="App\Console\Kernel" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
+      </class>
+      <line num="13" type="method" name="schedule" visibility="protected" complexity="1" crap="2" count="0"/>
+      <line num="16" type="stmt" count="0"/>
+      <line num="21" type="method" name="commands" visibility="protected" complexity="1" crap="1" count="184"/>
+      <line num="23" type="stmt" count="184"/>
+      <line num="25" type="stmt" count="184"/>
+      <metrics loc="28" ncloc="21" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
+    </file>
+    <file name="/var/www/sample/app/Exceptions/Handler.php">
+      <class name="App\Exceptions\Handler" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </class>
+      <line num="24" type="method" name="register" visibility="public" complexity="1" crap="1" count="184"/>
+      <line num="26" type="stmt" count="184"/>
+      <line num="28" type="stmt" count="184"/>
+      <metrics loc="31" ncloc="22" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/AuthenticatedSessionController.php">
+      <class name="App\Http\Controllers\Admin\Auth\AuthenticatedSessionController" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+      </class>
+      <line num="18" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="20" type="stmt" count="1"/>
+      <line num="26" type="method" name="store" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="28" type="stmt" count="2"/>
+      <line num="30" type="stmt" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="38" type="method" name="destroy" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <metrics loc="49" ncloc="40" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/ConfirmablePasswordController.php">
+      <class name="App\Http\Controllers\Admin\Auth\ConfirmablePasswordController" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
+      </class>
+      <line num="18" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="20" type="stmt" count="1"/>
+      <line num="26" type="method" name="store" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="28" type="stmt" count="2"/>
+      <line num="29" type="stmt" count="2"/>
+      <line num="30" type="stmt" count="2"/>
+      <line num="31" type="stmt" count="2"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <metrics loc="42" ncloc="36" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/EmailVerificationPromptController.php">
+      <class name="App\Http\Controllers\Admin\Auth\EmailVerificationPromptController" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </class>
+      <line num="16" type="method" name="__invoke" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="20" type="stmt" count="2"/>
+      <metrics loc="23" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/NewPasswordController.php">
+      <class name="App\Http\Controllers\Admin\Auth\NewPasswordController" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="22" coveredelements="22"/>
+      </class>
+      <line num="20" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="30" type="method" name="store" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="59" type="stmt" count="1"/>
+      <metrics loc="62" ncloc="48" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="22" coveredelements="22"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/PasswordController.php">
+      <class name="App\Http\Controllers\Admin\Auth\PasswordController" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="9" coveredelements="9"/>
+      </class>
+      <line num="16" type="method" name="update" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="2"/>
+      <line num="20" type="stmt" count="2"/>
+      <line num="21" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="24" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="27" type="stmt" count="1"/>
+      <metrics loc="30" ncloc="27" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="9" coveredelements="9"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/PasswordResetLinkController.php">
+      <class name="App\Http\Controllers\Admin\Auth\PasswordResetLinkController" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+      </class>
+      <line num="16" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="18" type="stmt" count="1"/>
+      <line num="26" type="method" name="store" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="28" type="stmt" count="3"/>
+      <line num="29" type="stmt" count="3"/>
+      <line num="30" type="stmt" count="3"/>
+      <line num="35" type="stmt" count="3"/>
+      <line num="36" type="stmt" count="3"/>
+      <line num="37" type="stmt" count="3"/>
+      <line num="39" type="stmt" count="3"/>
+      <line num="40" type="stmt" count="3"/>
+      <line num="41" type="stmt" count="3"/>
+      <line num="42" type="stmt" count="3"/>
+      <metrics loc="45" ncloc="34" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/Auth/VerifyEmailController.php">
+      <class name="App\Http\Controllers\Admin\Auth\VerifyEmailController" namespace="global">
+        <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </class>
+      <line num="16" type="method" name="__invoke" visibility="public" complexity="3" crap="3" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="26" type="stmt" count="1"/>
+      <metrics loc="29" ncloc="26" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/ContactController.php">
+      <class name="App\Http\Controllers\Admin\ContactController" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
+      </class>
+      <line num="18" type="method" name="index" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="21" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="2"/>
+      <line num="31" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="44" type="method" name="destroy" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <metrics loc="52" ncloc="34" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/TrashedContactController.php">
+      <class name="App\Http\Controllers\Admin\TrashedContactController" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+      </class>
+      <line num="18" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="21" type="stmt" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="31" type="method" name="undo" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="44" type="method" name="destroy" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <metrics loc="52" ncloc="36" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/UsersController.php">
+      <class name="App\Http\Controllers\Admin\UsersController" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
+      </class>
+      <line num="22" type="method" name="index" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="25" type="stmt" count="3"/>
+      <line num="27" type="stmt" count="3"/>
+      <line num="36" type="method" name="destroy" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="39" type="stmt" count="2"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="2"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <metrics loc="53" ncloc="39" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Admin/WarningUsersController.php">
+      <class name="App\Http\Controllers\Admin\WarningUsersController" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
+      </class>
+      <line num="18" type="method" name="index" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="21" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="2"/>
+      <line num="31" type="method" name="undo" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="43" type="method" name="destroy" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <metrics loc="50" ncloc="34" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/Controller.php">
+      <class name="App\Http\Controllers\Controller" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="13" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/Auth/AuthenticatedSessionController.php">
+      <class name="App\Http\Controllers\User\Auth\AuthenticatedSessionController" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+      </class>
+      <line num="18" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="20" type="stmt" count="1"/>
+      <line num="26" type="method" name="store" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="28" type="stmt" count="2"/>
+      <line num="30" type="stmt" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="38" type="method" name="destroy" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <metrics loc="49" ncloc="40" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/Auth/ConfirmablePasswordController.php">
+      <class name="App\Http\Controllers\User\Auth\ConfirmablePasswordController" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
+      </class>
+      <line num="18" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="20" type="stmt" count="1"/>
+      <line num="26" type="method" name="store" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="28" type="stmt" count="2"/>
+      <line num="29" type="stmt" count="2"/>
+      <line num="30" type="stmt" count="2"/>
+      <line num="31" type="stmt" count="2"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <metrics loc="42" ncloc="36" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/Auth/EmailVerificationPromptController.php">
+      <class name="App\Http\Controllers\User\Auth\EmailVerificationPromptController" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </class>
+      <line num="16" type="method" name="__invoke" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="20" type="stmt" count="2"/>
+      <metrics loc="23" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/Auth/NewPasswordController.php">
+      <class name="App\Http\Controllers\User\Auth\NewPasswordController" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="22" coveredelements="22"/>
+      </class>
+      <line num="20" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="30" type="method" name="store" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="59" type="stmt" count="1"/>
+      <metrics loc="62" ncloc="48" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="22" coveredelements="22"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/Auth/PasswordController.php">
+      <class name="App\Http\Controllers\User\Auth\PasswordController" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="9" coveredelements="9"/>
+      </class>
+      <line num="16" type="method" name="update" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="2"/>
+      <line num="20" type="stmt" count="2"/>
+      <line num="21" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="24" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="27" type="stmt" count="1"/>
+      <metrics loc="30" ncloc="27" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="9" coveredelements="9"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/Auth/PasswordResetLinkController.php">
+      <class name="App\Http\Controllers\User\Auth\PasswordResetLinkController" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+      </class>
+      <line num="16" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="18" type="stmt" count="1"/>
+      <line num="26" type="method" name="store" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="28" type="stmt" count="3"/>
+      <line num="29" type="stmt" count="3"/>
+      <line num="30" type="stmt" count="3"/>
+      <line num="35" type="stmt" count="3"/>
+      <line num="36" type="stmt" count="3"/>
+      <line num="37" type="stmt" count="3"/>
+      <line num="39" type="stmt" count="3"/>
+      <line num="40" type="stmt" count="3"/>
+      <line num="41" type="stmt" count="3"/>
+      <line num="42" type="stmt" count="3"/>
+      <metrics loc="45" ncloc="34" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/Auth/RegisteredUserController.php">
+      <class name="App\Http\Controllers\User\Auth\RegisteredUserController" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="16" coveredelements="16"/>
+      </class>
+      <line num="21" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="31" type="method" name="store" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <metrics loc="54" ncloc="44" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="16" coveredelements="16"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/Auth/VerifyEmailController.php">
+      <class name="App\Http\Controllers\User\Auth\VerifyEmailController" namespace="global">
+        <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </class>
+      <line num="16" type="method" name="__invoke" visibility="public" complexity="3" crap="3" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="26" type="stmt" count="1"/>
+      <metrics loc="29" ncloc="26" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/ContactController.php">
+      <class name="App\Http\Controllers\User\ContactController" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+      </class>
+      <line num="19" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="24" type="stmt" count="1"/>
+      <line num="32" type="method" name="store" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <metrics loc="42" ncloc="30" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/ImageController.php">
+      <class name="App\Http\Controllers\User\ImageController" namespace="global">
+        <metrics complexity="10" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="38" coveredelements="38"/>
+      </class>
+      <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="24" type="stmt" count="8"/>
+      <line num="25" type="stmt" count="8"/>
+      <line num="26" type="stmt" count="7"/>
+      <line num="27" type="stmt" count="8"/>
+      <line num="34" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="48" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="53" type="stmt" count="1"/>
+      <line num="63" type="method" name="store" visibility="public" complexity="4" crap="4" count="2"/>
+      <line num="66" type="stmt" count="2"/>
+      <line num="68" type="stmt" count="2"/>
+      <line num="70" type="stmt" count="1"/>
+      <line num="72" type="stmt" count="1"/>
+      <line num="73" type="stmt" count="1"/>
+      <line num="75" type="stmt" count="1"/>
+      <line num="77" type="stmt" count="1"/>
+      <line num="80" type="stmt" count="2"/>
+      <line num="82" type="stmt" count="1"/>
+      <line num="83" type="stmt" count="1"/>
+      <line num="84" type="stmt" count="1"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="94" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="97" type="stmt" count="1"/>
+      <line num="99" type="stmt" count="1"/>
+      <line num="108" type="method" name="destroy" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="111" type="stmt" count="2"/>
+      <line num="113" type="stmt" count="1"/>
+      <line num="115" type="stmt" count="1"/>
+      <line num="117" type="stmt" count="1"/>
+      <line num="118" type="stmt" count="2"/>
+      <line num="120" type="stmt" count="1"/>
+      <line num="121" type="stmt" count="1"/>
+      <line num="122" type="stmt" count="1"/>
+      <line num="123" type="stmt" count="1"/>
+      <metrics loc="127" ncloc="88" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="38" coveredelements="38"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/MemoController.php">
+      <class name="App\Http\Controllers\User\MemoController" namespace="global">
+        <metrics complexity="11" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="63" coveredstatements="63" elements="71" coveredelements="71"/>
+      </class>
+      <line num="28" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="31" type="stmt" count="12"/>
+      <line num="32" type="stmt" count="12"/>
+      <line num="33" type="stmt" count="11"/>
+      <line num="34" type="stmt" count="12"/>
+      <line num="41" type="method" name="index" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="44" type="stmt" count="2"/>
+      <line num="46" type="stmt" count="2"/>
+      <line num="48" type="stmt" count="2"/>
+      <line num="50" type="stmt" count="2"/>
+      <line num="57" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="60" type="stmt" count="1"/>
+      <line num="62" type="stmt" count="1"/>
+      <line num="64" type="stmt" count="1"/>
+      <line num="66" type="stmt" count="1"/>
+      <line num="75" type="method" name="store" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="78" type="stmt" count="2"/>
+      <line num="80" type="stmt" count="2"/>
+      <line num="82" type="stmt" count="1"/>
+      <line num="83" type="stmt" count="1"/>
+      <line num="84" type="stmt" count="1"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="86" type="stmt" count="1"/>
+      <line num="88" type="stmt" count="1"/>
+      <line num="90" type="stmt" count="1"/>
+      <line num="91" type="stmt" count="2"/>
+      <line num="93" type="stmt" count="1"/>
+      <line num="94" type="stmt" count="1"/>
+      <line num="95" type="stmt" count="1"/>
+      <line num="96" type="stmt" count="1"/>
+      <line num="105" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="108" type="stmt" count="1"/>
+      <line num="110" type="stmt" count="1"/>
+      <line num="112" type="stmt" count="1"/>
+      <line num="114" type="stmt" count="1"/>
+      <line num="116" type="stmt" count="1"/>
+      <line num="118" type="stmt" count="1"/>
+      <line num="126" type="method" name="edit" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="129" type="stmt" count="1"/>
+      <line num="131" type="stmt" count="1"/>
+      <line num="133" type="stmt" count="1"/>
+      <line num="135" type="stmt" count="1"/>
+      <line num="137" type="stmt" count="1"/>
+      <line num="139" type="stmt" count="1"/>
+      <line num="141" type="stmt" count="1"/>
+      <line num="143" type="stmt" count="1"/>
+      <line num="145" type="stmt" count="1"/>
+      <line num="146" type="stmt" count="1"/>
+      <line num="147" type="stmt" count="1"/>
+      <line num="156" type="method" name="update" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="159" type="stmt" count="2"/>
+      <line num="161" type="stmt" count="2"/>
+      <line num="163" type="stmt" count="1"/>
+      <line num="165" type="stmt" count="1"/>
+      <line num="167" type="stmt" count="1"/>
+      <line num="169" type="stmt" count="1"/>
+      <line num="171" type="stmt" count="1"/>
+      <line num="172" type="stmt" count="2"/>
+      <line num="174" type="stmt" count="1"/>
+      <line num="175" type="stmt" count="1"/>
+      <line num="176" type="stmt" count="1"/>
+      <line num="177" type="stmt" count="1"/>
+      <line num="187" type="method" name="destroy" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="190" type="stmt" count="2"/>
+      <line num="192" type="stmt" count="1"/>
+      <line num="194" type="stmt" count="1"/>
+      <line num="195" type="stmt" count="2"/>
+      <line num="197" type="stmt" count="1"/>
+      <line num="198" type="stmt" count="1"/>
+      <line num="199" type="stmt" count="1"/>
+      <line num="200" type="stmt" count="1"/>
+      <metrics loc="204" ncloc="136" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="63" coveredstatements="63" elements="71" coveredelements="71"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/ShareSettingController.php">
+      <class name="App\Http\Controllers\User\ShareSettingController" namespace="global">
+        <metrics complexity="7" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="40" coveredstatements="40" elements="46" coveredelements="46"/>
+      </class>
+      <line num="29" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="49" type="method" name="store" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="52" type="stmt" count="2"/>
+      <line num="54" type="stmt" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="59" type="stmt" count="2"/>
+      <line num="61" type="stmt" count="1"/>
+      <line num="62" type="stmt" count="1"/>
+      <line num="63" type="stmt" count="1"/>
+      <line num="64" type="stmt" count="1"/>
+      <line num="73" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="76" type="stmt" count="1"/>
+      <line num="78" type="stmt" count="1"/>
+      <line num="80" type="stmt" count="1"/>
+      <line num="82" type="stmt" count="1"/>
+      <line num="84" type="stmt" count="1"/>
+      <line num="86" type="stmt" count="1"/>
+      <line num="87" type="stmt" count="1"/>
+      <line num="88" type="stmt" count="1"/>
+      <line num="89" type="stmt" count="1"/>
+      <line num="97" type="method" name="edit" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="100" type="stmt" count="1"/>
+      <line num="102" type="stmt" count="1"/>
+      <line num="104" type="stmt" count="1"/>
+      <line num="106" type="stmt" count="1"/>
+      <line num="108" type="stmt" count="1"/>
+      <line num="110" type="stmt" count="1"/>
+      <line num="111" type="stmt" count="1"/>
+      <line num="112" type="stmt" count="1"/>
+      <line num="113" type="stmt" count="1"/>
+      <line num="121" type="method" name="update" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="123" type="stmt" count="1"/>
+      <line num="124" type="stmt" count="1"/>
+      <line num="125" type="stmt" count="1"/>
+      <line num="127" type="stmt" count="1"/>
+      <line num="128" type="stmt" count="1"/>
+      <line num="135" type="method" name="destroy" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="138" type="stmt" count="1"/>
+      <line num="140" type="stmt" count="1"/>
+      <line num="142" type="stmt" count="1"/>
+      <metrics loc="145" ncloc="97" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="40" coveredstatements="40" elements="46" coveredelements="46"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/TagController.php">
+      <class name="App\Http\Controllers\User\TagController" namespace="global">
+        <metrics complexity="6" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
+      </class>
+      <line num="20" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="27" type="stmt" count="1"/>
+      <line num="35" type="method" name="store" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="51" type="method" name="destroy" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="54" type="stmt" count="1"/>
+      <line num="55" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
+      <metrics loc="60" ncloc="41" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Controllers/User/TrashedMemoController.php">
+      <class name="App\Http\Controllers\User\TrashedMemoController" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
+      </class>
+      <line num="18" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="21" type="stmt" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="33" type="method" name="undo" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="45" type="method" name="destroy" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <metrics loc="52" ncloc="37" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Kernel.php">
+      <class name="App\Http\Kernel" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="69" ncloc="48" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Middleware/Authenticate.php">
+      <class name="App\Http\Middleware\Authenticate" namespace="global">
+        <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+      </class>
+      <line num="19" type="method" name="redirectTo" visibility="protected" complexity="3" crap="3" count="2"/>
+      <line num="21" type="stmt" count="2"/>
+      <line num="22" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <metrics loc="30" ncloc="25" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Middleware/EncryptCookies.php">
+      <class name="App\Http\Middleware\EncryptCookies" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="18" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Middleware/PreventRequestsDuringMaintenance.php">
+      <class name="App\Http\Middleware\PreventRequestsDuringMaintenance" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="18" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Middleware/RedirectIfAuthenticated.php">
+      <class name="App\Http\Middleware\RedirectIfAuthenticated" namespace="global">
+        <metrics complexity="5" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </class>
+      <line num="28" type="method" name="handle" visibility="public" complexity="5" crap="5" count="20"/>
+      <line num="30" type="stmt" count="20"/>
+      <line num="31" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="19"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="18"/>
+      <metrics loc="40" ncloc="28" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Middleware/TrimStrings.php">
+      <class name="App\Http\Middleware\TrimStrings" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="20" ncloc="15" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Middleware/TrustHosts.php">
+      <class name="App\Http\Middleware\TrustHosts" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+      </class>
+      <line num="14" type="method" name="hosts" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="16" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="18" type="stmt" count="0"/>
+      <metrics loc="21" ncloc="16" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Middleware/TrustProxies.php">
+      <class name="App\Http\Middleware\TrustProxies" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="29" ncloc="19" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Middleware/ValidateSignature.php">
+      <class name="App\Http\Middleware\ValidateSignature" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="23" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Middleware/VerifyCsrfToken.php">
+      <class name="App\Http\Middleware\VerifyCsrfToken" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="18" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Requests/Auth/LoginRequest.php">
+      <class name="App\Http\Requests\Auth\LoginRequest" namespace="global">
+        <metrics complexity="8" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="26" coveredstatements="18" elements="31" coveredelements="22"/>
+      </class>
+      <line num="17" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="19" type="stmt" count="4"/>
+      <line num="27" type="method" name="rules" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="29" type="stmt" count="4"/>
+      <line num="30" type="stmt" count="4"/>
+      <line num="31" type="stmt" count="4"/>
+      <line num="32" type="stmt" count="4"/>
+      <line num="40" type="method" name="authenticate" visibility="public" complexity="3" crap="3" count="4"/>
+      <line num="42" type="stmt" count="4"/>
+      <line num="44" type="stmt" count="4"/>
+      <line num="45" type="stmt" count="2"/>
+      <line num="47" type="stmt" count="2"/>
+      <line num="50" type="stmt" count="4"/>
+      <line num="51" type="stmt" count="2"/>
+      <line num="53" type="stmt" count="2"/>
+      <line num="54" type="stmt" count="2"/>
+      <line num="55" type="stmt" count="2"/>
+      <line num="58" type="stmt" count="2"/>
+      <line num="66" type="method" name="ensureIsNotRateLimited" visibility="public" complexity="2" crap="4.05" count="4"/>
+      <line num="68" type="stmt" count="4"/>
+      <line num="69" type="stmt" count="4"/>
+      <line num="72" type="stmt" count="0"/>
+      <line num="74" type="stmt" count="0"/>
+      <line num="76" type="stmt" count="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <line num="78" type="stmt" count="0"/>
+      <line num="79" type="stmt" count="0"/>
+      <line num="80" type="stmt" count="0"/>
+      <line num="81" type="stmt" count="0"/>
+      <line num="87" type="method" name="throttleKey" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="89" type="stmt" count="4"/>
+      <metrics loc="92" ncloc="71" classes="1" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="26" coveredstatements="18" elements="31" coveredelements="22"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Requests/ContactRequest.php">
+      <class name="App\Http\Requests\ContactRequest" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
+      </class>
+      <line num="12" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="14" type="stmt" count="2"/>
+      <line num="21" type="method" name="rules" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="23" type="stmt" count="3"/>
+      <line num="24" type="stmt" count="3"/>
+      <line num="25" type="stmt" count="3"/>
+      <line num="26" type="stmt" count="3"/>
+      <line num="33" type="method" name="messages" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="36" type="stmt" count="2"/>
+      <line num="37" type="stmt" count="2"/>
+      <line num="38" type="stmt" count="2"/>
+      <line num="39" type="stmt" count="2"/>
+      <line num="40" type="stmt" count="2"/>
+      <metrics loc="43" ncloc="32" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Requests/DeleteTagRequest.php">
+      <class name="App\Http\Requests\DeleteTagRequest" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
+      </class>
+      <line num="12" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="14" type="stmt" count="2"/>
+      <line num="21" type="method" name="rules" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="23" type="stmt" count="2"/>
+      <line num="24" type="stmt" count="2"/>
+      <line num="25" type="stmt" count="2"/>
+      <line num="32" type="method" name="messages" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="36" type="stmt" count="2"/>
+      <metrics loc="39" ncloc="28" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Requests/ShareEndRequest.php">
+      <class name="App\Http\Requests\ShareEndRequest" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="21" coveredelements="21"/>
+      </class>
+      <line num="15" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="17" type="stmt" count="2"/>
+      <line num="24" type="method" name="rules" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="26" type="stmt" count="3"/>
+      <line num="27" type="stmt" count="3"/>
+      <line num="28" type="stmt" count="3"/>
+      <line num="29" type="stmt" count="3"/>
+      <line num="31" type="stmt" count="3"/>
+      <line num="32" type="stmt" count="2"/>
+      <line num="33" type="stmt" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="36" type="stmt" count="3"/>
+      <line num="37" type="stmt" count="3"/>
+      <line num="38" type="stmt" count="3"/>
+      <line num="45" type="method" name="messages" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="47" type="stmt" count="2"/>
+      <line num="48" type="stmt" count="2"/>
+      <line num="49" type="stmt" count="2"/>
+      <line num="50" type="stmt" count="2"/>
+      <line num="51" type="stmt" count="2"/>
+      <metrics loc="54" ncloc="42" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="21" coveredelements="21"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Requests/ShareStartRequest.php">
+      <class name="App\Http\Requests\ShareStartRequest" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="23" coveredelements="23"/>
+      </class>
+      <line num="15" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="17" type="stmt" count="3"/>
+      <line num="24" type="method" name="rules" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="26" type="stmt" count="4"/>
+      <line num="27" type="stmt" count="4"/>
+      <line num="28" type="stmt" count="4"/>
+      <line num="29" type="stmt" count="4"/>
+      <line num="31" type="stmt" count="4"/>
+      <line num="32" type="stmt" count="2"/>
+      <line num="33" type="stmt" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="36" type="stmt" count="4"/>
+      <line num="37" type="stmt" count="4"/>
+      <line num="38" type="stmt" count="4"/>
+      <line num="39" type="stmt" count="4"/>
+      <line num="46" type="method" name="messages" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="48" type="stmt" count="3"/>
+      <line num="49" type="stmt" count="3"/>
+      <line num="50" type="stmt" count="3"/>
+      <line num="51" type="stmt" count="3"/>
+      <line num="52" type="stmt" count="3"/>
+      <line num="53" type="stmt" count="3"/>
+      <metrics loc="56" ncloc="44" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="23" coveredelements="23"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Requests/UploadImageRequest.php">
+      <class name="App\Http\Requests\UploadImageRequest" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
+      </class>
+      <line num="12" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="14" type="stmt" count="3"/>
+      <line num="21" type="method" name="rules" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="23" type="stmt" count="4"/>
+      <line num="24" type="stmt" count="4"/>
+      <line num="25" type="stmt" count="4"/>
+      <line num="32" type="method" name="messages" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="34" type="stmt" count="3"/>
+      <line num="35" type="stmt" count="3"/>
+      <line num="36" type="stmt" count="3"/>
+      <line num="37" type="stmt" count="3"/>
+      <line num="38" type="stmt" count="3"/>
+      <line num="39" type="stmt" count="3"/>
+      <metrics loc="42" ncloc="31" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Requests/UploadMemoRequest.php">
+      <class name="App\Http\Requests\UploadMemoRequest" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="17" coveredelements="17"/>
+      </class>
+      <line num="12" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="14" type="stmt" count="6"/>
+      <line num="21" type="method" name="rules" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="23" type="stmt" count="7"/>
+      <line num="24" type="stmt" count="7"/>
+      <line num="25" type="stmt" count="7"/>
+      <line num="26" type="stmt" count="7"/>
+      <line num="27" type="stmt" count="7"/>
+      <line num="34" type="method" name="messages" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="36" type="stmt" count="6"/>
+      <line num="37" type="stmt" count="6"/>
+      <line num="38" type="stmt" count="6"/>
+      <line num="39" type="stmt" count="6"/>
+      <line num="40" type="stmt" count="6"/>
+      <line num="41" type="stmt" count="6"/>
+      <line num="42" type="stmt" count="6"/>
+      <line num="43" type="stmt" count="6"/>
+      <metrics loc="46" ncloc="35" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="17" coveredelements="17"/>
+    </file>
+    <file name="/var/www/sample/app/Http/Requests/UploadTagRequest.php">
+      <class name="App\Http\Requests\UploadTagRequest" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
+      </class>
+      <line num="12" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="14" type="stmt" count="2"/>
+      <line num="21" type="method" name="rules" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="23" type="stmt" count="3"/>
+      <line num="24" type="stmt" count="3"/>
+      <line num="25" type="stmt" count="3"/>
+      <line num="32" type="method" name="messages" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="36" type="stmt" count="2"/>
+      <line num="37" type="stmt" count="2"/>
+      <line num="38" type="stmt" count="2"/>
+      <metrics loc="41" ncloc="30" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
+    </file>
+    <file name="/var/www/sample/app/Models/Admin.php">
+      <class name="App\Models\Admin" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+      </class>
+      <line num="52" type="method" name="sendPasswordResetNotification" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="54" type="stmt" count="4"/>
+      <metrics loc="57" ncloc="37" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+    </file>
+    <file name="/var/www/sample/app/Models/Contact.php">
+      <class name="App\Models\Contact" namespace="global">
+        <metrics complexity="7" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="19" coveredelements="19"/>
+      </class>
+      <line num="26" type="method" name="user" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="28" type="stmt" count="4"/>
+      <line num="36" type="method" name="scopeAvailableAllContacts" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="38" type="stmt" count="4"/>
+      <line num="47" type="method" name="scopeAvailableSelectContact" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="49" type="stmt" count="5"/>
+      <line num="58" type="method" name="scopeAvailableCreateContact" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="60" type="stmt" count="2"/>
+      <line num="61" type="stmt" count="2"/>
+      <line num="62" type="stmt" count="2"/>
+      <line num="63" type="stmt" count="2"/>
+      <line num="64" type="stmt" count="2"/>
+      <line num="73" type="method" name="scopeSearchKeyword" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="76" type="stmt" count="3"/>
+      <line num="78" type="stmt" count="2"/>
+      <line num="80" type="stmt" count="2"/>
+      <line num="82" type="stmt" count="2"/>
+      <line num="83" type="stmt" count="2"/>
+      <line num="84" type="stmt" count="2"/>
+      <metrics loc="88" ncloc="57" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="19" coveredelements="19"/>
+    </file>
+    <file name="/var/www/sample/app/Models/Image.php">
+      <class name="App\Models\Image" namespace="global">
+        <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+      </class>
+      <line num="25" type="method" name="memos" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="27" type="stmt" count="1"/>
+      <line num="34" type="method" name="user" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="36" type="stmt" count="4"/>
+      <line num="44" type="method" name="scopeAvailableAllImages" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="46" type="stmt" count="4"/>
+      <line num="47" type="stmt" count="4"/>
+      <line num="56" type="method" name="scopeAvailableSelectImage" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="58" type="stmt" count="3"/>
+      <line num="59" type="stmt" count="3"/>
+      <line num="68" type="method" name="scopeAvailableCreateImage" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="70" type="stmt" count="2"/>
+      <line num="71" type="stmt" count="2"/>
+      <line num="72" type="stmt" count="2"/>
+      <metrics loc="75" ncloc="50" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+    </file>
+    <file name="/var/www/sample/app/Models/Memo.php">
+      <class name="App\Models\Memo" namespace="global">
+        <metrics complexity="8" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="25" coveredelements="25"/>
+      </class>
+      <line num="28" type="method" name="tags" visibility="public" complexity="1" crap="1" count="11"/>
+      <line num="30" type="stmt" count="11"/>
+      <line num="37" type="method" name="images" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="39" type="stmt" count="10"/>
+      <line num="46" type="method" name="shareSettings" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="48" type="stmt" count="8"/>
+      <line num="55" type="method" name="user" visibility="public" complexity="1" crap="1" count="11"/>
+      <line num="57" type="stmt" count="11"/>
+      <line num="65" type="method" name="scopeAvailableAllMemos" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="67" type="stmt" count="4"/>
+      <line num="68" type="stmt" count="4"/>
+      <line num="69" type="stmt" count="4"/>
+      <line num="70" type="stmt" count="4"/>
+      <line num="79" type="method" name="scopeAvailableSelectMemo" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="81" type="stmt" count="6"/>
+      <line num="82" type="stmt" count="6"/>
+      <line num="83" type="stmt" count="6"/>
+      <line num="91" type="method" name="scopeAvailableAllTrashedMemos" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="93" type="stmt" count="2"/>
+      <line num="94" type="stmt" count="2"/>
+      <line num="95" type="stmt" count="2"/>
+      <line num="104" type="method" name="scopeAvailableSelectTrashedMemo" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="106" type="stmt" count="3"/>
+      <line num="107" type="stmt" count="3"/>
+      <line num="108" type="stmt" count="3"/>
+      <metrics loc="110" ncloc="72" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="25" coveredelements="25"/>
+    </file>
+    <file name="/var/www/sample/app/Models/MemoImage.php">
+      <class name="App\Models\MemoImage" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="23" ncloc="19" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Models/MemoTag.php">
+      <class name="App\Models\MemoTag" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="23" ncloc="19" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Models/ShareSetting.php">
+      <class name="App\Models\ShareSetting" namespace="global">
+        <metrics complexity="7" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="25" coveredelements="25"/>
+      </class>
+      <line num="25" type="method" name="memo" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="27" type="stmt" count="10"/>
+      <line num="34" type="method" name="user" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="36" type="stmt" count="3"/>
+      <line num="44" type="method" name="scopeAvailableAllSharedMemos" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="46" type="stmt" count="2"/>
+      <line num="47" type="stmt" count="2"/>
+      <line num="48" type="stmt" count="2"/>
+      <line num="58" type="method" name="scopeAvailableSelectSetting" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="60" type="stmt" count="4"/>
+      <line num="61" type="stmt" count="4"/>
+      <line num="71" type="method" name="scopeAvailableCreateSetting" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="73" type="stmt" count="2"/>
+      <line num="74" type="stmt" count="2"/>
+      <line num="75" type="stmt" count="2"/>
+      <line num="76" type="stmt" count="2"/>
+      <line num="77" type="stmt" count="2"/>
+      <line num="86" type="method" name="scopeAvailableCheckSetting" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="88" type="stmt" count="6"/>
+      <line num="89" type="stmt" count="6"/>
+      <line num="90" type="stmt" count="6"/>
+      <line num="99" type="method" name="scopeAvailableSharedMemoInfo" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="101" type="stmt" count="3"/>
+      <line num="102" type="stmt" count="3"/>
+      <line num="103" type="stmt" count="3"/>
+      <metrics loc="106" ncloc="67" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="25" coveredelements="25"/>
+    </file>
+    <file name="/var/www/sample/app/Models/Tag.php">
+      <class name="App\Models\Tag" namespace="global">
+        <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="21" coveredelements="21"/>
+      </class>
+      <line num="25" type="method" name="memos" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="27" type="stmt" count="6"/>
+      <line num="34" type="method" name="user" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="36" type="stmt" count="3"/>
+      <line num="44" type="method" name="scopeAvailableAllTags" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="46" type="stmt" count="6"/>
+      <line num="47" type="stmt" count="6"/>
+      <line num="48" type="stmt" count="6"/>
+      <line num="57" type="method" name="scopeAvailableSelectTag" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="59" type="stmt" count="3"/>
+      <line num="60" type="stmt" count="3"/>
+      <line num="61" type="stmt" count="3"/>
+      <line num="62" type="stmt" count="3"/>
+      <line num="71" type="method" name="scopeAvailableCreateTag" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="73" type="stmt" count="2"/>
+      <line num="74" type="stmt" count="2"/>
+      <line num="75" type="stmt" count="2"/>
+      <line num="76" type="stmt" count="2"/>
+      <line num="85" type="method" name="scopeAvailableCheckDuplicateTag" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="87" type="stmt" count="5"/>
+      <line num="88" type="stmt" count="5"/>
+      <metrics loc="91" ncloc="60" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="21" coveredelements="21"/>
+    </file>
+    <file name="/var/www/sample/app/Models/User.php">
+      <class name="App\Models\User" namespace="global">
+        <metrics complexity="8" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
+      </class>
+      <line num="55" type="method" name="sendPasswordResetNotification" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="57" type="stmt" count="4"/>
+      <line num="64" type="method" name="memos" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="66" type="stmt" count="3"/>
+      <line num="74" type="method" name="scopeAvailableAllUsers" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="76" type="stmt" count="6"/>
+      <line num="85" type="method" name="scopeAvailableSelectUser" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="87" type="stmt" count="5"/>
+      <line num="96" type="method" name="scopeAvailableSelectMailUser" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="98" type="stmt" count="3"/>
+      <line num="107" type="method" name="scopeSearchKeyword" visibility="public" complexity="3" crap="3" count="6"/>
+      <line num="110" type="stmt" count="6"/>
+      <line num="112" type="stmt" count="3"/>
+      <line num="114" type="stmt" count="3"/>
+      <line num="116" type="stmt" count="3"/>
+      <line num="117" type="stmt" count="3"/>
+      <metrics loc="122" ncloc="70" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
+    </file>
+    <file name="/var/www/sample/app/Notifications/Admin/ResetPasswordNotification.php">
+      <class name="App\Notifications\Admin\ResetPasswordNotification" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
+      </class>
+      <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="23" type="stmt" count="5"/>
+      <line num="31" type="method" name="via" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="33" type="stmt" count="4"/>
+      <line num="41" type="method" name="toMail" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <metrics loc="53" ncloc="37" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
+    </file>
+    <file name="/var/www/sample/app/Notifications/User/ResetPasswordNotification.php">
+      <class name="App\Notifications\User\ResetPasswordNotification" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
+      </class>
+      <line num="22" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="24" type="stmt" count="5"/>
+      <line num="33" type="method" name="via" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="35" type="stmt" count="4"/>
+      <line num="43" type="method" name="toMail" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="53" type="stmt" count="1"/>
+      <metrics loc="55" ncloc="38" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
+    </file>
+    <file name="/var/www/sample/app/Providers/AppServiceProvider.php">
+      <class name="App\Providers\AppServiceProvider" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+      </class>
+      <line num="12" type="method" name="register" visibility="public" complexity="1" crap="1" count="184"/>
+      <line num="15" type="stmt" count="184"/>
+      <line num="20" type="method" name="boot" visibility="public" complexity="2" crap="2" count="184"/>
+      <line num="23" type="stmt" count="184"/>
+      <line num="24" type="stmt" count="1"/>
+      <metrics loc="28" ncloc="20" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+    </file>
+    <file name="/var/www/sample/app/Providers/AuthServiceProvider.php">
+      <class name="App\Providers\AuthServiceProvider" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+      </class>
+      <line num="22" type="method" name="boot" visibility="public" complexity="1" crap="1" count="184"/>
+      <line num="25" type="stmt" count="184"/>
+      <metrics loc="27" ncloc="17" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+    </file>
+    <file name="/var/www/sample/app/Providers/BroadcastServiceProvider.php">
+      <class name="App\Providers\BroadcastServiceProvider" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
+      </class>
+      <line num="13" type="method" name="boot" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <metrics loc="20" ncloc="17" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
+    </file>
+    <file name="/var/www/sample/app/Providers/EventServiceProvider.php">
+      <class name="App\Providers\EventServiceProvider" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+      </class>
+      <line num="26" type="method" name="boot" visibility="public" complexity="1" crap="1" count="184"/>
+      <line num="29" type="stmt" count="184"/>
+      <line num="34" type="method" name="shouldDiscoverEvents" visibility="public" complexity="1" crap="1" count="184"/>
+      <line num="36" type="stmt" count="184"/>
+      <metrics loc="39" ncloc="27" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+    </file>
+    <file name="/var/www/sample/app/Providers/InterventionImageServiceProvider.php">
+      <class name="App\Providers\InterventionImageServiceProvider" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+      </class>
+      <line num="14" type="method" name="register" visibility="public" complexity="1" crap="1" count="184"/>
+      <line num="16" type="stmt" count="184"/>
+      <line num="17" type="stmt" count="3"/>
+      <line num="18" type="stmt" count="184"/>
+      <line num="24" type="method" name="boot" visibility="public" complexity="1" crap="1" count="184"/>
+      <line num="27" type="stmt" count="184"/>
+      <metrics loc="29" ncloc="22" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+    </file>
+    <file name="/var/www/sample/app/Providers/RouteServiceProvider.php">
+      <class name="App\Providers\RouteServiceProvider" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="17" elements="19" coveredelements="17"/>
+      </class>
+      <line num="28" type="method" name="boot" visibility="public" complexity="2" crap="2.00" count="184"/>
+      <line num="30" type="stmt" count="184"/>
+      <line num="31" type="stmt" count="0"/>
+      <line num="32" type="stmt" count="184"/>
+      <line num="34" type="stmt" count="184"/>
+      <line num="35" type="stmt" count="184"/>
+      <line num="36" type="stmt" count="184"/>
+      <line num="37" type="stmt" count="184"/>
+      <line num="39" type="stmt" count="184"/>
+      <line num="40" type="stmt" count="184"/>
+      <line num="41" type="stmt" count="184"/>
+      <line num="42" type="stmt" count="184"/>
+      <line num="43" type="stmt" count="184"/>
+      <line num="45" type="stmt" count="184"/>
+      <line num="46" type="stmt" count="184"/>
+      <line num="47" type="stmt" count="184"/>
+      <line num="48" type="stmt" count="184"/>
+      <line num="49" type="stmt" count="184"/>
+      <line num="50" type="stmt" count="184"/>
+      <metrics loc="53" ncloc="39" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="17" elements="19" coveredelements="17"/>
+    </file>
+    <file name="/var/www/sample/app/Services/ImageService.php">
+      <class name="App\Services\ImageService" namespace="global">
+        <metrics complexity="10" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="28" coveredelements="28"/>
+      </class>
+      <line num="19" type="method" name="checkUserImage" visibility="public" complexity="3" crap="3" count="9"/>
+      <line num="22" type="stmt" count="9"/>
+      <line num="24" type="stmt" count="9"/>
+      <line num="25" type="stmt" count="3"/>
+      <line num="26" type="stmt" count="3"/>
+      <line num="27" type="stmt" count="2"/>
+      <line num="37" type="method" name="getMemoImages" visibility="public" complexity="2" crap="2" count="5"/>
+      <line num="40" type="stmt" count="5"/>
+      <line num="41" type="stmt" count="5"/>
+      <line num="42" type="stmt" count="5"/>
+      <line num="44" type="stmt" count="5"/>
+      <line num="52" type="method" name="getMemoImagesId" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="55" type="stmt" count="2"/>
+      <line num="56" type="stmt" count="2"/>
+      <line num="57" type="stmt" count="2"/>
+      <line num="59" type="stmt" count="2"/>
+      <line num="68" type="method" name="afterResizingImage" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="71" type="stmt" count="2"/>
+      <line num="73" type="stmt" count="2"/>
+      <line num="75" type="stmt" count="2"/>
+      <line num="77" type="stmt" count="2"/>
+      <line num="79" type="stmt" count="2"/>
+      <line num="82" type="stmt" count="2"/>
+      <line num="84" type="stmt" count="2"/>
+      <line num="92" type="method" name="deleteStorage" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="95" type="stmt" count="2"/>
+      <line num="96" type="stmt" count="2"/>
+      <line num="97" type="stmt" count="1"/>
+      <metrics loc="101" ncloc="64" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="28" coveredelements="28"/>
+    </file>
+    <file name="/var/www/sample/app/Services/MemoService.php">
+      <class name="App\Services\MemoService" namespace="global">
+        <metrics complexity="15" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="35" coveredelements="35"/>
+      </class>
+      <line num="16" type="method" name="checkUserMemo" visibility="public" complexity="3" crap="3" count="13"/>
+      <line num="19" type="stmt" count="13"/>
+      <line num="21" type="stmt" count="13"/>
+      <line num="22" type="stmt" count="4"/>
+      <line num="23" type="stmt" count="4"/>
+      <line num="24" type="stmt" count="2"/>
+      <line num="33" type="method" name="searchMemos" visibility="public" complexity="4" crap="4" count="3"/>
+      <line num="36" type="stmt" count="3"/>
+      <line num="38" type="stmt" count="3"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="45" type="stmt" count="3"/>
+      <line num="47" type="stmt" count="3"/>
+      <line num="49" type="stmt" count="2"/>
+      <line num="51" type="stmt" count="2"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="55" type="stmt" count="3"/>
+      <line num="64" type="method" name="attachTagsAndImages" visibility="public" complexity="5" crap="5" count="3"/>
+      <line num="67" type="stmt" count="3"/>
+      <line num="68" type="stmt" count="3"/>
+      <line num="69" type="stmt" count="3"/>
+      <line num="73" type="stmt" count="3"/>
+      <line num="74" type="stmt" count="3"/>
+      <line num="75" type="stmt" count="3"/>
+      <line num="85" type="method" name="updateMemo" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="87" type="stmt" count="2"/>
+      <line num="88" type="stmt" count="2"/>
+      <line num="89" type="stmt" count="2"/>
+      <line num="90" type="stmt" count="2"/>
+      <line num="92" type="stmt" count="2"/>
+      <line num="100" type="method" name="checkShared" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="103" type="stmt" count="3"/>
+      <line num="105" type="stmt" count="3"/>
+      <line num="106" type="stmt" count="1"/>
+      <line num="108" type="stmt" count="3"/>
+      <metrics loc="111" ncloc="73" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="35" coveredelements="35"/>
+    </file>
+    <file name="/var/www/sample/app/Services/SessionService.php">
+      <class name="App\Services\SessionService" namespace="global">
+        <metrics complexity="6" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
+      </class>
+      <line num="14" type="method" name="setBrowserBackSession" visibility="public" complexity="2" crap="2" count="6"/>
+      <line num="17" type="stmt" count="6"/>
+      <line num="20" type="stmt" count="6"/>
+      <line num="21" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="5"/>
+      <line num="32" type="method" name="clickBrowserBackSession" visibility="public" complexity="3" crap="3" count="8"/>
+      <line num="34" type="stmt" count="8"/>
+      <line num="35" type="stmt" count="8"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="45" type="method" name="resetBrowserBackSession" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="47" type="stmt" count="7"/>
+      <metrics loc="50" ncloc="34" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="12" coveredelements="12"/>
+    </file>
+    <file name="/var/www/sample/app/Services/ShareSettingService.php">
+      <class name="App\Services\ShareSettingService" namespace="global">
+        <metrics complexity="20" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="35" elements="42" coveredelements="42"/>
+      </class>
+      <line num="15" type="method" name="searchSharedMemos" visibility="public" complexity="5" crap="5" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="20" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="2"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="27" type="stmt" count="1"/>
+      <line num="29" type="stmt" count="1"/>
+      <line num="31" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="2"/>
+      <line num="40" type="stmt" count="2"/>
+      <line num="42" type="stmt" count="2"/>
+      <line num="45" type="stmt" count="2"/>
+      <line num="53" type="method" name="searchSharedUser" visibility="public" complexity="3" crap="3" count="2"/>
+      <line num="56" type="stmt" count="2"/>
+      <line num="57" type="stmt" count="2"/>
+      <line num="59" type="stmt" count="2"/>
+      <line num="60" type="stmt" count="2"/>
+      <line num="63" type="stmt" count="2"/>
+      <line num="72" type="method" name="resetDuplicateShareSettings" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="75" type="stmt" count="2"/>
+      <line num="77" type="stmt" count="2"/>
+      <line num="78" type="stmt" count="1"/>
+      <line num="87" type="method" name="checkSharedMemoShow" visibility="public" complexity="3" crap="3" count="2"/>
+      <line num="89" type="stmt" count="2"/>
+      <line num="90" type="stmt" count="2"/>
+      <line num="91" type="stmt" count="1"/>
+      <line num="100" type="method" name="checkSharedMemoEdit" visibility="public" complexity="3" crap="3" count="2"/>
+      <line num="102" type="stmt" count="2"/>
+      <line num="103" type="stmt" count="2"/>
+      <line num="104" type="stmt" count="1"/>
+      <line num="113" type="method" name="checkSharedMemoStatus" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="116" type="stmt" count="2"/>
+      <line num="117" type="stmt" count="2"/>
+      <line num="118" type="stmt" count="2"/>
+      <line num="120" type="stmt" count="1"/>
+      <line num="121" type="stmt" count="1"/>
+      <line num="123" type="stmt" count="2"/>
+      <line num="131" type="method" name="deleteShareSettingAll" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="134" type="stmt" count="2"/>
+      <line num="135" type="stmt" count="2"/>
+      <line num="136" type="stmt" count="2"/>
+      <metrics loc="139" ncloc="85" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="35" elements="42" coveredelements="42"/>
+    </file>
+    <file name="/var/www/sample/app/Services/TagService.php">
+      <class name="App\Services\TagService" namespace="global">
+        <metrics complexity="7" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="18" coveredelements="18"/>
+      </class>
+      <line num="17" type="method" name="storeNewTag" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="20" type="stmt" count="3"/>
+      <line num="22" type="stmt" count="3"/>
+      <line num="24" type="stmt" count="3"/>
+      <line num="25" type="stmt" count="3"/>
+      <line num="26" type="stmt" count="3"/>
+      <line num="27" type="stmt" count="3"/>
+      <line num="29" type="stmt" count="3"/>
+      <line num="38" type="method" name="getMemoTagsId" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="40" type="stmt" count="2"/>
+      <line num="41" type="stmt" count="2"/>
+      <line num="43" type="stmt" count="2"/>
+      <line num="45" type="stmt" count="2"/>
+      <line num="53" type="method" name="getMemoTagsName" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="55" type="stmt" count="4"/>
+      <line num="56" type="stmt" count="4"/>
+      <line num="58" type="stmt" count="4"/>
+      <line num="60" type="stmt" count="4"/>
+      <metrics loc="63" ncloc="41" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="18" coveredelements="18"/>
+    </file>
+    <file name="/var/www/sample/app/Services/UserService.php">
+      <class name="App\Services\UserService" namespace="global">
+        <metrics complexity="4" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="8" coveredelements="8"/>
+      </class>
+      <line num="15" type="method" name="deleteUserShareSettingAll" visibility="public" complexity="4" crap="4" count="2"/>
+      <line num="18" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="2"/>
+      <line num="20" type="stmt" count="1"/>
+      <line num="21" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="2"/>
+      <line num="26" type="stmt" count="2"/>
+      <line num="27" type="stmt" count="1"/>
+      <metrics loc="31" ncloc="24" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="8" coveredelements="8"/>
+    </file>
+    <file name="/var/www/sample/app/View/Components/AppLayout.php">
+      <class name="App\View\Components\AppLayout" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+      </class>
+      <line num="13" type="method" name="render" visibility="public" complexity="1" crap="1" count="23"/>
+      <line num="15" type="stmt" count="23"/>
+      <metrics loc="18" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+    </file>
+    <file name="/var/www/sample/app/View/Components/GuestLayout.php">
+      <class name="App\View\Components\GuestLayout" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+      </class>
+      <line num="13" type="method" name="render" visibility="public" complexity="1" crap="1" count="11"/>
+      <line num="15" type="stmt" count="11"/>
+      <metrics loc="18" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+    </file>
+    <metrics files="71" loc="3752" ncloc="2674" classes="61" methods="176" coveredmethods="171" conditionals="0" coveredconditionals="0" statements="716" coveredstatements="701" elements="892" coveredelements="872"/>
+  </project>
+</coverage>

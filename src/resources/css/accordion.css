@@ -1,0 +1,51 @@
+/*
+  アコーディオンの開閉ボタンのレイアウト。
+*/
+.accordion_button {
+    position: relative;
+    padding: 2px 20px 2px 5px ;
+    font-weight: 600;
+    color: rgb(41 37 36);
+    border-width: 4px;
+    border-style: double;
+    border-radius: 0.5rem;
+    background-color: rgb(234 179 8) !important;
+}
+
+/*
+  アコーディオンの開閉ボタンのレイアウトの「+」を表示。
+*/
+.accordion_button::after {
+    content: "+";
+    position: absolute;
+    font-size: 1.25rem;
+    top: -3px;
+    right: 4px;
+  }
+
+/*
+  アコーディオンが開いた際に、「+」を「-」に変更する。
+*/
+.active .accordion_button::after {
+    content: "-";
+    font-size: 1.5rem;
+    top: -6px;
+    right: 5px;
+  }
+
+/* 
+アコーディオンの本文の閉じている部分のレイアウト。 
+*/
+.accordion_body {
+    overflow: hidden;
+    height: 0;
+    transition: all 0.3s ease;
+}
+
+/* 
+アコーディオンの本文が開いた時のレイアウト。 
+*/
+.active .accordion_body {
+    height: auto;
+    padding: 10px 0;
+}

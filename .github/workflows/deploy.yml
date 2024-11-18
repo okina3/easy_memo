@@ -1,0 +1,244 @@
+# ワークフローの名前
+name: laravel-memo-app-deploy
+
+# ワークフローのトリガー（developブランチへのmergeをトリガーとして実行）
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  # testsジョブの定義
+  tests:
+    # 使用するOS（Ubuntuの最新バージョン）
+    runs-on: ubuntu-latest
+
+    # MySQLサービスの設定
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: db_mysql_test
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: password
+        ports:
+          - 3307:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    # デフォルトの作業ディレクトリを `src` に設定
+    defaults:
+      run:
+        working-directory: src
+
+    steps:
+      # リポジトリをチェックアウト
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # PHP（8.1）とComposerのセットアップ
+      - name: Install PHP and Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+
+      # Composerの依存関係をインストール
+      - name: Install Composer Dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      # Node.js（20）のセットアップ
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Node.jsの依存関係をインストール
+      - name: Install Node.js Dependencies
+        run: npm ci
+
+      # ビルドの実行
+      - name: Build Frontend Assets
+        run: npm run build
+
+      # Laravel環境（.env.testingファイルを使用して.envファイルを作成し、Laravelのアプリケーションキーを生成）
+      - name: Set up Laravel Environment and Cache Config
+        run: |
+          cp .env.testing .env
+          php artisan config:cache
+          php artisan key:generate
+
+      # MySQLが準備完了するまで待機
+      - name: Wait for MySQL Service to be Ready
+        run: sleep 20
+
+      # マイグレーションとテストの実行（--env=testing オプションで、testing環境で、テスト実行）
+      - name: Run Database Migrations and Tests
+        run: |
+          php artisan migrate --env=testing
+          php artisan test --log-junit report.xml || true
+
+      # アーティファクトの保存
+      # テストレポートの保存
+      - name: Save Test Coverage Report
+        uses: actions/upload-artifact@v4
+        # テストが失敗しても実行
+        if: always()
+        # coverageフォルダの中の全てのファイルを、５日間保存
+        with:
+          name: coverage
+          path: src/coverage/**
+          retention-days: 5
+
+      # 成果物を保存する前に、.envファイルを削除
+      - name: Remove .env File
+        run: rm -f .env
+      # 成果物を保存する前に、readme_imagesフォルダごと削除
+      - name: Remove readme_images Folder
+        run: rm -rf ../readme_images/
+      # 成果物の保存
+      - name: Upload Deployment Artifacts
+        uses: actions/upload-artifact@v4
+        # 環境管理も含めたフォルダ（sample）ごと、隠しファイルも含め、５日間保存
+        with:
+          name: dist
+          path: "./*"
+          if-no-files-found: ignore
+          retention-days: 5
+          include-hidden-files: true
+
+  deploy:
+    # 使用するOS（Ubuntuの最新バージョン）
+    runs-on: ubuntu-latest
+    # testsジョブが成功した後に実行
+    needs: tests
+
+    steps:
+      # testsジョブで、作成したアーティファクト（成果物）を、DLして展開（中身のファイルをdistフォルダに展開）
+      - name: Download Deployment Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: ./dist/
+
+      # SSHに接続のセットアップ
+      - name: Set up SSH Connection
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.AWS_SSH_KEY }}
+          known_hosts: ${{ secrets.AWS_KNOWN_HOSTS }}
+
+      # EC2にSSH接続してファイルの権限を修正し、不要なディレクトリをクリーンアップ
+      - name: Fix Permissions and Cleanup on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_IP }} << 'EOF'
+            # storageディレクトリの権限を修正
+            if [ -d /home/***/dist/src/storage ]; then
+              echo "Fixing permissions for /home/***/dist/src/storage..."
+              sudo chown -R ${{ secrets.AWS_USERNAME }}:${{ secrets.AWS_USERNAME }} /home/***/dist/src/storage
+              sudo chmod -R 775 /home/***/dist/src/storage
+            else
+              echo 'Directory /home/***/dist/src/storage does not exist. Skipping permission fix.'
+            fi
+
+            # distディレクトリを削除してクリーンアップ
+            echo "Cleaning up ~/dist directory..."
+            sudo rm -rf ~/dist
+          EOF
+
+      # rsyncを使用して、distアーティファクトをEC2に転送
+      - name: Transfer Files to EC2 via Rsync
+        run: |
+          rsync -av --progress --exclude='node_modules' ./dist/ ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_IP }}:~/dist
+
+      # サンプル画像を、storageフォルダにコピー
+      - name: Copy Sample Images to Storage
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_IP }} << 'EOF'
+            cp ~/dist/src/public/images/*.jpg ~/dist/src/storage/app/public/
+            echo "All .jpg files copied to storage."
+          EOF
+
+      # .env.exampleから、.envファイルを生成
+      - name: Create .env File on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_IP }} << 'EOF'
+            cd ~/dist/src
+            cp .env.example .env
+            sed -i 's/^APP_KEY=.*$/APP_KEY=${{ secrets.APP_KEY }}/' .env
+            sed -i 's/^DB_DATABASE=.*$/DB_DATABASE=${{ secrets.DB_DATABASE }}/' .env
+            sed -i 's/^DB_USERNAME=.*$/DB_USERNAME=${{ secrets.DB_USERNAME }}/' .env
+            sed -i 's/^DB_PASSWORD=.*$/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/' .env
+            sed -i 's/^BROWSER_BACK_KEY=.*$/BROWSER_BACK_KEY=${{ secrets.BROWSER_BACK_KEY }}/' .env
+          EOF
+
+      # DockerとDocker Composeをインストールし、アプリケーションを起動
+      - name: Install Docker and Docker Compose, Launch Application
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_IP }} << 'EOF'
+          
+            # aptのキャッシュをクリア
+            sudo apt-get clean
+          
+            # Dockerを上書きインストール
+            sudo apt-get remove -y docker docker-engine docker.io containerd runc || true
+            sudo apt-get update
+            sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+            echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+            sudo apt-get update
+            sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+          
+            # 既存のDocker Composeを削除してからインストール
+            sudo rm -f /usr/local/bin/docker-compose
+            sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+          
+            # Dockerグループにユーザーを追加（既に追加されている場合はスキップ）
+            sudo groupadd docker || true
+            sudo usermod -aG docker $USER
+          
+            # 新しいグループを有効化
+            newgrp docker
+          
+            # Docker Composeでコンテナを再作成・起動
+            sudo docker-compose -f ~/dist/docker-compose.yml up -d --force-recreate
+          
+            # Laravelのstorageディレクトリの権限を設定
+            cd ~/dist/src
+            sudo chown -R www-data:www-data storage
+            sudo chmod -R 775 storage
+          
+            # Laravelのキャッシュをクリア
+            docker exec -i php_apache_sample bash -c "php artisan config:clear"
+            exit
+          EOF
+
+      # シンボリックリンク作成
+      - name: Create Storage Symlink
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_IP }} << 'EOF'
+            cd ~/dist
+
+            # storageフォルダのシンボリックリンク作成
+            echo "Creating symbolic link for storage..."
+            docker exec -i php_apache_sample bash -c "php artisan storage:link"
+          EOF
+
+      # MySQLが準備完了するまで待機
+      - name: Wait for MySQL Service to be Ready
+        run: sleep 20
+
+      # マイグレーションの実行
+      - name: Run Migrations
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_USERNAME }}@${{ secrets.AWS_IP }} << 'EOF'
+            cd ~/dist
+
+            # マイグレーションの実行
+            echo "Running migrations..."
+            docker exec -i php_apache_sample bash -c "php artisan migrate:refresh --seed --force || exit 1"
+          EOF

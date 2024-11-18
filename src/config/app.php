@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -159,7 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        App\Providers\InterventionImageServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -167,6 +167,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        // デフォルトから変更
         App\Providers\RouteServiceProvider::class,
     ])->toArray(),
 

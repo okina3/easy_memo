@@ -1,0 +1,68 @@
+/**
+   ボタンのレイアウト
+*/
+.btn {
+    padding: 0.25rem 0.75rem;
+    color: rgb(255 255 255);
+    border-width: 2px;
+    border-style: double;
+    border-radius: 0.25rem;
+}
+
+/**
+   ボタンのレイアウト（文字黒）
+*/
+.btn-bk {
+    font-weight: 700;
+    color: rgb(30 41 59);
+}
+
+/**
+   大見出しのレイアウト
+*/
+.heading {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+
+/**
+   大見出しの背景のレイアウト
+*/
+.heading_bg {
+    padding: 0.625rem 0.75rem;
+    color: rgb(241 245 249);
+    background-color: rgb(12 74 110);
+}
+
+/**
+   小見出しのレイアウト
+*/
+.sub_heading {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+
+/**
+   共有中のメモの目印のレイアウト
+*/
+.mark {
+    padding: 0.125rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgb(255 255 255);
+    font-weight: 600;
+}
+
+/**
+   共有中のメモの目印の背景レイアウト
+*/
+.mark_bg {
+    margin-bottom: 0.25rem;
+    display: inline-block;
+    border-width: 2px;
+    border-style: double;
+    border-radius: 0.75rem;
+    background-color: rgb(8 145 178);
+}

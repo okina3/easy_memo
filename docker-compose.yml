@@ -4,9 +4,9 @@ services:
   database:
     image: mysql:5.7
     container_name: db_sample
-    restart: unless-stopped
+    restart: always
     environment:
-      MYSQL_DATABASE: db_mysql_test
+      MYSQL_DATABASE: db_mysql
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: admin
       MYSQL_PASSWORD: password
@@ -17,10 +17,28 @@ services:
     ports:
       - "3306:3306"
 
+  # テスト用
+  database-test:
+    image: mysql:5.7
+    container_name: db_sample_test
+    restart: always
+    environment:
+      MYSQL_DATABASE: db_mysql_test
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./volumes/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./volumes/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - "3307:3306"
+
   php-apache:
     container_name: php_apache_sample
     build:
       context: ./php
+    restart: always
     ports:
       - "8000:80" 
       - "5173:5173"
@@ -29,6 +47,14 @@ services:
       - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
       - database 
+
+  mail:
+    image: axllent/mailpit:v1.8
+    container_name: mailpit
+    restart: always
+    ports:
+      - 8025:8025
+      - 1025:1025
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
