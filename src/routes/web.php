@@ -27,6 +27,11 @@ Route::get('/dashboard', function () {
     return view('user.dashboard');
 })->middleware(['auth:users', 'verified'])->name('dashboard');
 
+// トップページ
+Route::get('/top', function () {
+    return view('user.top');
+})->name('top');
+
 Route::middleware('auth:users')->group(function () {
     //メモ管理画面
     Route::controller(MemoController::class)->group(function () {
