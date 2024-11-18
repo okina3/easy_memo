@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 class Authenticate extends Middleware
 {
     protected string $admin_route = 'admin.login';
-    protected string $user_route = 'user.login';
+    protected string $user_route = 'user.top';
 
     /**
      * ユーザが認証されていない場合に、リダイレクトされるパスを切り分けるメソッド。

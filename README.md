@@ -1,8 +1,10 @@
 # EasyMemo
 
-趣味の記録などを簡単にメモするアプリです。<br />
-メモに画像、タグをつけて保存、管理し、一部の人に共有できます。 <br />
-レスポンシブ対応しているので、スマホからもご確認いただけます。
+![トップ画面](readme_images/top.png)
+
+# サービスURL
+
+https://portfoliomy-memo-app.click
 
 # 機能一覧
 
