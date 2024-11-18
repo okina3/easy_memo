@@ -18,9 +18,9 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     // デフォルト
-    public const HOME = '/dashboard';
+    public const HOME = '/';
     // 管理者用のログイン後のリダイレクト先を追加
-    public const ADMIN_HOME = '/admin/dashboard';
+    public const ADMIN_HOME = '/admin';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
