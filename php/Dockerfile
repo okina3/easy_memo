@@ -43,5 +43,5 @@ RUN pecl install xdebug \
 # PHPのカスタム設定ファイルをコピー
 COPY php.ini /usr/local/etc/php/php.ini
 
-# ワークディレクトリを/var/www/sampleに設定
-WORKDIR /var/www/sample
+# ワークディレクトリを/var/www/easy_memoに設定
+WORKDIR /var/www/easy_memo

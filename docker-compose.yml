@@ -3,7 +3,7 @@ version: "3.8"
 services:
   database:
     image: mysql:5.7
-    container_name: db_sample
+    container_name: db
     restart: always
     environment:
       MYSQL_DATABASE: db_mysql
@@ -20,7 +20,7 @@ services:
   # テスト用
   database-test:
     image: mysql:5.7
-    container_name: db_sample_test
+    container_name: db_test
     restart: always
     environment:
       MYSQL_DATABASE: db_mysql_test
@@ -35,7 +35,7 @@ services:
       - "3307:3306"
 
   php-apache:
-    container_name: php_apache_sample
+    container_name: php_apache
     build:
       context: ./php
     restart: always
@@ -43,7 +43,7 @@ services:
       - "8000:80" 
       - "5173:5173"
     volumes:
-      - ./src:/var/www/sample
+      - ./src:/var/www/easy_memo
       - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
       - database 

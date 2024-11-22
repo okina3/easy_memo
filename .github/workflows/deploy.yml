@@ -102,7 +102,7 @@ jobs:
       # 成果物の保存
       - name: Upload Deployment Artifacts
         uses: actions/upload-artifact@v4
-        # 環境管理も含めたフォルダ（sample）ごと、隠しファイルも含め、５日間保存
+        # 環境管理も含めたフォルダ（easy_memo）ごと、隠しファイルも含め、５日間保存
         with:
           name: dist
           path: "./*"
@@ -211,9 +211,9 @@ jobs:
             cd ~/dist/src
             sudo chown -R www-data:www-data storage
             sudo chmod -R 775 storage
-          
+
             # Laravelのキャッシュをクリア
-            docker exec -i php_apache_sample bash -c "php artisan config:clear"
+            docker exec -i php_apache bash -c "php artisan config:clear"
             exit
           EOF
 
@@ -225,7 +225,7 @@ jobs:
 
             # storageフォルダのシンボリックリンク作成
             echo "Creating symbolic link for storage..."
-            docker exec -i php_apache_sample bash -c "php artisan storage:link"
+            docker exec -i php_apache bash -c "php artisan storage:link"
           EOF
 
       # MySQLが準備完了するまで待機
@@ -240,5 +240,5 @@ jobs:
 
             # マイグレーションの実行
             echo "Running migrations..."
-            docker exec -i php_apache_sample bash -c "php artisan migrate:refresh --seed --force || exit 1"
+            docker exec -i php_apache bash -c "php artisan migrate:refresh --seed --force || exit 1"
           EOF
