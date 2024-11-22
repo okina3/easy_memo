@@ -80,6 +80,7 @@ https://portfoliomy-memo-app.click
 - AWS
     - VPC
     - EC2
+    - Route 53
 
 - Docker/Docker-compose
 - GitHub Actions
